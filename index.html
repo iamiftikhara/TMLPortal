@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Title -->
+  <title>Default Header (Container) | Front - Admin &amp; Dashboard Template</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.css">
+
+  <!-- CSS Front Template -->
+
+  <link rel="preload" href="/assets/css/theme.min.css" data-hs-appearance="default" as="style">
+  <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
+  <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css">
+  <link href="files/custom-style/style.css" rel="stylesheet">
+
+  <!-- SweetAlert CSS    -->
+  <link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+  <style data-hs-appearance-onload-styles>
+    * {
+      transition: unset !important;
+    }
+
+    body {
+      opacity: 0;
+    }
+  </style>
+
+  <style>
+    .bullet-span {
+      display: inline-block;
+      font-weight: 800;
+      width: 0.7em;
+      height: 0.7em;
+      text-align: center;
+      line-height: 1em;
+      border-radius: 1em;
+      background: #616161;
+
+      color: #61616100;
+      position: relative;
+      z-index: 1;
+
+    }
+
+
+    /*#populationSizeDiv .ts-wrapper.form-select .ts-control {
+      background: #f6f7fa !important;
+    }
+      */
+  </style>
+
+
+  <script>
+    window.hs_config = { "autopath": "@@autopath", "deleteLine": "hs-builder:delete", "deleteLine:build": "hs-builder:build-delete", "deleteLine:dist": "hs-builder:dist-delete", "previewMode": false, "startPath": "/index.html", "vars": { "themeFont": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap", "version": "?v=1.0" }, "layoutBuilder": { "extend": { "switcherSupport": true }, "header": { "layoutMode": "default", "containerMode": "container-fluid" }, "sidebarLayout": "default" }, "themeAppearance": { "layoutSkin": "default", "sidebarSkin": "default", "styles": { "colors": { "primary": "#377dff", "transparent": "transparent", "white": "#fff", "dark": "132144", "gray": { "100": "#f9fafc", "900": "#1e2022" } }, "font": "Inter" } }, "languageDirection": { "lang": "en" }, "skipFilesFromBundle": { "dist": ["assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "assets/js/demo.js"], "build": ["assets/css/theme.css", "assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js", "assets/js/demo.js", "assets/css/theme-dark.css", "assets/css/docs.css", "assets/vendor/icon-set/style.css", "assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js", "assets/js/demo.js"] }, "minifyCSSFiles": ["assets/css/theme.css", "assets/css/theme-dark.css"], "copyDependencies": { "dist": { "*assets/js/theme-custom.js": "" }, "build": { "*assets/js/theme-custom.js": "", "node_modules/bootstrap-icons/font/*fonts/**": "assets/css" } }, "buildFolder": "", "replacePathsToCDN": {}, "directoryNames": { "src": "./src", "dist": "./dist", "build": "./build" }, "fileNames": { "dist": { "js": "theme.min.js", "css": "theme.min.css" }, "build": { "css": "theme.min.css", "js": "theme.min.js", "vendorCSS": "vendor.min.css", "vendorJS": "vendor.min.js" } }, "fileTypes": "jpg|png|svg|mp4|webm|ogv|json" }
+    window.hs_config.gulpRGBA = (p1) => {
+      const options = p1.split(',')
+      const hex = options[0].toString()
+      const transparent = options[1].toString()
+
+      var c;
+      if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+        c = hex.substring(1).split('');
+        if (c.length == 3) {
+          c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = '0x' + c.join('');
+        return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + transparent + ')';
+      }
+      throw new Error('Bad Hex');
+    }
+    window.hs_config.gulpDarken = (p1) => {
+      const options = p1.split(',')
+
+      let col = options[0].toString()
+      let amt = -parseInt(options[1])
+      var usePound = false
+
+      if (col[0] == "#") {
+        col = col.slice(1)
+        usePound = true
+      }
+      var num = parseInt(col, 16)
+      var r = (num >> 16) + amt
+      if (r > 255) {
+        r = 255
+      } else if (r < 0) {
+        r = 0
+      }
+      var b = ((num >> 8) & 0x00FF) + amt
+      if (b > 255) {
+        b = 255
+      } else if (b < 0) {
+        b = 0
+      }
+      var g = (num & 0x0000FF) + amt
+      if (g > 255) {
+        g = 255
+      } else if (g < 0) {
+        g = 0
+      }
+      return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+    }
+    window.hs_config.gulpLighten = (p1) => {
+      const options = p1.split(',')
+
+      let col = options[0].toString()
+      let amt = parseInt(options[1])
+      var usePound = false
+
+      if (col[0] == "#") {
+        col = col.slice(1)
+        usePound = true
+      }
+      var num = parseInt(col, 16)
+      var r = (num >> 16) + amt
+      if (r > 255) {
+        r = 255
+      } else if (r < 0) {
+        r = 0
+      }
+      var b = ((num >> 8) & 0x00FF) + amt
+      if (b > 255) {
+        b = 255
+      } else if (b < 0) {
+        b = 0
+      }
+      var g = (num & 0x0000FF) + amt
+      if (g > 255) {
+        g = 255
+      } else if (g < 0) {
+        g = 0
+      }
+      return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+    }
+  </script>
+
+
+
+</head>
+
+<body>
+
+  <script src="/assets/js/hs.theme-appearance.js"></script>
+
+  <!-- ========== HEADER ========== -->
+  <header id="header" class="navbar navbar-expand-lg navbar-bordered bg-white  ">
+
+  </header>
+  <script>
+    $(function () {
+      $('#header').load('files/navbar/navbar.html')
+    })
+  </script>
+
+  <!-- ========== END HEADER ========== -->
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" role="main" class="main">
+    <!-- start page error -->
+    <!-- Card Error -->
+    <div class="content container p-5 mt-4 d-none" id="pageErrorCard">
+      <div class="card p-5">
+        <div class=" justify-content-center align-items-center">
+          <div class="text-center p-1">
+            <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
+              style="width: 10rem; opacity:0.3">
+            <p class="mb-0" id="pageErrorCardText">Error</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end page error -->
+
+    <!-- Content -->
+    <div class="content container p-5" id="mainContent">
+
+
+      <div class="card p-5 d-none" id="mainContentInnerLoader">
+        <div class="d-flex justify-content-center p-5">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="mainContentInnerWizerdFormToShow" class="d-none card">
+        <div class="card-body">
+          <!-- Step Form -->
+          <form class="js-step-form-validate js-validate" data-hs-step-form-options='{
+          "progressSelector": "#validationFormProgress",
+          "stepsSelector": "#validationFormContent",
+          "endSelector": "#validationFormFinishBtn",
+          "isValidate": true
+        }' id="muncipalityWizerdForm" autocomplete="off" novalidate="novalidate">
+            <!-- Step -->
+            <ul id="validationFormProgress"
+              class="js-step-progress step step-sm step-icon-sm step-inline step-item-between mb-7">
+
+              <!-- start first step -->
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
+                "targetSelector": "#municipalityWizerdFormBasics"
+              }'>
+                  <span class="step-icon step-icon-soft-dark">1</span>
+                  <div class="step-content">
+                    <span class="step-title">Municipality Basics</span>
+                  </div>
+                </a>
+              </li>
+              <!-- end first step -->
+
+              <!-- start second step -->
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
+                  "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
+                }'>
+                  <span class="step-icon step-icon-soft-dark">2</span>
+                  <div class="step-content">
+                    <span class="step-title">Organization Snapshot</span>
+                  </div>
+                </a>
+              </li>
+              <!-- end second step -->
+
+              <!-- start third step -->
+              <li class="step-item">
+                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
+                  "targetSelector": "#municipalityWizerdTechnologyEnvironment"
+                }'>
+                  <span class="step-icon step-icon-soft-dark">3</span>
+                  <div class="step-content">
+                    <span class="step-title">Technology Environment</span>
+                  </div>
+                </a>
+              </li>
+              <!-- end third step -->
+            </ul>
+            <!-- End Step -->
+
+            <!-- Content Step Form -->
+            <div id="validationFormContent">
+
+              <!-- start basics details -->
+              <div id="municipalityWizerdFormBasics" class="active">
+
+                <!-- Form -->
+                <div class="mb-4 col-12 col-md-6 pe-4">
+                  <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:</label>
+                  <input type="text" class="form-control" id="municipalityWizerdFormName"
+                    name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example">
+                </div>
+                <!-- End Form -->
+
+                <div class="d-flex">
+
+                  <!-- Form -->
+                  <div class="mb-4 col-12 col-md-6 pe-4">
+                    <label for="municipalityWizerdFormAssociatedCounty" class="form-label">Associated County (if
+                      any):</label>
+                    <input type="text" class="form-control" id="municipalityWizerdFormAssociatedCounty"
+                      name="municipalityWizerdFormAssociatedCounty" placeholder="Example County"
+                      aria-label="Example County">
+                  </div>
+                  <!-- End Form -->
+
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormPopulationSize">Population Size:</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormPopulationSize" name="muncipalityWizerdFormPopulationSize">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+                </div>
+
+
+
+                <div class="d-flex">
+
+
+                  <!-- Form -->
+                  <div class="mb-4 col-12 col-md-6 pe-4">
+                    <label for="municipalityWizerdFormContactName" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="municipalityWizerdFormContactName"
+                      name="municipalityWizerdFormContactName" placeholder="Enter your name"
+                      aria-label="Enter your name">
+                  </div>
+                  <!-- End Form -->
+
+                  <!-- Form -->
+                  <div class="mb-4 col-12 col-md-6 ps-4">
+                    <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
+                      name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com">
+                  </div>
+                  <!-- End Form -->
+
+                </div>
+
+
+                <div class="d-flex">
+
+                  <!-- Form -->
+                  <div class="mb-4 col-12 col-md-6 pe-4">
+                    <label for="muncipalityWizerdFormPhone" class="form-label">Phone:</label>
+                    <input type="text" class="form-control" id="muncipalityWizerdFormPhone"
+                      name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000">
+                  </div>
+                  <!-- End Form -->
+
+
+                  <!-- Form -->
+                  <div class="mb-4 col-12 col-md-6 ps-4">
+                    <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County Website/URL:</label>
+                    <input type="text" class="form-control" id="muncipalityWizerdFormCountryWebsiteURL"
+                      name="muncipalityWizerdFormCountryWebsiteURL" placeholder="https://www.example.com"
+                      aria-label="https://www.example.com">
+                  </div>
+                  <!-- End Form -->
+
+                </div>
+
+
+                <!-- Footer -->
+                <div class="d-flex align-items-center justify-content-end">
+                  <div class="">
+                    <button type="button" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
+                    "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
+                  }'>
+                      Next <i class="bi-chevron-right small"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- End Footer -->
+              </div>
+              <!-- end basics details -->
+
+              <!-- start Organization snapshot -->
+              <div id="municipalityWizerdFormOrganizationSnapshot" style="display: none;">
+
+                <div class="d-flex">
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for the Next
+                      12–24 Months (choose up to 3):</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormKeyPrioritiesUpTo3"
+                        name="muncipalityWizerdFormKeyPrioritiesUpTo3">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormDepartmentsUnderMunicipality">Departments Under
+                      Municipality (check all that apply):</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormDepartmentsUnderMunicipality"
+                        name="muncipalityWizerdFormDepartmentsUnderMunicipality">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+                </div>
+
+
+                <div class="d-flex">
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormTotalEmployees">Approx. total
+                      employees:</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormTotalEmployees" name="muncipalityWizerdFormTotalEmployees">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of IT
+                      employees:</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormNumberOfITEmployees"
+                        name="muncipalityWizerdFormNumberOfITEmployees">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+                </div>
+
+
+
+                <div class="mb-4">
+                  <label class="form-label">Do you use outsourced IT/cyber vendors?</label>
+
+                  <div class="d-flex">
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4">
+                      <input type="radio" id="cyberVendorsYes" class="form-check-input border-dark" name="cyberVendors">
+                      <label class="form-check-label" for="cyberVendorsYes">Yes</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4 ms-3">
+                      <input type="radio" id="cyberVendorsNo" class="form-check-input border-dark" name="cyberVendors">
+                      <label class="form-check-label" for="cyberVendorsNo">No</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4 ms-3">
+                      <input type="radio" id="cyberVendorsNotSure" class="form-check-input border-dark"
+                        name="cyberVendors">
+                      <label class="form-check-label" for="cyberVendorsNotSure">Not sure</label>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="d-flex align-items-center justify-content-end">
+                  <button type="button" class="btn btn-ghost-secondary me-2" data-hs-step-form-prev-options='{
+                    "targetSelector": "#municipalityWizerdFormBasics"
+                  }'>
+                    <i class="bi-chevron-left small"></i> Previous step
+                  </button>
+
+                  <div class="">
+                    <button type="button" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
+                    "targetSelector": "#municipalityWizerdTechnologyEnvironment"
+                  }'>
+                      Next <i class="bi-chevron-right small"></i>
+                    </button>
+                  </div>
+                </div>
+                <!-- End Footer -->
+              </div>
+              <!-- end Organization snapshot -->
+
+              <!-- start Technology Environment -->
+              <div id="municipalityWizerdTechnologyEnvironment" style="display: none;">
+
+
+                <div class="d-flex">
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormCloudApplication">Cloud Applications in
+                      Use:</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormCloudApplication" name="muncipalityWizerdFormCloudApplication">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices (desktops,
+                      laptops, tablets):</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormEndUserDevices" name="muncipalityWizerdFormEndUserDevices">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+                </div>
+
+                <div class="d-flex">
+
+
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormServers">Servers (on-premises or
+                      virtual):</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices (IoT,
+                      cameras, dispatch systems):</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormSpecializedDevices"
+                        name="muncipalityWizerdFormSpecializedDevices">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+
+
+                </div>
+
+
+
+                <div class="d-flex">
+
+
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormCloudWorkloads">Cloud Workloads:</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormCloudWorkloads" name="muncipalityWizerdFormCloudWorkloads">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+
+                  <!-- start size -->
+                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                    <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number of
+                      connected sites (City Hall, stations, libraries, etc.):</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="muncipalityWizerdFormNumberOfConnectedSites"
+                        name="muncipalityWizerdFormNumberOfConnectedSites">
+                        <option class="p-2" value="">Select</option>
+                      </select>
+                    </div>
+                    <!-- End Select -->
+                  </div>
+                  <!-- end size -->
+
+
+
+                </div>
+
+
+                <div class="mb-4">
+                  <label class="form-label">Do you have backup internet/redundancy?</label>
+
+                  <div class="d-flex">
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4">
+                      <input type="radio" id="backupInternetRedundancyYes" class="form-check-input border-dark"
+                        name="backupInternetRedundancy">
+                      <label class="form-check-label" for="backupInternetRedundancyYes">Yes</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4 ms-3">
+                      <input type="radio" id="backupInternetRedundancyNo" class="form-check-input border-dark"
+                        name="backupInternetRedundancy">
+                      <label class="form-check-label" for="backupInternetRedundancyNo">No</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-4 ms-3">
+                      <input type="radio" id="backupInternetRedundancyNotSure" class="form-check-input border-dark"
+                        name="backupInternetRedundancy">
+                      <label class="form-check-label" for="backupInternetRedundancyNotSure">Not sure</label>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <!-- Footer -->
+                <div class="d-sm-flex align-items-center justify-content-end">
+                  <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2"
+                    data-hs-step-form-prev-options='{
+                      "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
+                    }'>
+                    <i class="bi-chevron-left small"></i> Previous step
+                  </button>
+
+                  <div class="d-flex justify-content-end ">
+                    <button type="button" class="btn btn-white me-2" id="closeWizerd" data-dismiss="modal"
+                      aria-label="Close">Cancel</button>
+                    <button id="validationFormFinishBtn" type="button" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </div>
+                <!-- End Footer -->
+              </div>
+              <!-- end Technology Environment -->
+
+            </div>
+            <!-- End Content Step Form -->
+
+          </form>
+          <!-- End Step Form -->
+        </div>
+      </div>
+
+
+      <div id="mainContentInnerDataToShow" class="d-none">
+
+
+
+
+
+        <!-- start data table -->
+        <div id="ordersDataTableContainer" class="mt-4"></div>
+        <!-- end data table -->
+
+        <!-- start details div -->
+
+        <div id="orderDetailsContainer" class="d-none mt-4">
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-header-title">Order Details</h3>
+            </div>
+
+            <div class="card-body">
+
+              <div class="col-md-6 mb-4 mb-md-0">
+                <h5>Order ID: <span class="fw-normal" id="orderDetailsOrderId"></span></h5>
+                <h4>Service: <span class="fw-normal" id="orderDetailsService"></span></h4>
+                <h5>Date: <span class="fw-normal" id="orderDetailsOrderDate"></span></h5>
+                <h5>Payment Status: <span class="fw-normal" id="orderDetailsOrderStatus"></span></h5>
+              </div>
+
+
+
+            </div>
+          </div>
+
+
+
+          <!-- start order payment with card -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <h3 class="card-header-title">Order Payment</h3>
+            </div>
+
+            <div class="card-body">
+
+              <!-- start credit card selection -->
+              <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
+                <div class="col-12 col-md-6 pe-0 pe-md-3">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <div class="input-group input-group-merge ">
+                      <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                        <i class="bi-credit-card"></i>
+                      </div>
+                      <input type="text" class="form-control ps-3" id="paymentMethodCard"
+                        placeholder="Pay with Card (Stripe)" aria-label="Pay with Card (Stripe)"
+                        aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+
+                <div class="col-12 col-md-6 pe-0 ps-md-3">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <div class="input-group input-group-merge ">
+                      <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                        <i class="bi-paypal"></i>
+                      </div>
+                      <input type="text" class="form-control ps-3" id="paymentMethodPaypal"
+                        placeholder="Pay with PayPal" aria-label="Pay with PayPal"
+                        aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+              </div>
+              <!-- end credit card selection -->
+
+              <!-- start card holder details -->
+              <div class="d-flex justify-content-between align-items-center mb-4 flex-column">
+                <div class="col-12 col-md-12 pe-0">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <div class="input-group input-group-merge ">
+                      <input type="text" class="form-control" id="cardHolderName" placeholder="Card Holder Name"
+                        aria-label="Card Holder Name" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+
+                <div class="col-12 col-md-12 pe-0">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <div class="input-group input-group-merge ">
+                      <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 2345 XXXX"
+                        aria-label="1234 5678 2345 XXXX" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+
+                <div class="col-12 col-md-12 pe-0">
+                  <!-- Input Group -->
+                  <div class="mb-4">
+                    <div class="input-group input-group-merge ">
+                      <input type="text" class="form-control" id="otpInput" placeholder="Enter OTP"
+                        aria-label="Enter OTP" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+              </div>
+              <!-- end card holder details -->
+
+              <!-- start credit card expiry date -->
+              <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
+                <div class="col-12 col-md-6 pe-0 pe-md-3">
+                  <!-- Flatpickr -->
+                  <label class="input-label">Issue date</label>
+                  <input style="cursor: pointer !important;" type="text" id="issueDateOfCard" name="issueDateOfCard"
+                    required class="form-control flatpickr-custom w-25 bg-white ps-1 cursor-pointer"
+                    placeholder="Select date" data-hs-flatpickr-options='{
+                                                "dateFormat": "Y-m-d"
+                                                }'>
+                  <!-- End Flatpickr -->
+                </div>
+
+                <div class="col-12 col-md-6 pe-0 ps-md-3">
+                  <!-- Flatpickr -->
+                  <label class="input-label">Due date</label>
+                  <input style="cursor: pointer !important;" disabled type="text" id="dueDateOfCard"
+                    name="dueDateOfCard" required class="form-control flatpickr-custom w-25 ps-1 cursor-pointer"
+                    placeholder="Select date" data-hs-flatpickr-options='{
+                                            "dateFormat": "Y-m-d"
+                                            }'>
+                  <!-- End Flatpickr -->
+                </div>
+              </div>
+              <!-- end credit card expiry date -->
+
+
+            </div>
+
+            <!-- end details div -->
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="companyDetailsFormModal" tabindex="-1" role="dialog"
+      aria-labelledby="companyDetailsFormModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="companyDetailsFormModalLabel">Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- create inputs and other types according to this
+             Name of Municipality
+              Population size
+              Associated County (if any)
+              Point of Contact (Email, Phone)
+              County Website/URL
+              Municipality Objectives / Key Priorities
+              List of Departments under their purview
+              Total number of employees
+              Number of IT employees -->
+            <form>
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label for="muncipalityNameCompanyDetails" class="form-label">Name of Municipality:</label>
+                <input type="text" class="form-control" id="muncipalityNameCompanyDetails"
+                  name="muncipalityNameCompanyDetails" placeholder="City of Example" aria-label="City of Example">
+              </div>
+              <!-- End Form -->
+
+              <!-- start size -->
+              <div class="col-sm-12  mb-4" id="populationSizeDiv">
+                <label class=" form-label" for="populationSizeCompanyDetails">Population Size:</label>
+                <!-- Select -->
+                <div class="tom-select-custom" style="cursor: pointer;">
+                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="populationSizeCompanyDetails" name="populationSizeCompanyDetails">
+                    <option class="p-2" value="">Select</option>
+                  </select>
+                </div>
+                <!-- End Select -->
+              </div>
+              <!-- end size -->
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label for="associatedCountyProfileCompanyDetails" class="form-label">Associated County (if
+                  any):</label>
+                <input type="text" class="form-control" id="associatedCountyProfileCompanyDetails"
+                  name="associatedCountyProfileCompanyDetails" placeholder="Example County" aria-label="Example County">
+              </div>
+              <!-- End Form -->
+
+
+              <div class="d-flex">
+                <!-- Form -->
+                <div class="mb-4 col-6 pe-2">
+                  <label for="emailCompanyDetails" class="form-label">Email:</label>
+                  <input type="email" class="form-control" id="emailCompanyDetails" name="emailCompanyDetails"
+                    placeholder="john@example.com" aria-label="john@example.com">
+                </div>
+                <!-- End Form -->
+
+
+                <!-- Form -->
+                <div class="mb-4 col-6 ps-2">
+                  <label for="phoneCompanyDetails" class="form-label">Phone:</label>
+                  <input type="text" class="form-control" id="phoneCompanyDetails" name="phoneCompanyDetails"
+                    placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000">
+                </div>
+                <!-- End Form -->
+              </div>
+
+
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label for="countryWebsiteURLCompanyDetails" class="form-label">County Website/URL:</label>
+                <input type="text" class="form-control" id="countryWebsiteURLCompanyDetails"
+                  name="countryWebsiteURLCompanyDetails" placeholder="https://www.example.com"
+                  aria-label="https://www.example.com">
+              </div>
+              <!-- End Form -->
+
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label for="municipalityObjectivesCompanyDetails" class="form-label">Municipality Objectives / Key
+                  Priorities:</label>
+                <input type="text" class="form-control" id="municipalityObjectivesCompanyDetails"
+                  name="municipalityObjectivesCompanyDetails" placeholder="obj 1, obj 2, obj 3,..."
+                  aria-label="obj 1, obj 2, obj 3,...">
+              </div>
+              <!-- End Form -->
+
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label for="listOfDepartmentsUnderCompanyDetails" class="form-label">List of Departments under their
+                  purview:</label>
+                <input type="text" class="form-control" id="listOfDepartmentsUnderCompanyDetails"
+                  name="listOfDepartmentsUnderCompanyDetails" placeholder="dept 1, dept 2, dept 3,..."
+                  aria-label="dept 1, dept 2, dept 3,...">
+              </div>
+              <!-- End Form -->
+
+
+              <div class="col-12  mb-4">
+                <label class=" form-label" for="numberOfEmployeesSelect">Number of Employees</label>
+                <!-- Select -->
+                <div class="tom-select-custom" style="cursor: pointer;">
+                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                                          "searchInDropdown": false,
+                                      "hideSearch": true,
+                                      "placeholder": "Select"
+                                      }' id="numberOfEmployeesSelect" name="numberOfEmployeesSelect">
+                    <option class="p-2" value="">Select</option>
+                  </select>
+                </div>
+                <!-- End Select -->
+              </div>
+
+
+              <div class="col-12  mb-4">
+                <label class=" form-label" for="numberOfITEmployeesSelect">Number of IT Employees</label>
+                <!-- Select -->
+                <div class="tom-select-custom" style="cursor: pointer;">
+                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                                          "searchInDropdown": false,
+                                      "hideSearch": true,
+                                      "placeholder": "Select"
+                                      }' id="numberOfITEmployeesSelect" name="numberOfITEmployeesSelect">
+                    <option class="p-2" value="">Select</option>
+                  </select>
+                </div>
+                <!-- End Select -->
+              </div>
+
+
+
+
+            </form>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- End Content -->
+  </main>
+  <!-- ========== END MAIN CONTENT ========== -->
+
+  <!-- JS Global Compulsory  -->
+  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.js"></script>
+
+  <!-- validetion -->
+  <script src="/files/https-files/jquery.validate.min.js"></script>
+
+  <!-- JS Front -->
+  <script src="/assets/js/theme.min.js"></script>
+
+  <!-- data table links -->
+  <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="/assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="/assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/assets/vendor/jszip/dist/jszip.min.js"></script>
+  <script src="/assets/vendor/pdfmake/build/pdfmake.min.js"></script>
+  <script src="/assets/vendor/pdfmake/build/vfs_fonts.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+  <!-- Date Picker -->
+  <script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+
+  <!-- Datatable Initlization -->
+  <script src="/files/my-srcipts/datatabel_initlization.js"></script>
+
+  <!-- <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
+    integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb"
+    crossorigin="anonymous"></script>
+  <!-- SweetAlert CSS    -->
+  <script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
+  <!-- valedition constant -->
+  <script src="/files/my-srcipts/validation_constants.js"></script>
+  <!-- constant js -->
+  <script src="/files/my-srcipts/constant.js"></script>
+
+  <!-- page js -->
+  <script src="/files/my-srcipts/index.js"></script>
+  <script src="/files/table-config/index-table-confg.js"></script>
+
+
+  <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
+  <!-- script -->
+  <script>
+
+      (function () {
+        window.onload = function () {
+
+
+          new HSStepForm('.js-step-form-validate', {
+            preventNextStep: function () {
+              return new Promise(function (resolve, reject) {
+                // Find the current step
+                const currentStepElement = document.querySelector('.step-item.active.focus');
+                if (!currentStepElement) {
+                  // No active step found, resolve by default
+                  resolve();
+                  return;
+                }
+
+                console.log("currentStepElement", currentStepElement)
+
+                // Get the targetSelector for the current step
+                const linkElement = currentStepElement.querySelector('.step-content-wrapper');
+                console.log("linkElement", linkElement)
+
+                const dataOptions = linkElement.getAttribute('data-hs-step-form-next-options');
+                let targetSelectorValue;
+                if (dataOptions) {
+                  const parsedDataOptions = JSON.parse(dataOptions);
+                  targetSelectorValue = parsedDataOptions.targetSelector;
+                }
+
+                // Select invalid fields within the current step
+                const currentStepContainer = document.querySelector(targetSelectorValue);
+                console.log("currentStepContainer", currentStepContainer)
+
+                // Trigger validation
+                HSBsValidation.init('.js-validate');
+                const invalidFields = currentStepContainer.querySelectorAll('[aria-invalid="true"]');
+                console.log("invalidFields", invalidFields)
+
+                if (invalidFields.length === 0) {
+                  // No invalid fields, allow next step
+                  const invalidFieldsWithFlag = currentStepContainer.querySelectorAll('[data-invalid-index="1"]');
+                  console.log('invalidFieldsWithFlag', invalidFieldsWithFlag);
+
+                  if ((invalidFieldsWithFlag.length === 0)) {
+                    resolve();
+                    console.log('Promise resolve: iiiiiiiiiiiiiiiiiiii');
+
+                  } else {
+
+                    setTimeout(function () {
+                      invalidFieldsWithFlag.forEach(field => {
+                        field.setAttribute('aria-invalid', 'true');
+                        field.setAttribute('data-invalid-index', 0);
+                      }, 100)
+                    });
+
+                    resolve();
+                    console.log('Promise resolve: eeeeeeeeeeeeeeeeeeeeeee');
+
+                  }
+
+                } else {
+                  // Invalid fields present, prevent next step
+                  reject();
+                  console.log('Promise rejected:');
+
+                }
+              });
+            },
+
+
+            validator: HSBsValidation.init('.js-validate'),
+
+
+
+          });
+
+
+
+        };
+      })();
+
+  </script>
+
+  <script>
+
+    document.addEventListener('click', function (event) {
+      const prevButton = event.target.closest('[data-hs-step-form-prev-options]');
+
+      if (prevButton) {
+
+        const parentDivElement = prevButton.parentElement.parentElement;
+        console.log('prevButton.parentElement', prevButton.parentElement.parentElement)
+
+        if (parentDivElement) {
+          // Find all invalid fields in the previous step and mark them as valid
+          const invalidFields = parentDivElement.querySelectorAll('[aria-invalid="true"]');
+
+          invalidFields.forEach(field => {
+            field.setAttribute('aria-invalid', 'false');
+            field.setAttribute('data-invalid-index', 1);
+          });
+        }
+      }
+    });
+
+
+  </script>
+
+
+</body>
+
+</html>

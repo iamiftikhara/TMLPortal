@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Title -->
+  <title>Default Header (Container) | Front - Admin &amp; Dashboard Template</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.css">
+
+  <!-- CSS Front Template -->
+
+  <link rel="preload" href="/assets/css/theme.min.css" data-hs-appearance="default" as="style">
+  <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
+  <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="/assets/vendor/flatpickr/dist/flatpickr.min.css">
+  <link href="files/custom-style/style.css" rel="stylesheet">
+
+  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+  <style data-hs-appearance-onload-styles>
+    * {
+      transition: unset !important;
+    }
+
+    body {
+      opacity: 0;
+    }
+  </style>
+
+  <style>
+    .bullet-span {
+      display: inline-block;
+      font-weight: 800;
+      width: 0.7em;
+      height: 0.7em;
+      text-align: center;
+      line-height: 1em;
+      border-radius: 1em;
+      background: #616161;
+
+      color: #61616100;
+      position: relative;
+      z-index: 1;
+
+    }
+  </style>
+
+
+  <script>
+    window.hs_config = { "autopath": "@@autopath", "deleteLine": "hs-builder:delete", "deleteLine:build": "hs-builder:build-delete", "deleteLine:dist": "hs-builder:dist-delete", "previewMode": false, "startPath": "/index.html", "vars": { "themeFont": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap", "version": "?v=1.0" }, "layoutBuilder": { "extend": { "switcherSupport": true }, "header": { "layoutMode": "default", "containerMode": "container-fluid" }, "sidebarLayout": "default" }, "themeAppearance": { "layoutSkin": "default", "sidebarSkin": "default", "styles": { "colors": { "primary": "#377dff", "transparent": "transparent", "white": "#fff", "dark": "132144", "gray": { "100": "#f9fafc", "900": "#1e2022" } }, "font": "Inter" } }, "languageDirection": { "lang": "en" }, "skipFilesFromBundle": { "dist": ["assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "assets/js/demo.js"], "build": ["assets/css/theme.css", "assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js", "assets/js/demo.js", "assets/css/theme-dark.css", "assets/css/docs.css", "assets/vendor/icon-set/style.css", "assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js", "assets/js/demo.js"] }, "minifyCSSFiles": ["assets/css/theme.css", "assets/css/theme-dark.css"], "copyDependencies": { "dist": { "*assets/js/theme-custom.js": "" }, "build": { "*assets/js/theme-custom.js": "", "node_modules/bootstrap-icons/font/*fonts/**": "assets/css" } }, "buildFolder": "", "replacePathsToCDN": {}, "directoryNames": { "src": "./src", "dist": "./dist", "build": "./build" }, "fileNames": { "dist": { "js": "theme.min.js", "css": "theme.min.css" }, "build": { "css": "theme.min.css", "js": "theme.min.js", "vendorCSS": "vendor.min.css", "vendorJS": "vendor.min.js" } }, "fileTypes": "jpg|png|svg|mp4|webm|ogv|json" }
+    window.hs_config.gulpRGBA = (p1) => {
+      const options = p1.split(',')
+      const hex = options[0].toString()
+      const transparent = options[1].toString()
+
+      var c;
+      if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+        c = hex.substring(1).split('');
+        if (c.length == 3) {
+          c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = '0x' + c.join('');
+        return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + transparent + ')';
+      }
+      throw new Error('Bad Hex');
+    }
+    window.hs_config.gulpDarken = (p1) => {
+      const options = p1.split(',')
+
+      let col = options[0].toString()
+      let amt = -parseInt(options[1])
+      var usePound = false
+
+      if (col[0] == "#") {
+        col = col.slice(1)
+        usePound = true
+      }
+      var num = parseInt(col, 16)
+      var r = (num >> 16) + amt
+      if (r > 255) {
+        r = 255
+      } else if (r < 0) {
+        r = 0
+      }
+      var b = ((num >> 8) & 0x00FF) + amt
+      if (b > 255) {
+        b = 255
+      } else if (b < 0) {
+        b = 0
+      }
+      var g = (num & 0x0000FF) + amt
+      if (g > 255) {
+        g = 255
+      } else if (g < 0) {
+        g = 0
+      }
+      return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+    }
+    window.hs_config.gulpLighten = (p1) => {
+      const options = p1.split(',')
+
+      let col = options[0].toString()
+      let amt = parseInt(options[1])
+      var usePound = false
+
+      if (col[0] == "#") {
+        col = col.slice(1)
+        usePound = true
+      }
+      var num = parseInt(col, 16)
+      var r = (num >> 16) + amt
+      if (r > 255) {
+        r = 255
+      } else if (r < 0) {
+        r = 0
+      }
+      var b = ((num >> 8) & 0x00FF) + amt
+      if (b > 255) {
+        b = 255
+      } else if (b < 0) {
+        b = 0
+      }
+      var g = (num & 0x0000FF) + amt
+      if (g > 255) {
+        g = 255
+      } else if (g < 0) {
+        g = 0
+      }
+      return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+    }
+  </script>
+
+
+
+</head>
+
+<body>
+
+  <script src="/assets/js/hs.theme-appearance.js"></script>
+
+  <!-- ========== HEADER ========== -->
+  <header id="header" class="navbar navbar-expand-lg navbar-bordered bg-white  ">
+
+  </header>
+  <script>
+    $(function () {
+      $('#header').load('files/navbar/navbar.html')
+    })
+  </script>
+
+  <!-- ========== END HEADER ========== -->
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" role="main" class="main">
+    <!-- start page error -->
+    <!-- Card Error -->
+    <div class="content container p-5 mt-4 d-none" id="pageErrorCard">
+      <div class="card p-5">
+        <div class=" justify-content-center align-items-center">
+          <div class="text-center p-1">
+            <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
+              style="width: 10rem; opacity:0.3">
+            <p class="mb-0" id="pageErrorCardText">Error</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end page error -->
+
+    <!-- Content -->
+    <div class="content container p-5 d-non" id="mainContent">
+
+
+      <div class="card p-5 d-none" id="mainContentInnerLoader">
+        <div class="d-flex justify-content-center p-5">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="mainContentInnerDataToShow" class="d-none">
+
+        <!-- start data table -->
+        <div id="ordersDataTableContainer"></div>
+        <!-- end data table -->
+
+        <!-- start details div -->
+
+        <div id="orderDetailsContainer" class="d-none mt-4">
+
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-header-title">Order Details</h3>
+            </div>
+
+            <div class="card-body">
+
+              <div class="col-md-6 mb-3 mb-md-0">
+                <h5>Order ID: <span class="fw-normal" id="orderDetailsOrderId"></span></h5>
+                <h4>Service: <span class="fw-normal" id="orderDetailsService"></span></h4>
+                <h5>Date: <span class="fw-normal" id="orderDetailsOrderDate"></span></h5>
+                <h5>Payment Status: <span class="fw-normal" id="orderDetailsOrderStatus"></span></h5>
+              </div>
+
+
+
+            </div>
+          </div>
+
+
+
+          <!-- start order payment with card -->
+          <div class="card mt-4">
+            <div class="card-header">
+              <h3 class="card-header-title">Order Payment</h3>
+            </div>
+
+            <div class="card-body">
+
+              <!-- start credit card selection -->
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-column flex-md-row">
+                <div class="col-12 col-md-6 pe-0 pe-md-3">
+                  <!-- Input Group -->
+                  <div class="mb-3">
+                    <div class="input-group input-group-merge ">
+                      <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                        <i class="bi-credit-card"></i>
+                      </div>
+                      <input type="text" class="form-control ps-3" id="paymentMethodCard"
+                        placeholder="Pay with Card (Stripe)" aria-label="Pay with Card (Stripe)"
+                        aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+
+                <div class="col-12 col-md-6 pe-0 ps-md-3">
+                  <!-- Input Group -->
+                  <div class="mb-3">
+                    <div class="input-group input-group-merge ">
+                      <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                        <i class="bi-paypal"></i>
+                      </div>
+                      <input type="text" class="form-control ps-3" id="paymentMethodPaypal" placeholder="Pay with PayPal"
+                        aria-label="Pay with PayPal" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+              </div>
+              <!-- end credit card selection -->
+
+              <!-- start card holder details -->
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-column">
+                <div class="col-12 col-md-12 pe-0">
+                  <!-- Input Group -->
+                  <div class="mb-3">
+                    <div class="input-group input-group-merge ">
+                      <input type="text" class="form-control" id="cardHolderName" placeholder="Card Holder Name"
+                        aria-label="Card Holder Name" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+
+                <div class="col-12 col-md-12 pe-0">
+                  <!-- Input Group -->
+                  <div class="mb-3">
+                    <div class="input-group input-group-merge ">
+                      <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 2345 XXXX"
+                        aria-label="1234 5678 2345 XXXX" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+
+                <div class="col-12 col-md-12 pe-0">
+                  <!-- Input Group -->
+                  <div class="mb-3">
+                    <div class="input-group input-group-merge ">
+                      <input type="text" class="form-control" id="otpInput" placeholder="Enter OTP"
+                        aria-label="Enter OTP" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                    </div>
+                  </div>
+                  <!-- End Input Group -->
+                </div>
+              </div>
+              <!-- end card holder details -->
+
+              <!-- start credit card expiry date -->
+              <div class="d-flex justify-content-between align-items-center mb-3 flex-column flex-md-row">
+                <div class="col-12 col-md-6 pe-0 pe-md-3">
+                  <!-- Flatpickr -->
+                  <label  class="input-label">Issue date</label>
+                  <input style="cursor: pointer !important;" type="text"
+                                            id="issueDateOfCard"
+                                            name="issueDateOfCard" required
+                                            class="form-control flatpickr-custom w-25 bg-white ps-1 cursor-pointer"
+                                            placeholder="Select date" data-hs-flatpickr-options='{
+                                                "dateFormat": "Y-m-d"
+                                                }'>
+                  <!-- End Flatpickr -->
+                </div>
+
+                <div class="col-12 col-md-6 pe-0 ps-md-3">
+                  <!-- Flatpickr -->
+                  <label  class="input-label">Due date</label>
+                  <input style="cursor: pointer !important;" disabled type="text"
+                                            id="dueDateOfCard"
+                                            name="dueDateOfCard" required
+                                            class="form-control flatpickr-custom w-25 ps-1 cursor-pointer"
+                                            placeholder="Select date" data-hs-flatpickr-options='{
+                                            "dateFormat": "Y-m-d"
+                                            }'>
+<!-- End Flatpickr -->
+                </div>
+              </div>
+              <!-- end credit card expiry date -->
+
+
+            </div>
+
+            <!-- end details div -->
+
+
+          </div>
+          <!-- End Content -->
+  </main>
+  <!-- ========== END MAIN CONTENT ========== -->
+
+  <!-- JS Global Compulsory  -->
+  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.js"></script>
+
+  <!-- JS Front -->
+  <script src="/assets/js/theme.min.js"></script>
+
+  <!-- data table links -->
+  <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="/assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="/assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/assets/vendor/jszip/dist/jszip.min.js"></script>
+  <script src="/assets/vendor/pdfmake/build/pdfmake.min.js"></script>
+  <script src="/assets/vendor/pdfmake/build/vfs_fonts.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+  <!-- Date Picker -->
+  <script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
+
+  <!-- Datatable Initlization -->
+  <script src="/files/my-srcipts/datatabel_initlization.js"></script>
+
+  <!-- <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
+    integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb"
+    crossorigin="anonymous"></script>
+  <!-- constant js -->
+  <script src="/files/my-srcipts/constant.js"></script>
+
+  <!-- page js -->
+  <script src="/files/my-srcipts/orders.js"></script>
+  <script src="/files/table-config/order-table-confg.js"></script>
+
+
+
+
+
+</body>
+
+</html>

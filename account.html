@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Title -->
+  <title>Default Header (Container) | Front - Admin &amp; Dashboard Template</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.css">
+
+  <!-- CSS Front Template -->
+
+  <link rel="preload" href="/assets/css/theme.min.css" data-hs-appearance="default" as="style">
+  <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
+  <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+  <link href="files/custom-style/style.css" rel="stylesheet">
+
+  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+
+  <style data-hs-appearance-onload-styles>
+    * {
+      transition: unset !important;
+    }
+
+    body {
+      opacity: 0;
+    }
+  </style>
+
+  <style>
+    .bullet-span {
+      display: inline-block;
+      font-weight: 800;
+      width: 0.7em;
+      height: 0.7em;
+      text-align: center;
+      line-height: 1em;
+      border-radius: 1em;
+      background: #616161;
+
+      color: #61616100;
+      position: relative;
+      z-index: 1;
+
+    }
+
+
+    .horizontal-line {
+      margin-inline: 0 !important;
+      margin-block: 0.5rem;
+    }
+
+    .horizontal-line-billing {
+      margin-inline: -1rem !important;
+      margin-block: 1rem !important;
+    }
+
+    #profileNavbar .nav-link {
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      transition: all 0.3s ease;
+    }
+
+
+
+    
+    /*#savePaymentsMethodsSelectDiv .ts-wrapper.form-select .ts-control {
+      background: #f6f7fa !important;
+    }
+      */
+  </style>
+
+
+  <script>
+    window.hs_config = { "autopath": "@@autopath", "deleteLine": "hs-builder:delete", "deleteLine:build": "hs-builder:build-delete", "deleteLine:dist": "hs-builder:dist-delete", "previewMode": false, "startPath": "/index.html", "vars": { "themeFont": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap", "version": "?v=1.0" }, "layoutBuilder": { "extend": { "switcherSupport": true }, "header": { "layoutMode": "default", "containerMode": "container-fluid" }, "sidebarLayout": "default" }, "themeAppearance": { "layoutSkin": "default", "sidebarSkin": "default", "styles": { "colors": { "primary": "#377dff", "transparent": "transparent", "white": "#fff", "dark": "132144", "gray": { "100": "#f9fafc", "900": "#1e2022" } }, "font": "Inter" } }, "languageDirection": { "lang": "en" }, "skipFilesFromBundle": { "dist": ["assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "assets/js/demo.js"], "build": ["assets/css/theme.css", "assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js", "assets/js/demo.js", "assets/css/theme-dark.css", "assets/css/docs.css", "assets/vendor/icon-set/style.css", "assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js", "assets/js/demo.js"] }, "minifyCSSFiles": ["assets/css/theme.css", "assets/css/theme-dark.css"], "copyDependencies": { "dist": { "*assets/js/theme-custom.js": "" }, "build": { "*assets/js/theme-custom.js": "", "node_modules/bootstrap-icons/font/*fonts/**": "assets/css" } }, "buildFolder": "", "replacePathsToCDN": {}, "directoryNames": { "src": "./src", "dist": "./dist", "build": "./build" }, "fileNames": { "dist": { "js": "theme.min.js", "css": "theme.min.css" }, "build": { "css": "theme.min.css", "js": "theme.min.js", "vendorCSS": "vendor.min.css", "vendorJS": "vendor.min.js" } }, "fileTypes": "jpg|png|svg|mp4|webm|ogv|json" }
+    window.hs_config.gulpRGBA = (p1) => {
+      const options = p1.split(',')
+      const hex = options[0].toString()
+      const transparent = options[1].toString()
+
+      var c;
+      if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+        c = hex.substring(1).split('');
+        if (c.length == 3) {
+          c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+        }
+        c = '0x' + c.join('');
+        return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + transparent + ')';
+      }
+      throw new Error('Bad Hex');
+    }
+    window.hs_config.gulpDarken = (p1) => {
+      const options = p1.split(',')
+
+      let col = options[0].toString()
+      let amt = -parseInt(options[1])
+      var usePound = false
+
+      if (col[0] == "#") {
+        col = col.slice(1)
+        usePound = true
+      }
+      var num = parseInt(col, 16)
+      var r = (num >> 16) + amt
+      if (r > 255) {
+        r = 255
+      } else if (r < 0) {
+        r = 0
+      }
+      var b = ((num >> 8) & 0x00FF) + amt
+      if (b > 255) {
+        b = 255
+      } else if (b < 0) {
+        b = 0
+      }
+      var g = (num & 0x0000FF) + amt
+      if (g > 255) {
+        g = 255
+      } else if (g < 0) {
+        g = 0
+      }
+      return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+    }
+    window.hs_config.gulpLighten = (p1) => {
+      const options = p1.split(',')
+
+      let col = options[0].toString()
+      let amt = parseInt(options[1])
+      var usePound = false
+
+      if (col[0] == "#") {
+        col = col.slice(1)
+        usePound = true
+      }
+      var num = parseInt(col, 16)
+      var r = (num >> 16) + amt
+      if (r > 255) {
+        r = 255
+      } else if (r < 0) {
+        r = 0
+      }
+      var b = ((num >> 8) & 0x00FF) + amt
+      if (b > 255) {
+        b = 255
+      } else if (b < 0) {
+        b = 0
+      }
+      var g = (num & 0x0000FF) + amt
+      if (g > 255) {
+        g = 255
+      } else if (g < 0) {
+        g = 0
+      }
+      return (usePound ? "#" : "") + (g | (b << 8) | (r << 16)).toString(16)
+    }
+  </script>
+
+
+
+</head>
+
+<body>
+
+  <script src="/assets/js/hs.theme-appearance.js"></script>
+
+  <!-- ========== HEADER ========== -->
+  <header id="header" class="navbar navbar-expand-lg navbar-bordered bg-white  ">
+
+  </header>
+  <script>
+    $(function () {
+      $('#header').load('files/navbar/navbar.html')
+    })
+  </script>
+
+  <!-- ========== END HEADER ========== -->
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" role="main" class="main">
+    <!-- start page error -->
+    <!-- Card Error -->
+    <div class="content container p-5 d-none" id="pageErrorCard">
+      <div class="card p-5">
+        <div class=" justify-content-center align-items-center">
+          <div class="text-center p-1">
+            <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
+              style="width: 10rem; opacity:0.3">
+            <p class="mb-0" id="pageErrorCardText">Error</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end page error -->
+
+    <!-- Content -->
+    <div class="content container p-5" id="mainContent">
+
+
+      <div class="card p-5" id="mainContentInnerLoader">
+        <div class="d-flex justify-content-center p-5">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="mainContentInnerDataToShow" class="d-none">
+
+
+        <div class="d-flex">
+          <!-- Navbar -->
+          <div id="profileNavbar" class="p-0 pe-5" style="max-width: 15rem;">
+            <div class="card nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh;">
+              <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab"
+                data-bs-toggle="pill" data-bs-target="#profileTab" role="tab" aria-controls="profileTab"
+                aria-selected="true">Profile</a>
+              <hr class="horizontal-line">
+              <a class="nav-link profileTabClick" data-toggle="pill" href="#securityTab" data-bs-toggle="pill"
+                data-bs-target="#securityTab" role="tab" aria-controls="securityTab" aria-selected="false">Security</a>
+              <hr class="horizontal-line">
+              <a class="nav-link profileTabClick" data-toggle="pill" href="#billingTab" data-bs-toggle="pill"
+                data-bs-target="#billingTab" role="tab" aria-controls="billingTab" aria-selected="false">Billing</a>
+              <hr class="horizontal-line">
+              <a class="nav-link profileTabClick" data-toggle="pill" href="#notificationTab" data-bs-toggle="pill"
+                data-bs-target="#notificationTab" role="tab" aria-controls="notificationTab"
+                aria-selected="false">Notification</a>
+              <hr class="horizontal-line">
+              <a class="nav-link profileTabClick" data-toggle="pill" href="#teamTab" data-bs-toggle="pill"
+                data-bs-target="#teamTab" role="tab" aria-controls="teamTab" aria-selected="false">Team</a>
+              <hr class="horizontal-line">
+
+              <a class="nav-link d-flex justify-content-between mt-auto" href="#profileTab" data-bs-toggle="pill"
+                data-bs-target="#profileTab" role="tab" aria-controls="profileTab" aria-selected="false">
+                <span>Log Out</span> <i class="ms-8 bi-box-arrow-right nav-icon"></i>
+              </a>
+            </div>
+          </div>
+          <!-- End Navbar -->
+
+          <!-- Tab Content -->
+          <div class="col">
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
+                <div class="card p-3">
+                  <form>
+                    <!-- Form -->
+                    <div class="mb-3">
+                      <label for="muncipalityNameProfile" class="form-label">Municipality Name:</label>
+                      <input type="text" class="form-control form-control-light" id="muncipalityNameProfile"
+                        placeholder="City of Example" aria-label="City of Example">
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="mb-3">
+                      <label for="primaryContactNameProfile" class="form-label">Primary Contact Name:</label>
+                      <input type="text" class="form-control form-control-light" id="primaryContactNameProfile"
+                        placeholder="John Doe" aria-label="John Doe">
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="mb-3">
+                      <label for="emailAddressProfile" class="form-label">Email Address:</label>
+                      <input type="email" class="form-control form-control-light" id="emailAddressProfile"
+                        placeholder="it-manager@example.com">
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="mb-3">
+                      <label for="phoneNumberProfile" class="form-label">Phone Number:</label>
+                      <input type="text" class="form-control form-control-light" id="phoneNumberProfile"
+                        placeholder="+1 (123) 456 0000">
+                    </div>
+                    <!-- End Form -->
+                  </form>
+                  <div>
+                    <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Profile</button>
+                  </div>
+
+                </div>
+              </div>
+
+
+              <div class="tab-pane fade" id="securityTab" role="tabpanel">
+                <div class="card p-3">
+                  <form>
+                    <!-- Form -->
+                    <div class="mb-3">
+                      <label for="changePasswordProfile" class="form-label">Change Password:</label>
+                      <input type="password" class="form-control form-control-light" id="changePasswordProfile"
+                        placeholder="New Password" aria-label="New Password">
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-3">
+                      <input type="checkbox" id="mfaEnableCheckBox" class="form-check-input">
+                      <label class="form-check-label" for="mfaEnableCheckBox">Enable Multi-Factor Authentication
+                        (MFA)</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                  </form>
+                  <div>
+                    <button type="button" class="btn btn-primary" id="saveSecuritySettingBtn">Save Security
+                      Setting</button>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="billingTab" role="tabpanel">
+                <div class="card p-3">
+                  <form>
+
+
+                    <!-- start size -->
+                    <div class="col-sm-12  mb-4" id="savePaymentsMethodsSelectDiv">
+                      <label class=" form-label" for="savePaymentsMethodsSelect">Save Payment Methods</label>
+                      <!-- Select -->
+                      <div class="tom-select-custom" style="cursor: pointer;">
+                        <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                                "searchInDropdown": false,
+                            "hideSearch": true,
+                            "placeholder": "Select"
+                            }' id="savePaymentsMethodsSelect" name="savePaymentsMethodsSelect">
+                          <option class="p-2" value="">Select</option>
+                        </select>
+                      </div>
+                      <!-- End Select -->
+                    </div>
+                    <!-- end size -->
+
+                    <!-- Form -->
+                    <div class="mb-3">
+                      <label for="billingAddressProfile" class="form-label">Billing Address:</label>
+
+                      <input type="text" class="form-control form-control-light" id="billingAddressProfile"
+                        placeholder="123 Main Street, City" aria-label="123 Main Street, City">
+                    </div>
+                    <!-- End Form -->
+
+                    <!-- Form -->
+                    <div class="mb-3">
+                      <label for="billingAddressProfile2" class="form-label">Billing Address:</label>
+                      <input type="text" class="form-control form-control-light" id="billingAddressProfile2"
+                        placeholder="123 Main Street, City" aria-label="123 Main Street, City">
+                    </div>
+                    <!-- End Form -->
+
+                  </form>
+                  <div>
+                    <button type="button" class="btn btn-primary" id="saveBillingInfoBtn">Save Billing Info</button>
+                  </div>
+
+                  <hr class="horizontal-line-billing">
+
+
+                  <h3 class="">Invoice History</h3>
+
+                  <!-- Form -->
+                  <div class="mb-3">
+                    <input type="text" class="form-control form-control-light" id="invoice001Paid"
+                      placeholder="Invoice #001 - Paid" aria-label="Invoice #001 - Paid">
+                  </div>
+                  <!-- End Form -->
+
+                  <!-- Form -->
+                  <div class="mb-3">
+                    <input type="text" class="form-control form-control-light" id="invoice002Pending"
+                      placeholder="Invoice #002 - Pending" aria-label="Invoice #002 - Pending">
+                  </div>
+                  <!-- End Form -->
+
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="notificationTab" role="tabpanel">
+                <div class="card p-3">
+                  <form>
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-3">
+                      <input type="checkbox" id="emailNotificationsCheckBox" class="form-check-input border-dark">
+                      <label class="form-check-label" for="emailNotificationsCheckBox">Email notifications for quotes
+                        and orders</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-3">
+                      <input type="checkbox" id="smsNotificationsCheckBox" class="form-check-input border-dark">
+                      <label class="form-check-label" for="smsNotificationsCheckBox">SMS notifications</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-3">
+                      <input type="checkbox" id="weeklySummaryCheckBox" class="form-check-input border-dark">
+                      <label class="form-check-label" for="weeklySummaryCheckBox">Weekly summary</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                  </form>
+                  <div>
+                    <button type="button" class="btn btn-primary" id="saveNotificationSettingBtn">Save Notification
+                      Setting</button>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="teamTab" role="tabpanel">
+                <!-- start data table -->
+                <div id="profileTeamTableContainer"></div>
+                <!-- end data table -->
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- End Content -->
+  </main>
+  <!-- ========== END MAIN CONTENT ========== -->
+
+  <!-- JS Global Compulsory  -->
+  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.js"></script>
+
+  <!-- JS Front -->
+  <script src="/assets/js/theme.min.js"></script>
+
+  <!-- data table links -->
+  <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="/assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="/assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/assets/vendor/jszip/dist/jszip.min.js"></script>
+  <script src="/assets/vendor/pdfmake/build/pdfmake.min.js"></script>
+  <script src="/assets/vendor/pdfmake/build/vfs_fonts.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+  <!-- <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
+    integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb"
+    crossorigin="anonymous"></script>
+  <!-- constant js -->
+  <script src="/files/my-srcipts/constant.js"></script>
+
+  <!-- Datatable Initlization -->
+  <script src="/files/my-srcipts/datatabel_initlization.js"></script>
+
+  <!-- page js -->
+  <script src="/files/my-srcipts/account.js"></script>
+  <script src="/files/table-config/profile-table-confg.js"></script>
+
+
+
+
+
+</body>
+
+</html>
