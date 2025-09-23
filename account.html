@@ -24,7 +24,13 @@
   <link rel="preload" href="/assets/css/theme.min.css" data-hs-appearance="default" as="style">
   <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
   <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
-  <link href="files/custom-style/style.css" rel="stylesheet">
+  <link href="files/css/style.css" rel="stylesheet">
+  <!-- SweetAlert CSS    -->
+  <link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+  <!-- Security Key Encryption -->
+  <script src="/files/https-files/jsencrypt.min.js"></script>
+  <script src="/files/https-files/crypto-js.js"></script>
 
   <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
 
@@ -184,7 +190,7 @@
       $('#header').load('files/navbar/navbar.html')
     })
   </script>
-
+ <div id="cover-spin"></div>
   <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
@@ -240,11 +246,10 @@
                 aria-selected="false">Notification</a>
               <hr class="horizontal-line">
               <a class="nav-link profileTabClick" data-toggle="pill" href="#teamTab" data-bs-toggle="pill"
-                data-bs-target="#teamTab" role="tab" aria-controls="teamTab" aria-selected="false">Team</a>
+     -           data-bs-target="#teamTab" role="tab" aria-controls="teamTab" aria-selected="false">Team</a>
               <hr class="horizontal-line">
 
-              <a class="nav-link d-flex justify-content-between mt-auto" href="#profileTab" data-bs-toggle="pill"
-                data-bs-target="#profileTab" role="tab" aria-controls="profileTab" aria-selected="false">
+              <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()" onclick="logoutUser()">
                 <span>Log Out</span> <i class="ms-8 bi-box-arrow-right nav-icon"></i>
               </a>
             </div>
@@ -472,14 +477,16 @@
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
     integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb"
     crossorigin="anonymous"></script>
+    <!-- SweetAlert CSS    -->
+  <script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
   <!-- constant js -->
-  <script src="/files/my-srcipts/constant.js"></script>
+  <script src="/files/my-scripts/constants.js"></script>
 
   <!-- Datatable Initlization -->
-  <script src="/files/my-srcipts/datatabel_initlization.js"></script>
+  <script src="/files/my-scripts/datatabel_initlization.js"></script>
 
   <!-- page js -->
-  <script src="/files/my-srcipts/account.js"></script>
+  <script src="/files/my-scripts/account.js"></script>
   <script src="/files/table-config/profile-table-confg.js"></script>
 
 

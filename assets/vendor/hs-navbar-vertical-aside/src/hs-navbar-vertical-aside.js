@@ -378,7 +378,7 @@ export default class HSSideNav {
   }
 
   toggleSidebar() {
-    console.log(123)
+
     // Get opened menus
     const notHidden = els => [...els].filter($el => window.getComputedStyle($el).display !== 'none')
 
@@ -391,12 +391,16 @@ export default class HSSideNav {
       ? $mainContainer.classList.remove(this.sidebarToggleClass.slice(1))
       : $mainContainer.classList.add(this.sidebarToggleClass.slice(1))
 
+
+
     // Toggle aside
     if ($mainContainer.classList.contains(this.sidebarToggleClass.slice(1))) {
       $mainContainer.classList.add(this.settings.minClass.slice(1))
     } else {
       $mainContainer.classList.remove(this.settings.minClass.slice(1))
     }
+
+
 
     // Additional for plugin
     if (!this.showResolutionChecking() && $mainContainer.classList.contains(this.settings.minClass.slice(1)) || this.showResolutionChecking() && $mainContainer.classList.contains(this.settings.closedClass.slice(1))) {

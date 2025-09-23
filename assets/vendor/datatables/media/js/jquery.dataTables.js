@@ -12443,7 +12443,7 @@
 		 *        "columnDefs": [ {
 		 *          "targets": [ 0 ],
 		 *          "data": null,
-		 *          "defaultContent": "Click to edit"
+		 *          "defaultContent": "Click to edit."
 		 *        } ]
 		 *      } );
 		 *    } );

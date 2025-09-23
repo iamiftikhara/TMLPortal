@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Title -->
+  <title></title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./assets/images/fav.png">
+  <!-- Font -->
+  <link href="/files/https-files/google-fonts.css" rel="stylesheet">
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- SweetAlert CSS    -->
+  <link href="./assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+  <!-- Custome css -->
+  <link href="/files/css/style.css" rel="stylesheet">
+  <!-- Recaptcha Script -->
+  <script src='files/my-scripts/recaptcha.js'></script>
+  <!-- CSS Front Template -->
+  <link rel="preload" href="/assets/css/theme.min.css" data-hs-appearance="default" as="style">
+  <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
+  <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+
+  <style data-hs-appearance-onload-styles>
+    * {
+      transition: unset !important;
+    }
+
+    body {
+      opacity: 0;
+    }
+  </style>
+  <style>
+    iframe {
+      /* width: 400px !important;
+      height: 580px !important; */
+
+    }
+
+    .g-recaptcha div {
+      /* height: 90px !important; */
+    }
+
+    html {
+      zoom: 100% !important;
+    }
+  </style>
+  <script>
+    window.hs_config = { "autopath": "@@autopath", "deleteLine": "hs-builder:delete", "deleteLine:build": "hs-builder:build-delete", "deleteLine:dist": "hs-builder:dist-delete", "previewMode": false, "startPath": "/index.html", "vars": { "themeFont": "/files/https-files/google-fonts.css", "version": "?v=1.0" }, "layoutBuilder": { "extend": { "switcherSupport": true }, "header": { "layoutMode": "default", "containerMode": "container-fluid" }, "sidebarLayout": "default" }, "themeAppearance": { "layoutSkin": "default", "sidebarSkin": "default", "styles": { "colors": { "primary": "#377dff", "transparent": "transparent", "white": "#fff", "dark": "132144", "gray": { "100": "#f9fafc", "900": "#1e2022" } }, "font": "Inter" } }, "languageDirection": { "lang": "en" }, "skipFilesFromBundle": { "dist": ["assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "assets/js/demo.js"], "build": ["assets/css/theme.css", "assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js", "assets/js/demo.js", "assets/css/theme-dark.css", "assets/css/docs.css", "assets/vendor/icon-set/style.css", "assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js", "assets/js/demo.js"] }, "minifyCSSFiles": ["assets/css/theme.css", "assets/css/theme-dark.css"], "copyDependencies": { "dist": { "*assets/js/theme-custom.js": "" }, "build": { "*assets/js/theme-custom.js": "", "node_modules/bootstrap-icons/font/*fonts/**": "assets/css" } }, "buildFolder": "", "replacePathsToCDN": {}, "directoryNames": { "src": "./src", "dist": "./dist", "build": "./build" }, "fileNames": { "dist": { "js": "theme.min.js", "css": "theme.min.css" }, "build": { "css": "theme.min.css", "js": "theme.min.js", "vendorCSS": "vendor.min.css", "vendorJS": "vendor.min.js" } }, "fileTypes": "jpg|png|svg|mp4|webm|ogv|json" }
+  </script>
+</head>
+
+<body class="body-login-pages">
+
+  <script src="./assets/js/hs.theme-appearance.js"></script>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" class="main">
+    <!-- Content -->
+    <div class="container py-7 py-sm-7">
+
+      <div class="mx-auto" style="max-width: 35rem;">
+        <!-- Card -->
+        <div class="card card-lg mb-5 rounded">
+          <div class="card-body p-3">
+            <!-- Form -->
+            <form class="js-validate needs-validation" novalidate id="signUpForm">
+              <!-- <div class="text-center">
+                <div class="mb-2">
+                  <img class="zi-2" src="./assets/images/logo.png" alt="Image Description" style="width: 12rem;">
+                </div>
+              </div> -->
+              <div class="mb-2 d-flex justify-content-between singinFormLogoDiv" id="singinFormLogoDiv"></div>
+              <!-- Input classes for future use -->
+              <!-- shadow-none transparent-input border-0 border-bottom -->
+              <!-- First & last name -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- Form -->
+                  <div class="mb-2">
+                    <label class="form-label" for="signupFirstName">First name <span
+                        class="text-danger">*</span></label>
+                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                      data-bs-placement="right" data-bs-html="true" title="
+                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
+                        <ul>
+                        <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
+                        <li>Maximum length should be 50 characters.</li>
+                        <li>Minimum length should be 3 characters.</li>
+                        <li>Only digits are not allowed.</li>
+                        <li>Whitespaces are allowed.</li>
+                        </ul>"></i>
+                    <input type="text" class="form-control form-control-lg ps-1" name="signupFirstName"
+                      id="signupFirstName" placeholder="Charlie" minlength="3" maxlength="50" aria-label="Charlie"
+                      required autocomplete="off">
+                  </div>
+                  <!-- End Form -->
+                </div>
+                <div class="col-sm-6">
+                  <!-- Form -->
+                  <div class="mb-2">
+                    <label class="form-label" for="signupLastName">Last name <span class="text-danger">*</span></label>
+                    <i class="bi-question-circle text-body ms-1" id="LastNameToolTip" data-bs-toggle="tooltip"
+                      data-bs-placement="right" data-bs-html="true" title="
+                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
+                        <li>Maximum length should be 50 characters.</li>
+                        <li>Minimum length should be 3 characters.</li>
+                        <li>Only digits are not allowed.</li>
+                        <li>Whitespaces are allowed.</li></ul>"></i>
+                    <input type="text" id="signupLastName" name="signupLastName"
+                      class="form-control form-control-lg ps-1" minlength="3" maxlength="50" placeholder="Boone"
+                      aria-label="Boone" required autocomplete="off">
+                  </div>
+                  <!-- End Form -->
+                </div>
+              </div>
+              <!-- User name -->
+              <div class="mb-2 d-none">
+                <label class="form-label" for="signupUserName">Username <span class="text-danger">*</span></label>
+                <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                  data-bs-placement="right" data-bs-html="true" title="
+                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: (.), (-), ( _ ).</li>
+                    <li>Maximum length should be 50 characters.</li>
+                    <li>Minimum length should be 3 characters.</li>
+                    <li>Whitespaces are not allowed.</li></ul>"></i>
+                <input type="text" class="form-control form-control-lg  ps-1" name="signupUserName" id="signupUserName"
+                  tabindex="1" placeholder="Charlie" minlength="3" maxlength="50" aria-label="Name *" required
+                  autocomplete="off">
+              </div>
+
+              <!-- User email -->
+              <div class="mb-2">
+                <label class="form-label" for="signupUserEmail">Email <span class="text-danger">*</span></label>
+                <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                  data-bs-placement="right" data-bs-html="true" title="
+                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
+                    <ul>
+                    <li>Email format: user@domain.com.</li>
+                    <li>We are ofcourse supporting all extensions <br> (.org, .com, .io etc).</li>
+                    </ul>"></i>
+                <input type="email" class="form-control form-control-lg  ps-1" maxlength="50" name="signupUserEmail"
+                  id="signupUserEmail" tabindex="1" placeholder="user@domain.com" aria-label="usere@domain.com" required
+                  autocomplete="off">
+              </div>
+              <!-- start size -->
+              <div class="mb-3 d-none" id="">
+                <label class=" form-label" for="signupUserRole">Role:</label>
+                <!-- Select -->
+                <div class="tom-select-custom" style="cursor: pointer;">
+                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="signupUserRole" name="signupUserRole">
+                    <option class="p-2" value="">Select</option>
+                    <option class="p-2" value="Admin">Admin</option>
+                    <option class="p-2" value="User">User</option>
+                  </select>
+                </div>
+                <!-- End Select -->
+              </div>
+              <!-- end size -->
+              <!-- Orgnization Name -->
+              <div class="mb-3">
+                <label class="form-label" for="signupUserOrgnization">Organization name <span
+                    class="text-danger">*</span></label>
+                <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                  data-bs-placement="right" data-bs-html="true" title="
+                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
+                    <li>Maximum length should be 50 characters.</li>
+                    <li>Minimum length should be 3 characters.</li>
+                    <li>Only digits are not allowed.</li>
+                    <li>Whitespaces are allowed.</li></ul>"></i>
+                <input type="text" class="form-control form-control-lg  ps-1" name="signupUserOrgnization"
+                  id="signupUserOrgnization" tabindex="1" minlength="3" maxlength="50"
+                  placeholder="Enter organization name" required autocomplete="off">
+              </div>
+              <!-- User password -->
+              <div class="row mb-3">
+                <div class="col-sm-6">
+                  <label class="form-label" for="signupUserPassword">Password <span class="text-danger">*</span></label>
+                  <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-html="true" title="
+                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
+                        <ul>
+                        <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
+                        </ul>"></i>
+                  <!-- passowerd eye -->
+                  <a id="changePassTarget"
+                    class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
+                    href="javascript:;">
+                    <i id="changePassIcon" class="bi-eye"></i>
+                  </a>
+                  <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                    name="signupUserPassword" id="signupUserPassword" placeholder="Enter a strong password"
+                    aria-label="Password *" required minlength="8" maxlength="50" data-hs-toggle-password-options='{
+                      "target": "#changePassTarget",
+                      "defaultClass": "bi-eye-slash",
+                      "showClass": "bi-eye",
+                      "classChangeTarget": "#changePassIcon"
+                    }' autocomplete="off">
+                </div>
+                <!-- Repeat password -->
+                <div class="col-sm-6">
+                  <label class="form-label" for="signupUserRepeatPassword">Confirm password <span
+                      class="text-danger">*</span></label>
+                  <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-html="true"
+                    title="
+                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
+                  <!-- passowerd eye -->
+                  <a id="changeRepeatPassTarget"
+                    class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
+                    href="javascript:;">
+                    <i id="changeRepeatPassIcon" class="bi-eye"></i>
+                  </a>
+                  <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                    name="signupUserRepeatPassword" id="signupUserRepeatPassword" placeholder="Confirm password"
+                    aria-label="Confirm Password " maxlength="50" required data-hs-toggle-password-options='{
+                      "target": "#changeRepeatPassTarget",
+                      "defaultClass": "bi-eye-slash",
+                      "showClass": "bi-eye",
+                      "classChangeTarget": "#changeRepeatPassIcon"
+                    }' autocomplete="off">
+                </div>
+              </div>
+              <!-- Terms and Conditons -->
+              <div class="mb-2">
+                <p>By signing up, you agree to our <a target="_blank" class="text-decoration-underline"
+                    href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/terms-of-service.pdf">Terms</a> and <a
+                    class="text-decoration-underline"
+                    href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/privacy-policy.pdf" target="_blank">Privacy
+                    policy</a>.</p>
+              </div>
+              <div class="mb-2" id="recaptchaDisable">
+                <div class="g-recaptcha" data-sitekey="6LdUMv4ZAAAAAO3FZVUyZ4KfQw7XsNjl2CUIldYL"></div>
+                <div class="text-danger">
+                  <span id="captchaerror"></span>
+                </div>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg" id="signupBtn">Sign up</button>
+              </div>
+            </form>
+            <!-- End Form -->
+            <label class="form-label w-100 mt-2 mb-n2 d-none poweredby" tabindex="0" id="poweredby">
+              <span class="d-flex justify-content-end align-items-rigt">
+                <label id="powered_by " class="fs-6 mt-1">Powered by </label>&nbsp;&nbsp;
+                <a href="https://cytex.io" target="_blank"> <img src="files/images/logo/logo.png" id="cytex_img"
+                    style="max-height: 2rem;"></a>
+              </span>
+            </label>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+    </div>
+    <!-- End Content -->
+  </main>
+  <!-- ========== END MAIN CONTENT ========== -->
+
+  <!-- JS Global Compulsory  -->
+  <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SweetAlert CSS    -->
+  <script src="./assets/plugins/sweetalert/sweetalert.min.js"></script>
+
+  <!-- JS Implementing Plugins -->
+  <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
+  <!-- jQuery -->
+  <script src="/files/https-files/jquery.min.js"></script>
+  <!-- Password Hashing SHA -->
+  <script src="/files/https-files/jsSHA-202-sha.js"></script>
+  <!-- Auth Token Encryption -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
+    integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+  <!-- Validation checks handle this libraray -->
+  <script src="/files/https-files/jquery.validate.min.js"></script>
+  <!-- <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
+    integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb"
+    crossorigin="anonymous"></script>
+  <!-- JS Front -->
+  <script src="./assets/js/theme.min.js"></script>
+  <!-- Branding js -->
+  <script src="/files/my-scripts/branding.js"></script>
+  <!-- validation -->
+  <script src="/files/my-scripts/validation_constants.js"></script>
+  <!-- Constant -->
+  <script src="/files/my-scripts/constants.js"></script>
+  <!-- page JS -->
+  <script src="/files/my-scripts/signin.js"></script>
+  <!-- JS Plugins Init. -->
+  <script>
+      (function () {
+        window.onload = function () {
+          // INITIALIZATION OF TOGGLE PASSWORD
+          // =======================================================
+          new HSTogglePassword('.js-toggle-password');
+          // Redirect User to Index.html if user signed in already
+          if (localStorage.getItem('_ia') == 'true') {
+            // window.location.href = 'index.html';
+          }
+        }
+      })()
+  </script>
+</body>
+
+</html>
