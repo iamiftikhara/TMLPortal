@@ -255,7 +255,7 @@ $(document).ready(function() {
       first_name: fname,
       last_name: lname,
       organization: org,
-      role: 'user'
+      role: 'admin'
     };
 
 

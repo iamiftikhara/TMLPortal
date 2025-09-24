@@ -1,6 +1,7 @@
-// if (localStorage.getItem('_ia') !== 'true') {
-//   window.location.href = 'signin.html'
-// }
+if (localStorage.getItem('_ia') !== 'true') {
+  window.location.href = 'signin.html'
+}
+
 const tokenAuth = localStorage.getItem('_at')
 const decryptedByte = CryptoJS.AES.decrypt(tokenAuth, 'My Secret Passphrase')
 const authToken = decryptedByte.toString(CryptoJS.enc.Utf8)

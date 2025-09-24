@@ -28,19 +28,52 @@ const Content_Type = "application/json";
 const signinAPI = "tml/signin";
 const signupAPI = "tml/signup";
 const signinUDAPI = 'signin/ud'
+const singinCodeConfirmation = 'tml/confirmation'
+
+
 const logoutUserSessionAPI = "tml/logout";
 
 // Forgot password
 const forgotPasswordAPI = "tml/forgot-password";
 const verifyTokenAPI = "tml/verify-code"
+const changePasswordAPI = "tml/set-password"
 
 
 
 
+// Orders
+const getOrdersAPI = "tml/client/orders/list";
 
 
 // to open the message from locals
 const locKeyEncry = 'This is my message to you.'
+const pswd_change_success = "Successfully changed"
+
+
+// ********************** Start Error message ***********************
+
+// 204 STATUS
+const noDataFoundText204Case = "No data to show.";
+// 400 STATUS
+const invalidRequest400Error = "Invalid request.";
+// 401 STATUS
+const unauthorizedRequest401Error = "Unauthorized request.";
+// 403 STATUS
+const inActiveUser403Error = "User is in inactive state.";
+const invalidCredential403Error = "Invalid credentials.";
+// 404 STATUS
+const notFound404Error = "Data not found.";
+// 503 STATUS
+const serverError503Error = "Service is temporarily unavailable. Please try again.";
+// 408 STATUS
+const sessionExpired408Error = "Session expired.";
+// Redirect to Login Page 408
+const redirectToSignInPage408 = "/signin.html";
+// 409 STATUS
+const alreadyExist409Error = "Already exist."
+
+// ********************** Start Error message ***********************
+
 
 // Tom select option
 function initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
