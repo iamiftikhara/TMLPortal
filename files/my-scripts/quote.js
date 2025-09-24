@@ -1,9 +1,9 @@
 // if (localStorage.getItem('_ia') !== 'true') {
 //   window.location.href = 'signin.html'
 // }
-const tokenAuth = localStorage.getItem('_at')
-const decryptedByte = CryptoJS.AES.decrypt(tokenAuth, 'My Secret Passphrase')
-const authToken = decryptedByte.toString(CryptoJS.enc.Utf8)
+// const tokenAuth = localStorage.getItem('_at')
+// const decryptedByte = CryptoJS.AES.decrypt(tokenAuth, 'My Secret Passphrase')
+// const authToken = decryptedByte.toString(CryptoJS.enc.Utf8)
 
 let municipalitySizeSelectInit, NumberOfEmployeesSelectInit, cloudProviderSelectInit
 let numberOfUsersSelectInit, numberOfEndPointsSelectInit, budgetRangeSelectInit

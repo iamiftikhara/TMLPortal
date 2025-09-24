@@ -1,9 +1,9 @@
 // if (localStorage.getItem('_ia') !== 'true') {
 //   window.location.href = 'signin.html'
-// }
-const tokenAuth = localStorage.getItem('_at')
-const decryptedByte = CryptoJS.AES.decrypt(tokenAuth, 'My Secret Passphrase')
-const authToken = decryptedByte.toString(CryptoJS.enc.Utf8)
+// // }
+// const tokenAuth = localStorage.getItem('_at')
+// const decryptedByte = CryptoJS.AES.decrypt(tokenAuth, 'My Secret Passphrase')
+// const authToken = decryptedByte.toString(CryptoJS.enc.Utf8)
 
 let ordersDataTableInit
 let searchOject = {}
@@ -25,75 +25,75 @@ $(document).ready(function () {
 
 
 
-  
-      //   Intilize flatpickr Date
-      issueDateOfCard = flatpickr('#issueDateOfCard', {
-        // Configuration options
-        enableTime: false,
-        dateFormat: 'Y-m-d',
-        minDate: 'today',
-        onOpen: function (selectedDates, dateStr, instance) {
-          if (dateTimeFlage === true) {
-            const now = new Date()
 
-            instance.setDate(now)
-            $('#dueDateOfCard').val()
-            const endDateValue = $('#dueDateOfCard').val()
-            $('#dueDateOfCard').prop('disabled', false);
-            if (endDateValue) {
-              // instance.set('minTime', '00:00')
-            }
-            dateTimeFlage = false
-          }
-        },
-        onReady: function (selectedDates, dateStr, instance) {
-        },
-        onChange: function (selectedDates, dateStr, instance) {
-        },
-        disable: [
-          function (date) {
-            // return true to disable
-            // return (date.getDay() === 0 || date.getDay() === 6)
-          }
-        ]
-      })
-     
-     
+  //   Intilize flatpickr Date
+  issueDateOfCard = flatpickr('#issueDateOfCard', {
+    // Configuration options
+    enableTime: false,
+    dateFormat: 'Y-m-d',
+    minDate: 'today',
+    onOpen: function (selectedDates, dateStr, instance) {
+      if (dateTimeFlage === true) {
+        const now = new Date()
+
+        instance.setDate(now)
+        $('#dueDateOfCard').val()
+        const endDateValue = $('#dueDateOfCard').val()
+        $('#dueDateOfCard').prop('disabled', false);
+        if (endDateValue) {
+          // instance.set('minTime', '00:00')
+        }
+        dateTimeFlage = false
+      }
+    },
+    onReady: function (selectedDates, dateStr, instance) {
+    },
+    onChange: function (selectedDates, dateStr, instance) {
+    },
+    disable: [
+      function (date) {
+        // return true to disable
+        // return (date.getDay() === 0 || date.getDay() === 6)
+      }
+    ]
+  })
 
 
-      dueDateOfCard = flatpickr('#dueDateOfCard', {
-        // Configuration options
-        enableTime: false,
-        dateFormat: 'Y-m-d',
-        minDate: 'today',
 
-        onOpen: function (selectedDates, dateStr, instance) {
-          if (dateTimeEndFlage === true) {
-            const now = new Date()
-            const currentDate = new Date()
 
-            if (currentDate) {
-           
-              //   currentDate.setMinutes(now.getMinutes())
-              instance.setDate(currentDate)
-            } else {
-              instance.setDate(now)
-            }
-            instance.set('minTime', '00:00')
-            dateTimeEndFlage = false
-          }
-        },
-        onReady: function (selectedDates, dateStr, instance) {
-        },
-        onChange: function (selectedDates, dateStr, instance) {
-        },
-        disable: [
-          function (date) {
-            // return true to disable
-            // return (date.getDay() === 0 || date.getDay() === 6)
-          }
-        ]
-      })
+  dueDateOfCard = flatpickr('#dueDateOfCard', {
+    // Configuration options
+    enableTime: false,
+    dateFormat: 'Y-m-d',
+    minDate: 'today',
+
+    onOpen: function (selectedDates, dateStr, instance) {
+      if (dateTimeEndFlage === true) {
+        const now = new Date()
+        const currentDate = new Date()
+
+        if (currentDate) {
+
+          //   currentDate.setMinutes(now.getMinutes())
+          instance.setDate(currentDate)
+        } else {
+          instance.setDate(now)
+        }
+        instance.set('minTime', '00:00')
+        dateTimeEndFlage = false
+      }
+    },
+    onReady: function (selectedDates, dateStr, instance) {
+    },
+    onChange: function (selectedDates, dateStr, instance) {
+    },
+    disable: [
+      function (date) {
+        // return true to disable
+        // return (date.getDay() === 0 || date.getDay() === 6)
+      }
+    ]
+  })
 
 
 
@@ -139,17 +139,7 @@ function searchObjectCreation(search) {
 
 // Main API Call function for datatable
 function getOrdersTableData(skip, page) {
-  console.log(skip, page)
 
-
-  // create me dummy data for 5 rows based on this data.
-  // { "name": "Order ID", "widthClass": "w-5" },
-  // { "name": "Municipality", "widthClass": "w-5" },
-  // { "name": "Service", "widthClass": "w-5" },
-  // { "name": "Date", "widthClass": "w-5" },
-  // { "name": "Payment", "widthClass": "w-5" },
-  // { "name": "Status", "widthClass": "w-5" },
-  // { "name": "Actions", "widthClass": "" }
   let data = [
     {
       order_id: 'ORD12345',
@@ -168,75 +158,183 @@ function getOrdersTableData(skip, page) {
       status: 'Pending Kickoff',
     },
 
-  
 
-   
+
+
   ]
 
 
 
 
 
-  hideDataTableLoader200('ordersDataTable')
-
-  // Response data (IPs)
-  response = data
-  ordersDataReceived = response
-  localStorage.setItem('ordersDataTableTotal', data.length)
-  // If No IPs found
-
-  // loop through response to add data in datatable
-  for (let i = 0; i < response.length; i++) {
 
 
-    let order_id = generateSpan(response[i], 'order_id', '', '')
-    let municipality = generateSpan(response[i], 'municipality', '', '')
-    let service = generateSpan(response[i], 'service', '', '')
-    let date = generateSpan(response[i], 'date', '', '')
-    let payment = generateSpan(response[i], 'payment', '', '')
-    let status = generateSpan(response[i], 'status', '', '')
-    if(response[i].status === 'Pending Kickoff'){
-      status = `<div class='d-flex flex-column'>
+  let requirePayloadData
+  if ((Object.keys(searchOject).length > 0)) {
+    requirePayloadData = JSON.stringify({
+      auth_token: authToken,
+      skip: Number(skip),
+      page,
+      search: searchOject,
+
+    })
+  } else {
+    requirePayloadData = JSON.stringify({
+      // auth_token: authToken,
+      skip: Number(skip),
+      page,
+    })
+  }
+
+
+  // Ajax call
+  $.ajax({
+    url: MAIN_API_PATH + getOrdersAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: requirePayloadData,
+    statusCode: {
+      200: function (data) {
+        // Hide page laoder Spiner
+        $('#cover-spin').hide()
+
+        hideDataTableLoader200('ordersDataTable')
+
+        // Response data (IPs)
+        response = data
+        ordersDataReceived = response
+        localStorage.setItem('ordersDataTableTotal', data.length)
+        // If No IPs found
+
+        // loop through response to add data in datatable
+        for (let i = 0; i < response.length; i++) {
+
+
+          let order_id = generateSpan(response[i], 'order_id', '', '')
+          let municipality = generateSpan(response[i], 'municipality', '', '')
+          let service = generateSpan(response[i], 'service', '', '')
+          let date = generateSpan(response[i], 'date', '', '')
+          let payment = generateSpan(response[i], 'payment', '', '')
+          let status = generateSpan(response[i], 'status', '', '')
+          if (response[i].status === 'Pending Kickoff') {
+            status = `<div class='d-flex flex-column'>
       ${status}
       <button class="btn btn-sm btn-danger view-order-details p-1 ms-2 px-4" style='font-size: 10px; width: fit-content' data-order-id="${response[i].order_id}">Pay Now</button>
       </div>      
       `
-    }
+          }
 
-    let actions = `
+          let actions = `
       <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
       <button class="btn btn-sm btn-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
     `
 
 
 
-    ordersDataTableInit.row
-      .add([
-        `<td ><span >#${order_id}</span></td>`,
-        `<td ><span >${municipality}</span></td>`,
-        `<td ><span >${service}</span></td>`,
-        `<td ><span >${date}</span></td>`,
-        `<td ><span >${payment}</span></td>`,
-        `<td ><span >${status}</span></td>`,
-        `<td ><span >${actions}</span></td>`,
-        
-      ])
-      .draw()
-    datatablePagination('ordersDataTable', 1, 'ordersDataTableTotal', getOrdersTableData)
+          ordersDataTableInit.row
+            .add([
+              `<td ><span >#${order_id}</span></td>`,
+              `<td ><span >${municipality}</span></td>`,
+              `<td ><span >${service}</span></td>`,
+              `<td ><span >${date}</span></td>`,
+              `<td ><span >${payment}</span></td>`,
+              `<td ><span >${status}</span></td>`,
+              `<td ><span >${actions}</span></td>`,
+
+            ])
+            .draw()
+          datatablePagination('ordersDataTable', 1, 'ordersDataTableTotal', getOrdersTableData)
 
 
 
-    let viewOrderDetailsButtons = document.querySelectorAll('.view-order-details');
-    viewOrderDetailsButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        let orderId = this.getAttribute('data-order-id');
-        // Redirect to order details page
-        showOrderDetails(orderId);
-      });
-    });
-    
+          let viewOrderDetailsButtons = document.querySelectorAll('.view-order-details');
+          viewOrderDetailsButtons.forEach(button => {
+            button.addEventListener('click', function () {
+              let orderId = this.getAttribute('data-order-id');
+              // Redirect to order details page
+              showOrderDetails(orderId);
+            });
+          });
 
-  }
+
+        }
+      },
+      204: function () {
+        $('#cover-spin').hide()
+        hideDataTableLoaderError('ordersDataTable')
+        if (Object.keys(searchOject).length > 0) {
+          $('#ordersDataTableErrorDiv').addClass('d-none')
+          $('#ordersDataTable, #ordersDataTableDatatableMainHeading').removeClass('d-none')
+        }
+        ipAddressDatatable.clear().draw()
+        $('#ordersDataTableErrorText').text(noDataFoundText204Case)
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      hideDataTableLoaderError('ordersDataTable')
+
+      if (xhr.status === 400) {
+        $('#ordersDataTableErrorText').text(invalidRequest400Error)
+      } else if (xhr.status === 401) {
+        $('#ordersDataTableErrorText').text(unauthorizedRequest401Error)
+      } else if (xhr.status === 404) {
+        // $('#cover-spin').hide(0);
+        $('#ordersDataTableErrorText').text(notFound404Error)
+      } else if (xhr.status === 503) {
+        // $('#cover-spin').hide(0);
+        $('#ordersDataTableErrorText').text(serverError503Error)
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const currentDateString = String(data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+            SecurityKeyTime = false
+            getOrdersTableData(skip, page, search)
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const currentDateString = String(data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+              SecurityKeyTime = false
+              getOrdersTableData(skip, page, search)
+            })
+          }
+        })
+      } else {
+        // $('#cover-spin').hide(0);
+        $('#ordersDataTableErrorText').text(serverError503Error)
+      }
+    }
+  })
+
+
+
 }
 
 
@@ -263,7 +361,7 @@ function showOrderDetails(orderId) {
 
   $('#orderDetailsContainer').removeClass('d-none');
   $("html, body").animate(
-    { scrollTop: $("#orderDetailsContainer").offset().top }, 
+    { scrollTop: $("#orderDetailsContainer").offset().top },
     600 // duration in ms (600ms = smooth speed)
   );
 

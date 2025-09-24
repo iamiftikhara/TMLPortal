@@ -249,13 +249,13 @@ $(document).ready(function() {
     $('#signupBtn').css('cursor', 'not-allowed');
 
     let signupPayload = {
-      username: uname,
+      // username: uname,
       password: hashPassword,
       email: email,
       first_name: fname,
       last_name: lname,
       organization: org,
-      role: role
+      role: 'user'
     };
 
 
