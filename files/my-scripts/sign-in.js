@@ -273,12 +273,14 @@ $('#signinForm').submit(function (e) {
         200: function (xhr) {   
           let userDetails = xhr.user
 
-          localStorage.setItem('_un', userDetails.username)
+          localStorage.setItem('_uf', userDetails.first_name)
+          localStorage.setItem('_ul', userDetails.last_name)
+
           localStorage.setItem('_em', userDetails.email)
           localStorage.setItem('_mfa', userDetails.mfa_enabled)
-          localStorage.setItem('_org_i', userDetails.org_id)
+          localStorage.setItem('_org_n', userDetails.org_name)
           localStorage.setItem('_role', userDetails.role)
-          localStorage.setItem('_uid', userDetails.user_id)
+          localStorage.setItem('_is_super', userDetails.is_super)
           localStorage.setItem('_ia', true)
 
 
@@ -290,7 +292,6 @@ $('#signinForm').submit(function (e) {
             'My Secret Passphrase'
           )
           localStorage.setItem('_at', encryptedAES)
-       
           window.location.href = 'index.html'
           setTimeout(function () {
             $('#signinBtn').text('Sign In')
