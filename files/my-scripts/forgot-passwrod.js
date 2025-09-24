@@ -57,9 +57,9 @@ $(document).ready(function () {
 const emG = localStorage.getItem('_emG')
 const un = localStorage.getItem('_un')
 const pa = localStorage.getItem('_pa')
-if (emG == null || un == null || emG == '' || un == '' || emG === undefined || un == undefined) {
+if (emG == null || emG == '' || emG === undefined) {
   // window.location.href = 'signin.html'
-} else if (emG.length > 0 && un.length > 0) {
+} else if (emG.length > 0) {
   $('#emailtext').html(emG)
 }
 if (pa == null || pa == '' || pa == undefined) {
@@ -97,7 +97,7 @@ $('#verifyTokenBtn').on('click', function (e) {
 
   const requireData = JSON.stringify({
     email: email_pas,
-    username: un,
+    // username: un,
     code: tokk
   })
   $('#verifyTokenBtn').text('Verifying...')
@@ -105,7 +105,7 @@ $('#verifyTokenBtn').on('click', function (e) {
   $('#verifyTokenBtn').css('cursor', 'not-allowed')
 
   $.ajax({
-    url: MAIN_API_PATH + passwordCodeAPI,
+    url: MAIN_API_PATH + verifyTokenAPI,
     method: POST,
     contentType: Content_Type,
     dataType: 'json',
@@ -127,7 +127,7 @@ $('#verifyTokenBtn').on('click', function (e) {
       $('#verifyTokenBtn').css('cursor', 'pointer')
 
       const errro_show = JSON.parse(xhr.responseText)
-      if (xhr.status == 401 || xhr.status == 400 || xhr.status == 404 || xhr.status == 503) {
+      if (xhr.status == 401 || xhr.status == 400 || xhr.status == 404 || xhr.status == 503 || xhr.status == 410) {
         swal({
           title: 'Error',
           text: errro_show.message,
@@ -164,9 +164,8 @@ function changePassword () {
     return 0
   }
   const requireData = JSON.stringify({
-    username: un,
-    password: hash_password,
-    code: localStorage.getItem('tk'),
+    // username: un,
+    new_password: hash_password,
     email: email_pas
   })
   $('#resetPasswordBtn').text('Submitting...')

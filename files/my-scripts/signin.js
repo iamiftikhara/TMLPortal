@@ -392,7 +392,7 @@ function forgotPasswordFuncation () {
   const forgetUserName = $('#forgotPasswordUsername').val()
   const forgetUserEmail = $('#forgotPasswordUserEmail').val()
   const requireData = JSON.stringify({
-    username: forgetUserName,
+    // username: forgetUserName,
     email: forgetUserEmail
   })
   $('#forgotPasswordSubmitBtn').text('Submiting...')
@@ -413,7 +413,7 @@ function forgotPasswordFuncation () {
       $('#forgotPasswordUserEmail').val('')
       localStorage.setItem('_emG', xhr.message)
       localStorage.setItem('_emG_get', forgetUserEmail)
-      localStorage.setItem('_un', forgetUserName)
+      // localStorage.setItem('_un', forgetUserName)
       window.location.href = 'forgot-password.html'
     },
     error: function (xhr) {

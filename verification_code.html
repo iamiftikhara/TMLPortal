@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Title -->
+  <title></title>
+  <!-- Favicon --> 
+  <link rel="shortcut icon" href="./assets/images/fav.png">
+  <!-- Font -->
+  <link href="/files/https-files/google-fonts.css" rel="stylesheet">
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
+  <!-- SweetAlert CSS    -->
+  <link href="./assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+  <!-- Custome css -->
+  <link href="/files/css/style.css" rel="stylesheet">
+  <!-- CSS Front Template -->
+  <link rel="preload" href="/assets/css/theme.min.css" data-hs-appearance="default" as="style">
+        <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
+  <style data-hs-appearance-onload-styles>
+    * {
+      transition: unset !important;
+    }
+
+    body {
+      opacity: 0;
+    }
+  </style>
+  <script>
+    window.hs_config = { "autopath": "@@autopath", "deleteLine": "hs-builder:delete", "deleteLine:build": "hs-builder:build-delete", "deleteLine:dist": "hs-builder:dist-delete", "previewMode": false, "startPath": "/index.html", "vars": { "themeFont": "/files/https-files/google-fonts.css", "version": "?v=1.0" }, "layoutBuilder": { "extend": { "switcherSupport": true }, "header": { "layoutMode": "default", "containerMode": "container-fluid" }, "sidebarLayout": "default" }, "themeAppearance": { "layoutSkin": "default", "sidebarSkin": "default", "styles": { "colors": { "primary": "#377dff", "transparent": "transparent", "white": "#fff", "dark": "132144", "gray": { "100": "#f9fafc", "900": "#1e2022" } }, "font": "Inter" } }, "languageDirection": { "lang": "en" }, "skipFilesFromBundle": { "dist": ["assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "assets/js/demo.js"], "build": ["assets/css/theme.css", "assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside-mini-cache.js", "assets/js/demo.js", "assets/css/theme-dark.css", "assets/css/docs.css", "assets/vendor/icon-set/style.css", "assets/js/hs.theme-appearance.js", "assets/js/hs.theme-appearance-charts.js", "node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js", "assets/js/demo.js"] }, "minifyCSSFiles": ["assets/css/theme.css", "assets/css/theme-dark.css"], "copyDependencies": { "dist": { "*assets/js/theme-custom.js": "" }, "build": { "*assets/js/theme-custom.js": "", "node_modules/bootstrap-icons/font/*fonts/**": "assets/css" } }, "buildFolder": "", "replacePathsToCDN": {}, "directoryNames": { "src": "./src", "dist": "./dist", "build": "./build" }, "fileNames": { "dist": { "js": "theme.min.js", "css": "theme.min.css" }, "build": { "css": "theme.min.css", "js": "theme.min.js", "vendorCSS": "vendor.min.css", "vendorJS": "vendor.min.js" } }, "fileTypes": "jpg|png|svg|mp4|webm|ogv|json" }
+  </script>
+</head>
+
+<body class="body-login-pages">
+
+  <script src="./assets/js/hs.theme-appearance.js"></script>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" class="main">
+    <!-- Content -->
+    <div class="container py-7 py-sm-7">
+      <div class="mx-auto py-7" style="max-width: 35rem;">
+        <!-- Card -->
+        <div class="card card-lg mb-5 rounded">
+          <div class="card-body p-3">
+            <!-- Form -->
+            <form class="js-validate needs-validation" novalidate id="signinForm">
+              <!-- Form Logo -->
+              <div class="mb-2 d-flex justify-content-between singinFormLogoDiv" id="singinFormLogoDiv"></div>
+              <!-- Secret key text -->
+              <div class="mb-4">
+                <!-- <p>Secret key will be required in case you forget QR code.</p> -->
+              </div>
+              <!-- User Key -->
+              <div class="mb-4">
+                <div class="">
+                  <p class="text-center">We have sent a temporary verification code to your email address (<b  id="emailtext"></b>). <br>Enter the code to verify.The code is valid for 10 minutes.</p>
+                  <label class="form-label" for="signupUserName">Verification code <span class="text-danger">*</span></label>
+                  <!-- passowerd eye -->
+                  <a id="changePassTarget"
+                    class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
+                    href="javascript:;">
+                    <i id="changePassIcon" class="bi-eye"></i>
+                  </a>
+                  <input type="password" class="js-toggle-password form-control form-control-lg  ps-1" name="password"
+                    id="signinUserPassword" placeholder="8 characters required" aria-label="Password *" required
+                    minlength="8" maxlength="10" data-hs-toggle-password-options='{
+                    "target": "#changePassTarget",
+                    "defaultClass": "bi-eye-slash",
+                    "showClass": "bi-eye",
+                    "classChangeTarget": "#changePassIcon"
+                  }'>
+
+                </div>
+                <!-- forgot passowerd -->
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg" id="signinBtn">Submit</button>
+              </div>
+            </form>
+            <label class="form-label w-100 mt-2" tabindex="0">
+              <span class="d-flex justify-content-end align-items-rigt">
+                <a class="form-label-link mb-0" href="signin.html">Back
+                  to Sign-in?</a>
+              </span>
+            </label>
+            <!-- End Form -->
+            <label class="form-label w-100 mt-2 mb-n2 d-none poweredby" tabindex="0" id="poweredby">
+              <span class="d-flex justify-content-end align-items-rigt">
+                <label id="powered_by " class="fs-6 mt-1">Powered by </label>&nbsp;&nbsp;
+                <a href="https://cytex.io" target="_blank"> <img src="files/images/branding/cytexlogo.png"  id="cytex_img" style="max-height: 2rem;"></a>
+              </span>
+            </label>
+          </div>
+        </div>
+        <!-- End Card -->
+
+      </div>
+    </div>
+    <!-- End Content -->
+  </main>
+  <!-- ========== END MAIN CONTENT ========== -->
+
+  <!-- JS Global Compulsory  -->
+  <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+  <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SweetAlert CSS    -->
+  <script src="./assets/plugins/sweetalert/sweetalert.min.js"></script>
+  <!-- JS Implementing Plugins -->
+  <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
+  <!-- jQuery -->
+  <script src="/files/https-files/jquery.min.js"></script>
+  <!-- Password Hashing SHA -->
+  <script src="/files/https-files/jsSHA-202-sha.js"></script>
+  <!-- Auth Token Encryption -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
+    integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+  <!-- Validation checks handle this libraray -->
+  <script src="/files/https-files/jquery.validate.min.js"></script>
+  <!-- JS Front -->
+  <script src="./assets/js/theme.min.js"></script>
+  <!-- Branding js -->
+  <script src="files/my-scripts/branding.js"></script>
+  <!-- validation -->
+  <script src="files/my-scripts/validation_constants.js"></script> 
+  <!-- Constant -->
+  <script src="files/my-scripts/constants.js"></script>
+  <!-- page JS -->
+  <script src="files/my-scripts/verification_code.js"></script>
+
+
+
+  <!-- JS Plugins Init. -->
+  <script>
+      (function () {
+        window.onload = function () {
+          // INITIALIZATION OF TOGGLE PASSWORD
+          // =======================================================
+          new HSTogglePassword('.js-toggle-password');
+          // Redirect User to Index.html if user signed in already
+        };
+      })()
+  </script>
+</body>
+
+</html>

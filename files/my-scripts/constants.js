@@ -28,11 +28,15 @@ const Content_Type = "application/json";
 const signinAPI = "tml/signin";
 const signupAPI = "tml/signup";
 const signinUDAPI = 'signin/ud'
+const singinCodeConfirmation = 'tml/confirmation'
+
+
 const logoutUserSessionAPI = "tml/logout";
 
 // Forgot password
 const forgotPasswordAPI = "tml/forgot-password";
 const verifyTokenAPI = "tml/verify-code"
+const changePasswordAPI = "tml/set-password"
 
 
 
@@ -43,6 +47,8 @@ const getOrdersAPI = "tml/client/orders/list";
 
 // to open the message from locals
 const locKeyEncry = 'This is my message to you.'
+const pswd_change_success = "Successfully changed"
+
 
 // ********************** Start Error message ***********************
 
