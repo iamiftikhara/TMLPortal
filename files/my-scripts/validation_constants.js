@@ -639,3 +639,20 @@ $.validator.addMethod('atLeastOneInputRequired', function(value, element, select
 
   return isValid;
 }, 'Please fill at least one field.');
+
+
+// US Phone Number Validation
+jQuery.validator.addMethod("validUSPhone", function (value, element) {
+  return this.optional(element) || 
+    /^(\+?1\s?)?(\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/.test(value);
+}, "Please enter a valid phone number.");
+
+// Country name and URL
+jQuery.validator.addMethod('urlsCountryValidation', function (value, element) {
+  // Regex for URL
+  var urlRegex = /^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z]{2,})(?:\/[^\s]*)?$/;
+  // Regex for plain word (country name)
+  var wordRegex = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
+
+  return this.optional(element) || urlRegex.test(value) || wordRegex.test(value);
+}, 'Please enter a valid URL or a country name.');

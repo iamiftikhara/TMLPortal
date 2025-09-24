@@ -57,19 +57,54 @@ $(document).ready(function () {
   $('#muncipalityWizerdForm').validate({
     debug: true,
     rules: {
-      addNewAccountName: {
+      municipalityWizerdFormName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
         minlength: 3,
-        onlyDigitsNotAllowed: true
-
+        onlyDigitsNotAllowed: true,
+      },
+      municipalityWizerdFormAssociatedCounty: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 3,
+        onlyDigitsNotAllowed: true,
+      },
+      muncipalityWizerdFormPopulationSize: {
+        required: true,
+      },
+      municipalityWizerdFormContactName: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 3,
+        onlyDigitsNotAllowed: true,
+      },
+      muncipalityWizerdFormEmail: {
+        required: true,
+        email: true
+      },
+      muncipalityWizerdFormPhone: {
+        required: true,
+        validUSPhone: true
+      },
+      muncipalityWizerdFormCountryWebsiteURL: {
+        required: true,
+        urlsCountryValidation: true
       },
       muncipalityWizerdFormKeyPrioritiesUpTo3: {
         minlength: 3,
         required: true,
+      },
+      cyberVendors: {   // must match the "name" attribute in your radio inputs
+        required: true
       }
     },
     messages: {
+      muncipalityWizerdFormPopulationSize: {
+        required: "Please select an item.",
+      },
+      muncipalityWizerdFormKeyPrioritiesUpTo3: {
+        minlength: "Please choose at least 3 priorities.",
+      },
 
       addNewAccountSelectType: {
         required: "Please select an item.",
@@ -79,6 +114,9 @@ $(document).ready(function () {
       },
       addNewAccountSelectFrequency: {
         required: "Please select an item.",
+      },
+      cyberVendors: { 
+        required: "Please select an option."
       },
     },
     errorClass: 'error invalid-feedback',
@@ -98,7 +136,11 @@ $(document).ready(function () {
     },
     // the errorPlacement has to take the table layout into account
     errorPlacement: function (error, element) {
-      error.appendTo(element.parent())
+      if (element.attr("name") === "cyberVendors") {
+        error.appendTo(element.parent().parent().parent())
+      } else {
+        error.appendTo(element.parent())
+      }
     }
   })
 

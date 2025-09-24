@@ -270,8 +270,8 @@
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 pe-4">
                   <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:</label>
-                  <input type="text" class="form-control" id="municipalityWizerdFormName"
-                    name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example">
+                  <input type="text" class="form-control" id="municipalityWizerdFormName" maxlength="25"
+                    name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example" required>
                 </div>
                 <!-- End Form -->
 
@@ -282,8 +282,8 @@
                     <label for="municipalityWizerdFormAssociatedCounty" class="form-label">Associated County (if
                       any):</label>
                     <input type="text" class="form-control" id="municipalityWizerdFormAssociatedCounty"
-                      name="municipalityWizerdFormAssociatedCounty" placeholder="Example County"
-                      aria-label="Example County">
+                      name="municipalityWizerdFormAssociatedCounty" placeholder="Example County"  maxlength="25"
+                      aria-label="Example County" required>
                   </div>
                   <!-- End Form -->
 
@@ -297,7 +297,7 @@
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
-                          }' id="muncipalityWizerdFormPopulationSize" name="muncipalityWizerdFormPopulationSize">
+                          }' id="muncipalityWizerdFormPopulationSize" name="muncipalityWizerdFormPopulationSize" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -317,7 +317,7 @@
                     <label for="municipalityWizerdFormContactName" class="form-label">Name:</label>
                     <input type="text" class="form-control" id="municipalityWizerdFormContactName"
                       name="municipalityWizerdFormContactName" placeholder="Enter your name"
-                      aria-label="Enter your name">
+                      aria-label="Enter your name" required maxlength="25">
                   </div>
                   <!-- End Form -->
 
@@ -325,7 +325,7 @@
                   <div class="mb-4 col-12 col-md-6 ps-4">
                     <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
                     <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
-                      name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com">
+                      name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com" required>
                   </div>
                   <!-- End Form -->
 
@@ -338,7 +338,7 @@
                   <div class="mb-4 col-12 col-md-6 pe-4">
                     <label for="muncipalityWizerdFormPhone" class="form-label">Phone:</label>
                     <input type="text" class="form-control" id="muncipalityWizerdFormPhone"
-                      name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000">
+                      name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000" required>
                   </div>
                   <!-- End Form -->
 
@@ -348,7 +348,7 @@
                     <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County Website/URL:</label>
                     <input type="text" class="form-control" id="muncipalityWizerdFormCountryWebsiteURL"
                       name="muncipalityWizerdFormCountryWebsiteURL" placeholder="https://www.example.com"
-                      aria-label="https://www.example.com">
+                      aria-label="https://www.example.com" required>
                   </div>
                   <!-- End Form -->
 
@@ -376,8 +376,7 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for the Next
-                      12–24 Months (choose up to 3):</label>
+                    <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for the Next 12–24 Months (choose up to 3):</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -385,7 +384,7 @@
                           "hideSearch": true,
                           "placeholder": "Select"
                           }' id="muncipalityWizerdFormKeyPrioritiesUpTo3"
-                        name="muncipalityWizerdFormKeyPrioritiesUpTo3">
+                        name="muncipalityWizerdFormKeyPrioritiesUpTo3" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -404,7 +403,7 @@
                           "hideSearch": true,
                           "placeholder": "Select"
                           }' id="muncipalityWizerdFormDepartmentsUnderMunicipality"
-                        name="muncipalityWizerdFormDepartmentsUnderMunicipality">
+                        name="muncipalityWizerdFormDepartmentsUnderMunicipality" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -427,7 +426,7 @@
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
-                          }' id="muncipalityWizerdFormTotalEmployees" name="muncipalityWizerdFormTotalEmployees">
+                          }' id="muncipalityWizerdFormTotalEmployees" name="muncipalityWizerdFormTotalEmployees" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -446,7 +445,7 @@
                           "hideSearch": true,
                           "placeholder": "Select"
                           }' id="muncipalityWizerdFormNumberOfITEmployees"
-                        name="muncipalityWizerdFormNumberOfITEmployees">
+                        name="muncipalityWizerdFormNumberOfITEmployees" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -523,7 +522,7 @@
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
-                          }' id="muncipalityWizerdFormCloudApplication" name="muncipalityWizerdFormCloudApplication">
+                          }' id="muncipalityWizerdFormCloudApplication" name="muncipalityWizerdFormCloudApplication" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -541,7 +540,7 @@
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
-                          }' id="muncipalityWizerdFormEndUserDevices" name="muncipalityWizerdFormEndUserDevices">
+                          }' id="muncipalityWizerdFormEndUserDevices" name="muncipalityWizerdFormEndUserDevices" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -565,7 +564,7 @@
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
-                          }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers">
+                          }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -585,7 +584,7 @@
                           "hideSearch": true,
                           "placeholder": "Select"
                           }' id="muncipalityWizerdFormSpecializedDevices"
-                        name="muncipalityWizerdFormSpecializedDevices">
+                        name="muncipalityWizerdFormSpecializedDevices" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -612,7 +611,7 @@
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
-                          }' id="muncipalityWizerdFormCloudWorkloads" name="muncipalityWizerdFormCloudWorkloads">
+                          }' id="muncipalityWizerdFormCloudWorkloads" name="muncipalityWizerdFormCloudWorkloads" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -632,7 +631,7 @@
                           "hideSearch": true,
                           "placeholder": "Select"
                           }' id="muncipalityWizerdFormNumberOfConnectedSites"
-                        name="muncipalityWizerdFormNumberOfConnectedSites">
+                        name="muncipalityWizerdFormNumberOfConnectedSites" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -1064,7 +1063,7 @@
   <!-- Waves js -->
   <script src="files/plugins/node-waves/waves.js"></script>
   <!-- Notification js -->
-  <script src="files/my-scripts/notification.js"></script>
+  <script src="files/my-script/notification.js"></script>
   <!-- valedition constant -->
   <script src="/files/my-scripts/validation_constants.js"></script>
   <!-- constant js -->
