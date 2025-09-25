@@ -641,18 +641,77 @@ $.validator.addMethod('atLeastOneInputRequired', function(value, element, select
 }, 'Please fill at least one field.');
 
 
-// US Phone Number Validation
-jQuery.validator.addMethod("validUSPhone", function (value, element) {
-  return this.optional(element) || 
-    /^(\+?1\s?)?(\(\d{3}\)|\d{3})[\s.-]?\d{3}[\s.-]?\d{4}$/.test(value);
+// Multi-country (no lib) — country-specific first, then fallback
+jQuery.validator.addMethod("validMultiCountryPhone", function (value, element) {
+  if (this.optional(element)) return true;
+
+  // normalize: remove spaces, dots, dashes and parentheses (keep leading +)
+  var cleaned = value.trim().replace(/[\s\-\.\(\)]/g, '');
+
+  // must start with +
+  if (!/^\+/.test(cleaned)) return false;
+
+  // --- Country-specific checks (order matters) ---
+
+  // USA/Canada (NANP) — +1 followed by 10 digits
+  if (/^\+1/.test(cleaned)) {
+    return /^\+1\d{10}$/.test(cleaned); // e.g. +11234567890
+  }
+
+  // Pakistan
+  // - Landline: allow common lengths (total digits after +92 between 8 and 12)
+// Pakistan numbers (mobile + PTCL landline) — improved
+if (/^\+92/.test(cleaned)) {
+  // Mobile: +92 3XXXXXXXXX  (3 + 9 digits after +92)
+  if (/^\+923\d{9}$/.test(cleaned)) return true;
+
+  // PTCL / landline
+  if (/^\+92(?!3)\d{8,11}$/.test(cleaned)) return true;
+
+  return false; // fails all PK checks
+  }
+  // United Kingdom — +44 followed by 10 digits (common)
+  if (/^\+44/.test(cleaned)) {
+    return /^\+44\d{10}$/.test(cleaned); // e.g. +447911123456
+  }
+
+  // UAE / Dubai — +971 followed by 9 digits (most UAE numbers have 9 digits after +971)
+  if (/^\+971/.test(cleaned)) {
+    return /^\+971\d{9}$/.test(cleaned); // e.g. +971501234567
+  }
+
+  // Portugal Phone Number Validation
+  if (/^\+351/.test(cleaned)) {
+    // Must have +351 followed by exactly 9 digits
+    return /^\+351\d{9}$/.test(cleaned);
+  }
+
+  // Generic fallback for other countries: require at least 9 digits after '+' (reduces false-positives)
+  return /^\+[1-9]\d{8,14}$/.test(cleaned);
 }, "Please enter a valid phone number.");
 
-// Country name and URL
-jQuery.validator.addMethod('urlsCountryValidation', function (value, element) {
-  // Regex for URL
-  var urlRegex = /^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-zA-Z0-9-]+(?:\.[a-zA-Z]{2,})(?:\/[^\s]*)?$/;
-  // Regex for plain word (country name)
-  var wordRegex = /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/;
+// Example jQuery Validation usage
+$("#myForm").validate({
+  rules: {
+    phoneNumber: {
+      required: true,
+      validMultiCountryPhone: true
+    }
+  }
+});
 
-  return this.optional(element) || urlRegex.test(value) || wordRegex.test(value);
-}, 'Please enter a valid URL or a country name.');
+// Custom validation for minimum selected options in Tom Select
+jQuery.validator.addMethod("minSelectedOptions", function (value, element, param) {
+  // Get Tom Select instance
+  const tomSelectInstance = element.tomselect;
+  
+  if (!tomSelectInstance) return false; // No TomSelect attached
+  
+  const selectedValues = tomSelectInstance.getValue(); // This will be array or string
+  return Array.isArray(selectedValues) 
+    ? selectedValues.length >= param 
+    : selectedValues.split(',').filter(v => v.trim() !== '').length >= param;
+  
+}, function (param, element) {
+  return `Please select at least ${param} options.`; 
+});

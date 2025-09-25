@@ -469,21 +469,21 @@
                   <div class="d-flex">
 
                     <!-- Checkbox -->
-                    <div class="form-check mb-4">
+                    <div class="form-check mb-1">
                       <input type="radio" id="cyberVendorsYes" class="form-check-input border-dark" name="cyberVendors">
                       <label class="form-check-label" for="cyberVendorsYes">Yes</label>
                     </div>
                     <!-- End Checkbox -->
 
                     <!-- Checkbox -->
-                    <div class="form-check mb-4 ms-3">
+                    <div class="form-check mb-1 ms-3">
                       <input type="radio" id="cyberVendorsNo" class="form-check-input border-dark" name="cyberVendors">
                       <label class="form-check-label" for="cyberVendorsNo">No</label>
                     </div>
                     <!-- End Checkbox -->
 
                     <!-- Checkbox -->
-                    <div class="form-check mb-4 ms-3">
+                    <div class="form-check mb-1 ms-3">
                       <input type="radio" id="cyberVendorsNotSure" class="form-check-input border-dark"
                         name="cyberVendors">
                       <label class="form-check-label" for="cyberVendorsNotSure">Not sure</label>
@@ -494,14 +494,14 @@
 
                 <!-- Footer -->
                 <div class="d-flex align-items-center justify-content-end">
-                  <button type="button" class="btn btn-ghost-secondary me-2" data-hs-step-form-prev-options='{
+                  <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn" data-hs-step-form-prev-options='{
                     "targetSelector": "#municipalityWizerdFormBasics"
                   }'>
                     <i class="bi-chevron-left small"></i> Previous step
                   </button>
 
                   <div class="">
-                    <button type="button" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
+                    <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
                     "targetSelector": "#municipalityWizerdTechnologyEnvironment"
                   }'>
                       Next <i class="bi-chevron-right small"></i>
@@ -659,7 +659,7 @@
                   <div class="d-flex">
 
                     <!-- Checkbox -->
-                    <div class="form-check mb-4">
+                    <div class="form-check mb-1">
                       <input type="radio" id="backupInternetRedundancyYes" class="form-check-input border-dark"
                         name="backupInternetRedundancy">
                       <label class="form-check-label" for="backupInternetRedundancyYes">Yes</label>
@@ -667,7 +667,7 @@
                     <!-- End Checkbox -->
 
                     <!-- Checkbox -->
-                    <div class="form-check mb-4 ms-3">
+                    <div class="form-check mb-1 ms-3">
                       <input type="radio" id="backupInternetRedundancyNo" class="form-check-input border-dark"
                         name="backupInternetRedundancy">
                       <label class="form-check-label" for="backupInternetRedundancyNo">No</label>
@@ -675,7 +675,7 @@
                     <!-- End Checkbox -->
 
                     <!-- Checkbox -->
-                    <div class="form-check mb-4 ms-3">
+                    <div class="form-check mb-1 ms-3">
                       <input type="radio" id="backupInternetRedundancyNotSure" class="form-check-input border-dark"
                         name="backupInternetRedundancy">
                       <label class="form-check-label" for="backupInternetRedundancyNotSure">Not sure</label>
@@ -695,9 +695,9 @@
                   </button>
 
                   <div class="d-flex justify-content-end ">
-                    <button type="button" class="btn btn-white me-2" id="closeWizerd" data-dismiss="modal"
+                    <button id="validationFormFinishBtn" type="submit" class="btn btn-primary me-2">Save</button>
+                    <button type="button" class="btn btn-white" id="closeWizerd" data-dismiss="modal"
                       aria-label="Close">Cancel</button>
-                    <button id="validationFormFinishBtn" type="button" class="btn btn-primary">Save Changes</button>
                   </div>
                 </div>
                 <!-- End Footer -->
@@ -1091,8 +1091,6 @@
 
       (function () {
         window.onload = function () {
-
-
           new HSStepForm('.js-step-form-validate', {
             preventNextStep: function () {
               return new Promise(function (resolve, reject) {
