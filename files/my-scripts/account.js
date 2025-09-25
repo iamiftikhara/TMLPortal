@@ -185,6 +185,186 @@ function generateSpan(data, key, customClass = "", style = "") {
 
 
 
+
+// ******************** Start Add User ************************
+
+
+$('#saveSecuritySettingBtn').on('click', function () {
+  $('#cover-spin').show()
+  changePassword()
+})
+
+
+function changePassword() {
+
+  const oldPassword = $('#securityOldPassword').val();
+  const newPassword = $('#securityNewPassword').val();
+
+  const oldHashObj = new jsSHA('SHA-512', 'TEXT')
+  oldHashObj.update(oldPassword)
+  const oldHash = oldHashObj.getHash('HEX')
+  const hashOldPassword = oldHash
+
+
+  const newHashObj = new jsSHA('SHA-512', 'TEXT')
+  newHashObj.update(newPassword)
+  const newHash = newHashObj.getHash('HEX')
+  const hashNewPassword = newHash
+
+
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+    old_password: hashOldPassword,
+    new_password: hashNewPassword
+  })
+  // return 0 
+  $.ajax({
+    url: MAIN_API_PATH + changePasswordAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $('#cover-spin').hide(0)
+
+        showNotificationError(
+          'bg-green',
+          null,
+          null,
+          null,
+          null,
+          null,
+          UPDATE
+        )
+
+
+        $('#securityOldPassword').val('');
+        $('#securityNewPassword').val('');
+        $('#securityConfirmNewPassword').val('');
+
+
+
+      },
+      204: function () {
+        $('#cover-spin').hide(0)
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      if (xhr.status === 400) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        )
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        )
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        )
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        )
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $('#cover-spin').hide()
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const dateString = String(pageName + data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(dateString)
+            SecurityKeyTime = false
+            changePassword()
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              changePassword()
+            })
+          }
+        })
+      } else {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      }
+    }
+  })
+}
+
+// ******************** End Add User ***************************
+
+
+
+
 $('#teamTabClick').on('click', function () {
   // reload datatable
   showDataTableLoader('profileTeamDataTable')
@@ -852,12 +1032,8 @@ function removeMemberFromTeam(memberId) {
     $('#cover-spin').show()
 
     const apiBody = JSON.stringify({
-      ips: wgIP,
-      // type: ipTypeIdentifier,
       auth_token: authToken,
-      security_key: securityKeyEncrypted,
-      group_id: groupIdGET,
-      group_name: groupNameNewGET,
+      user_id: memberId,
     })
     // return 0 
     $.ajax({
