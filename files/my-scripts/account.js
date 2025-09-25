@@ -749,12 +749,8 @@ function removeMemberFromTeam(memberId) {
     $('#cover-spin').show()
 
     const apiBody = JSON.stringify({
-      ips: wgIP,
-      // type: ipTypeIdentifier,
       auth_token: authToken,
-      security_key: securityKeyEncrypted,
-      group_id: groupIdGET,
-      group_name: groupNameNewGET,
+      user_id: memberId,
     })
     // return 0 
     $.ajax({

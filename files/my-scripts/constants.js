@@ -36,7 +36,7 @@ const logoutUserSessionAPI = "tml/logout";
 // Forgot password
 const forgotPasswordAPI = "tml/forgot-password";
 const verifyTokenAPI = "tml/verify-code"
-const changePasswordAPI = "tml/set-password"
+const setPasswordAPI = "tml/set-password"
 
 
 
@@ -51,6 +51,9 @@ const getTeamsAdminUsersListAPI = "tml/admin/users/list";
 const addTeamsAdminUsesAddAPI = 'tml/admin/users/create'
 const editTeamsAdminUsesEditAPI = 'tml/admin/users/edit'
 const deletTeamsAdminUsersDeleteAPI= 'tml/admin/users/delete'
+
+// account security
+const changePasswordAPI= 'tml/change-password'
 
 
 // to open the message from locals

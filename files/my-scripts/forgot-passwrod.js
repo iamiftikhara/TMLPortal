@@ -172,7 +172,7 @@ function changePassword () {
   $('#resetPasswordBtn').attr('disabled', true)
   $('#resetPasswordBtn').css('cursor', 'not-allowed')
   $.ajax({
-    url: MAIN_API_PATH + changePasswordAPI,
+    url: MAIN_API_PATH + setPasswordAPI,
     method: POST,
     contentType: Content_Type,
     dataType: 'json',
