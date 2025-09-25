@@ -103,11 +103,11 @@ $(document).ready(function () {
       },
       muncipalityWizerdFormPhone: {
         required: true,
-        validUSPhone: true
+        validMultiCountryPhone: true
       },
       muncipalityWizerdFormCountryWebsiteURL: {
         required: true,
-        urlsCountryValidation: true
+        validUrl: true
       },
       muncipalityWizerdFormKeyPrioritiesUpTo3: {
         minSelectedOptions: 3,
