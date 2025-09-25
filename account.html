@@ -79,9 +79,11 @@
       transition: all 0.3s ease;
     }
 
+    .nav-segment .nav-link.active {
+      color: #1e2022 !important;
+      background-color: #bdc5d133 !important;
+    }
 
-
-    
     /*#savePaymentsMethodsSelectDiv .ts-wrapper.form-select .ts-control {
       background: #f6f7fa !important;
     }
@@ -230,7 +232,7 @@
         <div class="d-flex">
           <!-- Navbar -->
           <div id="profileNavbar" class="p-0 pe-5" style="max-width: 15rem;">
-            <div class="card nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh;">
+            <div class="card nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh; background-color: white;">
               <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab"
                 data-bs-toggle="pill" data-bs-target="#profileTab" role="tab" aria-controls="profileTab"
                 aria-selected="true">Profile</a>

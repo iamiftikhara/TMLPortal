@@ -656,3 +656,20 @@ jQuery.validator.addMethod('urlsCountryValidation', function (value, element) {
 
   return this.optional(element) || urlRegex.test(value) || wordRegex.test(value);
 }, 'Please enter a valid URL or a country name.');
+
+
+// Custom validation for minimum selected options in Tom Select
+jQuery.validator.addMethod("minSelectedOptions", function (value, element, param) {
+  // Get Tom Select instance
+  const tomSelectInstance = element.tomselect;
+  
+  if (!tomSelectInstance) return false; // No TomSelect attached
+  
+  const selectedValues = tomSelectInstance.getValue(); // This will be array or string
+  return Array.isArray(selectedValues) 
+    ? selectedValues.length >= param 
+    : selectedValues.split(',').filter(v => v.trim() !== '').length >= param;
+  
+}, function (param, element) {
+  return `Please select at least ${param} options.`; 
+});

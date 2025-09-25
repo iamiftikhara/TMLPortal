@@ -34,7 +34,7 @@ $(document).ready(function () {
   NumberOfEmployeesSelectInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('numberOfEmployeesSelect', false);
   NumberOfITEmployeesSelectInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('numberOfITEmployeesSelect', false);
   muncipalityWizerdFormPopulationSizeInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormPopulationSize', false);
-  muncipalityWizerdFormKeyPrioritiesUpTo3Init = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormKeyPrioritiesUpTo3', true, null, 3);
+  muncipalityWizerdFormKeyPrioritiesUpTo3Init = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormKeyPrioritiesUpTo3', true, null);
   muncipalityWizerdFormDepartmentsUnderMunicipalityInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormDepartmentsUnderMunicipality', true, null);
   muncipalityWizerdFormTotalEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormTotalEmployees', false);
   muncipalityWizerdFormTotalITEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfITEmployees', false);
@@ -73,6 +73,24 @@ $(document).ready(function () {
       muncipalityWizerdFormPopulationSize: {
         required: true,
       },
+      muncipalityWizerdFormCloudApplication: {
+        required: true,
+      },
+      muncipalityWizerdFormEndUserDevices: {
+        required: true,
+      },
+      muncipalityWizerdFormServers: {
+        required: true,
+      },
+      muncipalityWizerdFormSpecializedDevices: {
+        required: true,
+      },
+      muncipalityWizerdFormCloudWorkloads: {
+        required: true,
+      },
+      muncipalityWizerdFormNumberOfConnectedSites: {
+        required: true,
+      },
       municipalityWizerdFormContactName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
@@ -92,14 +110,35 @@ $(document).ready(function () {
         urlsCountryValidation: true
       },
       muncipalityWizerdFormKeyPrioritiesUpTo3: {
-        minlength: 3,
+        minSelectedOptions: 3,
         required: true,
       },
       cyberVendors: {   // must match the "name" attribute in your radio inputs
         required: true
+      },
+      backupInternetRedundancy: {
+        required: true
       }
     },
     messages: {
+      muncipalityWizerdFormCloudApplication: {
+        required: "Please select an item.",
+      },
+      muncipalityWizerdFormEndUserDevices: {
+        required: "Please select an item.",
+      },
+      muncipalityWizerdFormServers: {
+        required: "Please select an item.",
+      },
+      muncipalityWizerdFormSpecializedDevices: {
+        required: "Please select an item.",
+      },
+      muncipalityWizerdFormCloudWorkloads: {
+        required: "Please select an item.",
+      },
+      muncipalityWizerdFormNumberOfConnectedSites: {
+        required: "Please select an item.",
+      },
       muncipalityWizerdFormPopulationSize: {
         required: "Please select an item.",
       },
@@ -119,6 +158,9 @@ $(document).ready(function () {
       cyberVendors: { 
         required: "Please select an option."
       },
+      backupInternetRedundancy: {
+        required: "Please select an option."
+      }
     },
     errorClass: 'error invalid-feedback',
     validClass: 'success',
@@ -137,7 +179,7 @@ $(document).ready(function () {
     },
     // the errorPlacement has to take the table layout into account
     errorPlacement: function (error, element) {
-      if (element.attr("name") === "cyberVendors") {
+      if (element.attr("name") === "cyberVendors" || element.attr("name") === "backupInternetRedundancy") {
         error.appendTo(element.parent().parent().parent())
       } else {
         error.appendTo(element.parent())
@@ -221,19 +263,11 @@ $(document).ready(function () {
   getOrdersTableData(10, 1)
 
   updateFiltersSelectDataOptions()
-
+  reIntiateWizerd() 
 
 
 
 });
-
-// wizerd Next button
-$('.formNextButton').on('click', function () {
-  //   $('#addNewAccountWizerdForm').removeClass('was-validated')
-  $('#muncipalityWizerdForm').validate().form()
-})
-
-
 
 // get span for change
 function generateSpan(data, key, customClass = "", style = "") {
@@ -602,7 +636,102 @@ function updateFiltersSelectDataOptions() {
 
 }
 
+// Progress bar Control
+function addNumberingTOtheWizerd() {
+    // Select the ul element
+    const ulElement = $('#basicFormProgress')
+    // Loop through each li element and set the step number
+    ulElement.find('li.step-item').each(function (index) {
+        const stepNumber = index + 1
+        $(this).find('.step-icon').text(stepNumber)
+    })
+}
 
+function setTheNextButtonTarget(id, targetID) {
+    const nextButton = $(`#${id}`)
+    nextButton.attr('data-hs-step-form-next-options', `{
+        "targetSelector": "#${targetID}"
+    }`)
+}
+
+function setThePreivousButtonTarget(id, targetID) {
+    const previousButton = $(`#${id}`)
+    previousButton.attr('data-hs-step-form-prev-options', `{
+          "targetSelector": "#${targetID}"
+      }`)
+}
+
+
+// Wizerd Next button
+$('.formNextButton').on('click', function (e) {
+  e.preventDefault()
+  let selectedOptions = $("#muncipalityWizerdFormKeyPrioritiesUpTo3").val().length
+  const isChecked = $('input[name="cyberVendors"]:checked').length > 0;
+  console.log("isChecked!!!", isChecked);
+  
+  $('#muncipalityWizerdForm').validate().form()
+  if (selectedOptions > 3 || selectedOptions === 3 && isChecked === true) {
+        setTheNextButtonTarget('firstStepAccountTypeNextButton', 'municipalityWizerdTechnologyEnvironment')
+        setThePreivousButtonTarget('thiredStepGetAccessCountPreviousBtn', 'municipalityWizerdFormOrganizationSnapshot')
+
+        addNumberingTOtheWizerd()
+        reIntiateWizerd()
+    } else {
+        setTheNextButtonTarget('firstStepAccountTypeNextButton', 'municipalityWizerdFormOrganizationSnapshot')
+        setTheNextButtonTarget('secondStepAccountNameNextBtn', 'municipalityWizerdFormOrganizationSnapshot')
+
+        addNumberingTOtheWizerd()
+        reIntiateWizerd()
+    }
+});
+
+// validation Form Finish Btn
+$('#validationFormFinishBtn').on('click', function (e) {
+  e.preventDefault()
+  if ($('#muncipalityWizerdForm').validate().form()) {
+     console.log('Form is valid and ready to submit!')
+  }
+})
+
+// Intilize the Step wizerd
+function reIntiateWizerd() {
+    new HSStepForm('.js-step-form-validate', {
+        preventNextStep: function () {
+            return new Promise(function (resolve, reject) {
+                const invalidFields = document.querySelectorAll('[aria-invalid="true"]')
+                if (invalidFields.length === 0) {
+                    // No invalid fields, allow next step
+                    resolve()
+                }
+                else {
+                    // Invalid fields present, prevent next step
+                    // console.log(invalidFields[0].closest('div[id]').id)
+                    document.getElementById('muncipalityWizerdForm').classList.add('was-validated')
+
+                    const targetSelectorValue = '#' + invalidFields[0].closest('div[id]').id
+
+                    const liElements = document.querySelectorAll('li.step-item')
+
+                    liElements.forEach(liElement => {
+                        const linkElement = liElement.querySelector('.step-content-wrapper')
+                        const dataOptions = linkElement.getAttribute('data-hs-step-form-next-options')
+
+                        if (dataOptions) {
+                            const parsedDataOptions = JSON.parse(dataOptions)
+                            if (parsedDataOptions.targetSelector === targetSelectorValue) {
+                                liElement.classList.remove('is-valid')
+                                liElement.classList.add('is-invalid')
+                            }
+                        }
+                    })
+                    reject()
+                }
+            })
+        },
+
+        validator: HSBsValidation.init('.js-validate')
+    })
+}
 
 
 
