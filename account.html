@@ -307,30 +307,50 @@
 
 
               <div class="tab-pane fade" id="securityTab" role="tabpanel">
-                <div class="card p-3">
-                  <form>
-                    <!-- Form -->
-                    <div class="mb-3">
-                      <label for="changePasswordProfile" class="form-label">Change Password:</label>
-                      <input type="password" class="form-control form-control-light" id="changePasswordProfile"
-                        placeholder="New Password" aria-label="New Password">
-                    </div>
-                    <!-- End Form -->
-
-                    <!-- Checkbox -->
-                    <div class="form-check mb-3">
-                      <input type="checkbox" id="mfaEnableCheckBox" class="form-check-input">
-                      <label class="form-check-label" for="mfaEnableCheckBox">Enable Multi-Factor Authentication
-                        (MFA)</label>
-                    </div>
-                    <!-- End Checkbox -->
-
-                  </form>
-                  <div>
-                    <button type="button" class="btn btn-primary" id="saveSecuritySettingBtn">Save Security
-                      Setting</button>
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Change Password</h3>
                   </div>
+                  <div class="card-body">
+                    <form>
+                      <!-- Form -->
+                      <div class="mb-3 col-5">
+                        <label for="securityOldPassword" class="form-label">Old Password:</label>
+                        <input type="password" class="form-control form-control-light" id="securityOldPassword"
+                          placeholder="Enter old password" name="securityOldPassword">
+                      </div>
+                      <!-- End Form -->
 
+                       <!-- Form -->
+                      <div class="mb-3 col-5">
+                        <label for="securityNewPassword" class="form-label">New Password:</label>
+                        <input type="password" class="form-control form-control-light" id="securityNewPassword"
+                          placeholder="Enter new password" name="securityNewPassword">
+                      </div>
+                      <!-- End Form -->
+
+                       <!-- Form -->
+                      <div class="mb-3 col-5">
+                        <label for="securityConfirmNewPassword" class="form-label">Confirm New Password:</label>
+                        <input type="password" class="form-control form-control-light" id="securityConfirmNewPassword"
+                          placeholder="Confirm new password">
+                      </div>
+                      <!-- End Form -->
+
+                      <!-- Checkbox -->
+                      <div class="form-check mb-3">
+                        <input type="checkbox" id="mfaEnableCheckBox" class="form-check-input">
+                        <label class="form-check-label" for="mfaEnableCheckBox">Enable Multi-Factor Authentication
+                          (MFA)</label>
+                      </div>
+                      <!-- End Checkbox -->
+
+                    </form>
+                    <div>
+                      <button type="button" class="btn btn-primary" id="saveSecuritySettingBtn">Save Security
+                        Setting</button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -626,6 +646,8 @@
   <script src="/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
   <script src="/assets/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
   <script src="/assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+  <!-- Password Hashing SHA -->
+  <script src="/files/https-files/jsSHA-202-sha.js"></script>
 
   <!-- <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
