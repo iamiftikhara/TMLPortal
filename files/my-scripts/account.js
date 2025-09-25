@@ -9,12 +9,26 @@ const authToken = decryptedByte.toString(CryptoJS.enc.Utf8)
 
 let savePaymentsMethodsSelectInit
 let profileTeamDataTableInit
+let searchOject = {}
+let login_user_email
+
+// api responses
+let teamMembersAPIResponse = []
 
 $(document).ready(function () {
   $('#cover-spin').hide()
   $('#mainContentInnerLoader').addClass('d-none')
   $('#mainContentInnerDataToShow').removeClass('d-none')
+  login_user_email = localStorage.getItem('_em')
+  const is_super = localStorage.getItem('_is_super')
+  if (is_super === 'true' || is_super === true) {
+    $('#editUserDetailsSuperAccess').prop('disabled', false)
+  } else {
+    $('#editUserDetailsSuperAccess').prop('disabled', true)
+    $('#editUserDetailsSuperAccess').parent().attr('title', 'You are not supper user.')
 
+
+  }
 
   // First Data Table Initialization
   profileTeamDataTableInit = createTableComponent(profileTeamConfig, options)
@@ -28,7 +42,7 @@ $(document).ready(function () {
 
 
 
-  getProfileTeamTableData(10, 1)
+  // getProfileTeamTableData(10, 1)
 
 });
 
@@ -89,6 +103,15 @@ function generateSpan(data, key, customClass = "", style = "") {
 
 
 
+$('#teamTabClick').on('click', function () {
+  // reload datatable
+  showDataTableLoader('profileTeamDataTable')
+  profileTeamDataTableInit.clear().draw()
+  let pageEntries = Number($('#datatableEntries1').val())
+  getProfileTeamTableData(pageEntries, 1)
+});
+
+
 function searchObjectCreation(search) {
   searchOject = search;
 }
@@ -134,55 +157,184 @@ function getProfileTeamTableData(skip, page) {
   ]
 
 
+  let requirePayloadData
+  if ((Object.keys(searchOject).length > 0)) {
+    requirePayloadData = JSON.stringify({
+      auth_token: authToken,
+      skip: Number(skip),
+      page,
+      search: searchOject,
 
-
-
-  hideDataTableLoader200('profileTeamDataTable')
-
-  // Response data (IPs)
-  response = data
-  ordersDataReceived = response
-  localStorage.setItem('profileTeamDataTableTotal', data.length)
-  // If No IPs found
-
-  // loop through response to add data in datatable
-  for (let i = 0; i < response.length; i++) {
-
-
-    let name = generateSpan(response[i], 'name', '', '')
-    let email = generateSpan(response[i], 'email', '', '')
-    let role = generateSpan(response[i], 'role', '', '')
-
-    let actions = `
-      <button class="btn btn-sm btn-danger remove-member" data-order-id="${response[i].id}">Remove</button>
-    `
-
-
-
-    profileTeamDataTableInit.row
-      .add([
-        `<td ><span >${name}</span></td>`,
-        `<td ><span >${email}</span></td>`,
-        `<td ><span >${role}</span></td>`,
-        `<td ><span >${actions}</span></td>`,
-
-      ])
-      .draw()
-    datatablePagination('profileTeamDataTable', 1, 'profileTeamDataTableTotal', getProfileTeamTableData)
-
-
-
-    let removeMemberButtons = document.querySelectorAll('.remove-member');
-    removeMemberButtons.forEach(button => {
-      button.addEventListener('click', function () {
-        let orderId = this.getAttribute('data-order-id');
-        // Redirect to order details page
-        removeMemberFromTeam(orderId);
-      });
-    });
-
-
+    })
+  } else {
+    requirePayloadData = JSON.stringify({
+      auth_token: authToken,
+      skip: Number(skip),
+      page,
+    })
   }
+
+
+  // Ajax call
+  $.ajax({
+    url: MAIN_API_PATH + getTeamsAdminUsersListAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: requirePayloadData,
+    statusCode: {
+      200: function (data) {
+        // Hide page laoder Spiner
+        $('#cover-spin').hide()
+
+        hideDataTableLoader200('profileTeamDataTable')
+
+        // Response data (IPs)
+        response = data.message
+        teamMembersAPIResponse = response
+        ordersDataReceived = response
+        localStorage.setItem('profileTeamDataTableTotal', data.count)
+        // If No IPs found
+
+        // loop through response to add data in datatable
+        for (let i = 0; i < response.length; i++) {
+
+
+          let fname = generateSpan(response[i], 'first_name', '', '')
+          let lname = generateSpan(response[i], 'last_name', '', '')
+
+          let email = generateSpan(response[i], 'email', '', '')
+          let role = generateSpan(response[i], 'role', '', '')
+
+
+          let actions
+          if (login_user_email == response[i].email) {
+            actions = `
+            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].user_id}">Edit</button>
+            <button class="btn btn-sm btn-danger " disabled data-member-id="${response[i].user_id}">Remove</button>
+          `
+          } else {
+            actions = `
+            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].user_id}">Edit</button>
+            <button class="btn btn-sm btn-danger remove-member" data-member-id="${response[i].user_id}">Remove</button>
+          `
+          }
+
+
+          profileTeamDataTableInit.row
+            .add([
+              `<td ><span >${fname}</span></td>`,
+              `<td ><span >${lname}</span></td>`,
+              `<td ><span >${email}</span></td>`,
+              `<td ><span >${role}</span></td>`,
+              `<td ><span >${actions}</span></td>`,
+
+            ])
+            .draw()
+          datatablePagination('profileTeamDataTable', 1, 'profileTeamDataTableTotal', getProfileTeamTableData)
+
+
+          let editMemberButtons = document.querySelectorAll('.edit-member');
+          editMemberButtons.forEach(button => {
+            button.addEventListener('click', function () {
+              let memberId = this.getAttribute('data-member-id');
+              // Redirect to order details page
+              $('#editUserDetailsModal').modal('show')
+              editMemberFromTeam(memberId);
+            });
+          });
+
+
+
+          let removeMemberButtons = document.querySelectorAll('.remove-member');
+          removeMemberButtons.forEach(button => {
+            button.addEventListener('click', function () {
+              let memberId = this.getAttribute('data-member-id');
+              // Redirect to order details page
+              removeMemberFromTeam(memberId);
+            });
+          });
+
+
+        }
+      },
+      204: function () {
+        $('#cover-spin').hide()
+        hideDataTableLoaderError('profileTeamDataTable')
+        if (Object.keys(searchOject).length > 0) {
+          $('#profileTeamDataTableErrorDiv').addClass('d-none')
+          $('#profileTeamDataTable, #profileTeamDataTableDatatableMainHeading').removeClass('d-none')
+        }
+        ipAddressDatatable.clear().draw()
+        $('#profileTeamDataTableErrorText').text(noDataFoundText204Case)
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      hideDataTableLoaderError('profileTeamDataTable')
+
+      if (xhr.status === 400) {
+        $('#profileTeamDataTableErrorText').text(invalidRequest400Error)
+      } else if (xhr.status === 401) {
+        $('#profileTeamDataTableErrorText').text(unauthorizedRequest401Error)
+      } else if (xhr.status === 404) {
+        // $('#cover-spin').hide(0);
+        $('#profileTeamDataTableErrorText').text(notFound404Error)
+      } else if (xhr.status === 503) {
+        // $('#cover-spin').hide(0);
+        $('#profileTeamDataTableErrorText').text(serverError503Error)
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const currentDateString = String(data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+            SecurityKeyTime = false
+            getOrdersTableData(skip, page, search)
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const currentDateString = String(data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+              SecurityKeyTime = false
+              getOrdersTableData(skip, page, search)
+            })
+          }
+        })
+      } else {
+        // $('#cover-spin').hide(0);
+        $('#profileTeamDataTableErrorText').text(serverError503Error)
+      }
+    }
+  })
+
+
+
+
+
 }
 
 
@@ -192,9 +344,379 @@ function exportProfileTeamDataTableData() {
   console.log('exportProfileTeamDataTableData called')
 }
 
+let currentEditUserDataInUse = {}
+let isSuperChecked = ''
+// edit user
+function editMemberFromTeam(memberId) {
 
+  let userDetails = teamMembersAPIResponse.find(member => member.user_id === memberId)
+  currentEditUserDataInUse = userDetails
+  $('#editUserDetailsModalFirstName').val(userDetails.first_name);
+  $('#editUserDetailsModalLastName').val(userDetails.last_name);
+
+  const is_super = userDetails.is_super
+  isSuperChecked = is_super
+  if (is_super === true) {
+    $('#editUserDetailsSuperAccess').prop('checked', true)
+  } else {
+    $('#editUserDetailsSuperAccess').prop('checked', false)
+  }
+
+
+  $('#editUserDetailsModalFirstName').on('keyup', function () {
+    enableDisabelEidtUserButton()
+  })
+
+  $('#editUserDetailsModalLastName').on('keyup', function () {
+    enableDisabelEidtUserButton()
+  })
+
+  $('#editUserDetailsSuperAccess').on('change', function () {
+    isSuperChecked = $(this).prop('checked');
+    enableDisabelEidtUserButton()
+  })
+
+
+  enableDisabelEidtUserButton()
+
+
+
+}
+
+
+$('#editUserDetailsSaveButton').on('click', function () {
+  $('#cover-spin').show()
+  updatedTheUsersDetails()
+})
+
+
+function updatedTheUsersDetails() {
+
+  const first_name = $('#editUserDetailsModalFirstName').val();
+  const last_name = $('#editUserDetailsModalLastName').val();
+  const is_super = $('#editUserDetailsSuperAccess').prop('checked');;
+  const user_id = currentEditUserDataInUse.user_id
+
+
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+    user_id: user_id,
+    first_name: first_name,
+    last_name: last_name,
+    is_super: is_super
+  })
+  // return 0 
+  $.ajax({
+    url: MAIN_API_PATH + editTeamsAdminUsesEditAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    // data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $('#cover-spin').hide(0)
+        $('#editUserDetailsModal').modal('hide')
+
+        showNotificationError(
+          'bg-green',
+          null,
+          null,
+          null,
+          null,
+          null,
+          UPDATE
+        )
+
+        teamMembersAPIResponse = []
+        showDataTableLoader('profileTeamDataTable')
+
+        profileTeamDataTableInit.clear().draw()
+        let pageEntries = Number($('#datatableEntries1').val())
+        getProfileTeamTableData(pageEntries, 1)
+
+      },
+      204: function () {
+        $('#cover-spin').hide(0)
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      if (xhr.status === 400) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        )
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        )
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        )
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        )
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $('#cover-spin').hide()
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const dateString = String(pageName + data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(dateString)
+            SecurityKeyTime = false
+            editPolicyAndSessions()
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              editPolicyAndSessions()
+            })
+          }
+        })
+      } else {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      }
+    }
+  })
+}
+
+
+// edit delete
 function removeMemberFromTeam(memberId) {
   console.log('removeMemberFromTeam called', memberId)
+
+
+
+  swal({
+    title: 'Logout Session',
+    text: 'Are you sure you want to logout?',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Confirm',
+    cancelButtonText: 'Cancel'
+  }, function () {
+    $('#cover-spin').show()
+
+    const apiBody = JSON.stringify({
+      ips: wgIP,
+      // type: ipTypeIdentifier,
+      auth_token: authToken,
+      security_key: securityKeyEncrypted,
+      group_id: groupIdGET,
+      group_name: groupNameNewGET,
+    })
+    // return 0 
+    $.ajax({
+      url: MAIN_API_PATH + deletTeamsAdminUsersDeleteAPI,
+      method: POST,
+      contentType: Content_Type,
+      dataType: 'json',
+      data: apiBody,
+      statusCode: {
+        200: function (data) {
+          $('#cover-spin').hide(0)
+
+          showNotificationError(
+            'bg-green',
+            null,
+            null,
+            null,
+            null,
+            null,
+            DELETE
+          )
+
+          teamMembersAPIResponse = []
+          showDataTableLoader('profileTeamDataTable')
+
+          profileTeamDataTableInit.clear().draw()
+          let pageEntries = Number($('#datatableEntries1').val())
+          getProfileTeamTableData(pageEntries, 1)
+
+        },
+        204: function () {
+          $('#cover-spin').hide(0)
+        }
+      },
+      error: function (xhr, status, error) {
+        $('#cover-spin').hide()
+        if (xhr.status === 400) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            invalidRequest400Error
+          )
+        } else if (xhr.status === 401) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            unauthorizedRequest401Error
+          )
+        } else if (xhr.status === 404) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            notFound404Error
+          )
+        } else if (xhr.status === 409) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            alreadyExist409Error
+          )
+        } else if (xhr.status === 503) {
+          showNotificationError(
+            'bg-red',
+            null,
+            null,
+            null,
+            null,
+            null,
+            serverError503Error
+          )
+        } else if (xhr.status === 408) {
+          swal(
+            {
+              title: ' ',
+              text: sessionExpired408Error,
+              type: 'info',
+              showCancelButton: false,
+              confirmButtonText: 'Logout'
+            },
+            function (isConfirm) {
+              if (isConfirm) {
+                localStorage.clear()
+                window.location.href = redirectToSignInPage408
+              }
+            }
+          )
+        } else if (xhr.status === 410) {
+          $('#cover-spin').hide()
+
+          $.ajax({
+            url: MAIN_API_PATH + getGmtAPI,
+            method: POST,
+            contentType: Content_Type,
+            dataType: 'json',
+            success: function (data, textStatus, xhr) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              editPolicyAndSessions()
+            },
+            error: function (xhr, status, error) {
+              $.getJSON(worldTimeAPI, function (data) {
+                const encrypt = new JSEncrypt()
+                encrypt.setPublicKey(sitePublicKey)
+                const dateString = String(pageName + data.unixtime)
+                securityKeyEncrypted = encrypt.encrypt(dateString)
+                SecurityKeyTime = false
+                editPolicyAndSessions()
+              })
+            }
+          })
+        } else {
+          showNotificationError(
+            'bg-red',
+            null,
+            null,
+            null,
+            null,
+            null,
+            serverError503Error
+          )
+        }
+      }
+    })
+  })
+
 }
 
 
@@ -214,120 +736,150 @@ function logoutUser(SessionId) {
   }, function () {
     $('#cover-spin').show()
 
-    const requireData =
-      JSON.stringify({
-        time: Number(SessionId),
-        auth_token: authToken,
-      })
-    $.ajax({
-      url: MAIN_API_PATH + logoutUserSessionAPI,
-      method: POST,
-      contentType: Content_Type,
-      dataType: 'json',
-      data: requireData,
-      success: function (data, textStatus, xhr) {
-        $('#cover-spin').hide()
-        $('#create_td').DataTable().clear().draw()
-        showNotificationError('bg-green', null, null, null, null, null, DELETE)
-        profileSessionDatatable.clear().draw()
-        const entriesPerPageChanged = Number($('#datatableEntries1').val())
-        getAllSessionDetail(entriesPerPageChanged, 1)
-      },
-      error: function (xhr, status, error) {
-        $('#cover-spin').hide(0)
-        if (xhr.status === 400) {
-          showNotificationError(
-            'bg-orange',
-            null,
-            null,
-            null,
-            null,
-            null,
-            invalidRequest400Error
+    setTimeout(() => {
+      window.location.href = 'signin.html';
+    }, 1500);
 
-          )
-        } else if (xhr.status === 401) {
-          showNotificationError(
-            'bg-orange',
-            null,
-            null,
-            null,
-            null,
-            null,
-            unauthorizedRequest401Error
-          )
-        } else if (xhr.status === 404) {
-          showNotificationError(
-            'bg-red',
-            null,
-            null,
-            null,
-            null,
-            null,
-            notFound404Error
-          )
-        } else if (xhr.status === 503) {
-          showNotificationError(
-            'bg-red',
-            null,
-            null,
-            null,
-            null,
-            null,
-            serverError503Error
-          )
-        } else if (xhr.status === 408) {
-          swal({
-            title: ' ',
-            text: sessionExpired408Error,
-            type: 'info',
-            showCancelButton: false,
-            confirmButtonText: 'Logout'
-          }, function (isConfirm) {
-            if (isConfirm) {
-              localStorage.clear()
-              window.location.href = redirectToSignInPage408
-            }
-          })
-        } else if (xhr.status === 410) {
-          $.ajax({
-            url: MAIN_API_PATH + getGmtAPI,
-            method: POST,
-            contentType: Content_Type,
-            dataType: 'json',
-            success: function (data, textStatus, xhr) {
-              const encrypt = new JSEncrypt()
-              encrypt.setPublicKey(sitePublicKey)
-              const dateString = String(data.unixtime)
-              securityKeyEncrypted = encrypt.encrypt(dateString)
-              SecurityKeyTime = false
-              deleteSession()
-            },
-            error: function (xhr, status, error) {
-              $.getJSON(worldTimeAPI,
-                function (data) {
-                  const encrypt = new JSEncrypt()
-                  encrypt.setPublicKey(sitePublicKey)
-                  const dateString = String(data.unixtime)
-                  securityKeyEncrypted = encrypt.encrypt(dateString)
-                  SecurityKeyTime = false
-                  deleteSession()
-                })
-            }
-          })
-        } else {
-          showNotificationError(
-            'bg-red',
-            null,
-            null,
-            null,
-            null,
-            null,
-            serverError503Error
-          )
-        }
-      }
-    })
+
+    // const requireData =
+    //   JSON.stringify({
+    //     time: Number(SessionId),
+    //     auth_token: authToken,
+    //   })
+    // $.ajax({
+    //   url: MAIN_API_PATH + logoutUserSessionAPI,
+    //   method: POST,
+    //   contentType: Content_Type,
+    //   dataType: 'json',
+    //   data: requireData,
+    //   success: function (data, textStatus, xhr) {
+    //     $('#cover-spin').hide()
+    //     $('#create_td').DataTable().clear().draw()
+    //     showNotificationError('bg-green', null, null, null, null, null, DELETE)
+    //     profileSessionDatatable.clear().draw()
+    //     const entriesPerPageChanged = Number($('#datatableEntries1').val())
+    //     getAllSessionDetail(entriesPerPageChanged, 1)
+    //   },
+    //   error: function (xhr, status, error) {
+    //     $('#cover-spin').hide(0)
+    //     if (xhr.status === 400) {
+    //       showNotificationError(
+    //         'bg-orange',
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         invalidRequest400Error
+
+    //       )
+    //     } else if (xhr.status === 401) {
+    //       showNotificationError(
+    //         'bg-orange',
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         unauthorizedRequest401Error
+    //       )
+    //     } else if (xhr.status === 404) {
+    //       showNotificationError(
+    //         'bg-red',
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         notFound404Error
+    //       )
+    //     } else if (xhr.status === 503) {
+    //       showNotificationError(
+    //         'bg-red',
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         serverError503Error
+    //       )
+    //     } else if (xhr.status === 408) {
+    //       swal({
+    //         title: ' ',
+    //         text: sessionExpired408Error,
+    //         type: 'info',
+    //         showCancelButton: false,
+    //         confirmButtonText: 'Logout'
+    //       }, function (isConfirm) {
+    //         if (isConfirm) {
+    //           localStorage.clear()
+    //           window.location.href = redirectToSignInPage408
+    //         }
+    //       })
+    //     } else if (xhr.status === 410) {
+    //       $.ajax({
+    //         url: MAIN_API_PATH + getGmtAPI,
+    //         method: POST,
+    //         contentType: Content_Type,
+    //         dataType: 'json',
+    //         success: function (data, textStatus, xhr) {
+    //           const encrypt = new JSEncrypt()
+    //           encrypt.setPublicKey(sitePublicKey)
+    //           const dateString = String(data.unixtime)
+    //           securityKeyEncrypted = encrypt.encrypt(dateString)
+    //           SecurityKeyTime = false
+    //           deleteSession()
+    //         },
+    //         error: function (xhr, status, error) {
+    //           $.getJSON(worldTimeAPI,
+    //             function (data) {
+    //               const encrypt = new JSEncrypt()
+    //               encrypt.setPublicKey(sitePublicKey)
+    //               const dateString = String(data.unixtime)
+    //               securityKeyEncrypted = encrypt.encrypt(dateString)
+    //               SecurityKeyTime = false
+    //               deleteSession()
+    //             })
+    //         }
+    //       })
+    //     } else {
+    //       showNotificationError(
+    //         'bg-red',
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         null,
+    //         serverError503Error
+    //       )
+    //     }
+    //   }
+    // })
   })
+
+}
+
+
+
+
+// enable disable button
+function enableDisabelEidtUserButton() {
+
+
+
+  const first_name = $('#editUserDetailsModalFirstName').val();
+  const last_name = $('#editUserDetailsModalLastName').val();
+  // const is_super = $('#editUserDetailsSuperAccess').val();
+
+
+  console.log(first_name, currentEditUserDataInUse.first_name, last_name, currentEditUserDataInUse.last_name, isSuperChecked, currentEditUserDataInUse.is_super)
+
+  if (first_name === currentEditUserDataInUse.first_name && last_name === currentEditUserDataInUse.last_name && isSuperChecked === currentEditUserDataInUse.is_super) {
+    $('#editUserDetailsSaveButton').prop('disabled', true)
+  } else {
+    $('#editUserDetailsSaveButton').prop('disabled', false)
+
+  }
+
 
 }

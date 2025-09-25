@@ -18,19 +18,25 @@ const options = JSON.stringify({
 // profile team table
 const profileTeamConfig = {
   "tableHTMLIdToAppend": "profileTeamTableContainer", //append to html DOM Id (Required)
-  "tableName": "My Orders",
+  "tableName": "Users",
   "tableId": "profileTeamDataTable", //table name (Unique) Required
   "tableExportFunc": exportProfileTeamDataTableData, // Null = d-none // ""= for no pagination // functionName for 
   "tableMainApiCallFunc": getProfileTeamTableData, // Main API Call function name for datatable
   "tableIndexNo": 1, // Table number (Required)
   "tablePagination": true,
-  "tableHeaderHTMLContent": ``,
+  "tableHeaderHTMLContent": ` <div class="d-flex">
+                                <button type="button" class="btn btn-primary btn-sm read_only" data-bs-toggle="modal"
+                                    data-bs-target="#editUserDetailsModal">
+                                    Add Linked IP
+                                </button>
+                              </div>`,
   // "columns": null,
   "columns": [
 
-    { "name": "Email", "id": "email", "columnNo": 1, "visible": true },
-    { "name": "Role", "id": "role", "columnNo": 2, "visible": true },
-    { "name": "Action", "id": "action", "columnNo": 3, "visible": true }
+    { "name": "Last Name", "id": "last_name", "columnNo": 1, "visible": true },
+    { "name": "Email", "id": "email", "columnNo": 2, "visible": true },
+    { "name": "Role", "id": "role", "columnNo": 3, "visible": true },
+    { "name": "Action", "id": "action", "columnNo": 4, "visible": true }
 
 
   ],
@@ -40,9 +46,16 @@ const profileTeamConfig = {
     "searchFunctionForSearchObj": searchObjectCreation,
     "fields": [
       {
-        "label": "Name",
-        "id": "name",
+        "label": "First name",
+        "id": "first_name",
         "placeholder": "Enter name",
+        "type": "text",
+        "checked": true,
+      },
+      {
+        "label": "Last first name",
+        "id": "last_name",
+        "placeholder": "Enter last name",
         "type": "text",
         "checked": true,
       },
@@ -59,9 +72,17 @@ const profileTeamConfig = {
   "filterFields": [
     {
       "type": "text",
-      "label": "Name",
-      "id": "name",
-      "placeholder": "Enter name",
+      "label": "First name",
+      "id": "fname",
+      "placeholder": "Enter first name",
+      "columnNo": 0,
+      "hidden": false // This field is shown
+    },
+    {
+      "type": "text",
+      "label": "Last name",
+      "id": "lname",
+      "placeholder": "Enter last name",
       "columnNo": 0,
       "hidden": false // This field is shown
     },
@@ -77,9 +98,10 @@ const profileTeamConfig = {
 
   ],
   "tableHeader": [
-    { "name": "Name", "widthClass": "w-5" },
+    { "name": "Frist Name", "widthClass": "w-5" },
+    { "name": "Last Name", "widthClass": "w-5" },
     { "name": "Email", "widthClass": "w-5" },
     { "name": "Role", "widthClass": "w-5" },
-    { "name": "Action", "widthClass": "w-5" }
+    { "name": "Action", "widthClass": "w-" }
   ],
 };

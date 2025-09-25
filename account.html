@@ -81,7 +81,7 @@
 
 
 
-    
+
     /*#savePaymentsMethodsSelectDiv .ts-wrapper.form-select .ts-control {
       background: #f6f7fa !important;
     }
@@ -190,7 +190,7 @@
       $('#header').load('files/navbar/navbar.html')
     })
   </script>
- <div id="cover-spin"></div>
+  <div id="cover-spin"></div>
   <!-- ========== END HEADER ========== -->
 
   <!-- ========== MAIN CONTENT ========== -->
@@ -245,11 +245,13 @@
                 data-bs-target="#notificationTab" role="tab" aria-controls="notificationTab"
                 aria-selected="false">Notification</a>
               <hr class="horizontal-line">
-              <a class="nav-link profileTabClick" data-toggle="pill" href="#teamTab" data-bs-toggle="pill"
-     -           data-bs-target="#teamTab" role="tab" aria-controls="teamTab" aria-selected="false">Team</a>
+              <a class="nav-link profileTabClick" id="teamTabClick" data-toggle="pill" href="#teamTab"
+                data-bs-toggle="pill" - data-bs-target="#teamTab" role="tab" aria-controls="teamTab"
+                aria-selected="false">Team</a>
               <hr class="horizontal-line">
 
-              <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()" onclick="logoutUser()">
+              <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()"
+                onclick="logoutUser()">
                 <span>Log Out</span> <i class="ms-8 bi-box-arrow-right nav-icon"></i>
               </a>
             </div>
@@ -446,6 +448,68 @@
 
     </div>
     <!-- End Content -->
+
+
+
+    <!-- edit user Modal -->
+    <div class="modal fade" id="editUserDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="companyDetailsFormModalLabel">Edit User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editUserDetailsModalForm">
+
+              <div class="d-flex">
+                <!-- Form -->
+                <div class="mb-4 pe-2">
+                  <label for="editUserDetailsModalFirstName" class="form-label">First Name:</label>
+                  <input type="text" class="form-control" id="editUserDetailsModalFirstName"
+                    name="editUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon">
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="editUserDetailsModalLastName" class="form-label">Last Name:</label>
+                  <input type="text" class="form-control" id="editUserDetailsModalLastName"
+                    name="editUserDetailsModalLastName" placeholder="Wick" aria-label="Wick">
+                </div>
+                <!-- End Form -->
+              </div>
+
+
+              <!-- Form -->
+              <div class="mb-4">
+                <!-- Checkbox Switch -->
+                <div class="form-check form-switch mb-4">
+                  <input type="checkbox" class="form-check-input" disabled id="editUserDetailsSuperAccess">
+                  <label class="form-check-label" for="editUserDetailsSuperAccess">Admin</label>
+                </div>
+                <!-- End Checkbox Switch -->
+              </div>
+              <!-- End Form -->
+
+
+
+            </form>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="editUserDetailsSaveButton">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End edit user Modal -->
+
+
+
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
@@ -477,12 +541,13 @@
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
     integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb"
     crossorigin="anonymous"></script>
-    <!-- SweetAlert CSS    -->
+  <!-- SweetAlert CSS    -->
   <script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
   <!-- Waves js -->
   <script src="/files/plugins/node-waves/waves.js"></script>
   <!-- Notification js -->
   <script src="/files/my-scripts/notification.js"></script>
+  <script src="/files/plugins/bootstrap-notify/bootstrap-notify.js"></script>
   <!-- constant js -->
   <script src="/files/my-scripts/constants.js"></script>
 

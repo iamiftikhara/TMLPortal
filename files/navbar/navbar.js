@@ -1,7 +1,7 @@
 function applyActiveClass() {
     console.log('run')
     const currentPath = window.location.pathname;
-    const navLinks = $('.nav-link');
+    const navLinks = $('#navbarContainerNavDropdown .nav-link');
 
 
     console.log(currentPath);
@@ -23,7 +23,7 @@ function applyActiveClass() {
         const linkHref = link.attr('href').replace(/^\//, '');
         const normalizedPath = currentPath.replace(/^\//, '');
     
-        console.log('link', linkHref, normalizedPath);
+        // console.log('link', linkHref, normalizedPath);
     
         if (linkHref === normalizedPath) {
             link.addClass('active');

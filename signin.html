@@ -192,162 +192,164 @@
             <div class="mb-2 d-flex justify-content-between singinFormLogoDiv" id="singinFormLogoDiv"></div>
 
             <div class="row g-2">
-           
-            <div class="text-center mb-2">Sign in with your existing account</div>
-            <!-- Form -->
-            <form class="js-validate needs-validation" novalidate id="signinForm">
-              <!-- Form Logo -->
-              <!-- <div class="mb-2" id="singinFormLogoDiv"> -->
-              <!-- Cytex logo to display -->
-              <!-- <img class="zi-2 me-5" src="/files/images/signin_signup/socialImpact.png" alt="Image Description"
+
+              <div class="text-center mb-2">Sign in with your existing account</div>
+              <!-- Form -->
+              <form class="js-validate needs-validation" novalidate id="signinForm">
+                <!-- Form Logo -->
+                <!-- <div class="mb-2" id="singinFormLogoDiv"> -->
+                <!-- Cytex logo to display -->
+                <!-- <img class="zi-2 me-5" src="/files/images/signin_signup/socialImpact.png" alt="Image Description"
                   style="width: 12rem;">
                 <img class="zi-2 ms-3" src="/files/images/signin_signup/logo.png" alt="Image Description"
                   style="width: 12rem;">
               </div> -->
 
 
-              <!-- Input classes for future use -->
-              <!-- shadow-none transparent-input border-0 border-bottom -->
-              <!-- User name -->
-              <div class="mb-4 d-none">
-                <label class="form-label" for="signinUserName">Username <span class="text-danger">*</span></label>
-                <input type="text" class="form-control form-control-lg  ps-1" name="signInUsername" id="signinUserName"
-                  tabindex="1" placeholder="Enter username" aria-label="Name *" minlength="3" maxlength="50" required>
-              </div>
-              <!-- User email -->
-              <div class="mb-4" id="signinEmail">
-                <label class="form-label" for="signinUserEmail">Email <span class="text-danger">*</span></label>
-                <input type="email" class="form-control form-control-lg  ps-1" name="signInUserEmail"
-                  id="signinUserEmail" tabindex="1" placeholder="user@domain.com" aria-label="user@domain.com"
-                  minlength="3" maxlength="50" required>
-              </div>
-              <!-- User password -->
-              <div class="mb-4">
-                <div class="">
-                  <label class="form-label" for="signinUserPassword">Password <span class="text-danger">*</span></label>
-                  <!-- passowerd eye -->
-                  <a id="changePassTarget"
-                    class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-2"
-                    href="javascript:;">
-                    <i id="changePassIcon" class="bi-eye"></i>
-                  </a>
-                  <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
-                    name="signInUserPassword" id="signinUserPassword" placeholder="Enter password"
-                    aria-label="Password *" minlength="3" maxlength="25" required minlength="8"
-                    data-hs-toggle-password-options='{
+                <!-- Input classes for future use -->
+                <!-- shadow-none transparent-input border-0 border-bottom -->
+                <!-- User name -->
+                <div class="mb-4 d-none">
+                  <label class="form-label" for="signinUserName">Username <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control form-control-lg  ps-1" name="signInUsername"
+                    id="signinUserName" tabindex="1" placeholder="Enter username" aria-label="Name *" minlength="3"
+                    maxlength="50" required>
+                </div>
+                <!-- User email -->
+                <div class="mb-4" id="signinEmail">
+                  <label class="form-label" for="signinUserEmail">Email <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control form-control-lg  ps-1" name="signInUserEmail"
+                    id="signinUserEmail" tabindex="1" placeholder="user@domain.com" aria-label="user@domain.com"
+                    minlength="3" maxlength="50" required>
+                </div>
+                <!-- User password -->
+                <div class="mb-4">
+                  <div class="">
+                    <label class="form-label" for="signinUserPassword">Password <span
+                        class="text-danger">*</span></label>
+                    <!-- passowerd eye -->
+                    <a id="changePassTarget"
+                      class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-2"
+                      href="javascript:;">
+                      <i id="changePassIcon" class="bi-eye"></i>
+                    </a>
+                    <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                      name="signInUserPassword" id="signinUserPassword" placeholder="Enter password"
+                      aria-label="Password *" minlength="3" maxlength="25" required minlength="8"
+                      data-hs-toggle-password-options='{
                       "target": "#changePassTarget",
                       "defaultClass": "bi-eye-slash",
                       "showClass": "bi-eye",
                       "classChangeTarget": "#changePassIcon"
                     }'>
 
+                  </div>
+                  <!-- forgot passowerd -->
+                  <label class="form-label w-100 mt-2" tabindex="0">
+                    <span class="d-flex justify-content-end align-items-rigt">
+                      <a class="form-label-link mb-0 cursor-pointer" data-bs-toggle="modal"
+                        data-bs-target="#forgotPasswordModal">Forgot
+                        password?</a>
+                    </span>
+                  </label>
                 </div>
-                <!-- forgot passowerd -->
-                <label class="form-label w-100 mt-2" tabindex="0">
-                  <span class="d-flex justify-content-end align-items-rigt">
-                    <a class="form-label-link mb-0 cursor-pointer" data-bs-toggle="modal"
-                      data-bs-target="#forgotPasswordModal">Forgot
-                      password?</a>
-                  </span>
-                </label>
-              </div>
-              <div class="d-grid mt-n2">
-                <button type="submit" class="btn btn-primary btn-lg" id="signinBtn">Sign in</button>
+                <div class="d-grid mt-n2">
+                  <button type="submit" class="btn btn-primary btn-lg" id="signinBtn">Sign in</button>
 
-              </div>
-            </form>
+                </div>
+              </form>
 
 
 
 
 
 
-            <label class="form-label w-100 mt-2 mb-n2  poweredby d-none" tabindex="0" id="poweredby">
-              <span class="d-flex justify-content-end align-items-rigt">
-                <label id="powered_by " class="fs-6 mt-1">Powered by </label>&nbsp;&nbsp;
-                <a href="https://cytex.io" target="_blank"> <img src="files/images/logo/logo.png"
-                    id="cytex_img" style="max-height: 2rem;"></a>
-              </span>
-            </label>
-
-          </div>
-        </div>
-        <div class="d-grid mt-n2 p-4 d-none" id="lineShow" style="color: black;background-color: white;">
-          <div class="mb-2 d-flex justify-content-between singinFormLogoDiv " id="singinFormLogoDiv"></div>
-          <div style="font-size: 18px;"><span class="d-none justify-content-center align-items-end"
-              id="spanhowOnlyForHref"><a target="_blank" class="text-decoration-underline" id="riskApp">Click here
-              </a>&nbsp; to continue with risk assessments.</span>
-            <div class="container mt-4 mb-n2 d-none" id="showOrline">
-              <div class="row">
-                <div class="col-3 "></div>
-                <div class="col-2 line"></div>
-                <div class="col-2 text-center or-operator" style="width: 60px;margin-top: -5px;">OR</div>
-                <div class="col-2 line"></div>
-                <div class="col-3 "></div>
-              </div>
+              <label class="form-label w-100 mt-2 mb-n2  poweredby d-none" tabindex="0" id="poweredby">
+                <span class="d-flex justify-content-end align-items-rigt">
+                  <label id="powered_by " class="fs-6 mt-1">Powered by </label>&nbsp;&nbsp;
+                  <a href="https://cytex.io" target="_blank"> <img src="files/images/logo/logo.png" id="cytex_img"
+                      style="max-height: 2rem;"></a>
+                </span>
+              </label>
 
             </div>
-            <span class="d-flex justify-content-center align-items-end">Click to&nbsp;<a target="_blank"
-                class="text-decoration-underline" id="chldSignup"> sign up </a>&nbsp;as a managed organization.</span>
           </div>
-        </div>
-        <!-- End Card -->
+          <div class="d-grid mt-n2 p-4 d-none" id="lineShow" style="color: black;background-color: white;">
+            <div class="mb-2 d-flex justify-content-between singinFormLogoDiv " id="singinFormLogoDiv"></div>
+            <div style="font-size: 18px;"><span class="d-none justify-content-center align-items-end"
+                id="spanhowOnlyForHref"><a target="_blank" class="text-decoration-underline" id="riskApp">Click here
+                </a>&nbsp; to continue with risk assessments.</span>
+              <div class="container mt-4 mb-n2 d-none" id="showOrline">
+                <div class="row">
+                  <div class="col-3 "></div>
+                  <div class="col-2 line"></div>
+                  <div class="col-2 text-center or-operator" style="width: 60px;margin-top: -5px;">OR</div>
+                  <div class="col-2 line"></div>
+                  <div class="col-3 "></div>
+                </div>
 
-        <!-- Forgot password Modal -->
-        <div class="col-5 modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class=" modal-content">
-              <!-- Body -->
-              <div class="modal-body p-3">
-                <!-- Form -->
-                <form class="js-validate needs-validation" id="forgotPasswordForm" novalidate="">
-                  <div class="text-center">
-                    <div class="mb-5">
-                      <h1 class="display-5 cursor-pointer">Forgot Password</h1>
-                      <!-- <p>Enter the username associated with your Cytex account.</p> -->
+              </div>
+              <span class="d-flex justify-content-center align-items-end">Click to&nbsp;<a target="_blank"
+                  class="text-decoration-underline" id="chldSignup"> sign up </a>&nbsp;as a managed organization.</span>
+            </div>
+          </div>
+          <!-- End Card -->
+
+          <!-- Forgot password Modal -->
+          <div class="col-5 modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class=" modal-content">
+                <!-- Body -->
+                <div class="modal-body p-3">
+                  <!-- Form -->
+                  <form class="js-validate needs-validation" id="forgotPasswordForm" novalidate="">
+                    <div class="text-center">
+                      <div class="mb-5">
+                        <h1 class="display-5 cursor-pointer">Forgot Password</h1>
+                        <!-- <p>Enter the username associated with your Cytex account.</p> -->
+                      </div>
                     </div>
-                  </div>
-                  <!-- User name -->
-                  <div class="mb-4 d-none">
-                    <label class="form-label" for="forgotPasswordUsername" tabindex="0">Username</label> <span
-                      class="text-danger">*</span><i class="bi-question-circle text-body ms-1" id="firstNameToolTip"
-                      data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true"
-                      title="
+                    <!-- User name -->
+                    <div class="mb-4 d-none">
+                      <label class="form-label" for="forgotPasswordUsername" tabindex="0">Username</label> <span
+                        class="text-danger">*</span><i class="bi-question-circle text-body ms-1" id="firstNameToolTip"
+                        data-bs-toggle="tooltip" data-bs-placement="right" data-bs-html="true"
+                        title="
                       <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the correct username associated with your cytex account.</li></ul>"></i>
-                    <input type="text" class="form-control form-control-lg ps-1" name="forgotPasswordUsername"
-                      id="forgotPasswordUsername" tabindex="1" minlength="3" maxlength="50" placeholder="Enter username"
-                      aria-label="Enter username" required>
-                  </div>
-                  <!-- user email -->
-                  <div class="mb-4 d-non" id="forgotPasswrodEmialDiv">
-                    <label class="form-label" for="forgotPasswordUserEmail" tabindex="0">Email</label> <span
-                      class="text-danger">*</span>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true"
-                      title="
+                      <input type="text" class="form-control form-control-lg ps-1" name="forgotPasswordUsername"
+                        id="forgotPasswordUsername" tabindex="1" minlength="3" maxlength="50"
+                        placeholder="Enter username" aria-label="Enter username" required>
+                    </div>
+                    <!-- user email -->
+                    <div class="mb-4 d-non" id="forgotPasswrodEmialDiv">
+                      <label class="form-label" for="forgotPasswordUserEmail" tabindex="0">Email</label> <span
+                        class="text-danger">*</span>
+                      <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-html="true"
+                        title="
                     <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the correct email associated with your cytex account.</li></ul>"></i>
-                    <input type="email" class="form-control form-control-lg ps-1" name="forgotPasswordEmail"
-                      id="forgotPasswordUserEmail" tabindex="1" placeholder="user@domain.com"
-                      aria-label="user@domain.com" required>
-                  </div>
+                      <input type="email" class="form-control form-control-lg ps-1" name="forgotPasswordEmail"
+                        id="forgotPasswordUserEmail" tabindex="1" placeholder="user@domain.com"
+                        aria-label="user@domain.com" required>
+                    </div>
 
-                  <div class="d-grid gap-2 d-flex flex-row-reverse">
-                    <button type="submit" id="forgotPasswordSubmitBtn"
-                      class="btn bg-primary text-white btn-sm">Submit</button>
-                    <button type="button" data-bs-dismiss="modal" aria-label="Close"
-                      class="forgot-password-close-modal btn bg-secondary text-white btn-sm">Cancel</button>
-                  </div>
-                </form>
-                <!-- End Form -->
+                    <div class="d-grid gap-2 d-flex flex-row-reverse">
+                      <button type="submit" id="forgotPasswordSubmitBtn"
+                        class="btn bg-primary text-white btn-sm">Submit</button>
+                      <button type="button" data-bs-dismiss="modal" aria-label="Close"
+                        class="forgot-password-close-modal btn bg-secondary text-white btn-sm">Cancel</button>
+                    </div>
+                  </form>
+                  <!-- End Form -->
+                </div>
+                <!-- End Body -->
               </div>
-              <!-- End Body -->
             </div>
           </div>
+          <!-- End Welcome Message Modal -->
         </div>
-        <!-- End Welcome Message Modal -->
       </div>
-    </div>
-    <!-- End Content -->
+      <!-- End Content -->
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
@@ -371,6 +373,8 @@
   <script src="files/plugins/node-waves/waves.js"></script>
   <!-- Notification js -->
   <script src="files/my-scripts/notification.js"></script>
+  <script src="../files/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+
   <!-- JS Front -->
   <script src="./assets/js/theme.min.js"></script>
   <!-- Branding js -->

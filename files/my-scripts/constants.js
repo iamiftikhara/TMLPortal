@@ -45,9 +45,31 @@ const changePasswordAPI = "tml/set-password"
 const getOrdersAPI = "tml/client/orders/list";
 
 
+
+// account details
+const getTeamsAdminUsersListAPI = "tml/admin/users/list";
+const editTeamsAdminUsesEditAPI = 'tml/admin/users/edit'
+const deletTeamsAdminUsersDeleteAPI= 'tml/admin/users/delete'
+
+
 // to open the message from locals
 const locKeyEncry = 'This is my message to you.'
 const pswd_change_success = "Successfully changed"
+const DELETE = "Successfully deleted.";
+const NOTALLOWED = "Not allowed.";
+const EANABLE = "Successfully enabled.";
+const DISCONNECT = "Successfully Disconnected.";
+const ENTER_URL = "Enter URL.";
+const SUCCESSFULLY_ADDED = "Successfully added to watchlist.";
+const SUCCESSFULLY_REMOVE = "Successfully removed from watchlist.";
+const COOKIES = "Cookies updated.";
+const PRIVACY = "Privacy policy updated.";
+const TERMS = "Terms and conditions updated.";
+const LOGOUT = "Successfully logout.";
+const SAVED = "Successfully saved.";
+const UPDATE = "Successfully updated.";
+const downloadedFile = "Successfully downloaded.";
+const SUCCESSFULLY_UPDATED = "Successfully updated.";
 
 
 // ********************** Start Error message ***********************
