@@ -18,7 +18,7 @@ const options = JSON.stringify({
 // profile team table
 const profileTeamConfig = {
   "tableHTMLIdToAppend": "profileTeamTableContainer", //append to html DOM Id (Required)
-  "tableName": "Users",
+  "tableName": "Team Members",
   "tableId": "profileTeamDataTable", //table name (Unique) Required
   "tableExportFunc": exportProfileTeamDataTableData, // Null = d-none // ""= for no pagination // functionName for 
   "tableMainApiCallFunc": getProfileTeamTableData, // Main API Call function name for datatable
@@ -27,7 +27,7 @@ const profileTeamConfig = {
   "tableHeaderHTMLContent": ` <div class="d-flex">
                                 <button type="button" class="btn btn-primary btn-sm read_only" data-bs-toggle="modal"
                                     data-bs-target="#editUserDetailsModal">
-                                    Add Linked IP
+                                    Add Team Member
                                 </button>
                               </div>`,
   // "columns": null,
