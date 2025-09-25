@@ -24,7 +24,12 @@ const dataSourceIPconfig = {
   "tableMainApiCallFunc": getOrdersTableData, // Main API Call function name for datatable
   "tableIndexNo": 1, // Table number (Required)
   "tablePagination": true,
-  "tableHeaderHTMLContent": ``,
+  "tableHeaderHTMLContent": ` <div class="d-flex">
+                                <button type="button" class="btn btn-primary btn-sm read_only" data-bs-toggle="modal"
+                                    data-bs-target="#addUserDetailsModal">
+                                    Create Order
+                                </button>
+                              </div>`,
   // "columns": null,
   "columns": [
 

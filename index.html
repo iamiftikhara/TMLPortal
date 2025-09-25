@@ -65,6 +65,17 @@
     }
 
 
+    .disabled-div {
+      position: relative;
+      cursor: no-drop;
+      cursor: not-allowed;
+      opacity: 0.6;
+      pointer-events: none;
+      /* block clicks */
+    }
+
+
+
     /*#populationSizeDiv .ts-wrapper.form-select .ts-control {
       background: #f6f7fa !important;
     }
@@ -207,15 +218,40 @@
       </div>
 
 
+
+
+      <!-- ***************************** Start Orgnization Details *********************************** -->
+
+      <div id="showMuncipilatiyDetaisl" class="mb-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="text-center">
+              <img class="mb-4" src="files/images/logo/logo.png" alt="Image Description"
+                style="width: 10rem; opacity:0.3">
+              <h1 class="mb-1" id="welcomeHeading">Welcome!</h1>
+              <p class="mb-0" id="welcomeText">We're glad to have you here.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- ***************************** End Orgnization Details *********************************** -->
+
+
+
+      <!-- ***************************** Start Muncipility Details *********************************** -->
+
       <div id="mainContentInnerWizerdFormToShow" class="d-none card">
         <div class="card-body">
           <!-- Step Form -->
           <form class="js-step-form-validate js-validate" data-hs-step-form-options='{
-          "progressSelector": "#validationFormProgress",
-          "stepsSelector": "#validationFormContent",
-          "endSelector": "#validationFormFinishBtn",
-          "isValidate": true
-        }' id="muncipalityWizerdForm" autocomplete="off" novalidate="novalidate">
+                      "progressSelector": "#validationFormProgress",
+                      "stepsSelector": "#validationFormContent",
+                      "endSelector": "#validationFormFinishBtn",
+                      "isValidate": true
+                    }' id="muncipalityWizerdForm" autocomplete="off" novalidate="novalidate">
             <!-- Step -->
             <ul id="validationFormProgress"
               class="js-step-progress step step-sm step-icon-sm step-inline step-item-between mb-7">
@@ -223,8 +259,8 @@
               <!-- start first step -->
               <li class="step-item">
                 <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                "targetSelector": "#municipalityWizerdFormBasics"
-              }'>
+                                "targetSelector": "#municipalityWizerdFormBasics"
+                              }'>
                   <span class="step-icon step-icon-soft-dark">1</span>
                   <div class="step-content">
                     <span class="step-title">Municipality Basics</span>
@@ -236,8 +272,8 @@
               <!-- start second step -->
               <li class="step-item">
                 <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                  "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
-                }'>
+                                    "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
+                                  }'>
                   <span class="step-icon step-icon-soft-dark">2</span>
                   <div class="step-content">
                     <span class="step-title">Organization Snapshot</span>
@@ -249,8 +285,8 @@
               <!-- start third step -->
               <li class="step-item">
                 <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                  "targetSelector": "#municipalityWizerdTechnologyEnvironment"
-                }'>
+                                        "targetSelector": "#municipalityWizerdTechnologyEnvironment"
+                                      }'>
                   <span class="step-icon step-icon-soft-dark">3</span>
                   <div class="step-content">
                     <span class="step-title">Technology Environment</span>
@@ -291,7 +327,8 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormPopulationSize">Population Size:</label>
+                    <label class=" form-label" for="muncipalityWizerdFormPopulationSize">Population
+                      Size:</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -349,7 +386,8 @@
 
                   <!-- Form -->
                   <div class="mb-4 col-12 col-md-6 ps-4">
-                    <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County Website/URL:</label>
+                    <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County
+                      Website/URL:</label>
                     <input type="text" class="form-control" id="muncipalityWizerdFormCountryWebsiteURL"
                       name="muncipalityWizerdFormCountryWebsiteURL" placeholder="https://www.example.com"
                       aria-label="https://www.example.com" required>
@@ -363,8 +401,8 @@
                 <div class="d-flex align-items-center justify-content-end">
                   <div class="">
                     <button type="button" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
-                    "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
-                  }'>
+                                          "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
+                                        }'>
                       Next <i class="bi-chevron-right small"></i>
                     </button>
                   </div>
@@ -380,15 +418,16 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for the Next
+                    <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for
+                      the Next
                       12–24 Months (choose up to 3):</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormKeyPrioritiesUpTo3"
+                                "hideSearch": true,
+                                "placeholder": "Select"
+                                }' id="muncipalityWizerdFormKeyPrioritiesUpTo3"
                         name="muncipalityWizerdFormKeyPrioritiesUpTo3" required>
                         <option class="p-2" value="">Select</option>
                       </select>
@@ -399,15 +438,16 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormDepartmentsUnderMunicipality">Departments Under
+                    <label class=" form-label" for="muncipalityWizerdFormDepartmentsUnderMunicipality">Departments
+                      Under
                       Municipality (check all that apply):</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormDepartmentsUnderMunicipality"
+                                  "hideSearch": true,
+                                  "placeholder": "Select"
+                                  }' id="muncipalityWizerdFormDepartmentsUnderMunicipality"
                         name="muncipalityWizerdFormDepartmentsUnderMunicipality" required>
                         <option class="p-2" value="">Select</option>
                       </select>
@@ -429,10 +469,10 @@
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormTotalEmployees" name="muncipalityWizerdFormTotalEmployees"
-                        required>
+                                  "hideSearch": true,
+                                  "placeholder": "Select"
+                                  }' id="muncipalityWizerdFormTotalEmployees"
+                        name="muncipalityWizerdFormTotalEmployees" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -442,15 +482,16 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of IT
+                    <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of
+                      IT
                       employees:</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormNumberOfITEmployees"
+                                "hideSearch": true,
+                                "placeholder": "Select"
+                                }' id="muncipalityWizerdFormNumberOfITEmployees"
                         name="muncipalityWizerdFormNumberOfITEmployees" required>
                         <option class="p-2" value="">Select</option>
                       </select>
@@ -494,16 +535,18 @@
 
                 <!-- Footer -->
                 <div class="d-flex align-items-center justify-content-end">
-                  <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn" data-hs-step-form-prev-options='{
-                    "targetSelector": "#municipalityWizerdFormBasics"
-                  }'>
+                  <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn"
+                    data-hs-step-form-prev-options='{
+                                  "targetSelector": "#municipalityWizerdFormBasics"
+                                }'>
                     <i class="bi-chevron-left small"></i> Previous step
                   </button>
 
                   <div class="">
-                    <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
-                    "targetSelector": "#municipalityWizerdTechnologyEnvironment"
-                  }'>
+                    <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-primary formNextButton"
+                      data-hs-step-form-next-options='{
+                                "targetSelector": "#municipalityWizerdTechnologyEnvironment"
+                              }'>
                       Next <i class="bi-chevron-right small"></i>
                     </button>
                   </div>
@@ -526,10 +569,10 @@
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormCloudApplication" name="muncipalityWizerdFormCloudApplication"
-                        required>
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormCloudApplication"
+                        name="muncipalityWizerdFormCloudApplication" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -539,15 +582,16 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices (desktops,
+                    <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices
+                      (desktops,
                       laptops, tablets):</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormEndUserDevices" name="muncipalityWizerdFormEndUserDevices"
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormEndUserDevices" name="muncipalityWizerdFormEndUserDevices"
                         required>
                         <option class="p-2" value="">Select</option>
                       </select>
@@ -570,9 +614,9 @@
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers" required>
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers" required>
                         <option class="p-2" value="">Select</option>
                       </select>
                     </div>
@@ -583,15 +627,16 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices (IoT,
+                    <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices
+                      (IoT,
                       cameras, dispatch systems):</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormSpecializedDevices"
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormSpecializedDevices"
                         name="muncipalityWizerdFormSpecializedDevices" required>
                         <option class="p-2" value="">Select</option>
                       </select>
@@ -612,14 +657,15 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormCloudWorkloads">Cloud Workloads:</label>
+                    <label class=" form-label" for="muncipalityWizerdFormCloudWorkloads">Cloud
+                      Workloads:</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormCloudWorkloads" name="muncipalityWizerdFormCloudWorkloads"
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormCloudWorkloads" name="muncipalityWizerdFormCloudWorkloads"
                         required>
                         <option class="p-2" value="">Select</option>
                       </select>
@@ -631,15 +677,16 @@
 
                   <!-- start size -->
                   <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number of
+                    <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number
+                      of
                       connected sites (City Hall, stations, libraries, etc.):</label>
                     <!-- Select -->
                     <div class="tom-select-custom" style="cursor: pointer;">
                       <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormNumberOfConnectedSites"
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormNumberOfConnectedSites"
                         name="muncipalityWizerdFormNumberOfConnectedSites" required>
                         <option class="p-2" value="">Select</option>
                       </select>
@@ -712,174 +759,211 @@
         </div>
       </div>
 
+      <div id="showMuncipilatiyDetaisl" class="mb-4 ">
+        <div class="card">
+          <div class="card-body">
 
-      <div id="mainContentInnerDataToShow" class="d-none">
-
-
-
-
-
-        <!-- start data table -->
-        <div id="ordersDataTableContainer" class="mt-4"></div>
-        <!-- end data table -->
-
-        <!-- start details div -->
-
-        <div id="orderDetailsContainer" class="d-none mt-4">
-
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-header-title">Order Details</h3>
-            </div>
-
-            <div class="card-body">
-
-              <div class="col-md-6 mb-4 mb-md-0">
-                <h5>Order ID: <span class="fw-normal" id="orderDetailsOrderId"></span></h5>
-                <h4>Service: <span class="fw-normal" id="orderDetailsService"></span></h4>
-                <h5>Date: <span class="fw-normal" id="orderDetailsOrderDate"></span></h5>
-                <h5>Payment Status: <span class="fw-normal" id="orderDetailsOrderStatus"></span></h5>
+            <!-- Start Loader -->
+            <div class=" d-non" id="showMuncipilatiyDetaislLoader">
+              <div class="d-flex justify-content-center p-5">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
               </div>
-
-
-
             </div>
+            <!-- End Loader -->
+
+            <!-- Start Error Div -->
+            <div class="text-center d-none" id="showMuncipilatiyDetaislErrorTextDiv">
+              <img class="mb-4" src="files/images/logo/logo.png" alt="Image Description"
+                style="width: 10rem; opacity:0.3">
+              <p class="mb-0" id="showMuncipilatiyDetaislErrorText">Error</p>
+            </div>
+            <!-- End Error Div -->
+
+            <!-- Start Main Data Div -->
+
+            <div id="showMuncipilatiyDetaislMainDiv" class="d-none"></div>
+
+            <!-- End Main Data Div -->
+
+
           </div>
+        </div>
 
 
 
-          <!-- start order payment with card -->
-          <div class="card mt-4">
-            <div class="card-header">
-              <h3 class="card-header-title">Order Payment</h3>
+        <!-- ***************************** End Muncipility Details *********************************** -->
+
+
+        <div id="mainContentInnerDataToShow" class="d-none">
+
+
+
+
+
+          <!-- start data table -->
+          <div id="ordersDataTableContainer" class="mt-4"></div>
+          <!-- end data table -->
+
+          <!-- start details div -->
+
+          <div id="orderDetailsContainer" class="d-none mt-4">
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-header-title">Order Details</h3>
+              </div>
+
+              <div class="card-body">
+
+                <div class="col-md-6 mb-4 mb-md-0">
+                  <h5>Order ID: <span class="fw-normal" id="orderDetailsOrderId"></span></h5>
+                  <h4>Service: <span class="fw-normal" id="orderDetailsService"></span></h4>
+                  <h5>Date: <span class="fw-normal" id="orderDetailsOrderDate"></span></h5>
+                  <h5>Payment Status: <span class="fw-normal" id="orderDetailsOrderStatus"></span></h5>
+                </div>
+
+
+
+              </div>
             </div>
 
-            <div class="card-body">
 
-              <!-- start credit card selection -->
-              <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
-                <div class="col-12 col-md-6 pe-0 pe-md-3">
-                  <!-- Input Group -->
-                  <div class="mb-4">
-                    <div class="input-group input-group-merge ">
-                      <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
-                        <i class="bi-credit-card"></i>
-                      </div>
-                      <input type="text" class="form-control ps-3" id="paymentMethodCard"
-                        placeholder="Pay with Card (Stripe)" aria-label="Pay with Card (Stripe)"
-                        aria-describedby="inputGroupLightEmailOptionalAddOn">
-                    </div>
-                  </div>
-                  <!-- End Input Group -->
-                </div>
 
-                <div class="col-12 col-md-6 pe-0 ps-md-3">
-                  <!-- Input Group -->
-                  <div class="mb-4">
-                    <div class="input-group input-group-merge ">
-                      <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
-                        <i class="bi-paypal"></i>
-                      </div>
-                      <input type="text" class="form-control ps-3" id="paymentMethodPaypal"
-                        placeholder="Pay with PayPal" aria-label="Pay with PayPal"
-                        aria-describedby="inputGroupLightEmailOptionalAddOn">
-                    </div>
-                  </div>
-                  <!-- End Input Group -->
-                </div>
+            <!-- start order payment with card -->
+            <div class="card mt-4">
+              <div class="card-header">
+                <h3 class="card-header-title">Order Payment</h3>
               </div>
-              <!-- end credit card selection -->
 
-              <!-- start card holder details -->
-              <div class="d-flex justify-content-between align-items-center mb-4 flex-column">
-                <div class="col-12 col-md-12 pe-0">
-                  <!-- Input Group -->
-                  <div class="mb-4">
-                    <div class="input-group input-group-merge ">
-                      <input type="text" class="form-control" id="cardHolderName" placeholder="Card Holder Name"
-                        aria-label="Card Holder Name" aria-describedby="inputGroupLightEmailOptionalAddOn">
+              <div class="card-body">
+
+                <!-- start credit card selection -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
+                  <div class="col-12 col-md-6 pe-0 pe-md-3">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                          <i class="bi-credit-card"></i>
+                        </div>
+                        <input type="text" class="form-control ps-3" id="paymentMethodCard"
+                          placeholder="Pay with Card (Stripe)" aria-label="Pay with Card (Stripe)"
+                          aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
                     </div>
+                    <!-- End Input Group -->
                   </div>
-                  <!-- End Input Group -->
-                </div>
 
-                <div class="col-12 col-md-12 pe-0">
-                  <!-- Input Group -->
-                  <div class="mb-4">
-                    <div class="input-group input-group-merge ">
-                      <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 2345 XXXX"
-                        aria-label="1234 5678 2345 XXXX" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                  <div class="col-12 col-md-6 pe-0 ps-md-3">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                          <i class="bi-paypal"></i>
+                        </div>
+                        <input type="text" class="form-control ps-3" id="paymentMethodPaypal"
+                          placeholder="Pay with PayPal" aria-label="Pay with PayPal"
+                          aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
                     </div>
+                    <!-- End Input Group -->
                   </div>
-                  <!-- End Input Group -->
                 </div>
+                <!-- end credit card selection -->
 
-                <div class="col-12 col-md-12 pe-0">
-                  <!-- Input Group -->
-                  <div class="mb-4">
-                    <div class="input-group input-group-merge ">
-                      <input type="text" class="form-control" id="otpInput" placeholder="Enter OTP"
-                        aria-label="Enter OTP" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                <!-- start card holder details -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-column">
+                  <div class="col-12 col-md-12 pe-0">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <input type="text" class="form-control" id="cardHolderName" placeholder="Card Holder Name"
+                          aria-label="Card Holder Name" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
                     </div>
+                    <!-- End Input Group -->
                   </div>
-                  <!-- End Input Group -->
-                </div>
-              </div>
-              <!-- end card holder details -->
 
-              <!-- start credit card expiry date -->
-              <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
-                <div class="col-12 col-md-6 pe-0 pe-md-3">
-                  <!-- Flatpickr -->
-                  <label class="input-label">Issue date</label>
-                  <input style="cursor: pointer !important;" type="text" id="issueDateOfCard" name="issueDateOfCard"
-                    required class="form-control flatpickr-custom w-25 bg-white ps-1 cursor-pointer"
-                    placeholder="Select date" data-hs-flatpickr-options='{
+                  <div class="col-12 col-md-12 pe-0">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 2345 XXXX"
+                          aria-label="1234 5678 2345 XXXX" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+
+                  <div class="col-12 col-md-12 pe-0">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <input type="text" class="form-control" id="otpInput" placeholder="Enter OTP"
+                          aria-label="Enter OTP" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- end card holder details -->
+
+                <!-- start credit card expiry date -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
+                  <div class="col-12 col-md-6 pe-0 pe-md-3">
+                    <!-- Flatpickr -->
+                    <label class="input-label">Issue date</label>
+                    <input style="cursor: pointer !important;" type="text" id="issueDateOfCard" name="issueDateOfCard"
+                      required class="form-control flatpickr-custom w-25 bg-white ps-1 cursor-pointer"
+                      placeholder="Select date" data-hs-flatpickr-options='{
                                                 "dateFormat": "Y-m-d"
                                                 }'>
-                  <!-- End Flatpickr -->
-                </div>
+                    <!-- End Flatpickr -->
+                  </div>
 
-                <div class="col-12 col-md-6 pe-0 ps-md-3">
-                  <!-- Flatpickr -->
-                  <label class="input-label">Due date</label>
-                  <input style="cursor: pointer !important;" disabled type="text" id="dueDateOfCard"
-                    name="dueDateOfCard" required class="form-control flatpickr-custom w-25 ps-1 cursor-pointer"
-                    placeholder="Select date" data-hs-flatpickr-options='{
+                  <div class="col-12 col-md-6 pe-0 ps-md-3">
+                    <!-- Flatpickr -->
+                    <label class="input-label">Due date</label>
+                    <input style="cursor: pointer !important;" disabled type="text" id="dueDateOfCard"
+                      name="dueDateOfCard" required class="form-control flatpickr-custom w-25 ps-1 cursor-pointer"
+                      placeholder="Select date" data-hs-flatpickr-options='{
                                             "dateFormat": "Y-m-d"
                                             }'>
-                  <!-- End Flatpickr -->
+                    <!-- End Flatpickr -->
+                  </div>
                 </div>
+                <!-- end credit card expiry date -->
+
+
               </div>
-              <!-- end credit card expiry date -->
+
+              <!-- end details div -->
 
 
             </div>
-
-            <!-- end details div -->
-
 
           </div>
 
         </div>
-
       </div>
-    </div>
+
+      <!-- ***************************** End Muncipility Details *********************************** -->
 
 
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="companyDetailsFormModal" tabindex="-1" role="dialog"
-      aria-labelledby="companyDetailsFormModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="companyDetailsFormModalLabel">Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <!-- create inputs and other types according to this
+      <!-- Modal -->
+      <div class="modal fade" id="companyDetailsFormModal" tabindex="-1" role="dialog"
+        aria-labelledby="companyDetailsFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="companyDetailsFormModalLabel">Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- create inputs and other types according to this
              Name of Municipality
               Population size
               Associated County (if any)
@@ -889,145 +973,148 @@
               List of Departments under their purview
               Total number of employees
               Number of IT employees -->
-            <form>
+              <form>
 
-              <!-- Form -->
-              <div class="mb-4">
-                <label for="muncipalityNameCompanyDetails" class="form-label">Name of Municipality:</label>
-                <input type="text" class="form-control" id="muncipalityNameCompanyDetails"
-                  name="muncipalityNameCompanyDetails" placeholder="City of Example" aria-label="City of Example">
-              </div>
-              <!-- End Form -->
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="muncipalityNameCompanyDetails" class="form-label">Name of Municipality:</label>
+                  <input type="text" class="form-control" id="muncipalityNameCompanyDetails"
+                    name="muncipalityNameCompanyDetails" placeholder="City of Example" aria-label="City of Example">
+                </div>
+                <!-- End Form -->
 
-              <!-- start size -->
-              <div class="col-sm-12  mb-4" id="populationSizeDiv">
-                <label class=" form-label" for="populationSizeCompanyDetails">Population Size:</label>
-                <!-- Select -->
-                <div class="tom-select-custom" style="cursor: pointer;">
-                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                <!-- start size -->
+                <div class="col-sm-12  mb-4" id="populationSizeDiv">
+                  <label class=" form-label" for="populationSizeCompanyDetails">Population Size:</label>
+                  <!-- Select -->
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
                           }' id="populationSizeCompanyDetails" name="populationSizeCompanyDetails">
-                    <option class="p-2" value="">Select</option>
-                  </select>
+                      <option class="p-2" value="">Select</option>
+                    </select>
+                  </div>
+                  <!-- End Select -->
                 </div>
-                <!-- End Select -->
-              </div>
-              <!-- end size -->
+                <!-- end size -->
 
-              <!-- Form -->
-              <div class="mb-4">
-                <label for="associatedCountyProfileCompanyDetails" class="form-label">Associated County (if
-                  any):</label>
-                <input type="text" class="form-control" id="associatedCountyProfileCompanyDetails"
-                  name="associatedCountyProfileCompanyDetails" placeholder="Example County" aria-label="Example County">
-              </div>
-              <!-- End Form -->
-
-
-              <div class="d-flex">
                 <!-- Form -->
-                <div class="mb-4 col-6 pe-2">
-                  <label for="emailCompanyDetails" class="form-label">Email:</label>
-                  <input type="email" class="form-control" id="emailCompanyDetails" name="emailCompanyDetails"
-                    placeholder="john@example.com" aria-label="john@example.com">
+                <div class="mb-4">
+                  <label for="associatedCountyProfileCompanyDetails" class="form-label">Associated County (if
+                    any):</label>
+                  <input type="text" class="form-control" id="associatedCountyProfileCompanyDetails"
+                    name="associatedCountyProfileCompanyDetails" placeholder="Example County"
+                    aria-label="Example County">
+                </div>
+                <!-- End Form -->
+
+
+                <div class="d-flex">
+                  <!-- Form -->
+                  <div class="mb-4 col-6 pe-2">
+                    <label for="emailCompanyDetails" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="emailCompanyDetails" name="emailCompanyDetails"
+                      placeholder="john@example.com" aria-label="john@example.com">
+                  </div>
+                  <!-- End Form -->
+
+
+                  <!-- Form -->
+                  <div class="mb-4 col-6 ps-2">
+                    <label for="phoneCompanyDetails" class="form-label">Phone:</label>
+                    <input type="text" class="form-control" id="phoneCompanyDetails" name="phoneCompanyDetails"
+                      placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000">
+                  </div>
+                  <!-- End Form -->
+                </div>
+
+
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="countryWebsiteURLCompanyDetails" class="form-label">County Website/URL:</label>
+                  <input type="text" class="form-control" id="countryWebsiteURLCompanyDetails"
+                    name="countryWebsiteURLCompanyDetails" placeholder="https://www.example.com"
+                    aria-label="https://www.example.com">
                 </div>
                 <!-- End Form -->
 
 
                 <!-- Form -->
-                <div class="mb-4 col-6 ps-2">
-                  <label for="phoneCompanyDetails" class="form-label">Phone:</label>
-                  <input type="text" class="form-control" id="phoneCompanyDetails" name="phoneCompanyDetails"
-                    placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000">
+                <div class="mb-4">
+                  <label for="municipalityObjectivesCompanyDetails" class="form-label">Municipality Objectives
+                    / Key
+                    Priorities:</label>
+                  <input type="text" class="form-control" id="municipalityObjectivesCompanyDetails"
+                    name="municipalityObjectivesCompanyDetails" placeholder="obj 1, obj 2, obj 3,..."
+                    aria-label="obj 1, obj 2, obj 3,...">
                 </div>
                 <!-- End Form -->
-              </div>
 
 
-
-              <!-- Form -->
-              <div class="mb-4">
-                <label for="countryWebsiteURLCompanyDetails" class="form-label">County Website/URL:</label>
-                <input type="text" class="form-control" id="countryWebsiteURLCompanyDetails"
-                  name="countryWebsiteURLCompanyDetails" placeholder="https://www.example.com"
-                  aria-label="https://www.example.com">
-              </div>
-              <!-- End Form -->
-
-
-              <!-- Form -->
-              <div class="mb-4">
-                <label for="municipalityObjectivesCompanyDetails" class="form-label">Municipality Objectives / Key
-                  Priorities:</label>
-                <input type="text" class="form-control" id="municipalityObjectivesCompanyDetails"
-                  name="municipalityObjectivesCompanyDetails" placeholder="obj 1, obj 2, obj 3,..."
-                  aria-label="obj 1, obj 2, obj 3,...">
-              </div>
-              <!-- End Form -->
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="listOfDepartmentsUnderCompanyDetails" class="form-label">List of Departments
+                    under their
+                    purview:</label>
+                  <input type="text" class="form-control" id="listOfDepartmentsUnderCompanyDetails"
+                    name="listOfDepartmentsUnderCompanyDetails" placeholder="dept 1, dept 2, dept 3,..."
+                    aria-label="dept 1, dept 2, dept 3,...">
+                </div>
+                <!-- End Form -->
 
 
-              <!-- Form -->
-              <div class="mb-4">
-                <label for="listOfDepartmentsUnderCompanyDetails" class="form-label">List of Departments under their
-                  purview:</label>
-                <input type="text" class="form-control" id="listOfDepartmentsUnderCompanyDetails"
-                  name="listOfDepartmentsUnderCompanyDetails" placeholder="dept 1, dept 2, dept 3,..."
-                  aria-label="dept 1, dept 2, dept 3,...">
-              </div>
-              <!-- End Form -->
-
-
-              <div class="col-12  mb-4">
-                <label class=" form-label" for="numberOfEmployeesSelect">Number of Employees</label>
-                <!-- Select -->
-                <div class="tom-select-custom" style="cursor: pointer;">
-                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                <div class="col-12  mb-4">
+                  <label class=" form-label" for="numberOfEmployeesSelect">Number of Employees</label>
+                  <!-- Select -->
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                                           "searchInDropdown": false,
                                       "hideSearch": true,
                                       "placeholder": "Select"
                                       }' id="numberOfEmployeesSelect" name="numberOfEmployeesSelect">
-                    <option class="p-2" value="">Select</option>
-                  </select>
+                      <option class="p-2" value="">Select</option>
+                    </select>
+                  </div>
+                  <!-- End Select -->
                 </div>
-                <!-- End Select -->
-              </div>
 
 
-              <div class="col-12  mb-4">
-                <label class=" form-label" for="numberOfITEmployeesSelect">Number of IT Employees</label>
-                <!-- Select -->
-                <div class="tom-select-custom" style="cursor: pointer;">
-                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                <div class="col-12  mb-4">
+                  <label class=" form-label" for="numberOfITEmployeesSelect">Number of IT Employees</label>
+                  <!-- Select -->
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                                           "searchInDropdown": false,
                                       "hideSearch": true,
                                       "placeholder": "Select"
                                       }' id="numberOfITEmployeesSelect" name="numberOfITEmployeesSelect">
-                    <option class="p-2" value="">Select</option>
-                  </select>
+                      <option class="p-2" value="">Select</option>
+                    </select>
+                  </div>
+                  <!-- End Select -->
                 </div>
-                <!-- End Select -->
-              </div>
 
 
 
 
-            </form>
+              </form>
 
 
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- End Modal -->
+      <!-- End Modal -->
 
-    <!-- End Content -->
+      <!-- End Content -->
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
@@ -1072,8 +1159,8 @@
   <!-- Waves js -->
   <script src="files/plugins/node-waves/waves.js"></script>
   <!-- Notification js -->
-  <script src="files/my-script/notification.js"></script>
-  <script src="../files/plugins/bootstrap-notify/bootstrap-notify.js"></script>
+  <script src="/files/my-script/notification.js"></script>
+  <script src="/files/plugins/bootstrap-notify/bootstrap-notify.js"></script>
 
   <!-- valedition constant -->
   <script src="/files/my-scripts/validation_constants.js"></script>

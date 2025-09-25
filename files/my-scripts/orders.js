@@ -181,7 +181,7 @@ function getOrdersTableData(skip, page) {
     })
   } else {
     requirePayloadData = JSON.stringify({
-      // auth_token: authToken,
+      auth_token: authToken,
       skip: Number(skip),
       page,
     })
@@ -268,7 +268,7 @@ function getOrdersTableData(skip, page) {
           $('#ordersDataTableErrorDiv').addClass('d-none')
           $('#ordersDataTable, #ordersDataTableDatatableMainHeading').removeClass('d-none')
         }
-        ipAddressDatatable.clear().draw()
+        ordersDataTableInit.clear().draw()
         $('#ordersDataTableErrorText').text(noDataFoundText204Case)
       }
     },
