@@ -344,6 +344,185 @@ function exportProfileTeamDataTableData() {
   console.log('exportProfileTeamDataTableData called')
 }
 
+
+
+// ******************** Start Add User ************************
+
+
+$('#addUserDetailsSaveButton').on('click', function () {
+  $('#cover-spin').show()
+  createTheUsers()
+})
+
+
+function createTheUsers() {
+
+  const first_name = $('#addUserDetailsModalFirstName').val();
+  const last_name = $('#addUserDetailsModalLastName').val();
+  const email = $('#addUserDetailsModalEmail').val();
+  const password = $('#addUserDetailsModalPassword').val();
+
+
+  const is_super = $('#addUserDetailsSuperAccess').prop('checked');;
+  const user_type = localStorage.getItem('_role')
+
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+    first_name: first_name,
+    last_name: last_name,
+    is_super: is_super,
+    type: user_type,
+    email: email,
+    password: password
+  })
+  // return 0 
+  $.ajax({
+    url: MAIN_API_PATH + addTeamsAdminUsesAddAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $('#cover-spin').hide(0)
+        $('#addUserDetailsModal').modal('hide')
+
+        showNotificationError(
+          'bg-green',
+          null,
+          null,
+          null,
+          null,
+          null,
+          UPDATE
+        )
+
+        teamMembersAPIResponse = []
+        showDataTableLoader('profileTeamDataTable')
+
+        profileTeamDataTableInit.clear().draw()
+        let pageEntries = Number($('#datatableEntries1').val())
+        getProfileTeamTableData(pageEntries, 1)
+
+      },
+      204: function () {
+        $('#cover-spin').hide(0)
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      if (xhr.status === 400) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        )
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        )
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        )
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        )
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $('#cover-spin').hide()
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const dateString = String(pageName + data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(dateString)
+            SecurityKeyTime = false
+            createTheUsers()
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              createTheUsers()
+            })
+          }
+        })
+      } else {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      }
+    }
+  })
+}
+
+// ******************** End Add User ***************************
+
+
+// ******************** Start Eidt User ************************
 let currentEditUserDataInUse = {}
 let isSuperChecked = ''
 // edit user
@@ -411,7 +590,7 @@ function updatedTheUsersDetails() {
     method: POST,
     contentType: Content_Type,
     dataType: 'json',
-    // data: apiBody,
+    data: apiBody,
     statusCode: {
       200: function (data) {
         $('#cover-spin').hide(0)
@@ -548,6 +727,9 @@ function updatedTheUsersDetails() {
     }
   })
 }
+
+// ******************** End Eidt User ***************************
+
 
 
 // edit delete

@@ -48,6 +48,7 @@ const getOrdersAPI = "tml/client/orders/list";
 
 // account details
 const getTeamsAdminUsersListAPI = "tml/admin/users/list";
+const addTeamsAdminUsesAddAPI = 'tml/admin/users/create'
 const editTeamsAdminUsesEditAPI = 'tml/admin/users/edit'
 const deletTeamsAdminUsersDeleteAPI= 'tml/admin/users/delete'
 

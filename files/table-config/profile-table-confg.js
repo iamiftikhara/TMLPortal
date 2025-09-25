@@ -26,7 +26,7 @@ const profileTeamConfig = {
   "tablePagination": true,
   "tableHeaderHTMLContent": ` <div class="d-flex">
                                 <button type="button" class="btn btn-primary btn-sm read_only" data-bs-toggle="modal"
-                                    data-bs-target="#editUserDetailsModal">
+                                    data-bs-target="#addUserDetailsModal">
                                     Add Team Member
                                 </button>
                               </div>`,

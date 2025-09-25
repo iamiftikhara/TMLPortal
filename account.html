@@ -452,6 +452,94 @@
     <!-- End Content -->
 
 
+    <!-- edit user Modal -->
+    <div class="modal fade" id="addUserDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="companyDetailsFormModalLabel">Add Team Member</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="addUserDetailsModalForm">
+
+              <div class="d-flex">
+                <!-- Form -->
+                <div class="mb-4 col-12 col-md-6 pe-2">
+                  <label for="addUserDetailsModalFirstName" class="form-label">First Name:</label>
+                  <input type="text" class="form-control" id="addUserDetailsModalFirstName"
+                    name="addUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon">
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="addUserDetailsModalLastName" class="form-label">Last Name:</label>
+                  <input type="text" class="form-control" id="addUserDetailsModalLastName"
+                    name="addUserDetailsModalLastName" placeholder="Wick" aria-label="Wick">
+                </div>
+                <!-- End Form -->
+              </div>
+
+              <!-- Form -->
+              <div class="mb-4">
+                <label for="addUserDetailsModalEmail" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="addUserDetailsModalEmail" name="addUserDetailsModalEmail"
+                  placeholder="Wick" aria-label="Wick">
+              </div>
+              <!-- End Form -->
+
+
+              <div class="d-flex">
+
+                <!-- Form -->
+                <div class="mb-4 col-12 col-md-6 pe-2">
+                  <label for="addUserDetailsModalPassword" class="form-label">Password:</label>
+                  <input type="password" class="form-control" id="addUserDetailsModalPassword"
+                    name="addUserDetailsModalPassword" placeholder="********" aria-label="Wick">
+                </div>
+                <!-- End Form -->
+
+
+                <!-- Form -->
+                <div class="mb-4 col-12 col-md-6 ps-2">
+                  <label for="addUserDetailsModalConfirmPassword" class="form-label">Confirm Password:</label>
+                  <input type="password" class="form-control" id="addUserDetailsModalConfirmPassword"
+                    name="addUserDetailsModalConfirmPassword" placeholder="********" aria-label="Wick">
+                </div>
+                <!-- End Form -->
+
+              </div>
+
+
+
+              <!-- Form -->
+              <div class="mb-4">
+                <!-- Checkbox Switch -->
+                <div class="form-check form-switch mb-4">
+                  <input type="checkbox" class="form-check-input" disabled id="addUserDetailsSuperAccess">
+                  <label class="form-check-label" for="AddUserDetailsSuperAccess">Admin</label>
+                </div>
+                <!-- End Checkbox Switch -->
+              </div>
+              <!-- End Form -->
+
+
+
+            </form>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="addUserDetailsSaveButton">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End edit user Modal -->
+
 
     <!-- edit user Modal -->
     <div class="modal fade" id="editUserDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
