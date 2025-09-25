@@ -40,8 +40,90 @@ $(document).ready(function () {
     $('#firstActiveProfile').addClass('active')
   }, 2000);
 
+    //  validation rules define
+  $('#addUserDetailsModalForm').validate({
+    debug: true,
+    rules: {
+      editUserDetailsModalFirstName: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 3,
+        onlyDigitsNotAllowed: true,
+      },
+      editUserDetailsModalLastName: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 3,
+        onlyDigitsNotAllowed: true,
+      }
+    },
+    messages: {},
+    errorClass: 'error invalid-feedback',
+    validClass: 'success',
+    errorElement: 'span',
+    highlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents('div.control-group')
+        .addClass(errorClass)
+        .removeClass(validClass)
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents('.error')
+        .removeClass(errorClass)
+        .addClass(validClass)
+    },
+    // the errorPlacement has to take the table layout into account
+    errorPlacement: function (error, element) {
+      if (element.attr("name") === "cyberVendors" || element.attr("name") === "backupInternetRedundancy") {
+        error.appendTo(element.parent().parent().parent())
+      } else {
+        error.appendTo(element.parent())
+      }
+    }
+  })
 
-
+  $('#editUserDetailsModalForm').validate({
+    debug: true,
+    rules: {
+      addUserDetailsModalFirstName: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 3,
+        onlyDigitsNotAllowed: true,
+      },
+      addUserDetailsModalLastName: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 3,
+        onlyDigitsNotAllowed: true,
+      }
+    },
+    messages: {},
+    errorClass: 'error invalid-feedback',
+    validClass: 'success',
+    errorElement: 'span',
+    highlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents('div.control-group')
+        .addClass(errorClass)
+        .removeClass(validClass)
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents('.error')
+        .removeClass(errorClass)
+        .addClass(validClass)
+    },
+    // the errorPlacement has to take the table layout into account
+    errorPlacement: function (error, element) {
+      if (element.attr("name") === "cyberVendors" || element.attr("name") === "backupInternetRedundancy") {
+        error.appendTo(element.parent().parent().parent())
+      } else {
+        error.appendTo(element.parent())
+      }
+    }
+  })
   // getProfileTeamTableData(10, 1)
 
 });
@@ -350,8 +432,11 @@ function exportProfileTeamDataTableData() {
 
 
 $('#addUserDetailsSaveButton').on('click', function () {
-  $('#cover-spin').show()
-  createTheUsers()
+  if($('#addUserDetailsModalForm').validate().form()) {
+    $('#cover-spin').show()
+    createTheUsers()
+  }
+  
 })
 
 
@@ -362,6 +447,8 @@ function createTheUsers() {
   const email = $('#addUserDetailsModalEmail').val();
   const password = $('#addUserDetailsModalPassword').val();
 
+// console.log("typeof $.notify", typeof $.notify); // should not be undefined
+// console.log("typeof showNotificationError", typeof showNotificationError);
 
   const is_super = $('#addUserDetailsSuperAccess').prop('checked');;
   const user_type = localStorage.getItem('_role')
@@ -388,7 +475,7 @@ function createTheUsers() {
         $('#addUserDetailsModal').modal('hide')
 
         showNotificationError(
-          'bg-green',
+          'alert-success',
           null,
           null,
           null,
@@ -407,13 +494,29 @@ function createTheUsers() {
       },
       204: function () {
         $('#cover-spin').hide(0)
+        // showNotificationError(
+        //   'alert-success',
+        //   null,
+        //   null,
+        //   null,
+        //   null,
+        //   null,
+        //   alreadyExist409Error
+        // )
+        showNotificationError('alert-warning', null, null, null, null, null, 'Saved successfully!');
+
+
+        
+
+
+
       }
     },
     error: function (xhr, status, error) {
       $('#cover-spin').hide()
       if (xhr.status === 400) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -423,7 +526,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 401) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -433,7 +536,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 404) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -443,7 +546,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 409) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -453,7 +556,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 503) {
         showNotificationError(
-          'bg-red',
+          'alert-danger',
           null,
           null,
           null,
@@ -506,7 +609,7 @@ function createTheUsers() {
         })
       } else {
         showNotificationError(
-          'bg-red',
+          'alert-danger',
           null,
           null,
           null,
@@ -597,7 +700,7 @@ function updatedTheUsersDetails() {
         $('#editUserDetailsModal').modal('hide')
 
         showNotificationError(
-          'bg-green',
+          'alert-success',
           null,
           null,
           null,
@@ -622,7 +725,7 @@ function updatedTheUsersDetails() {
       $('#cover-spin').hide()
       if (xhr.status === 400) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -632,7 +735,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 401) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -642,7 +745,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 404) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -652,7 +755,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 409) {
         showNotificationError(
-          'bg-orange',
+          'alert-warning',
           null,
           null,
           null,
@@ -662,7 +765,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 503) {
         showNotificationError(
-          'bg-red',
+          'alert-danger',
           null,
           null,
           null,
@@ -715,7 +818,7 @@ function updatedTheUsersDetails() {
         })
       } else {
         showNotificationError(
-          'bg-red',
+          'alert-danger',
           null,
           null,
           null,
@@ -768,7 +871,7 @@ function removeMemberFromTeam(memberId) {
           $('#cover-spin').hide(0)
 
           showNotificationError(
-            'bg-green',
+            'alert-success',
             null,
             null,
             null,
@@ -793,7 +896,7 @@ function removeMemberFromTeam(memberId) {
         $('#cover-spin').hide()
         if (xhr.status === 400) {
           showNotificationError(
-            'bg-orange',
+            'alert-warning',
             null,
             null,
             null,
@@ -803,7 +906,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 401) {
           showNotificationError(
-            'bg-orange',
+            'alert-warning',
             null,
             null,
             null,
@@ -813,7 +916,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 404) {
           showNotificationError(
-            'bg-orange',
+            'alert-warning',
             null,
             null,
             null,
@@ -823,7 +926,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 409) {
           showNotificationError(
-            'bg-orange',
+            'alert-warning',
             null,
             null,
             null,
@@ -833,7 +936,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 503) {
           showNotificationError(
-            'bg-red',
+            'alert-danger',
             null,
             null,
             null,
@@ -886,7 +989,7 @@ function removeMemberFromTeam(memberId) {
           })
         } else {
           showNotificationError(
-            'bg-red',
+            'alert-danger',
             null,
             null,
             null,
@@ -937,7 +1040,7 @@ function logoutUser(SessionId) {
     //   success: function (data, textStatus, xhr) {
     //     $('#cover-spin').hide()
     //     $('#create_td').DataTable().clear().draw()
-    //     showNotificationError('bg-green', null, null, null, null, null, DELETE)
+    //     showNotificationError('alert-success', null, null, null, null, null, DELETE)
     //     profileSessionDatatable.clear().draw()
     //     const entriesPerPageChanged = Number($('#datatableEntries1').val())
     //     getAllSessionDetail(entriesPerPageChanged, 1)
@@ -946,7 +1049,7 @@ function logoutUser(SessionId) {
     //     $('#cover-spin').hide(0)
     //     if (xhr.status === 400) {
     //       showNotificationError(
-    //         'bg-orange',
+    //         'alert-warning',
     //         null,
     //         null,
     //         null,
@@ -957,7 +1060,7 @@ function logoutUser(SessionId) {
     //       )
     //     } else if (xhr.status === 401) {
     //       showNotificationError(
-    //         'bg-orange',
+    //         'alert-warning',
     //         null,
     //         null,
     //         null,
@@ -967,7 +1070,7 @@ function logoutUser(SessionId) {
     //       )
     //     } else if (xhr.status === 404) {
     //       showNotificationError(
-    //         'bg-red',
+    //         'alert-danger',
     //         null,
     //         null,
     //         null,
@@ -977,7 +1080,7 @@ function logoutUser(SessionId) {
     //       )
     //     } else if (xhr.status === 503) {
     //       showNotificationError(
-    //         'bg-red',
+    //         'alert-danger',
     //         null,
     //         null,
     //         null,
@@ -1026,7 +1129,7 @@ function logoutUser(SessionId) {
     //       })
     //     } else {
     //       showNotificationError(
-    //         'bg-red',
+    //         'alert-danger',
     //         null,
     //         null,
     //         null,

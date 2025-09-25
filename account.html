@@ -18,6 +18,8 @@
   <!-- CSS Implementing Plugins -->
   <link rel="stylesheet" href="/assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/assets/vendor/hs-mega-menu/dist/hs-mega-menu.min.css">
+  <!-- SweetAlert CSS    -->
+  <link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
   <!-- CSS Front Template -->
 
@@ -25,9 +27,7 @@
   <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
   <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
   <link href="files/css/style.css" rel="stylesheet">
-  <!-- SweetAlert CSS    -->
-  <link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-
+ 
   <!-- Security Key Encryption -->
   <script src="/files/https-files/jsencrypt.min.js"></script>
   <script src="/files/https-files/crypto-js.js"></script>
@@ -232,29 +232,29 @@
         <div class="d-flex">
           <!-- Navbar -->
           <div id="profileNavbar" class="p-0 pe-5" style="max-width: 15rem;">
-            <div class="card nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh; background-color: white;">
+            <div class="card h-100 nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh; background-color: white;">
               <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab"
                 data-bs-toggle="pill" data-bs-target="#profileTab" role="tab" aria-controls="profileTab"
-                aria-selected="true">Profile</a>
+                aria-selected="true"><img src="files/images/sidebar-icon/Profile.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Profile</a>
               <hr class="horizontal-line">
               <a class="nav-link profileTabClick" data-toggle="pill" href="#securityTab" data-bs-toggle="pill"
-                data-bs-target="#securityTab" role="tab" aria-controls="securityTab" aria-selected="false">Security</a>
+                data-bs-target="#securityTab" role="tab" aria-controls="securityTab" aria-selected="false"><img src="files/images/sidebar-icon/Security.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Security</a>
               <hr class="horizontal-line">
               <a class="nav-link profileTabClick" data-toggle="pill" href="#billingTab" data-bs-toggle="pill"
-                data-bs-target="#billingTab" role="tab" aria-controls="billingTab" aria-selected="false">Billing</a>
+                data-bs-target="#billingTab" role="tab" aria-controls="billingTab" aria-selected="false"><img src="files/images/sidebar-icon/Bill.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Billing</a>
               <hr class="horizontal-line">
               <a class="nav-link profileTabClick" data-toggle="pill" href="#notificationTab" data-bs-toggle="pill"
                 data-bs-target="#notificationTab" role="tab" aria-controls="notificationTab"
-                aria-selected="false">Notification</a>
+                aria-selected="false"><img src="files/images/sidebar-icon/Notification.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Notification</a>
               <hr class="horizontal-line">
               <a class="nav-link profileTabClick" id="teamTabClick" data-toggle="pill" href="#teamTab"
                 data-bs-toggle="pill" - data-bs-target="#teamTab" role="tab" aria-controls="teamTab"
-                aria-selected="false">Team</a>
+                aria-selected="false"><img src="files/images/sidebar-icon/Teams.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Team</a>
               <hr class="horizontal-line">
 
               <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()"
                 onclick="logoutUser()">
-                <span>Log Out</span> <i class="ms-8 bi-box-arrow-right nav-icon"></i>
+                <span>Log Out</span> <span class="ms-8"><img src="files/images/sidebar-icon/Logout.svg" width="40" height="30" alt="Profile Icon" style="margin-right: 10px;"></span>
               </a>
             </div>
           </div>
@@ -466,15 +466,17 @@
               <div class="d-flex">
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 pe-2">
-                  <label for="addUserDetailsModalFirstName" class="form-label">First Name:</label>
+                  <label for="addUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
+                            *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalFirstName"
-                    name="addUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon">
+                    name="addUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
                 </div>
                 <!-- End Form -->
 
                 <!-- Form -->
                 <div class="mb-4">
-                  <label for="addUserDetailsModalLastName" class="form-label">Last Name:</label>
+                  <label for="addUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
+                            *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalLastName"
                     name="addUserDetailsModalLastName" placeholder="Wick" aria-label="Wick">
                 </div>
@@ -483,7 +485,8 @@
 
               <!-- Form -->
               <div class="mb-4">
-                <label for="addUserDetailsModalEmail" class="form-label">Email:</label>
+                <label for="addUserDetailsModalEmail" class="form-label">Email: <span class="text-danger">
+                            *</span></label>
                 <input type="email" class="form-control" id="addUserDetailsModalEmail" name="addUserDetailsModalEmail"
                   placeholder="Wick" aria-label="Wick">
               </div>
@@ -494,7 +497,8 @@
 
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 pe-2">
-                  <label for="addUserDetailsModalPassword" class="form-label">Password:</label>
+                  <label for="addUserDetailsModalPassword" class="form-label">Password: <span class="text-danger">
+                            *</span></label>
                   <input type="password" class="form-control" id="addUserDetailsModalPassword"
                     name="addUserDetailsModalPassword" placeholder="********" aria-label="Wick">
                 </div>
@@ -503,7 +507,8 @@
 
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 ps-2">
-                  <label for="addUserDetailsModalConfirmPassword" class="form-label">Confirm Password:</label>
+                  <label for="addUserDetailsModalConfirmPassword" class="form-label">Confirm Password: <span class="text-danger">
+                            *</span></label>
                   <input type="password" class="form-control" id="addUserDetailsModalConfirmPassword"
                     name="addUserDetailsModalConfirmPassword" placeholder="********" aria-label="Wick">
                 </div>
@@ -533,7 +538,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="addUserDetailsSaveButton">Save changes</button>
+            <button type="submit" class="btn btn-primary" id="addUserDetailsSaveButton">Save changes</button>
           </div>
         </div>
       </div>
@@ -555,17 +560,19 @@
               <div class="d-flex">
                 <!-- Form -->
                 <div class="mb-4 pe-2">
-                  <label for="editUserDetailsModalFirstName" class="form-label">First Name:</label>
+                  <label for="editUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
+                            *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalFirstName"
-                    name="editUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon">
+                    name="editUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
                 </div>
                 <!-- End Form -->
 
                 <!-- Form -->
                 <div class="mb-4">
-                  <label for="editUserDetailsModalLastName" class="form-label">Last Name:</label>
+                  <label for="editUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
+                            *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalLastName"
-                    name="editUserDetailsModalLastName" placeholder="Wick" aria-label="Wick">
+                    name="editUserDetailsModalLastName" placeholder="Wick" aria-label="Wick" required>
                 </div>
                 <!-- End Form -->
               </div>
@@ -613,6 +620,8 @@
 
   <!-- JS Front -->
   <script src="/assets/js/theme.min.js"></script>
+  <!-- validetion -->
+  <script src="/files/https-files/jquery.validate.min.js"></script>
 
   <!-- data table links -->
   <script src="/assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
@@ -635,15 +644,15 @@
   <script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
   <!-- Waves js -->
   <script src="/files/plugins/node-waves/waves.js"></script>
+  <!-- constant js -->
+  <script src="/files/my-scripts/constants.js"></script>
+  <!-- valedition constant -->
+  <script src="/files/my-scripts/validation_constants.js"></script>
+  <!-- Datatable Initlization -->
+  <script src="/files/my-scripts/datatabel_initlization.js"></script>
   <!-- Notification js -->
   <script src="/files/my-scripts/notification.js"></script>
   <script src="/files/plugins/bootstrap-notify/bootstrap-notify.js"></script>
-  <!-- constant js -->
-  <script src="/files/my-scripts/constants.js"></script>
-
-  <!-- Datatable Initlization -->
-  <script src="/files/my-scripts/datatabel_initlization.js"></script>
-
   <!-- page js -->
   <script src="/files/my-scripts/account.js"></script>
   <script src="/files/table-config/profile-table-confg.js"></script>
