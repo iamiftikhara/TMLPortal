@@ -365,9 +365,9 @@ function getMuncipilityDetails() {
           .attr('title', 'Municipality details are required.')
           .css('cursor', 'no-drop');
 
-          let org_name = localStorage.getItem('_org_n')
+        let org_name = localStorage.getItem('_org_n')
         $('#municipalityWizerdFormName').val(org_name)
-        $('#municipalityWizerdFormName').attr('disabled', true).css({'cursor': 'no-drop'})
+        $('#municipalityWizerdFormName').attr('disabled', true).css({ 'cursor': 'no-drop' })
 
 
 
@@ -718,9 +718,9 @@ function updateFiltersSelectDataOptions() {
 
   // municipality size population data
   let filterSizeData = [
-    { id: 'small', title: 'Less than 50,000' },
-    { id: 'medium', title: '50,000 - 500,000' },
-    { id: 'large', title: 'More than 500,000' },
+    { id: '<50000', title: '<50,000' },
+    { id: '50000-500000', title: '50,000-500,000' },
+    { id: '>500000', title: '>500,000' },
   ]
 
   // number of employees data
@@ -744,10 +744,10 @@ function updateFiltersSelectDataOptions() {
 
   // wizerd form population data
   let muncipalityWizerdFormPopulationSizeData = [
-    { id: 'small', title: '<10,000' },
-    { id: 'medium', title: '10,000-50,000' },
-    { id: 'large', title: '50,000-100,000' },
-    { id: 'xlarge', title: '>100,000' },
+    { id: '<10000', title: '<10,000' },
+    { id: '10000-50000', title: '10,000-50,000' },
+    { id: '50000-100000', title: '50,000-100,000' },
+    { id: '>100000', title: '>100,000' },
   ]
 
   let muncipalityWizerdFormKeyPrioritiesUpTo3Data = [
@@ -835,7 +835,7 @@ function updateFiltersSelectDataOptions() {
 
 
   populationSizeCompanyDetailsInit.addOption(filterSizeData);
-  populationSizeCompanyDetailsInit.setValue('small')
+  populationSizeCompanyDetailsInit.setValue('<50000')
 
   NumberOfEmployeesSelectInit.addOption(numberOfEmployeesData);
   NumberOfEmployeesSelectInit.setValue('51-200')
@@ -928,13 +928,275 @@ $('.formNextButton').on('click', function (e) {
   }
 });
 
+
+
+// ********************** start set municpilities detsils *********************************
+
 // validation Form Finish Btn
 $('#validationFormFinishBtn').on('click', function (e) {
   e.preventDefault()
   if ($('#muncipalityWizerdForm').validate().form()) {
-    console.log('Form is valid and ready to submit!')
+    setMuncipilitiesData()
   }
 })
+
+
+function setMuncipilitiesData() {
+
+
+  /*
+    "municipality_id": municipality_id,
+    "namespace": me["namespace"],
+    "created_by": me["composit_id"],
+    "municipality_name": body.get("municipality_name", me["organization"]),
+    "county": body.get("county", ""),
+    "population_size": body.get("population_size", ""),
+    "primary_contact_name": body.get("primary_contact_name", ""),
+    "primary_contact_email": body.get("primary_contact_email", ""),
+    "primary_contact_phone": body.get("primary_contact_phone", ""),
+    "website_url": body.get("website_url", ""),
+    "key_priorities": body.get("key_priorities", []), 
+    "departments": body.get("departments", []),  
+    "total_employees": int(body.get("total_employees", 0)),
+    "it_employees": int(body.get("it_employees", 0)),
+    "outsourced_it": body.get("outsourced_it", ""), 
+    "cloud_apps_in_use": body.get("cloud_apps_in_use", []),
+    "cloud_workloads_in_use": body.get("cloud_apps_in_use", []),
+    "end_user_devices": int(body.get("end_user_devices", 0)), 
+    "servers": int(body.get("servers", 0)), 
+    "specialized_devices": int(body.get("specialized_devices", 0)), 
+    "no_of_connecetd_sites": int(body.get("no_of_connecetd_sites", 0)), 
+    "network_backup": body.get("network_backup", ""), 
+    "created_at": body.get("created_at", req_time),
+    "updated_at": req_time,
+  */
+
+
+  const municipality_name = $('#municipalityWizerdFormName').val();
+  const county = $('#municipalityWizerdFormAssociatedCounty').val();
+  const population_size = $('#muncipalityWizerdFormPopulationSize').val();
+  const primary_contact_name = $('#municipalityWizerdFormContactName').val();
+  const primary_contact_email = $('#muncipalityWizerdFormEmail').val();
+  const primary_contact_phone = $('#muncipalityWizerdFormPhone').val();
+  const website_url = $('#muncipalityWizerdFormCountryWebsiteURL').val();
+  const key_priorities = $('#muncipalityWizerdFormKeyPrioritiesUpTo3').val();
+  const departments = $('#muncipalityWizerdFormDepartmentsUnderMunicipality').val();
+  const total_employees = $('#muncipalityWizerdFormTotalEmployees').val();
+  const it_employees = $('#muncipalityWizerdFormNumberOfITEmployees').val();
+  const outsourced_it = $('input[name="cyberVendors"]:checked').val(); // name cyberVendors
+  const cloud_apps_in_use = $('#muncipalityWizerdFormCloudApplication').val();
+  const cloud_workloads_in_use = $('#muncipalityWizerdFormCloudWorkloads').val();
+  const end_user_devices = $('#muncipalityWizerdFormEndUserDevices').val();
+  const servers = $('#muncipalityWizerdFormServers').val();
+  const specialized_devices = $('#muncipalityWizerdFormSpecializedDevices').val();
+  const no_of_connecetd_sites = $('#muncipalityWizerdFormNumberOfConnectedSites').val();
+  const network_backup = $('input[name="backupInternetRedundancy"]:checked').val();  // name  backupInternetRedundancy
+
+
+  console.log("Municipality Name:", municipality_name);
+  console.log("County:", county);
+  console.log("Population Size:", population_size);
+  console.log("Primary Contact Name:", primary_contact_name);
+  console.log("Primary Contact Email:", primary_contact_email);
+  console.log("Primary Contact Phone:", primary_contact_phone);
+  console.log("Website URL:", website_url);
+  console.log("Key Priorities:", key_priorities);
+  console.log("Departments:", departments);
+  console.log("Total Employees:", total_employees);
+  console.log("IT Employees:", it_employees);
+  console.log("Outsourced IT:", outsourced_it);
+  console.log("Cloud Apps in Use:", cloud_apps_in_use);
+  console.log("Cloud Workloads in Use:", cloud_workloads_in_use);
+  console.log("End User Devices:", end_user_devices);
+  console.log("Servers:", servers);
+  console.log("Specialized Devices:", specialized_devices);
+  console.log("No. of Connected Sites:", no_of_connecetd_sites);
+  console.log("Network Backup:", network_backup);
+
+
+
+  // return
+
+  // console.log("typeof $.notify", typeof $.notify); // should not be undefined
+  // console.log("typeof showNotificationError", typeof showNotificationError);
+
+  const is_super = $('#addUserDetailsSuperAccess').prop('checked');;
+  const user_type = localStorage.getItem('_role')
+
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+    municipality_name,
+    county,
+    population_size,
+    primary_contact_name,
+    primary_contact_email,
+    primary_contact_phone,
+    website_url,
+    key_priorities,
+    departments,
+    total_employees,
+    it_employees,
+    outsourced_it,
+    cloud_apps_in_use,
+    cloud_workloads_in_use,
+    end_user_devices,
+    servers,
+    specialized_devices,
+    no_of_connecetd_sites,
+    network_backup
+  })
+  // return 0 
+  $.ajax({
+    url: MAIN_API_PATH + setMunicipalityWizardSetAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $('#cover-spin').hide(0)
+        $('#addUserDetailsModal').modal('hide')
+
+        showNotificationError(
+          'bg-green',
+          null,
+          null,
+          null,
+          null,
+          null,
+          UPDATE
+        )
+
+        teamMembersAPIResponse = []
+        showDataTableLoader('profileTeamDataTable')
+
+        profileTeamDataTableInit.clear().draw()
+        let pageEntries = Number($('#datatableEntries1').val())
+        getProfileTeamTableData(pageEntries, 1)
+
+      },
+      204: function () {
+        $('#cover-spin').hide(0)
+        showNotificationError('bg-orange', null, null, null, null, null, alreadyExist409Error);
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      if (xhr.status === 400) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        )
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        )
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        )
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        )
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $('#cover-spin').hide()
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const dateString = String(pageName + data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(dateString)
+            SecurityKeyTime = false
+            setMuncipilitiesData()
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              setMuncipilitiesData()
+            })
+          }
+        })
+      } else {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      }
+    }
+  })
+}
+
+
+
+// ********************** end set municpilities detsils *********************************
+
+
+
+
 
 // Intilize the Step wizerd
 function reIntiateWizerd() {

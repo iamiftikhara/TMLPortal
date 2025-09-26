@@ -41,7 +41,8 @@ const setPasswordAPI = "tml/set-password"
 
 
 
-// Orders
+// Index
+const setMunicipalityWizardSetAPI= 'tml/municipality/wizard/set'
 const getOrdersAPI = "tml/client/orders/list";
 
 
