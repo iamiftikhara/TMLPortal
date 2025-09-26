@@ -44,18 +44,28 @@ $(document).ready(function () {
   $('#addUserDetailsModalForm').validate({
     debug: true,
     rules: {
-      editUserDetailsModalFirstName: {
+      addUserDetailsModalFirstName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
         minlength: 3,
         onlyDigitsNotAllowed: true,
       },
-      editUserDetailsModalLastName: {
+      addUserDetailsModalLastName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
         minlength: 3,
         onlyDigitsNotAllowed: true,
-      }
+      },
+      addUserDetailsModalEmail: {
+        required: true,
+      },
+      addUserDetailsModalPassword: {
+        required: true,
+        strongPassword: true
+      },
+      addUserDetailsModalConfirmPassword: {
+        equalTo: '#addUserDetailsModalPassword'
+      },
     },
     messages: {},
     errorClass: 'error invalid-feedback',
@@ -86,13 +96,13 @@ $(document).ready(function () {
   $('#editUserDetailsModalForm').validate({
     debug: true,
     rules: {
-      addUserDetailsModalFirstName: {
+      editUserDetailsModalFirstName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
         minlength: 3,
         onlyDigitsNotAllowed: true,
       },
-      addUserDetailsModalLastName: {
+      editUserDetailsModalLastName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
         minlength: 3,
@@ -655,7 +665,7 @@ function createTheUsers() {
         $('#addUserDetailsModal').modal('hide')
 
         showNotificationError(
-          'alert-success',
+          'bg-green',
           null,
           null,
           null,
@@ -674,29 +684,14 @@ function createTheUsers() {
       },
       204: function () {
         $('#cover-spin').hide(0)
-        // showNotificationError(
-        //   'alert-success',
-        //   null,
-        //   null,
-        //   null,
-        //   null,
-        //   null,
-        //   alreadyExist409Error
-        // )
-        showNotificationError('alert-warning', null, null, null, null, null, 'Saved successfully!');
-
-
-        
-
-
-
+        showNotificationError('bg-orange', null, null, null, null, null, alreadyExist409Error);
       }
     },
     error: function (xhr, status, error) {
       $('#cover-spin').hide()
       if (xhr.status === 400) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -706,7 +701,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 401) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -716,7 +711,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 404) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -726,7 +721,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 409) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -736,7 +731,7 @@ function createTheUsers() {
         )
       } else if (xhr.status === 503) {
         showNotificationError(
-          'alert-danger',
+          'bg-red',
           null,
           null,
           null,
@@ -789,7 +784,7 @@ function createTheUsers() {
         })
       } else {
         showNotificationError(
-          'alert-danger',
+          'bg-red',
           null,
           null,
           null,
@@ -838,17 +833,15 @@ function editMemberFromTeam(memberId) {
     enableDisabelEidtUserButton()
   })
 
-
   enableDisabelEidtUserButton()
-
-
-
 }
 
 
 $('#editUserDetailsSaveButton').on('click', function () {
-  $('#cover-spin').show()
-  updatedTheUsersDetails()
+  if($('#addUserDetailsModalForm').validate().form()) {
+    $('#cover-spin').show()
+    updatedTheUsersDetails()
+  }
 })
 
 
@@ -880,7 +873,7 @@ function updatedTheUsersDetails() {
         $('#editUserDetailsModal').modal('hide')
 
         showNotificationError(
-          'alert-success',
+          'bg-green',
           null,
           null,
           null,
@@ -905,7 +898,7 @@ function updatedTheUsersDetails() {
       $('#cover-spin').hide()
       if (xhr.status === 400) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -915,7 +908,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 401) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -925,7 +918,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 404) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -935,7 +928,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 409) {
         showNotificationError(
-          'alert-warning',
+          'bg-orange',
           null,
           null,
           null,
@@ -945,7 +938,7 @@ function updatedTheUsersDetails() {
         )
       } else if (xhr.status === 503) {
         showNotificationError(
-          'alert-danger',
+          'bg-red',
           null,
           null,
           null,
@@ -998,7 +991,7 @@ function updatedTheUsersDetails() {
         })
       } else {
         showNotificationError(
-          'alert-danger',
+          'bg-red',
           null,
           null,
           null,
@@ -1022,8 +1015,8 @@ function removeMemberFromTeam(memberId) {
 
 
   swal({
-    title: 'Logout Session',
-    text: 'Are you sure you want to logout?',
+    title: 'Deleting Record',
+    text: 'Are you sure you want to delete?',
     type: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Confirm',
@@ -1047,7 +1040,7 @@ function removeMemberFromTeam(memberId) {
           $('#cover-spin').hide(0)
 
           showNotificationError(
-            'alert-success',
+            'bg-green',
             null,
             null,
             null,
@@ -1072,7 +1065,7 @@ function removeMemberFromTeam(memberId) {
         $('#cover-spin').hide()
         if (xhr.status === 400) {
           showNotificationError(
-            'alert-warning',
+            'bg-orange',
             null,
             null,
             null,
@@ -1082,7 +1075,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 401) {
           showNotificationError(
-            'alert-warning',
+            'bg-orange',
             null,
             null,
             null,
@@ -1092,7 +1085,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 404) {
           showNotificationError(
-            'alert-warning',
+            'bg-orange',
             null,
             null,
             null,
@@ -1102,7 +1095,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 409) {
           showNotificationError(
-            'alert-warning',
+            'bg-orange',
             null,
             null,
             null,
@@ -1112,7 +1105,7 @@ function removeMemberFromTeam(memberId) {
           )
         } else if (xhr.status === 503) {
           showNotificationError(
-            'alert-danger',
+            'bg-red',
             null,
             null,
             null,
@@ -1165,7 +1158,7 @@ function removeMemberFromTeam(memberId) {
           })
         } else {
           showNotificationError(
-            'alert-danger',
+            'bg-red',
             null,
             null,
             null,
@@ -1216,7 +1209,7 @@ function logoutUser(SessionId) {
     //   success: function (data, textStatus, xhr) {
     //     $('#cover-spin').hide()
     //     $('#create_td').DataTable().clear().draw()
-    //     showNotificationError('alert-success', null, null, null, null, null, DELETE)
+    //     showNotificationError('bg-green', null, null, null, null, null, DELETE)
     //     profileSessionDatatable.clear().draw()
     //     const entriesPerPageChanged = Number($('#datatableEntries1').val())
     //     getAllSessionDetail(entriesPerPageChanged, 1)
@@ -1225,7 +1218,7 @@ function logoutUser(SessionId) {
     //     $('#cover-spin').hide(0)
     //     if (xhr.status === 400) {
     //       showNotificationError(
-    //         'alert-warning',
+    //         'bg-orange',
     //         null,
     //         null,
     //         null,
@@ -1236,7 +1229,7 @@ function logoutUser(SessionId) {
     //       )
     //     } else if (xhr.status === 401) {
     //       showNotificationError(
-    //         'alert-warning',
+    //         'bg-orange',
     //         null,
     //         null,
     //         null,
@@ -1246,7 +1239,7 @@ function logoutUser(SessionId) {
     //       )
     //     } else if (xhr.status === 404) {
     //       showNotificationError(
-    //         'alert-danger',
+    //         'bg-red',
     //         null,
     //         null,
     //         null,
@@ -1256,7 +1249,7 @@ function logoutUser(SessionId) {
     //       )
     //     } else if (xhr.status === 503) {
     //       showNotificationError(
-    //         'alert-danger',
+    //         'bg-red',
     //         null,
     //         null,
     //         null,
@@ -1305,7 +1298,7 @@ function logoutUser(SessionId) {
     //       })
     //     } else {
     //       showNotificationError(
-    //         'alert-danger',
+    //         'bg-red',
     //         null,
     //         null,
     //         null,
