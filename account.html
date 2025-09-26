@@ -264,44 +264,61 @@
           <div class="col">
             <div class="tab-content">
               <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
-                <div class="card p-3">
-                  <form>
-                    <!-- Form -->
-                    <div class="mb-3">
-                      <label for="muncipalityNameProfile" class="form-label">Municipality Name:</label>
-                      <input type="text" class="form-control form-control-light" id="muncipalityNameProfile"
-                        placeholder="City of Example" aria-label="City of Example">
-                    </div>
-                    <!-- End Form -->
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Profile Information</h3>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-6 col-sm-12">
+                            <!-- Form -->
+                              <div class="mb-3">
+                                <label for="muncipalityNameProfile" class="form-label">Municipality Name:</label>
+                                <input type="text" class="form-control form-control-light" id="muncipalityNameProfile"
+                                  placeholder="City of Example" aria-label="City of Example">
+                              </div>
+                            <!-- End Form -->
+                          </div>
+                          <div class="col-lg-6 col-sm-12">
+                            <!-- Form -->
+                              <div class="mb-3">
+                                <label for="primaryContactNameProfile" class="form-label">Primary Contact Name:</label>
+                                <input type="text" class="form-control form-control-light" id="primaryContactNameProfile"
+                                  placeholder="John Doe" aria-label="John Doe">
+                              </div>
+                            <!-- End Form -->
+                          </div>
+                        </div>
 
-                    <!-- Form -->
-                    <div class="mb-3">
-                      <label for="primaryContactNameProfile" class="form-label">Primary Contact Name:</label>
-                      <input type="text" class="form-control form-control-light" id="primaryContactNameProfile"
-                        placeholder="John Doe" aria-label="John Doe">
-                    </div>
-                    <!-- End Form -->
-
-                    <!-- Form -->
-                    <div class="mb-3">
-                      <label for="emailAddressProfile" class="form-label">Email Address:</label>
-                      <input type="email" class="form-control form-control-light" id="emailAddressProfile"
-                        placeholder="it-manager@example.com">
-                    </div>
-                    <!-- End Form -->
-
-                    <!-- Form -->
-                    <div class="mb-3">
-                      <label for="phoneNumberProfile" class="form-label">Phone Number:</label>
-                      <input type="text" class="form-control form-control-light" id="phoneNumberProfile"
-                        placeholder="+1 (123) 456 0000">
-                    </div>
-                    <!-- End Form -->
-                  </form>
-                  <div>
+                        <div class="row">
+                          <div class="col-lg-6 col-sm-12">
+                            <!-- Form -->
+                              <div class="mb-3">
+                                <label for="emailAddressProfile" class="form-label">Email Address:</label>
+                                <input type="email" class="form-control form-control-light" id="emailAddressProfile"
+                                  placeholder="it-manager@example.com">
+                              </div>
+                            <!-- End Form -->
+                          </div>
+                          <div class="col-lg-6 col-sm-12">
+                            <!-- Form -->
+                              <div class="mb-3">
+                                <label for="phoneNumberProfile" class="form-label">Phone Number:</label>
+                                <input type="text" class="form-control form-control-light" id="phoneNumberProfile"
+                                  placeholder="+1 (123) 456 0000">
+                              </div>
+                            <!-- End Form -->
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  
+                  </div>
+                  <div class="card-footer text-end">
                     <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Profile</button>
                   </div>
-
                 </div>
               </div>
 

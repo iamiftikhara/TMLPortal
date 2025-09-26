@@ -1,4 +1,14 @@
 function showNotificationError(colorName, text, placementFrom, placementAlign, animateEnter, animateExit, customVal) {
+
+    if (colorName === "bg-red") {
+        colorName = "alert-danger";
+    } else if (colorName === "bg-green") {
+        colorName = "alert-success";
+    } else if (colorName === "bg-orange") {
+        colorName = "alert-warning";
+    }
+
+
     if (colorName === null || colorName === '') { colorName = 'red'; }
     if (text === null || text === '') { text = 'Turning standard Bootstrap alerts'; }
     if (animateEnter === null || animateEnter === '') { animateEnter = 'animated fadeInDown'; }
