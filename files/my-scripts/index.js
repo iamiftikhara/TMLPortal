@@ -365,6 +365,11 @@ function getMuncipilityDetails() {
           .attr('title', 'Municipality details are required.')
           .css('cursor', 'no-drop');
 
+          let org_name = localStorage.getItem('_org_n')
+        $('#municipalityWizerdFormName').val(org_name)
+        $('#municipalityWizerdFormName').attr('disabled', true).css({'cursor': 'no-drop'})
+
+
 
 
       }
@@ -687,6 +692,8 @@ $(document).on('click', '#clickToOpenWizerd', function () {
     { scrollTop: $("#mainContentInnerWizerdFormToShow").offset().top },
     600 // duration in ms (600ms = smooth speed)
   );
+  $("#muncipalityWizerdForm input").attr("autocomplete", "off");
+
 });
 
 

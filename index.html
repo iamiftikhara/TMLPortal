@@ -303,96 +303,116 @@
               <!-- start basics details -->
               <div id="municipalityWizerdFormBasics" class="active">
 
-                <!-- Form -->
-                <div class="mb-4 col-12 col-md-6 pe-4">
-                  <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:</label>
-                  <input type="text" class="form-control" id="municipalityWizerdFormName" maxlength="25"
-                    name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example"
-                    required>
-                </div>
-                <!-- End Form -->
-
-                <div class="d-flex">
-
-                  <!-- Form -->
-                  <div class="mb-4 col-12 col-md-6 pe-4">
-                    <label for="municipalityWizerdFormAssociatedCounty" class="form-label">Associated County (if
-                      any):</label>
-                    <input type="text" class="form-control" id="municipalityWizerdFormAssociatedCounty"
-                      name="municipalityWizerdFormAssociatedCounty" placeholder="Example County" maxlength="25"
-                      aria-label="Example County" required>
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Basic Details</h3>
                   </div>
-                  <!-- End Form -->
+                  <div class="card-body">
+                    <div class="d-flex mb-4">
+                      <!-- Form -->
+                      <div class="col-12 col-md-6 pe-4">
+                        <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:</label>
+                        <input type="text" class="form-control" id="municipalityWizerdFormName" maxlength="25"
+                          name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example"
+                          required>
+                      </div>
+                      <!-- End Form -->
 
-
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormPopulationSize">Population
-                      Size:</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                      <!-- start size -->
+                      <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormPopulationSize">Population
+                          Size:</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                           "hideSearch": true,
                           "placeholder": "Select"
                           }' id="muncipalityWizerdFormPopulationSize" name="muncipalityWizerdFormPopulationSize"
-                        required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
+                            required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
                     </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
 
+
+
+                    <div class="d-flex">
+
+                      <!-- Form -->
+                      <div class="col-12 col-md-6 pe-4">
+                        <label for="municipalityWizerdFormAssociatedCounty" class="form-label">Associated County (if
+                          any):</label>
+                        <input type="text" class="form-control" id="municipalityWizerdFormAssociatedCounty"
+                          name="municipalityWizerdFormAssociatedCounty" placeholder="Example County" maxlength="25"
+                          aria-label="Example County" required>
+                      </div>
+                      <!-- End Form -->
+
+
+                      <!-- Form -->
+                      <div class="col-12 col-md-6 ps-4">
+                        <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County
+                          Website/URL:</label>
+                        <input type="text" class="form-control" id="muncipalityWizerdFormCountryWebsiteURL"
+                          name="muncipalityWizerdFormCountryWebsiteURL" placeholder="https://www.example.com"
+                          aria-label="https://www.example.com" required>
+                      </div>
+                      <!-- End Form -->
+
+
+                    </div>
+
+                  </div>
                 </div>
 
 
-
-                <div class="d-flex">
-
-
-                  <!-- Form -->
-                  <div class="mb-4 col-12 col-md-6 pe-4">
-                    <label for="municipalityWizerdFormContactName" class="form-label">Name:</label>
-                    <input type="text" class="form-control" id="municipalityWizerdFormContactName"
-                      name="municipalityWizerdFormContactName" placeholder="Enter your name"
-                      aria-label="Enter your name" required maxlength="25">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Primary Contact</h3>
                   </div>
-                  <!-- End Form -->
+                  <div class="card-body">
 
-                  <!-- Form -->
-                  <div class="mb-4 col-12 col-md-6 ps-4">
-                    <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
-                      name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com"
-                      required>
+                    <div class="d-flex mb-4">
+
+
+                      <!-- Form -->
+                      <div class="col-12 col-md-6 pe-4">
+                        <label for="municipalityWizerdFormContactName" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="municipalityWizerdFormContactName"
+                          name="municipalityWizerdFormContactName" placeholder="Enter your name"
+                          aria-label="Enter your name" required maxlength="25">
+                      </div>
+                      <!-- End Form -->
+
+                      <!-- Form -->
+                      <div class="col-12 col-md-6 ps-4">
+                        <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
+                          name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com"
+                          required>
+                      </div>
+                      <!-- End Form -->
+
+                    </div>
+
+
+                    <div class="d-flex">
+
+                      <!-- Form -->
+                      <div class="col-12 col-md-6 pe-4">
+                        <label for="muncipalityWizerdFormPhone" class="form-label">Phone:</label>
+                        <input type="text" class="form-control" id="muncipalityWizerdFormPhone"
+                          name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000"
+                          aria-label="+1 (123) 456 0000" required>
+                      </div>
+                      <!-- End Form -->
+
+                    </div>
                   </div>
-                  <!-- End Form -->
-
-                </div>
-
-
-                <div class="d-flex">
-
-                  <!-- Form -->
-                  <div class="mb-4 col-12 col-md-6 pe-4">
-                    <label for="muncipalityWizerdFormPhone" class="form-label">Phone:</label>
-                    <input type="text" class="form-control" id="muncipalityWizerdFormPhone"
-                      name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000"
-                      required>
-                  </div>
-                  <!-- End Form -->
-
-
-                  <!-- Form -->
-                  <div class="mb-4 col-12 col-md-6 ps-4">
-                    <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County
-                      Website/URL:</label>
-                    <input type="text" class="form-control" id="muncipalityWizerdFormCountryWebsiteURL"
-                      name="muncipalityWizerdFormCountryWebsiteURL" placeholder="https://www.example.com"
-                      aria-label="https://www.example.com" required>
-                  </div>
-                  <!-- End Form -->
 
                 </div>
 
@@ -414,120 +434,140 @@
               <!-- start Organization snapshot -->
               <div id="municipalityWizerdFormOrganizationSnapshot" style="display: none;">
 
-                <div class="d-flex">
 
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for
-                      the Next
-                      12–24 Months (choose up to 3):</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Priorities</h3>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="d-flex">
+
+                      <!-- start size -->
+                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for
+                          the Next
+                          12–24 Months (choose up to 3):</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                                 "hideSearch": true,
                                 "placeholder": "Select"
                                 }' id="muncipalityWizerdFormKeyPrioritiesUpTo3"
-                        name="muncipalityWizerdFormKeyPrioritiesUpTo3" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
+                            name="muncipalityWizerdFormKeyPrioritiesUpTo3" required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
 
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormDepartmentsUnderMunicipality">Departments
-                      Under
-                      Municipality (check all that apply):</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                      <!-- start size -->
+                      <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormDepartmentsUnderMunicipality">Departments
+                          Under
+                          Municipality (check all that apply):</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                                   "hideSearch": true,
                                   "placeholder": "Select"
                                   }' id="muncipalityWizerdFormDepartmentsUnderMunicipality"
-                        name="muncipalityWizerdFormDepartmentsUnderMunicipality" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
+                            name="muncipalityWizerdFormDepartmentsUnderMunicipality" required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
 
+                    </div>
+                  </div>
                 </div>
 
 
-                <div class="d-flex">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Staffing</h3>
+                  </div>
+                  <div class="card-body">
 
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormTotalEmployees">Approx. total
-                      employees:</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                    <div class="d-flex mb-4">
+
+                      <!-- start size -->
+                      <div class="col-12 col-md-6 pe-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormTotalEmployees">Approx. total
+                          employees:</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                                   "hideSearch": true,
                                   "placeholder": "Select"
                                   }' id="muncipalityWizerdFormTotalEmployees"
-                        name="muncipalityWizerdFormTotalEmployees" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
+                            name="muncipalityWizerdFormTotalEmployees" required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
 
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of
-                      IT
-                      employees:</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                      <!-- start size -->
+                      <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of
+                          IT
+                          employees:</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                                 "hideSearch": true,
                                 "placeholder": "Select"
                                 }' id="muncipalityWizerdFormNumberOfITEmployees"
-                        name="muncipalityWizerdFormNumberOfITEmployees" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
+                            name="muncipalityWizerdFormNumberOfITEmployees" required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
+
                     </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
-
-                </div>
 
 
 
-                <div class="mb-4">
-                  <label class="form-label">Do you use outsourced IT/cyber vendors?</label>
+                    <div class="mb-4">
+                      <label class="form-label">Do you use outsourced IT/cyber vendors?</label>
 
-                  <div class="d-flex">
+                      <div class="d-flex">
 
-                    <!-- Checkbox -->
-                    <div class="form-check mb-1">
-                      <input type="radio" id="cyberVendorsYes" class="form-check-input border-dark" name="cyberVendors">
-                      <label class="form-check-label" for="cyberVendorsYes">Yes</label>
-                    </div>
-                    <!-- End Checkbox -->
+                        <!-- Checkbox -->
+                        <div class="form-check mb-1">
+                          <input type="radio" id="cyberVendorsYes" class="form-check-input border-dark"
+                            name="cyberVendors">
+                          <label class="form-check-label" for="cyberVendorsYes">Yes</label>
+                        </div>
+                        <!-- End Checkbox -->
 
-                    <!-- Checkbox -->
-                    <div class="form-check mb-1 ms-3">
-                      <input type="radio" id="cyberVendorsNo" class="form-check-input border-dark" name="cyberVendors">
-                      <label class="form-check-label" for="cyberVendorsNo">No</label>
-                    </div>
-                    <!-- End Checkbox -->
+                        <!-- Checkbox -->
+                        <div class="form-check mb-1 ms-3">
+                          <input type="radio" id="cyberVendorsNo" class="form-check-input border-dark"
+                            name="cyberVendors">
+                          <label class="form-check-label" for="cyberVendorsNo">No</label>
+                        </div>
+                        <!-- End Checkbox -->
 
-                    <!-- Checkbox -->
-                    <div class="form-check mb-1 ms-3">
-                      <input type="radio" id="cyberVendorsNotSure" class="form-check-input border-dark"
-                        name="cyberVendors">
-                      <label class="form-check-label" for="cyberVendorsNotSure">Not sure</label>
+                        <!-- Checkbox -->
+                        <div class="form-check mb-1 ms-3">
+                          <input type="radio" id="cyberVendorsNotSure" class="form-check-input border-dark"
+                            name="cyberVendors">
+                          <label class="form-check-label" for="cyberVendorsNotSure">Not sure</label>
+                        </div>
+
+                      </div>
                     </div>
 
                   </div>
@@ -559,174 +599,205 @@
               <div id="municipalityWizerdTechnologyEnvironment" style="display: none;">
 
 
-                <div class="d-flex">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Cloud Applications</h3>
+                  </div>
+                  <div class="card-body">
 
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormCloudApplication">Cloud Applications in
-                      Use:</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                    <div class="d-flex">
+
+                      <!-- start size -->
+                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormCloudApplication">Cloud Applications in
+                          Use:</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
                               "placeholder": "Select"
                               }' id="muncipalityWizerdFormCloudApplication"
-                        name="muncipalityWizerdFormCloudApplication" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
+                            name="muncipalityWizerdFormCloudApplication" required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
 
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices
-                      (desktops,
-                      laptops, tablets):</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                              "hideSearch": true,
-                              "placeholder": "Select"
-                              }' id="muncipalityWizerdFormEndUserDevices" name="muncipalityWizerdFormEndUserDevices"
-                        required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
-
-                </div>
-
-                <div class="d-flex">
-
-
-
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormServers">Servers (on-premises or
-                      virtual):</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                              "hideSearch": true,
-                              "placeholder": "Select"
-                              }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
-
-
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices
-                      (IoT,
-                      cameras, dispatch systems):</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                              "hideSearch": true,
-                              "placeholder": "Select"
-                              }' id="muncipalityWizerdFormSpecializedDevices"
-                        name="muncipalityWizerdFormSpecializedDevices" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
-
-
-
-                </div>
-
-
-
-                <div class="d-flex">
-
-
-
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormCloudWorkloads">Cloud
-                      Workloads:</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                      <!-- start size -->
+                      <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormCloudWorkloads">Cloud
+                          Workloads:</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
                               "placeholder": "Select"
                               }' id="muncipalityWizerdFormCloudWorkloads" name="muncipalityWizerdFormCloudWorkloads"
-                        required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
+                            required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
+
+
+
                     </div>
-                    <!-- End Select -->
+
                   </div>
-                  <!-- end size -->
+                </div>
 
 
-                  <!-- start size -->
-                  <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                    <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number
-                      of
-                      connected sites (City Hall, stations, libraries, etc.):</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Devices & Endpoints</h3>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="d-flex mb-4">
+
+
+
+                      <!-- start size -->
+                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices
+                          (desktops,
+                          laptops, tablets):</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormEndUserDevices" name="muncipalityWizerdFormEndUserDevices"
+                            required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
+
+                      <!-- start size -->
+                      <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormServers">Servers (on-premises or
+                          virtual):</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers" required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
+
+
+
+
+
+
+                    </div>
+
+                    <!-- start size -->
+                    <div class="col-12 col-md-6" id="populationSizeDiv">
+                      <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices
+                        (IoT,
+                        cameras, dispatch systems):</label>
+                      <!-- Select -->
+                      <div class="tom-select-custom" style="cursor: pointer;">
+                        <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                              "hideSearch": true,
+                              "placeholder": "Select"
+                              }' id="muncipalityWizerdFormSpecializedDevices"
+                          name="muncipalityWizerdFormSpecializedDevices" required>
+                          <option class="p-2" value="">Select</option>
+                        </select>
+                      </div>
+                      <!-- End Select -->
+                    </div>
+                    <!-- end size -->
+
+
+                  </div>
+                </div>
+
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h3 class="card-header-title">Network Structure </h3>
+                  </div>
+                  <div class="card-body">
+
+                    <div class="d-flex">
+
+
+                      <!-- start size -->
+                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
+                        <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number
+                          of
+                          connected sites (City Hall, stations, libraries, etc.):</label>
+                        <!-- Select -->
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
                               "placeholder": "Select"
                               }' id="muncipalityWizerdFormNumberOfConnectedSites"
-                        name="muncipalityWizerdFormNumberOfConnectedSites" required>
-                        <option class="p-2" value="">Select</option>
-                      </select>
+                            name="muncipalityWizerdFormNumberOfConnectedSites" required>
+                            <option class="p-2" value="">Select</option>
+                          </select>
+                        </div>
+                        <!-- End Select -->
+                      </div>
+                      <!-- end size -->
+
+
+                      <div class="col-12 col-md-6 ps-4">
+                        <label class="form-label">Do you have backup internet/redundancy?</label>
+
+                        <div class="d-flex">
+
+                          <!-- Checkbox -->
+                          <div class="form-check mb-1">
+                            <input type="radio" id="backupInternetRedundancyYes" class="form-check-input border-dark"
+                              name="backupInternetRedundancy">
+                            <label class="form-check-label" for="backupInternetRedundancyYes">Yes</label>
+                          </div>
+                          <!-- End Checkbox -->
+
+                          <!-- Checkbox -->
+                          <div class="form-check mb-1 ms-3">
+                            <input type="radio" id="backupInternetRedundancyNo" class="form-check-input border-dark"
+                              name="backupInternetRedundancy">
+                            <label class="form-check-label" for="backupInternetRedundancyNo">No</label>
+                          </div>
+                          <!-- End Checkbox -->
+
+                          <!-- Checkbox -->
+                          <div class="form-check mb-1 ms-3">
+                            <input type="radio" id="backupInternetRedundancyNotSure"
+                              class="form-check-input border-dark" name="backupInternetRedundancy">
+                            <label class="form-check-label" for="backupInternetRedundancyNotSure">Not sure</label>
+                          </div>
+
+                        </div>
+                      </div>
+
+
                     </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
 
 
 
-                </div>
-
-
-                <div class="mb-4">
-                  <label class="form-label">Do you have backup internet/redundancy?</label>
-
-                  <div class="d-flex">
-
-                    <!-- Checkbox -->
-                    <div class="form-check mb-1">
-                      <input type="radio" id="backupInternetRedundancyYes" class="form-check-input border-dark"
-                        name="backupInternetRedundancy">
-                      <label class="form-check-label" for="backupInternetRedundancyYes">Yes</label>
-                    </div>
-                    <!-- End Checkbox -->
-
-                    <!-- Checkbox -->
-                    <div class="form-check mb-1 ms-3">
-                      <input type="radio" id="backupInternetRedundancyNo" class="form-check-input border-dark"
-                        name="backupInternetRedundancy">
-                      <label class="form-check-label" for="backupInternetRedundancyNo">No</label>
-                    </div>
-                    <!-- End Checkbox -->
-
-                    <!-- Checkbox -->
-                    <div class="form-check mb-1 ms-3">
-                      <input type="radio" id="backupInternetRedundancyNotSure" class="form-check-input border-dark"
-                        name="backupInternetRedundancy">
-                      <label class="form-check-label" for="backupInternetRedundancyNotSure">Not sure</label>
-                    </div>
 
                   </div>
                 </div>
@@ -742,7 +813,8 @@
                   </button>
 
                   <div class="d-flex justify-content-end ">
-                    <button id="validationFormFinishBtn" type="submit" class="btn btn-primary me-2">Save changes</button>
+                    <button id="validationFormFinishBtn" type="submit" class="btn btn-primary me-2">Save
+                      changes</button>
                     <button type="button" class="btn btn-white" id="closeWizerd" data-dismiss="modal"
                       aria-label="Close">Cancel</button>
                   </div>
