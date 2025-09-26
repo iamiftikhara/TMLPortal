@@ -36,15 +36,15 @@ $(document).ready(function () {
   muncipalityWizerdFormPopulationSizeInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormPopulationSize', false);
   muncipalityWizerdFormKeyPrioritiesUpTo3Init = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormKeyPrioritiesUpTo3', true, null);
   muncipalityWizerdFormDepartmentsUnderMunicipalityInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormDepartmentsUnderMunicipality', true, null);
-  muncipalityWizerdFormTotalEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormTotalEmployees', false);
-  muncipalityWizerdFormTotalITEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfITEmployees', false);
+  // muncipalityWizerdFormTotalEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormTotalEmployees', false);
+  // muncipalityWizerdFormTotalITEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfITEmployees', false);
 
   muncipalityWizerdFormCloudApplicationInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormCloudApplication', false);
-  muncipalityWizerdFormEndUserDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormEndUserDevices', false);
-  muncipalityWizerdFormServersInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormServers', false);
-  muncipalityWizerdFormSpecializedDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormSpecializedDevices', false);
+  // muncipalityWizerdFormEndUserDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormEndUserDevices', false);
+  // muncipalityWizerdFormServersInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormServers', false);
+  // muncipalityWizerdFormSpecializedDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormSpecializedDevices', false);
   muncipalityWizerdFormCloudWorkloadsInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormCloudWorkloads', false);
-  muncipalityWizerdFormNumberOfConnectedSitesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfConnectedSites', false);
+  // muncipalityWizerdFormNumberOfConnectedSitesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfConnectedSites', false);
 
 
 
@@ -78,18 +78,23 @@ $(document).ready(function () {
       },
       muncipalityWizerdFormEndUserDevices: {
         required: true,
+        onlyNumberDegitsAllowed: true
       },
       muncipalityWizerdFormServers: {
         required: true,
+        onlyNumberDegitsAllowed: true
+
       },
       muncipalityWizerdFormSpecializedDevices: {
         required: true,
+        onlyNumberDegitsAllowed: true
       },
       muncipalityWizerdFormCloudWorkloads: {
         required: true,
       },
       muncipalityWizerdFormNumberOfConnectedSites: {
         required: true,
+        onlyNumberDegitsAllowed: true
       },
       municipalityWizerdFormContactName: {
         atLeastOneCharacter: true,
@@ -118,25 +123,21 @@ $(document).ready(function () {
       },
       backupInternetRedundancy: {
         required: true
-      }
+      },
+      muncipalityWizerdFormTotalEmployees: {
+        required: true,
+        onlyNumberDegitsAllowed: true
+      },
+      muncipalityWizerdFormNumberOfITEmployees: {
+        required: true,
+        onlyNumberDegitsAllowed: true
+      },
     },
     messages: {
       muncipalityWizerdFormCloudApplication: {
         required: "Please select an item.",
       },
-      muncipalityWizerdFormEndUserDevices: {
-        required: "Please select an item.",
-      },
-      muncipalityWizerdFormServers: {
-        required: "Please select an item.",
-      },
-      muncipalityWizerdFormSpecializedDevices: {
-        required: "Please select an item.",
-      },
       muncipalityWizerdFormCloudWorkloads: {
-        required: "Please select an item.",
-      },
-      muncipalityWizerdFormNumberOfConnectedSites: {
         required: "Please select an item.",
       },
       muncipalityWizerdFormPopulationSize: {
@@ -853,28 +854,28 @@ function updateFiltersSelectDataOptions() {
   muncipalityWizerdFormDepartmentsUnderMunicipalityInit.addOption(muncipalityWizerdFormDepartmentsUnderMunicipalityData);
   // muncipalityWizerdFormDepartmentsUnderMunicipalityInit.setValue('policeFireEMS')
 
-  muncipalityWizerdFormTotalEmployeesInit.addOption(muncipalityWizerdFormNumberOfEmployeesData);
+  // muncipalityWizerdFormTotalEmployeesInit.addOption(muncipalityWizerdFormNumberOfEmployeesData);
   // muncipalityWizerdFormTotalEmployeesInit.setValue('51-200')
 
-  muncipalityWizerdFormTotalITEmployeesInit.addOption(muncipalityWizerdFormMumberOfITEmployeesData);
+  // muncipalityWizerdFormTotalITEmployeesInit.addOption(muncipalityWizerdFormMumberOfITEmployeesData);
   // muncipalityWizerdFormTotalITEmployeesInit.setValue('1-50')
 
   muncipalityWizerdFormCloudApplicationInit.addOption(muncipalityWizerdFormCloudApplicationData);
   // muncipalityWizerdFormCloudApplicationInit.setValue('microsoft365')
 
-  muncipalityWizerdFormEndUserDevicesInit.addOption(muncipalityWizerdFormEndUserDevicesData);
+  // muncipalityWizerdFormEndUserDevicesInit.addOption(muncipalityWizerdFormEndUserDevicesData);
   // muncipalityWizerdFormEndUserDevicesInit.setValue('51-200')
 
-  muncipalityWizerdFormServersInit.addOption(muncipalityWizerdFormServersData);
+  // muncipalityWizerdFormServersInit.addOption(muncipalityWizerdFormServersData);
   // muncipalityWizerdFormServersInit.setValue('1-50')
 
-  muncipalityWizerdFormSpecializedDevicesInit.addOption(muncipalityWizerdFormSpecializedDevicesData);
+  // muncipalityWizerdFormSpecializedDevicesInit.addOption(muncipalityWizerdFormSpecializedDevicesData);
   // muncipalityWizerdFormSpecializedDevicesInit.setValue('1-50')
 
   muncipalityWizerdFormCloudWorkloadsInit.addOption(muncipalityWizerdFormCloudWorkloadsData);
   // muncipalityWizerdFormCloudWorkloadsInit.setValue('mostlyCloudBased')
 
-  muncipalityWizerdFormNumberOfConnectedSitesInit.addOption(muncipalityWizerdFormNumberOfConnectedSitesData);
+  // muncipalityWizerdFormNumberOfConnectedSitesInit.addOption(muncipalityWizerdFormNumberOfConnectedSitesData);
   // muncipalityWizerdFormNumberOfConnectedSitesInit.setValue('1')
 
 }

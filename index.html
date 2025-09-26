@@ -501,7 +501,9 @@
                         <label class=" form-label" for="muncipalityWizerdFormTotalEmployees">Approx. total
                           employees:</label>
                         <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
+                         <input type="text" class="form-control" id="muncipalityWizerdFormTotalEmployees"
+                          name="muncipalityWizerdFormTotalEmployees" placeholder="Enter approx. total employees" maxlength="25" aria-label="Enter approx. total employees" required>
+                        <!-- <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                                   "hideSearch": true,
@@ -510,18 +512,18 @@
                             name="muncipalityWizerdFormTotalEmployees" required>
                             <option class="p-2" value="">Select</option>
                           </select>
-                        </div>
+                        </div> -->
                         <!-- End Select -->
                       </div>
                       <!-- end size -->
 
                       <!-- start size -->
                       <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of
-                          IT
-                          employees:</label>
+                        <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of IT employees:</label>
+                          <input type="text" class="form-control" id="muncipalityWizerdFormNumberOfITEmployees"
+                          name="muncipalityWizerdFormNumberOfITEmployees" placeholder="Enter approx. number of IT employees" maxlength="25" aria-label="Enter approx. number of IT employees" required>
                         <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
+                        <!-- <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                                 "hideSearch": true,
@@ -530,7 +532,7 @@
                             name="muncipalityWizerdFormNumberOfITEmployees" required>
                             <option class="p-2" value="">Select</option>
                           </select>
-                        </div>
+                        </div> -->
                         <!-- End Select -->
                       </div>
                       <!-- end size -->
@@ -572,14 +574,15 @@
                   </div>
                 </div>
 
-                <!-- Footer -->
-                <div class="d-flex align-items-center justify-content-end">
-                  <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn"
+                 <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn"
                     data-hs-step-form-prev-options='{
                                   "targetSelector": "#municipalityWizerdFormBasics"
                                 }'>
                     <i class="bi-chevron-left small"></i> Previous step
                   </button>
+                <!-- Footer -->
+                <div class="d-flex align-items-center justify-content-end">
+                 
 
                   <div class="">
                     <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-primary formNextButton"
@@ -664,11 +667,11 @@
 
                       <!-- start size -->
                       <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices
-                          (desktops,
-                          laptops, tablets):</label>
+                        <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices (desktops, laptops, tablets):</label>
+                          <input type="text" class="form-control" id="muncipalityWizerdFormEndUserDevices"
+                          name="muncipalityWizerdFormEndUserDevices" placeholder="Enter end-user devices (desktops, laptops, tablets)" maxlength="25" aria-label="Enter end-user devices (desktops, laptops, tablets)" required>
                         <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
+                        <!-- <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
@@ -677,7 +680,7 @@
                             required>
                             <option class="p-2" value="">Select</option>
                           </select>
-                        </div>
+                        </div> -->
                         <!-- End Select -->
                       </div>
                       <!-- end size -->
@@ -686,8 +689,11 @@
                       <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormServers">Servers (on-premises or
                           virtual):</label>
+                        <input type="text" class="form-control" id="muncipalityWizerdFormServers"
+                          name="muncipalityWizerdFormServers" placeholder="Enter servers" maxlength="25" aria-label="Enter servers (on-premises or
+                          virtual)" required>
                         <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
+                        <!-- <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
@@ -695,7 +701,7 @@
                               }' id="muncipalityWizerdFormServers" name="muncipalityWizerdFormServers" required>
                             <option class="p-2" value="">Select</option>
                           </select>
-                        </div>
+                        </div> -->
                         <!-- End Select -->
                       </div>
                       <!-- end size -->
@@ -710,10 +716,11 @@
                     <!-- start size -->
                     <div class="col-12 col-md-6" id="populationSizeDiv">
                       <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices
-                        (IoT,
-                        cameras, dispatch systems):</label>
+                        (IoT, cameras, dispatch systems):</label>
+                        <input type="text" class="form-control" id="muncipalityWizerdFormSpecializedDevices"
+                          name="muncipalityWizerdFormSpecializedDevices" placeholder="Enter specialized devices" maxlength="25" aria-label="Enter specialized devices" required>
                       <!-- Select -->
-                      <div class="tom-select-custom" style="cursor: pointer;">
+                      <!-- <div class="tom-select-custom" style="cursor: pointer;">
                         <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
@@ -722,7 +729,7 @@
                           name="muncipalityWizerdFormSpecializedDevices" required>
                           <option class="p-2" value="">Select</option>
                         </select>
-                      </div>
+                      </div> -->
                       <!-- End Select -->
                     </div>
                     <!-- end size -->
@@ -743,10 +750,11 @@
                       <!-- start size -->
                       <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number
-                          of
-                          connected sites (City Hall, stations, libraries, etc.):</label>
+                          of connected sites (City Hall, stations, libraries, etc.):</label>
+                          <input type="text" class="form-control" id="muncipalityWizerdFormNumberOfConnectedSites"
+                          name="muncipalityWizerdFormNumberOfConnectedSites" placeholder="Enter approx. number of connected sites" maxlength="25" aria-label="Enter approx. number of connected sites" required>
                         <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
+                        <!-- <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
@@ -755,7 +763,7 @@
                             name="muncipalityWizerdFormNumberOfConnectedSites" required>
                             <option class="p-2" value="">Select</option>
                           </select>
-                        </div>
+                        </div> -->
                         <!-- End Select -->
                       </div>
                       <!-- end size -->
@@ -801,21 +809,21 @@
                   </div>
                 </div>
 
-
-                <!-- Footer -->
-                <div class="d-sm-flex align-items-center justify-content-end">
-                  <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2"
+                <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2"
                     data-hs-step-form-prev-options='{
                       "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
                     }'>
                     <i class="bi-chevron-left small"></i> Previous step
                   </button>
+                <!-- Footer -->
+                <div class="d-sm-flex align-items-center justify-content-end">
+                  <button type="button" class="btn btn-white me-2" id="closeWizerd" data-dismiss="modal"
+                      aria-label="Close">Cancel</button>
 
                   <div class="d-flex justify-content-end ">
                     <button id="validationFormFinishBtn" type="submit" class="btn btn-primary me-2">Save
                       changes</button>
-                    <button type="button" class="btn btn-white" id="closeWizerd" data-dismiss="modal"
-                      aria-label="Close">Cancel</button>
+                    
                   </div>
                 </div>
                 <!-- End Footer -->
