@@ -43,6 +43,7 @@ const setPasswordAPI = "tml/set-password"
 
 // Index
 const setMunicipalityWizardSetAPI= 'tml/municipality/wizard/set'
+const getMunicipalityWizardSetAPI= 'tml/municipality/wizard/get'
 const getOrdersAPI = "tml/client/orders/list";
 
 
@@ -52,11 +53,21 @@ const getTeamsAdminUsersListAPI = "tml/admin/users/list";
 const addTeamsAdminUsesAddAPI = 'tml/admin/users/create'
 const editTeamsAdminUsesEditAPI = 'tml/admin/users/edit'
 const deletTeamsAdminUsersDeleteAPI= 'tml/admin/users/delete'
+const tmlUpdateProfile = 'tml/update/profile'
 
 // account security
 const changePasswordAPI= 'tml/change-password'
 
+// ********************** Start Admin message ***********************
+let TMLAdminServiceAdd = "tml/admin/services/add"
+let getserviceManagementAPI =  `tml/admin/services/view`
+let editserviceManagementAPI =  `tml/admin/services/update`
+let deleteserviceManagementAPI = '/tml/admin/services/delete'
 
+// File Upload
+let adminDocumentsAdd = "/tml/admin/documents/add"
+let adminDocumentsView = "/tml/admin/documents/view"
+// ********************** End Admin message ***********************
 // to open the message from locals
 const locKeyEncry = 'This is my message to you.'
 const pswd_change_success = "Successfully changed"

@@ -1,0 +1,104 @@
+<aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered bg-white  ">
+    <div class="navbar-vertical-container">
+      <div class="navbar-vertical-footer-offset">
+        <!-- Logo -->
+
+        <a class="navbar-brand" href="./index.html" aria-label="Front">
+          <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo" src="./assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
+          <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
+          <img class="navbar-brand-logo-mini" src="./assets/svg/logos-light/logo-short.svg" alt="Logo" data-hs-theme-appearance="dark">
+        </a>
+
+
+
+        <!-- Content -->
+        <div class="navbar-vertical-content">
+          <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
+            <!-- Collapse -->
+            <div class="nav-item">
+              <a class="nav-link" >
+                <i class="bi-house-door nav-icon"></i>
+                <span class="nav-link-title">Dashboards</span>
+              </a>
+            </div>
+          
+            <div id="navbarVerticalMenuPagesMenu">
+              <!-- Collapse -->
+              <div class="nav-item">
+                <a class="nav-link dropdown-toggle " href="/quotes-review.html">
+                  <i class="bi-people nav-icon"></i>
+                  <span class="nav-link-title">Quote Review</span>
+                </a>
+
+                <div class="nav-collapse collapse show" >
+                  <a class="nav-link " >Request</a>
+                  <a class="nav-link " >Adjust</a>
+                  <a class="nav-link " >Finalize</a>
+                </div>
+              </div>
+              <!-- End Collapse -->
+
+              <!-- Collapse -->
+              <div class="nav-item">
+                <a class="nav-link dropdown-toggle "  role="button" href="/service-management.html">
+                  <i class="bi-person nav-icon"></i>
+                  <span class="nav-link-title">Service Management</span>
+                </a>
+
+                <div class="nav-collapse collapse show ">
+                  <a class="nav-link " >Add/Update</a>
+                  <a class="nav-link " >Upload Docs</a>
+                 
+                </div>
+              </div>
+              <!-- End Collapse -->
+
+              <!-- Collapse -->
+              <div class="nav-item">
+                <a class="nav-link dropdown-toggle" href="/analytics.html" >
+                  <i class="bi-person-badge nav-icon"></i>
+                  <span class="nav-link-title">Analytics</span>
+                </a>
+
+                <div class="nav-collapse collapse show" >
+                  <a class="nav-link " href="">Engagement</a>
+                  <a class="nav-link " href="">Report</a>
+                  <!-- <a class="nav-link " href="./account-invoice.html">Invoice</a> -->
+                </div>
+              </div>
+              
+          </div>
+
+        </div>
+        <!-- End Content -->
+
+      
+      </div>
+    </div>
+  </aside>
+
+  <script>
+    $(document).ready(function () {
+  // Get current page URL path (without query/hash)
+  let currentPath = window.location.pathname.split("/").pop();
+
+  // Loop through sidebar links
+  $('.navbar-vertical-content a.nav-link').each(function () {
+    let linkPath = $(this).attr('href');
+
+    if (linkPath && linkPath.indexOf(currentPath) !== -1) {
+      // Remove old active
+      $('.navbar-vertical-content a.nav-link').removeClass('active');
+
+      // Add active to current
+      $(this).addClass('active');
+
+      // If inside a collapse menu, also open the parent
+      $(this).closest('.nav-collapse').addClass('show');
+      $(this).closest('.nav-item').find('.dropdown-toggle').addClass('active');
+    }
+  });
+});
+
+  </script>

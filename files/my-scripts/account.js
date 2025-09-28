@@ -134,11 +134,251 @@ $(document).ready(function () {
       }
     }
   })
-  // getProfileTeamTableData(10, 1)
+     //  validation rules define
+  $('#editProfile').validate({
+    debug: true,
+    rules: {
+      editFirstName: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 1,
+        onlyDigitsNotAllowed: true,
+      },
+      editLastName: {
+       atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 1,
+        onlyDigitsNotAllowed: true,
+      },
+    },
+    messages: {},
+    errorClass: 'error invalid-feedback',
+    validClass: 'success',
+    errorElement: 'span',
+    highlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents('div.control-group')
+        .addClass(errorClass)
+        .removeClass(validClass)
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents('.error')
+        .removeClass(errorClass)
+        .addClass(validClass)
+    },
+    // the errorPlacement has to take the table layout into account
+    errorPlacement: function (error, element) {
+      if (element.attr("name") === "cyberVendors" || element.attr("name") === "backupInternetRedundancy") {
+        error.appendTo(element.parent().parent().parent())
+      } else {
+        error.appendTo(element.parent())
+      }
+    }
+  })
+ // Get values from localStorage
+  const firstName = localStorage.getItem("_uf");
+  const lastName = localStorage.getItem("_ul");
+
+  // Set values in the form if they exist
+  if (firstName) {
+    document.getElementById("editFirstName").value = firstName;
+  }
+  if (lastName) {
+    document.getElementById("editLastName").value = lastName;
+  }
 
 });
 
+// ================= START: Sidebar Role-Based Visibility =================
+  const userRole = localStorage.getItem("_role"); // assume role is stored as "admin", "user", etc.
 
+  if (userRole === "admin") {
+    // Select the links
+    const billingTab = document.querySelector('a[href="#billingTab"]');
+    const notificationTab = document.querySelector('a[href="#notificationTab"]');
+    const teamTab = document.querySelector('a[href="#teamTab"]');
+
+    // Hide them
+    if (billingTab) billingTab.style.display = "none";
+    if (notificationTab) notificationTab.style.display = "none";
+    if (teamTab) teamTab.style.display = "none";
+
+    // Optionally hide the <hr> after each hidden link for clean look
+    const hrElements = document.querySelectorAll(".horizontal-line");
+    hrElements.forEach(hr => {
+      const nextLink = hr.nextElementSibling;
+      if (nextLink && nextLink.style.display === "none") {
+        hr.style.display = "none";
+      }
+    });
+  }
+// ================= END: Sidebar Role-Based Visibility =================
+// ******************** Start Add User ************************
+
+
+$('#saveProfileBtn').on('click', function () {
+  if($('#editProfile').validate().form()) {
+    $('#cover-spin').show()
+    editProfile()
+  }
+  
+})
+
+
+function editProfile() {
+
+  const first_name = $('#editFirstName').val();
+  const last_name = $('#editLastName').val();
+
+// console.log("typeof $.notify", typeof $.notify); // should not be undefined
+// console.log("typeof showNotificationError", typeof showNotificationError);
+
+
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+    first_name: first_name,
+    last_name: last_name,
+  })
+  // return 0 
+  $.ajax({
+    url: MAIN_API_PATH + tmlUpdateProfile,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $('#cover-spin').hide(0)
+        $('#addUserDetailsModal').modal('hide')
+  localStorage.setItem("_uf",first_name);
+   localStorage.setItem("_ul",last_name);
+        showNotificationError(
+          'bg-green',
+          null,
+          null,
+          null,
+          null,
+          null,
+          UPDATE
+        )
+      },
+      204: function () {
+        $('#cover-spin').hide(0)
+        showNotificationError('bg-orange', null, null, null, null, null, alreadyExist409Error);
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      if (xhr.status === 400) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        )
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        )
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        )
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        )
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $('#cover-spin').hide()
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const dateString = String(pageName + data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(dateString)
+            SecurityKeyTime = false
+            createTheUsers()
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              createTheUsers()
+            })
+          }
+        })
+      } else {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      }
+    }
+  })
+}
+
+// ******************** End Add User ***************************
 
 // profile tab click
 $('.profileTabClick').on('click', function () {
@@ -482,13 +722,13 @@ function getProfileTeamTableData(skip, page) {
           let actions
           if (login_user_email == response[i].email) {
             actions = `
-            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].user_id}">Edit</button>
-            <button class="btn btn-sm btn-danger " disabled data-member-id="${response[i].user_id}">Remove</button>
+            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].composit_id}">Edit</button>
+            <button class="btn btn-sm btn-danger " disabled data-member-id="${response[i].composit_id}">Remove</button>
           `
           } else {
             actions = `
-            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].user_id}">Edit</button>
-            <button class="btn btn-sm btn-danger remove-member" data-member-id="${response[i].user_id}">Remove</button>
+            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].composit_id}">Edit</button>
+            <button class="btn btn-sm btn-danger remove-member" data-member-id="${response[i].composit_id}">Remove</button>
           `
           }
 
@@ -806,7 +1046,7 @@ let isSuperChecked = ''
 // edit user
 function editMemberFromTeam(memberId) {
 
-  let userDetails = teamMembersAPIResponse.find(member => member.user_id === memberId)
+  let userDetails = teamMembersAPIResponse.find(member => member.composit_id === memberId)
   currentEditUserDataInUse = userDetails
   $('#editUserDetailsModalFirstName').val(userDetails.first_name);
   $('#editUserDetailsModalLastName').val(userDetails.last_name);
@@ -850,7 +1090,7 @@ function updatedTheUsersDetails() {
   const first_name = $('#editUserDetailsModalFirstName').val();
   const last_name = $('#editUserDetailsModalLastName').val();
   const is_super = $('#editUserDetailsSuperAccess').prop('checked');;
-  const user_id = currentEditUserDataInUse.user_id
+  const user_id = currentEditUserDataInUse.composit_id
 
 
   const apiBody = JSON.stringify({

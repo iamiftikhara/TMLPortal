@@ -269,55 +269,36 @@
                     <h3 class="card-header-title">Profile Information</h3>
                   </div>
                   <div class="card-body">
-                    <form>
+                    <form id="editProfile">
                       <div class="container">
                         <div class="row">
                           <div class="col-lg-6 col-sm-12">
                             <!-- Form -->
                               <div class="mb-3">
-                                <label for="muncipalityNameProfile" class="form-label">Municipality Name:</label>
-                                <input type="text" class="form-control form-control-light" id="muncipalityNameProfile"
-                                  placeholder="City of Example" aria-label="City of Example">
+                                <label for="primaryContactNameProfile" class="form-label">First name:</label>
+                                <input type="text" class="form-control " id="editFirstName" name="editFirstName"
+                                  placeholder="John" aria-label="John Doe" required>
                               </div>
                             <!-- End Form -->
                           </div>
-                          <div class="col-lg-6 col-sm-12">
+                             <div class="col-lg-6 col-sm-12">
                             <!-- Form -->
                               <div class="mb-3">
-                                <label for="primaryContactNameProfile" class="form-label">Primary Contact Name:</label>
-                                <input type="text" class="form-control form-control-light" id="primaryContactNameProfile"
-                                  placeholder="John Doe" aria-label="John Doe">
+                                <label for="editLastName" class="form-label">Last Name:</label>
+                                <input type="text" class="form-control " id="editLastName" name="editLastName"
+                                  placeholder="Doe" required>
                               </div>
                             <!-- End Form -->
                           </div>
                         </div>
 
-                        <div class="row">
-                          <div class="col-lg-6 col-sm-12">
-                            <!-- Form -->
-                              <div class="mb-3">
-                                <label for="emailAddressProfile" class="form-label">Email Address:</label>
-                                <input type="email" class="form-control form-control-light" id="emailAddressProfile"
-                                  placeholder="it-manager@example.com">
-                              </div>
-                            <!-- End Form -->
-                          </div>
-                          <div class="col-lg-6 col-sm-12">
-                            <!-- Form -->
-                              <div class="mb-3">
-                                <label for="phoneNumberProfile" class="form-label">Phone Number:</label>
-                                <input type="text" class="form-control form-control-light" id="phoneNumberProfile"
-                                  placeholder="+1 (123) 456 0000">
-                              </div>
-                            <!-- End Form -->
-                          </div>
-                        </div>
+                      
                       </div>
                     </form>
                   
                   </div>
                   <div class="card-footer text-end">
-                    <button type="button" class="btn btn-primary" id="saveProfileBtn">Save Profile</button>
+                    <button type="button" class="btn btn-outline-primary" id="saveProfileBtn">Submit</button>
                   </div>
                 </div>
               </div>
@@ -330,29 +311,32 @@
                   </div>
                   <div class="card-body">
                     <form>
-                      <!-- Form -->
-                      <div class="mb-3 col-5">
+                      <div class="row">
+                              <!-- Form -->
+                      <div class="mb-3 col-4">
                         <label for="securityOldPassword" class="form-label">Old Password:</label>
-                        <input type="password" class="form-control form-control-light" id="securityOldPassword"
+                        <input type="password" class="form-control " id="securityOldPassword"
                           placeholder="Enter old password" name="securityOldPassword">
                       </div>
                       <!-- End Form -->
 
                        <!-- Form -->
-                      <div class="mb-3 col-5">
+                      <div class="mb-3 col-4">
                         <label for="securityNewPassword" class="form-label">New Password:</label>
-                        <input type="password" class="form-control form-control-light" id="securityNewPassword"
+                        <input type="password" class="form-control " id="securityNewPassword"
                           placeholder="Enter new password" name="securityNewPassword">
                       </div>
                       <!-- End Form -->
 
                        <!-- Form -->
-                      <div class="mb-3 col-5">
+                      <div class="mb-3 col-4">
                         <label for="securityConfirmNewPassword" class="form-label">Confirm New Password:</label>
-                        <input type="password" class="form-control form-control-light" id="securityConfirmNewPassword"
+                        <input type="password" class="form-control " id="securityConfirmNewPassword"
                           placeholder="Confirm new password">
                       </div>
                       <!-- End Form -->
+                      </div>
+                
 
                       <!-- Checkbox -->
                       <div class="form-check mb-3 d-none">
@@ -363,10 +347,10 @@
                       <!-- End Checkbox -->
 
                     </form>
-                    <div>
-                      <button type="button" class="btn btn-primary" id="saveSecuritySettingBtn">Save Security
-                        Setting</button>
-                    </div>
+                    
+                  </div>
+                    <div class="card-footer text-end">
+                    <button type="button" class="btn btn-outline-primary" id="saveSecuritySettingBtn">Submit </button>
                   </div>
                 </div>
               </div>
@@ -397,7 +381,7 @@
                     <div class="mb-3">
                       <label for="billingAddressProfile" class="form-label">Billing Address:</label>
 
-                      <input type="text" class="form-control form-control-light" id="billingAddressProfile"
+                      <input type="text" class="form-control " id="billingAddressProfile"
                         placeholder="123 Main Street, City" aria-label="123 Main Street, City">
                     </div>
                     <!-- End Form -->
@@ -405,7 +389,7 @@
                     <!-- Form -->
                     <div class="mb-3">
                       <label for="billingAddressProfile2" class="form-label">Billing Address:</label>
-                      <input type="text" class="form-control form-control-light" id="billingAddressProfile2"
+                      <input type="text" class="form-control " id="billingAddressProfile2"
                         placeholder="123 Main Street, City" aria-label="123 Main Street, City">
                     </div>
                     <!-- End Form -->
@@ -422,14 +406,14 @@
 
                   <!-- Form -->
                   <div class="mb-3">
-                    <input type="text" class="form-control form-control-light" id="invoice001Paid"
+                    <input type="text" class="form-control " id="invoice001Paid"
                       placeholder="Invoice #001 - Paid" aria-label="Invoice #001 - Paid">
                   </div>
                   <!-- End Form -->
 
                   <!-- Form -->
                   <div class="mb-3">
-                    <input type="text" class="form-control form-control-light" id="invoice002Pending"
+                    <input type="text" class="form-control " id="invoice002Pending"
                       placeholder="Invoice #002 - Pending" aria-label="Invoice #002 - Pending">
                   </div>
                   <!-- End Form -->

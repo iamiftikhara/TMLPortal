@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .dot {
+          height: 10px;
+          width: 10px;
+          background-color: #4287F5;
+          border-radius: 50%;
+          display: inline-block;
+          margin-top: 0px !important;
+          margin-bottom: 0px !important;
+          margin-left: 3px !important;
+        }
+        </style>
+</head>
+<body>
+    <div class="menu">
+        <ul class="list">
+            <li class="dashboard-li">
+                <a href="index.html">
+                    <img src="../../files/images/Icons png/Dashboard-1.png" style="width: 25px;height: 25px; " />
+                    <span>Dashboard <span class="dot" id="index_newstatus"></span></span>
+
+                </a>
+            </li>
+            
+            <li class="myClick">
+                <a class="menu-toggle waves-effect waves-block" id="cloudClick">
+                    <img src="../../files/images/Icons png/Cloud-storage-1.png" style="height: 25px;width: 25px; " />
+                    <span>Cloud App</span>
+
+                </a>
+                <ul class="ml-menu art-vmenu cloudClickUl">
+                    <li id="Amazon_S3">
+                        <a style="cursor: pointer;" onclick="cloudMove('Amazon S3')">
+                            <img src="../../files/images/Icons png/amazon-s3-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Amazon S3 <span class="dot" id="cloud_storage_review.html?name=Amazon%20S3_newstatus"></span> </span>
+                        </a>
+                    </li>
+                    <li id="Dropbox">
+                        <a style="cursor: pointer;" onclick="cloudMove('Dropbox')">
+                            <img src="../../files/images/Icons png/Dropbox-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Dropbox <span class="dot" id="cloud_storage_review.html?name=Dropbox_newstatus"></span></span>
+                        </a>
+                    </li>
+                    <li id="Google_Drive">
+                        <a style="cursor: pointer;" onclick="cloudMove('Google Drive')">
+                            <img src="../../files/images/Icons png/Google-drive-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Google Drive <span class="dot" id="cloud_storage_review.html?name=Google%20Drive_newstatus"></span></span>
+                        </a>
+                    </li>
+                    <li id="Microsoft_365">
+                        <a style="cursor: pointer;" onclick="cloudMove('Office 365')">
+                            <img src="../../files/images/Icons png/Office-365-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Office 365 <span class="dot" id="cloud_storage_review.html?name=Office%20365_newstatus"></span></span> 
+                        </a>
+                    </li>
+                    <li id="One_Drive">
+                        <a style="cursor: pointer;" onclick="cloudMove('One Drive')">
+                            <img src="../../files/images/Icons png/One-drive-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>One Drive <span class="dot" id="cloud_storage_review.html?name=One%20Drive_newstatus"></span></span> 
+                        </a>
+                    </li>
+                    <li id="Slack">
+                        <a style="cursor: pointer;" onclick="cloudMove('Slack')">
+                            <img src="../../files/images/Icons png/Slack-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Slack <span class="dot" id="cloud_storage_review.html?name=Slack_newstatus"></span></span> 
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="menu-toggle waves-effect waves-block" id="networkTraffic">
+                    <img src="https://cdn0.iconfinder.com/data/icons/seo-and-web-outline-38/64/seo-and-web-outline-38-16-512.png" style="height: 25px;width: 25px; " />
+                    <span>Partner Network Trrafic</span>
+
+                </a>
+                <ul class="ml-menu networkTrafficUl">
+                    <li>
+                        <a href="network-traffic.html">
+                            <img src="../../files/images/Icons png/Network-traffic-1.png" style="height: 25px;width: 25px; " /> &nbsp;&nbsp;
+                            <span>Network Traffic <span class="dot" id="network_traffic_newstatus"></span></span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="data-destinations.html">
+                            <img src="../../files/images/Icons png/Data-destination-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Data Destinations  <span class="dot" id="data_destinations_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="data-source.html">
+                            <img src="../../files/images/Icons png/data-resource-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Data Sources  <span class="dot" id="incoming_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="policy.html">
+                            <img src="../../files/images/Icons png/Policy-management-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Policy Management  <span class="dot" id="policy_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                   
+                </ul>
+            </li>
+
+            <li>
+                <a class="menu-toggle waves-effect waves-block" id="dataPartner">
+                    <img src="https://lh3.googleusercontent.com/proxy/tCndDn38bAkGeHwEjSBRYQzIlFtOCcUJU6AWiOZRS9H7bJ_gim8SSC44ex9mnQEq9IJ7f0k5Qh1jPNPeJIUljxyirddND_H4SjxjvzqtJqLvXA" style="height: 25px;width: 27px; " />
+                    <span>Data Partner</span>
+
+                </a>
+                <ul class="ml-menu dataPartnerUl">
+                    <li>
+                        <a href="supply_chain.html">
+                            <img src="../../files/images/Icons png/Vendor-configs-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Data Partner <span class="dot" id="supply_chain_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="partnerdetail.html">
+                            <img src="../../files/images/Icons png/Vendor-configs-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Data Partner Config  <span class="dot" id="partnerdetail_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pp-report.html">
+                            <img src="../../files/images/Icons png/Vendor-configs-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Privacy Policy <span class="dot" id="pp_report_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tc-report.html">
+                            <img src="../../files/images/Icons png/Vendor-configs-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Terms & Conditions <span class="dot" id="tc_report_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="visualization.html">
+                            <img src="../../files/images/Icons png/Vendor-configs-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Visualization  <span class="dot" id="csrm_dashboard_newstatus"></span></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a class="menu-toggle waves-effect waves-block" id="reportClick">
+                    <img src="../../files/images/Icons png/Reports-1.png" style="height: 25px;width: 25px; " />
+                    <span>Reports</span>
+
+                </a>
+                <ul class="ml-menu reportClickUl">
+                    <li>
+                        <a href="alerts.html">
+                            <img src="../../files/images/Icons png/Vendor-alerts-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Alerts <span class="dot" id="alerts_newstatus"></span></span>
+
+                        </a>
+                    </li>
+
+                    <!-- <li>
+                        <a href="blocked.html">
+                            <img src="../../files/images/Icons png/Block-sites.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Blocked Network Traffic  <span class="dot" id="blocked_newstatus"></span></span>
+
+                        </a>
+                    </li> -->
+                    <li style="margin-left: -1px;">
+                        <a href="cloud_work_load_audit.html">
+                            <img src="../../files/sidebar-icons/cloud_workload_audit.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Cloud Work Load Audit  <span class="dot" id="cloud_work_load_audit_newstatus"></span></span>
+                        </a>
+                    </li>
+                    <li style="margin-left: -1px;">
+                        <a href="cookies_compliance.html">
+                            <img src="../../files/images/regulatory_icons/cookies_compliance1024x1024 .png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Cookies Compliance  <span class="dot" id="cookies_compliance_newstatus"></span></span>
+                        </a>
+                    </li>
+                   
+                    <li>
+                        <a href="osint.html">
+                            <img src="../../files/images/Icons png/OSINT.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Deep Search  <span class="dot" id="osint_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="partners.html">
+                            <img src="../../files/images/data_partners_config72x72.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Data Partner  <span class="dot" id="partners_newstatus"></span></span>
+
+                        </a>
+                    </li> -->
+                    <!-- <li style="display: none;">
+                        <a href="pp.html" style="padding-left: 53px;">
+                            <img src="../../files/images/Data_partner_privacy_policy.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Data Partners Privacy Policy  <span class="dot" id="pp_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li style="display: none;">
+                        <a href="tc.html">
+                            <img src="../../files/images/Data_partner_T&C.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Data Partner T & C  <span class="dot" id="tc_newstatus"></span></span>
+
+                        </a>
+                    </li> -->
+
+                    <li style="margin-left: -1px;">
+                        <a href="mdm_detail.html">
+                            <img src="../../files/sidebar-icons/MDM_report.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>MDM Report  <span class="dot" id="mdm_detail_newstatus"></span></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="risk.html">
+                            <img src="../../files/images/Icons png/organization-risk-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Organization Risk  <span class="dot" id="risk_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="pp-report.html">
+                            <img src="../../files/images/privacy_policy_analysis.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Privacy Policy Analysis  <span class="dot" id="pp_report_newstatus"></span></span>
+
+                        </a>
+                    </li> -->
+
+                    <li style="margin-left: -1px;">
+                        <a href="auth-apps.html">
+                            <img src="../../files/sidebar-icons/SSO_apps.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>SSO Apps  <span class="dot" id="auth_apps_newstatus"></span></span>
+                        </a>
+                    </li>
+
+                    <!-- <li>
+                        <a href="tc-report.html" style="padding-left: 52px;">
+                            <img src="../../files/images/terms_and_conditions_analysis.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Terms & Conditions Analysis  <span class="dot" id="tc_report_newstatus"></span></span>
+
+                        </a>
+                    </li> -->
+                </ul>
+            </li>
+
+            
+            <li class="super_role" style="display: none;">
+                <a class="menu-toggle waves-effect waves-block" id="config">
+                    <img src="../../files/images/Icons png/Configration-1.png" style="height: 25px;width: 25px; " />
+                    <span>Configuration</span>
+
+
+                </a>
+                <ul class="ml-menu configUl">
+                    <li>
+                        <a href="config_alerts.html">
+                            <img src="../../files/images/alerts_config72x72.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Alerts Config  <span class="dot" id="config_alerts_newstatus"></span></span>
+                            
+                        </a>
+                    </li>
+                    <li style="margin-left: -1px;">
+                        <a href="aws.html">
+                            <img src="../../files/sidebar-icons/cloud_asset_audit.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Cloud Asset Audit  <span class="dot" id="aws_newstatus"></span></span>
+                        </a>
+                    </li>
+                 
+                    <li>
+                        <a href="cloudapp.html">
+                            <img src="../../files/images/Icons png/Cloud-storage-configration-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Cloud App Config  <span class="dot" id="cloudapp_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cookie_mgmt.html">
+                            <img src="../../files/images/cookie_managment_25x25.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Cookie Management  <span class="dot" id="cookie_mgmt_newstatus"></span></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="user.html">
+                            <img src="../../files/images/Icons png/create-user-2.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>Create User  <span class="dot" id="user_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a href="threats.html">
+                            <img src="../../files/images/Icons png/cyber-threats-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Cyber Intelligence  <span class="dot" id="threats_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <li style="margin-left: -1px;">
+                        <a href="dsr_setting.html">
+                            <img src="../../files/sidebar-icons/DSR.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>DSR <span class="dot" id="dsr_setting_newstatus"></span></span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="partnerdetail.html">
+                            <img src="../../files/images/Icons png/Vendor-configs-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Data Partner Config  <span class="dot" id="partnerdetail_newstatus"></span></span>
+
+                        </a>
+                    </li> -->
+                    
+
+                    <li style="margin-left: -1px;">
+                        <a href="mdm.html">
+                            <img src="../../files/sidebar-icons/MDM.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>MDM  <span class="dot" id="mdm_newstatus"></span></span>
+                        </a>
+                    </li>
+
+                    <li style="margin-left: -1px;">
+                        <a href="mdm_profile.html">
+                            <img src="../../files/sidebar-icons/MDM.png"
+                                style="height: 25px;width: 25px;" />&nbsp;&nbsp;
+                            <span>MDM Profile  <span class="dot" id="mdm_profile_newstatus"></span></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="mailing_deny_list.html">
+                            <img src="../../files/images/Icons png/mailing-list-2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Mailing List  <span class="dot" id="mailing_deny_list_newstatus"></span></span>
+
+                        </a>
+                    </li>
+
+                   
+
+                    <li style="margin-left: 0px;">
+                        <a href="authentication.html" style="padding-left: 52px;">
+                            <img src="../../files/images/authhh.png" style="height: 24px;width: 22px;" />&nbsp;&nbsp;
+                            <span>Multi Factor Authentication  <span class="dot" id="authentication_newstatus"></span></span>
+                        </a>
+                    </li>
+                  
+                    <li>
+                        <a href="user-groups.html">
+                            <img src="../../files/sidebar-icons/manage_SSO_groups.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Manage SSO Groups  <span class="dot" id="sso_groups_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="workflow.html">
+                            <img src="../../files/images/manage.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Manage Workflows  <span class="dot" id="workflow_newstatus"></span></span>
+                        </a>
+                    </li>
+                   
+                    <li>
+                        <a href="contract_upload.html">
+                            <img src="../../files/images/regulatory_icons/compliance_partner1024x1024.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Partner contract  <span class="dot" id="contract_upload_newstatus"></span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="time_set.html">
+                            <img src="../../files/images/Icons png/Time-zone-configs 2.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Time Config <span class="dot" id="time_set_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="user_details.html">
+                            <img src="../../files/sidebar-icons/user_config.png"
+                                style="height: 25px;width: 25px; " />&nbsp;&nbsp;
+                            <span>Users Config  <span class="dot" id="user_details_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    
+                    
+
+                  
+
+                </ul>
+            </li>
+            <li id="Phishing_simulator">
+                <a href="/Phishing/phishing_home.html">
+                    <img src="../../files/images/Icons png/Phishing-1.png" style="height: 25px;width: 25px; " />
+                    <span>Phishing Simulator </span>
+
+                </a>
+            </li>
+
+
+            <li>
+                <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block" id="compli">
+                    <img src="../../files/images/Icons png/Compliance-1.png" style="height: 25px;width: 25px; " />
+                    <span>Regulatory Compliance </span>
+
+                </a>
+                <ul class="ml-menu compliUl">
+
+                    <li>
+                        <a href="ccpa_dashboard.html" id="ccpa">
+                            <img src="../../files/sidebar-icons/CCPA.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">CCPA  <span class="dot" id="ccpa_dashboard_newstatus"></span></span>
+
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="csrm_inventory.html" id="nist">
+                            <img src="../../files/images/regulatory_icons/csrm1024x1024.png"
+                                style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">C-SCRM  <span class="dot" id="csrm_inventory_newstatus"></span></span>
+                        </a>
+                    </li> -->
+                    <li>
+                        <a href="finra_dashboard.html" id="finra">
+                            <img src="../../files/sidebar-icons/FINRA.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">FINRA  <span class="dot" id="finra_dashboard_newstatus"></span></span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="gdpr_dashboard.html" id="gdpr">
+                            <img src="../../files/sidebar-icons/GDPR.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">GDPR  <span class="dot" id="gdpr_dashboard_newstatus"></span></span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="hippa_dashboard.html" id="hippa">
+                            <img src="../../files/sidebar-icons/HIPAA.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">HIPAA  <span class="dot" id="hippa_dashboard_newstatus"></span></span>
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="municipality_inventory.html" id="nist">
+                            <img src="../../files/images/Municipality_icon.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">Municipality  <span class="dot" id="municipality_inventory_newstatus"></span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nist_dashboard.html" id="nist">
+                            <img src="../../files/sidebar-icons/NIST.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">NIST <span class="dot" id="nist_dashboard_newstatus"></span></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="soc_inventory.html" id="nist">
+                            <img src="../../files/sidebar-icons/nist.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">SOC2 <span
+                                    class="dot" id="soc_inventory_newstatus"></span></span>
+                        </a>
+                    </li>
+                    <!-- <li>
+                        <a href="visualization.html" id="nist">
+                            <img src="../../files/images/csrm30x30.png" style="height: 30px;width: 30px; " />
+                            <span style="margin: 7px 12px 7px 6px;font-size: 14px;overflow: hidden;">Supply Chain Risk</span>
+                        </a>
+                    </li> -->
+                </ul>
+            </li>
+        </ul>
+        <ul class="dropdown-menu pull-right" style="display:none ">
+            <li><a href="profile-view.html">Profile<span class="dot" id="profile_view_newstatus"></span></a></li>
+            <li><a href="profile-view.html">Profile<span class="dot" id="set_module_newstatus"></span></a></li>
+            
+            <li><a href="feedback.html">Feedback<span class="dot" id="feedback_newstatus"></span></a></li>
+            <li><a href="feature.html">Feature Request<span class="dot" id="feature_newstatus"></span></a></li>
+            <li><a href="help.html">Help <span class="dot" id="help_newstatus"></span></a></li>
+            <li><a href="whats_new.html">What's New  <span class="dot" id="whats_new_newstatus"></span></a></li>
+    
+            <li onclick="signOut()"><a href="signin.html">Logout</a></li>
+    
+        </ul>
+    </div>
+   
+</body>
+<script src=".../../files/my-script/side.js"></script>
+<script>
+
+    var access_pages_cytex=[{"page":"index"},{"page":"network_traffic"},{"page":"blocked"},{"page":"dsr_setting"},{"page":"alerts"},{"page":"whats_new"},{"page":"set_module"},{"page":"cloud_work_load_audit"},{"page":"cookies_compliance"},{"page":"data_destinations"},{"page":"osint"},{"page":"pp"},{"page":"tc"},{"page":"mdm_detail"},{"page":"risk"},{"page":"pp-report"},{"page":"auth_apps"},{"page":"tc-report"},{"page":"config_alerts"},{"page":"threats"},{"page":"aws"},{"page":"cookie_mgmt"},{"page":"user"},{"page":"cloudapp"},{"page":"partnerdetail"},{"page":"incoming"},{"page":"mdm"},{"page":"mdm_profile"},{"page":"mailing_deny_list"},{"page":"authentication"},{"page":"user-groups"},{"page":"workflow"},{"page":"policy"},{"page":"contract_upload"},{"page":"time_set"},{"page":"user_details"},{"page":"ccpa_dashboard"},{"page":"finra_dashboard"},{"page":"gdpr_dashboard"},{"page":"hippa_dashboard"},{"page":"municipality_inventory"},{"page":"nist_dashboard"},{ "page": "soc_inventory" },{"page":"cloud_storage_review.html?name=Amazon%20S3"},{"page":"cloud_storage_review.html?name=Dropbox"},{"page":"cloud_storage_review.html?name=Google%20Drive"},{"page":"cloud_storage_review.html?name=Office%20365"},{"page":"cloud_storage_review.html?name=One%20Drive"},{"page":"cloud_storage_review.html?name=Slack"},
+    {"page":"supply_chain"},{"page":"csrm_dashboard"}
+]
+    if(localStorage.getItem("new_mod_v")){
+       removeDot()
+    }   
+       function  removeDot(){
+       var  getVisitedModules= JSON.parse(localStorage.getItem("new_mod_v"))
+
+   for(var i=0;  i < getVisitedModules.length; i++){
+
+       if(access_pages_cytex.filter(e=>e.page==getVisitedModules[i].page).length>0)
+       {
+        // console.log("getv",getVisitedModules[i].page)
+
+       var moduleUnique_id=getVisitedModules[i].page+"_newstatus"
+   document.getElementById(moduleUnique_id).style.display="none"
+   }
+}
+   }
+   </script>
+</html>
