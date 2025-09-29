@@ -514,6 +514,42 @@ function getOrdersTableData(skip, page) {
 
         hideDataTableLoader200("ordersDataTable");
 
+        // Dummy orders data
+        // const data = [
+        //   {
+        //     order_id: "ORD-1001",
+        //     municipality: "Lahore",
+        //     service: "Water Connection",
+        //     date: "2025-09-29",
+        //     payment: "PKR 5,000",
+        //     status: "Pending Kickoff"
+        //   },
+        //   {
+        //     order_id: "ORD-1002",
+        //     municipality: "Karachi",
+        //     service: "Electricity",
+        //     date: "2025-09-25",
+        //     payment: "PKR 3,200",
+        //     status: "Completed"
+        //   },
+        //   {
+        //     order_id: "ORD-1003",
+        //     municipality: "Islamabad",
+        //     service: "Gas Connection",
+        //     date: "2025-09-20",
+        //     payment: "PKR 7,800",
+        //     status: "In Progress"
+        //   },
+        //   {
+        //     order_id: "ORD-1004",
+        //     municipality: "Multan",
+        //     service: "Internet Setup",
+        //     date: "2025-09-15",
+        //     payment: "PKR 2,500",
+        //     status: "Cancelled"
+        //   }
+        // ];
+
         // Response data (IPs)
         response = data;
         ordersDataReceived = response;
@@ -1186,7 +1222,7 @@ function getMuncipilitiesData() {
 
         $("#showMuncipilatiyDetaislLoader").addClass("d-none");
         $("#showMuncipilatiyDetaislErrorTextDiv").addClass("d-none");
- $("#muncipalityInformationHeader").removeClass("d-none");
+        $("#muncipalityInformationHeader").removeClass("d-none");
         $("#showMuncipilatiyDetaislMainDiv")
           .html(renderMunicipalityCards(apiData))
           .removeClass("d-none");
@@ -1202,10 +1238,10 @@ function getMuncipilitiesData() {
           <p class="mb-0">We're glad to have you here. <span class='text-decoration-underline cursor-pointer text-primary' id='clickToOpenWizerd'>Click</span> here to add details.</p>
           `);
 
-        $("#ordersDataTableContainer > .card").addClass("disabled-div");
-        $("#ordersDataTableContainer")
-          .attr("title", "Municipality details are required.")
-          .css("cursor", "no-drop");
+        // $("#ordersDataTableContainer > .card").addClass("disabled-div");
+        // $("#ordersDataTableContainer")
+        //   .attr("title", "Municipality details are required.")
+        //   .css("cursor", "no-drop");
 
         let org_name = localStorage.getItem("_org_n");
         $("#municipalityWizerdFormName").val(org_name);

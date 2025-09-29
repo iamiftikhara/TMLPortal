@@ -2,7 +2,9 @@ const options = JSON.stringify({
   dom: 'Bfrtip',
   columnDefs: [
     {
-      targets: [0, 1],
+      // targets: [0, 1],
+      targets: [0, 5],
+      orderable: false,
       // orderable: true
     }
   ],
@@ -33,12 +35,13 @@ const dataSourceIPconfig = {
   // "columns": null,
   "columns": [
 
-    { "name": "Municipality", "id": "municipality", "columnNo": 1, "visible": true },
-    { "name": "Service", "id": "service", "columnNo": 2, "visible": true },
-    { "name": "Date", "id": "date", "columnNo": 3, "visible": true },
-    { "name": "Payment", "id": "payment", "columnNo": 4, "visible": true },
-    { "name": "Status", "id": "status", "columnNo": 5, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 6, "visible": true }
+    { "name": "selectAllServicesList", "id": "selectAllServicesList", "columnNo": 1, "visible": true },
+    { "name": "Municipality", "id": "municipality", "columnNo": 2, "visible": true },
+    { "name": "Service", "id": "service", "columnNo": 3, "visible": true },
+    { "name": "Date", "id": "date", "columnNo": 4, "visible": true },
+    { "name": "Payment", "id": "payment", "columnNo": 5, "visible": true },
+    { "name": "Status", "id": "status", "columnNo": 6, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 7, "visible": true }
 
   ],
   //  "searchFields": null,
@@ -76,7 +79,7 @@ const dataSourceIPconfig = {
       "label": "Order ID",
       "id": "order_id",
       "placeholder": "Enter Order ID",
-      "columnNo": 0,
+      "columnNo": 1,
       "hidden": false // This field is shown
     },
     {
@@ -84,7 +87,7 @@ const dataSourceIPconfig = {
       "label": "Municipality",
       "id": "municipality",
       "placeholder": "Enter Municipality",
-      "columnNo": 1,
+      "columnNo": 2,
       "hidden": false // This field is shown
     },
     {
@@ -92,7 +95,7 @@ const dataSourceIPconfig = {
       "label": "Service",
       "id": "service",
       "placeholder": "Enter Service",
-      "columnNo": 2,
+      "columnNo": 3,
       "hidden": false // This field is shown
     },
     {
@@ -116,6 +119,7 @@ const dataSourceIPconfig = {
 
   ],
   "tableHeader": [
+    { "name": `<input type="checkbox" name="select-all-services" id="selectAllServicesList"></input>`, "widthClass": "w-5" },
     { "name": "Order ID", "widthClass": "w-5" },
     { "name": "Municipality", "widthClass": "w-5" },
     { "name": "Service", "widthClass": "w-5" },
