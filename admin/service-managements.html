@@ -38,7 +38,7 @@
   <script src="/files/https-files/crypto-js.js"></script>
 
   <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
-  
+
 
 
   <style data-hs-appearance-onload-styles>
@@ -239,9 +239,9 @@
         <div class="card-body">
 
 
-       <!-- Dropzone -->
-<!-- Dropzone -->
-<!-- <div id="attachFilesNewProjectLabel" class="js-dropzone dz-dropzone dz-dropzone-card">
+          <!-- Dropzone -->
+          <!-- Dropzone -->
+          <!-- <div id="attachFilesNewProjectLabel" class="js-dropzone dz-dropzone dz-dropzone-card">
   <div class="dz-message">
     <h5>Drag and drop your file here</h5>
     <p class="mb-2">or</p>
@@ -257,10 +257,10 @@
                 <div class="col-md">
                   <div class="d-flex justify-content-between align-items-center">
                     <h4 class="card-header-title">Add/Update Services</h4>
-                                <button type="button" class="btn btn-outline-primary read_only" data-bs-toggle="modal"
-                                    data-bs-target="#addFileModal" >
-                                    Add File
-                                </button>
+                    <button type="button" class="btn btn-outline-primary read_only" data-bs-toggle="modal"
+                      data-bs-target="#addFileModal">
+                      Add File
+                    </button>
 
                   </div>
                 </div>
@@ -387,6 +387,13 @@
       </div>
       <!-- ***************************** End Service Management Upload Files *********************************** -->
 
+
+      <!-- ***************************** Start create bundle *********************************** -->
+
+      <div id="createBundleDataTableContainer" class="mt-4"></div>
+
+      <!-- ***************************** End create bundle *********************************** -->
+
       <!-- ***************************** Start Service Management Modal *********************************** -->
       <!-- Modal -->
       <div class="modal fade" id="serviceManagementDetailsModal" tabindex="-1" role="dialog"
@@ -462,54 +469,97 @@
       <!-- End Modal -->
 
       <!-- ***************************** End Service Management Modal *********************************** -->
-<!-- Modal -->
-<div class="modal fade" id="addFileModal" tabindex="-1" aria-labelledby="addFileModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addFileModalLabel">Add File</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="addFileForm">
-          <div class="mb-3">
-            <label for="fileTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="fileTitle" required>
-          </div>
-          <div class="mb-3">
-            <label for="fileDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="fileDescription"></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="fileType" class="form-label">Type</label>
-            <div class="tom-select-custom" style="cursor: pointer;">
-                 <select class="form-select" id="fileType" required>
-              <option value="file">File</option>
-              <option value="url">URL</option>
-              <option value="text">Text</option>
-            </select>
+      <!-- Modal -->
+      <div class="modal fade" id="addFileModal" tabindex="-1" aria-labelledby="addFileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addFileModalLabel">Add File</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-         
-          </div>
-          <div class="mb-3" id="sourceWrapper">
-            <label for="fileSource" class="form-label">Source</label>
-            <input type="text" class="form-control" id="fileSource">
-          </div>
-          <div class="mb-3" id="fileUploadWrapper">
-            <label for="fileInput" class="form-label">Upload File</label>
-            <input type="file" class="form-control" id="fileInput">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="submitFileBtn">Submit</button>
-      </div>
-    </div>
-  </div>
-</div>
+            <div class="modal-body">
+              <form id="addFileForm">
+                <div class="mb-3">
+                  <label for="fileTitle" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="fileTitle" required>
+                </div>
+                <div class="mb-3">
+                  <label for="fileDescription" class="form-label">Description</label>
+                  <textarea class="form-control" id="fileDescription"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="fileType" class="form-label">Type</label>
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" id="fileType" required>
+                      <option value="file">File</option>
+                      <option value="url">URL</option>
+                      <option value="text">Text</option>
+                    </select>
+                  </div>
 
+                </div>
+                <div class="mb-3" id="sourceWrapper">
+                  <label for="fileSource" class="form-label">Source</label>
+                  <input type="text" class="form-control" id="fileSource">
+                </div>
+                <div class="mb-3" id="fileUploadWrapper">
+                  <label for="fileInput" class="form-label">Upload File</label>
+                  <input type="file" class="form-control" id="fileInput">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="submitFileBtn">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- End Content -->
+
+      <!-- ***************************** Start Create bundle Modal **********************************-->
+
+      <div class="modal fade" id="creatBundleModal" tabindex="-1" aria-labelledby="creatBundleModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addFileModalLabel">Create Bundle</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="enrollServicesForm">
+                <div class="mb-3">
+                  <label for="fileTitle" class="form-label">Title <span class="text-danger">*</span></label><i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                      data-bs-placement="right" data-bs-html="true" title="
+                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
+                        <ul>
+                        <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
+                        <li>Maximum length should be 50 characters.</li>
+                        <li>Minimum length should be 3 characters.</li>
+                        <li>Only digits are not allowed.</li>
+                        <li>Whitespaces are allowed.</li>
+                        </ul>"></i>
+                  <input type="text" class="form-control" id="enrollServicesFormTitle" name="enrollServicesFormTitle" placeholder="Enter title" required>
+                </div>
+                <div class="mb-3">
+                  <label for="fileDescription" class="form-label">Description</label><span class="text-danger">*</span>
+                  <textarea class="form-control" placeholder="Enter description" id="enrollServicesFormDescription" name="enrollServicesFormDescription"></textarea>
+                </div>
+                <div id="enroleServicesForCreateBundleTableContainer" class="mt-4"></div>
+                
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="enrollServicesSubmitBtn">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!-- ***************************** End Create bundle Modal ********************************** -->
+
+
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
@@ -565,6 +615,9 @@
   <!-- page js -->
   <script src="files/my-scripts/service-management.js"></script>
   <script src="files/table-config/index-table-confg.js"></script>
+  <script src="files/table-config/services-managment-table-confg.js"></script>
+
+
 
 
   <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>

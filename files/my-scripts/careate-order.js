@@ -51,11 +51,11 @@ $(document).ready(function () {
       "numberOfITEmployeesSelect",
       false
     );
-  muncipalityWizerdFormPopulationSizeInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "muncipalityWizerdFormPopulationSize",
-      false
-    );
+  // muncipalityWizerdFormPopulationSizeInit =
+  //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  //     "muncipalityWizerdFormPopulationSize",
+  //     false
+  //   );
   muncipalityWizerdFormKeyPrioritiesUpTo3Init =
     initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
       "muncipalityWizerdFormKeyPrioritiesUpTo3",
@@ -245,8 +245,8 @@ $(document).ready(function () {
         dateTimeFlage = false;
       }
     },
-    onReady: function (selectedDates, dateStr, instance) {},
-    onChange: function (selectedDates, dateStr, instance) {},
+    onReady: function (selectedDates, dateStr, instance) { },
+    onChange: function (selectedDates, dateStr, instance) { },
     disable: [
       function (date) {
         // return true to disable
@@ -276,8 +276,8 @@ $(document).ready(function () {
         dateTimeEndFlage = false;
       }
     },
-    onReady: function (selectedDates, dateStr, instance) {},
-    onChange: function (selectedDates, dateStr, instance) {},
+    onReady: function (selectedDates, dateStr, instance) { },
+    onChange: function (selectedDates, dateStr, instance) { },
     disable: [
       function (date) {
         // return true to disable
@@ -324,8 +324,8 @@ function generateSpan(data, key, customClass = "", style = "") {
     // If the key is a simple value
     const displayValue =
       data[key] == "" ||
-      data[key] === null ||
-      (data[key] && data[key].length <= 0)
+        data[key] === null ||
+        (data[key] && data[key].length <= 0)
         ? "--"
         : `${data[key]}`;
     const title = displayValue;
@@ -335,129 +335,216 @@ function generateSpan(data, key, customClass = "", style = "") {
   return spanContent;
 }
 
-// Main API Call function for datatable
-// function getMuncipilityDetails() {
 
-//   let data = [
-//     {
-//       order_id: 'ORD12345',
-//       municipality: 'Springfield',
-//       service: 'Cloud Hosting',
-//       date: '2024-01-15',
-//       payment: 'Paid',
-//       status: 'In Provisioning',
-//     },
-//     {
-//       order_id: 'ORDdf5',
-//       municipality: 'Springfield',
-//       service: 'Cloud Hosting',
-//       date: '2024-01-13',
-//       payment: 'Pending',
-//       status: 'Pending Kickoff',
-//     },
+const homeBtnCard = document.getElementById("wizardHomeBtn");
 
-//   ]
 
-//   let requirePayloadData
-//   requirePayloadData = JSON.stringify({
-//     auth_token: authToken,
-//   })
+// Show card on Home
+homeBtnCard.addEventListener("click", () => {
+  window.location.href = "index.html";
+});
 
-//   // Ajax call
-//   $.ajax({
-//     url: MAIN_API_PATH + getOrdersAPI,
-//     method: POST,
-//     contentType: Content_Type,
-//     dataType: 'json',
-//     data: requirePayloadData,
-//     statusCode: {
-//       200: function (data) {
-//         // Hide page laoder Spiner
-//         $('#cover-spin').hide()
 
-//       },
-//       204: function () {
-//         $('#cover-spin').hide()
-//         $('#showMuncipilatiyDetaislLoader, #showMuncipilatiyDetaislMainDiv').addClass('d-none')
-//         $('#showMuncipilatiyDetaislErrorTextDiv').removeClass('d-none')
-//         $('#showMuncipilatiyDetaislErrorText').html(`
-//           <h1 class="mb-1">Welcome!</h1>
-//           <p class="mb-0">We're glad to have you here. <span class='text-decoration-underline cursor-pointer text-primary' id='clickToOpenWizerd'>Click</span> here to add details.</p>
-//           `)
+// ********************* start bundle selection *********************************
 
-//         $('#ordersDataTableContainer > .card').addClass('disabled-div')
-//         $('#ordersDataTableContainer')
-//           .attr('title', 'Municipality details are required.')
-//           .css('cursor', 'no-drop');
+// Set policy value recived front End (fucntion called from frontEnd)
+function setPolicyValue(val, firstSet) {
+  // when custome Policy is called to be activated
+  if (val === 4) {
+    if (firstSet !== true) {
+      swal(
+        {
+          title: 'Important ',
+          text: 'This policy will block all domains on your network except domains you have added in permit list.',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel'
+        }, function (isConfirm) {
+          if (isConfirm) {
+            switchAnchorState('#DenyListAncherTag', '#PermitListAncherTag', 'Deny list not allowed on this policy.');
 
-//         let org_name = localStorage.getItem('_org_n')
-//         $('#municipalityWizerdFormName').val(org_name)
-//         $('#municipalityWizerdFormName').attr('disabled', true).css({ 'cursor': 'no-drop' })
+            // To add check
+            $('#restrictivePolicyCheck, #permissivePolicyCheck, #strictPolicyCheck').addClass('d-none')
+            $('#customePolicyCheck').removeClass('d-none')
 
-//       }
-//     },
-//     error: function (xhr, status, error) {
-//       $('#cover-spin').hide()
 
-//       if (xhr.status === 400) {
-//         $('#showMuncipilatiyDetaislErrorText').text(invalidRequest400Error)
-//       } else if (xhr.status === 401) {
-//         $('#showMuncipilatiyDetaislErrorText').text(unauthorizedRequest401Error)
-//       } else if (xhr.status === 404) {
-//         // $('#cover-spin').hide(0);
-//         $('#showMuncipilatiyDetaislErrorText').text(notFound404Error)
-//       } else if (xhr.status === 503) {
-//         // $('#cover-spin').hide(0);
-//         $('#showMuncipilatiyDetaislErrorText').text(serverError503Error)
-//       } else if (xhr.status === 408) {
-//         swal(
-//           {
-//             title: ' ',
-//             text: sessionExpired408Error,
-//             type: 'info',
-//             showCancelButton: false,
-//             confirmButtonText: 'Logout'
-//           },
-//           function (isConfirm) {
-//             if (isConfirm) {
-//               localStorage.clear()
-//               window.location.href = redirectToSignInPage408
-//             }
-//           }
-//         )
-//       } else if (xhr.status === 410) {
-//         $.ajax({
-//           url: MAIN_API_PATH + getGmtAPI,
-//           method: POST,
-//           contentType: Content_Type,
-//           dataType: 'json',
-//           success: function (data, textStatus, xhr) {
-//             const encrypt = new JSEncrypt()
-//             encrypt.setPublicKey(sitePublicKey)
-//             const currentDateString = String(data.unixtime)
-//             securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
-//             SecurityKeyTime = false
-//             getMuncipilityDetails()
-//           },
-//           error: function (xhr, status, error) {
-//             $.getJSON(worldTimeAPI, function (data) {
-//               const encrypt = new JSEncrypt()
-//               encrypt.setPublicKey(sitePublicKey)
-//               const currentDateString = String(data.unixtime)
-//               securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
-//               SecurityKeyTime = false
-//               getMuncipilityDetails()
-//             })
-//           }
-//         })
-//       } else {
-//         // $('#cover-spin').hide(0);
-//         $('#showMuncipilatiyDetaislErrorText').text(serverError503Error)
-//       }
-//     }
-//   })
+            // Resize the box
+            $('#permissivePolicyCard, #restrictivePolicyCard, #strictPolicyCard').css({
+              transform: 'scale(0.9)',
+              'box-shadow': 'none',
+              border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
+            })
+            $('#cutomePolicyCard').css({
+              transform: 'scale(1)',
+              'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
+              border: '1px solid rgb(192, 55, 9)'
+            })
+            setPolicyRecall(val)
+          }
+        }
+      )
+    } else {
+      switchAnchorState('#DenyListAncherTag', '#PermitListAncherTag', 'Deny list not allowed on this policy.');
 
-// }
+      // To add check
+      $('#restrictivePolicyCheck, #permissivePolicyCheck, #strictPolicyCheck').addClass('d-none')
+      $('#customePolicyCheck').removeClass('d-none')
+
+
+      // Resize the box
+      $('#permissivePolicyCard, #restrictivePolicyCard, #strictPolicyCard').css({
+        transform: 'scale(0.9)',
+        'box-shadow': 'none',
+        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
+      })
+      $('#cutomePolicyCard').css({
+        transform: 'scale(1)',
+        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
+        border: '1px solid rgb(192, 55, 9)'
+      })
+      setPolicyRecall(val)
+    }
+
+  } else {
+
+    // when permissive Policy is called to be activated
+    if (val === 1) {
+      switchAnchorState('#PermitListAncherTag', '#DenyListAncherTag', 'Permissive list not allowed on this policy.');
+
+
+      // To add check
+      $('#customePolicyCheck, #strictPolicyCheck, #restrictivePolicyCheck').addClass('d-none')
+      $('#permissivePolicyCheck').removeClass('d-none')
+
+      // Resize the box
+      $('#restrictivePolicyCard, #cutomePolicyCard, #strictPolicyCard').css({
+        transform: 'scale(0.9)',
+        'box-shadow': 'none',
+        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
+      })
+      $('#permissivePolicyCard').css({
+        transform: 'scale(1)',
+        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
+        border: '1px solid rgb(192, 55, 9)'
+      })
+      // function to set policy on backend
+      setPolicyRecall(val)
+    }
+    // when strict Policy is called to be activated
+    else if (val === 2) {
+      switchAnchorState('#PermitListAncherTag', '#DenyListAncherTag', 'Permissive list not allowed on this policy.');
+
+      // To add check
+      $('#customePolicyCheck, #permissivePolicyCheck, #restrictivePolicyCheck').addClass('d-none')
+      $('#strictPolicyCheck').removeClass('d-none')
+
+      // Resize the box
+      $('#permissivePolicyCard, #restrictivePolicyCard, #cutomePolicyCard').css({
+        transform: 'scale(0.9)',
+        'box-shadow': 'none',
+        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
+      })
+      $('#strictPolicyCard').css({
+        transform: 'scale(1)',
+        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
+        border: '1px solid rgb(192, 55, 9)'
+      })
+      // function to set policy on backend
+      setPolicyRecall(val)
+    }
+    // when Restrictive Policy is called to be activated
+    else if (val === 3) {
+      switchAnchorState('#PermitListAncherTag', '#DenyListAncherTag', 'Permissive list not allowed on this policy.');
+
+      // To add check
+      $('#customePolicyCheck, #permissivePolicyCheck, #strictPolicyCheck').addClass('d-none')
+      $('#restrictivePolicyCheck').removeClass('d-none')
+
+      // Resize the box
+      $('#permissivePolicyCard, #strictPolicyCard, #cutomePolicyCard').css({
+        transform: 'scale(0.9)',
+        'box-shadow': 'none',
+        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
+      })
+      $('#restrictivePolicyCard').css({
+        transform: 'scale(1)',
+        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
+        border: '1px solid rgb(192, 55, 9)'
+      })
+      // function to set policy on backend
+      setPolicyRecall(val)
+    }
+  }
+}
+
+
+function setPolicyRecall(val) {
+  selectedPolicyID = val
+  enableElements('.disabled-from-div', '.disabled-from-div .nav-item');
+}
+
+
+function switchAnchorState(disableSelector, enableSelector, message) {
+  const $disableEl = $(disableSelector);
+  const $enableEl = $(enableSelector);
+
+  // Disable the first anchor
+  $disableEl.removeClass('active')
+    .css({ cursor: 'not-allowed', pointerEvents: 'none' })
+    .parent().addClass('cursor-no-drop')
+    .attr('title', message || 'This action is not allowed.');
+
+  // Enable/activate the second anchor
+  $enableEl.addClass('active')
+    .css({ cursor: 'pointer', pointerEvents: '' })
+    .parent().removeClass('cursor-no-drop')
+    .removeAttr('title');
+
+  if (disableSelector === '#DenyListAncherTag') {
+    enteredDomainsListPermitORDeny = 'Deny';
+  } else {
+    enteredDomainsListPermitORDeny = 'Permit';
+  }
+
+
+}
+// switchAnchorState('#DenyListAncherTag', '#DenyListAncherTag', 'Permissive list not allowed on this policy.');
+
+
+function enableElements(selector1, selector2) {
+  // Enable form container
+  const $el1 = $(selector1);
+  $el1.css({
+    pointerEvents: '',
+    cursor: '',
+    backgroundColor: ''
+  });
+  $el1.find(':input').prop('disabled', false);
+  $el1.removeAttr('title');
+
+  // Enable navigation or other items
+  const $el2 = $(selector2);
+  $el2.css({
+    pointerEvents: '',
+    cursor: ''
+  });
+
+  $('#DomainListFileUpload').css({
+    cursor: 'pointer'
+  });
+
+  $('#policyDomainListCategorySaveBtn').attr('disabled', true)
+  $('#policyDomainListCategorySaveBtn').parent().css('cursor', 'no-drop')
+
+  disabledCheck = true;
+}
+// Later, enable them again
+// enableElements('.IpInputForm', '.IpInputForm .nav-item');
+
+
+// ********************* end bundle selection *********************************
+
 
 function searchObjectCreation(search) {
   searchOject = search;
@@ -829,9 +916,9 @@ function updateFiltersSelectDataOptions() {
   NumberOfITEmployeesSelectInit.setValue("1-50");
 
   // wizerd form population data
-  muncipalityWizerdFormPopulationSizeInit.addOption(
-    muncipalityWizerdFormPopulationSizeData
-  );
+  // muncipalityWizerdFormPopulationSizeInit.addOption(
+  //   muncipalityWizerdFormPopulationSizeData
+  // );
   // muncipalityWizerdFormPopulationSizeInit.setValue('small')
 
   muncipalityWizerdFormKeyPrioritiesUpTo3Init.addOption(
@@ -872,6 +959,8 @@ function updateFiltersSelectDataOptions() {
   // muncipalityWizerdFormNumberOfConnectedSitesInit.addOption(muncipalityWizerdFormNumberOfConnectedSitesData);
   // muncipalityWizerdFormNumberOfConnectedSitesInit.setValue('1')
 }
+
+
 
 // Progress bar Control
 function addNumberingTOtheWizerd() {
@@ -960,10 +1049,12 @@ function setMuncipilitiesData() {
   const website_url = $("#muncipalityWizerdFormCountryWebsiteURL").val();
   const key_priorities = $("#muncipalityWizerdFormKeyPrioritiesUpTo3").val();
   // Match ids with titles
- key_priorities = selectedKeys.map(id => {
-  const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(item => item.id === id);
-  return found ? found.title : id;
-});
+  key_priorities = selectedKeys.map((id) => {
+    const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(
+      (item) => item.id === id
+    );
+    return found ? found.title : id;
+  });
   const departments = $(
     "#muncipalityWizerdFormDepartmentsUnderMunicipality"
   ).val();
@@ -1163,540 +1254,6 @@ function setMuncipilitiesData() {
 
 // ********************** end set municpilities detsils *********************************
 
-// ********************** start get municpilities detsils *********************************
-
-getMuncipilitiesData();
-function getMuncipilitiesData() {
-  const apiBody = JSON.stringify({
-    auth_token: authToken,
-  });
-
-  // return 0
-  $.ajax({
-    url: MAIN_API_PATH + getMunicipalityWizardSetAPI,
-    method: POST,
-    contentType: Content_Type,
-    dataType: "json",
-    data: apiBody,
-    statusCode: {
-      200: function (data) {
-        $("#cover-spin").hide(0);
-        //  const data = response.message;
-        const apiData = data.message;
-
-        $("#showMuncipilatiyDetaislLoader").addClass("d-none");
-        $("#showMuncipilatiyDetaislErrorTextDiv").addClass("d-none");
- $("#muncipalityInformationHeader").removeClass("d-none");
-        $("#showMuncipilatiyDetaislMainDiv")
-          .html(renderMunicipalityCards(apiData))
-          .removeClass("d-none");
-      },
-      204: function () {
-        $("#cover-spin").hide();
-        $(
-          "#showMuncipilatiyDetaislLoader, #showMuncipilatiyDetaislMainDiv"
-        ).addClass("d-none");
-        $("#showMuncipilatiyDetaislErrorTextDiv").removeClass("d-none");
-        $("#showMuncipilatiyDetaislErrorText").html(`
-          <h1 class="mb-1">Welcome!</h1>
-          <p class="mb-0">We're glad to have you here. <span class='text-decoration-underline cursor-pointer text-primary' id='clickToOpenWizerd'>Click</span> here to add details.</p>
-          `);
-
-        $("#ordersDataTableContainer > .card").addClass("disabled-div");
-        $("#ordersDataTableContainer")
-          .attr("title", "Municipality details are required.")
-          .css("cursor", "no-drop");
-
-        let org_name = localStorage.getItem("_org_n");
-        $("#municipalityWizerdFormName").val(org_name);
-        $("#municipalityWizerdFormName")
-          .attr("disabled", true)
-          .css({ cursor: "no-drop" });
-      },
-    },
-    error: function (xhr, status, error) {
-      $("#cover-spin").hide();
-      if (xhr.status === 400) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          invalidRequest400Error
-        );
-      } else if (xhr.status === 401) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          unauthorizedRequest401Error
-        );
-      } else if (xhr.status === 404) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          notFound404Error
-        );
-      } else if (xhr.status === 409) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          alreadyExist409Error
-        );
-      } else if (xhr.status === 503) {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
-      } else if (xhr.status === 408) {
-        swal(
-          {
-            title: " ",
-            text: sessionExpired408Error,
-            type: "info",
-            showCancelButton: false,
-            confirmButtonText: "Logout",
-          },
-          function (isConfirm) {
-            if (isConfirm) {
-              localStorage.clear();
-              window.location.href = redirectToSignInPage408;
-            }
-          }
-        );
-      } else if (xhr.status === 410) {
-        $("#cover-spin").hide();
-
-        $.ajax({
-          url: MAIN_API_PATH + getGmtAPI,
-          method: POST,
-          contentType: Content_Type,
-          dataType: "json",
-          success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt();
-            encrypt.setPublicKey(sitePublicKey);
-            const dateString = String(pageName + data.unixtime);
-            securityKeyEncrypted = encrypt.encrypt(dateString);
-            SecurityKeyTime = false;
-            setMuncipilitiesData();
-          },
-          error: function (xhr, status, error) {
-            $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt();
-              encrypt.setPublicKey(sitePublicKey);
-              const dateString = String(pageName + data.unixtime);
-              securityKeyEncrypted = encrypt.encrypt(dateString);
-              SecurityKeyTime = false;
-              setMuncipilitiesData();
-            });
-          },
-        });
-      } else {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
-      }
-    },
-  });
-}
-
-function renderMunicipalityCards(data) {
-  const renderList = (arr) => {
-    if (!arr || arr.length === 0)
-      return `<span class="text-muted">No data</span>`;
-    return (
-      `<ul class="mb-0 ps-3">` +
-      arr.map((item) => `<li>${item}</li>`).join("") +
-      `</ul>`
-    );
-  };
-
-  return `
-  
-  <div class="row g-4">
-  
-    <!-- Left side (basic + contact) -->
-    <div class="col-lg-8">
-      <div class="row g-4">
-
-      <!-- Basic Info -->
-<div class="col-md-6">
-  <div class="card shadow-sm h-100 border-0">
-    <div class="card-header bg-primary text-white fw-bold">
-      <i class="bi-buildings me-2"></i>  Basic Information
-    </div>
-    <div class="card-body">
-      <!-- Municipality -->
-      <p class="text-muted mb-1">
-        <i class="bi bi-building me-1"></i> Municipality
-      </p>
-      <p class="fw-bold ms-4">${data.municipality_name ?? "--"}</p>
-
-      <!-- Population -->
-      <p class="text-muted mb-1">
-        <i class="bi bi-people me-1"></i> Population Size
-      </p>
-      <p class="fw-bold ms-4">${data.population_size ?? "--"}</p>
-
-      <!-- County + Website -->
-      <p class="text-muted mb-1">
-        <i class="bi bi-geo-alt me-1"></i> County
-      </p>
-      <p class="fw-bold ms-4">
-        ${
-          data.website_url
-            ? `<a href="${
-                data.website_url
-              }" target="_blank" class="text-decoration-none">${
-                data.county ?? "--"
-              }</a>`
-            : data.county ?? "--"
-        }
-      </p>
-    </div>
-  </div>
-</div>
-
-
-     <!-- Primary Contact -->
-<div class="col-md-6">
-  <div class="card shadow-sm h-100 border-0">
-    <div class="card-header bg-success text-white fw-bold">
-      <i class="bi bi-person-lines-fill me-2"></i> Primary Contact
-    </div>
-    <div class="card-body">
-      <!-- Name -->
-      <p class="text-muted mb-1">
-        <i class="bi bi-person me-1"></i> Name
-      </p>
-      <p class="fw-bold ms-4">${data.primary_contact_name ?? "--"}</p>
-
-      <!-- Email -->
-      <p class="text-muted mb-1">
-        <i class="bi bi-envelope me-1"></i> Email
-      </p>
-      <p class="fw-bold ms-4">${data.primary_contact_email ?? "--"}</p>
-
-      <!-- Phone -->
-      <p class="text-muted mb-1">
-        <i class="bi bi-telephone me-1"></i> Phone
-      </p>
-      <p class="fw-bold ms-4">${data.primary_contact_phone ?? "--"}</p>
-    </div>
-  </div>
-</div>
-
-          <!-- Key Priorities -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm border-0 h-100">
-            <div class="card-header bg-warning fw-bold">
-              <i class="bi bi-flag me-2"></i> Key Priorities
-            </div>
-            <div class="card-body">
-              ${renderList(data.key_priorities)}
-            </div>
-          </div>
-        </div>
-
-        <!-- Departments -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm border-0 h-100">
-            <div class="card-header bg-light fw-bold">
-              <i class="bi bi-diagram-3 me-2"></i> Departments
-            </div>
-            <div class="card-body">
-              ${renderList(data.departments)}
-            </div>
-          </div>
-        </div>
-
-        <!-- Cloud Applications -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm border-0 h-100">
-            <div class="card-header bg-secondary text-white fw-bold">
-              <i class="bi bi-cloud-check me-2"></i> Cloud Apps
-            </div>
-            <div class="card-body">
-              ${renderList(data.cloud_apps_in_use)}
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Right side (stats) -->
-    <div class="col-lg-4">
-    <div class="row g-3">
-
-  <!-- Total Employees -->
-  <div class="col-6 col-md-6">
-    <div class="card shadow-sm border-0 h-100">
-      <div class="card-body text-center">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-people fs-3 text-primary me-2"></i>
-          <span class="text-muted small" style="font-size:14px">Total Employees</span>
-        </div>
-        <h3 class="fw-bold" style="font-size:30px;">
-          ${data.total_employees ?? "--"}
-        </h3>
-      </div>
-    </div>
-  </div>
-
-  <!-- IT Employees -->
-  <div class="col-6 col-md-6">
-    <div class="card shadow-sm border-0 h-100">
-      <div class="card-body text-center">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-laptop fs-3 text-success me-2"></i>
-          <span class="text-muted small" style="font-size:14px">IT Employees</span>
-        </div>
-        <h3 class="fw-bold" style="font-size:30px;">
-          ${data.it_employees ?? "--"}
-        </h3>
-      </div>
-    </div>
-  </div>
-
-  <!-- End-user Devices -->
-  <div class="col-6 col-md-6">
-    <div class="card shadow-sm border-0 h-100">
-      <div class="card-body text-center">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-tablet fs-3 text-warning me-2"></i>
-          <span class="text-muted small" style="font-size:14px">End-user Devices</span>
-        </div>
-        <h3 class="fw-bold" style="font-size:30px;">
-          ${data.end_user_devices ?? "--"}
-        </h3>
-      </div>
-    </div>
-  </div>
-   
-
-  <!-- Servers -->
-  <div class="col-6 col-md-6">
-    <div class="card shadow-sm border-0 h-100">
-      <div class="card-body text-center">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-server fs-3 text-danger me-2"></i>
-          <span class="text-muted small" style="font-size:14px">Servers</span>
-        </div>
-        <h3 class="fw-bold" style="font-size:30px;">
-          ${data.servers ?? "--"}
-        </h3>
-      </div>
-    </div>
-  </div>
-
-  <!-- Specialized Devices -->
-  <div class="col-6 col-md-6">
-    <div class="card shadow-sm border-0 h-100">
-      <div class="card-body text-center">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-phone-flip fs-3 text-info me-2"></i>
-          <span class="text-muted small" style="font-size:14px">Specialized Devices</span>
-        </div>
-        <h3 class="fw-bold" style="font-size:30px;">
-          ${data.specialized_devices ?? "--"}
-        </h3>
-      </div>
-    </div>
-  </div>
-
-  <!-- Connected Sites -->
-  <div class="col-6 col-md-6">
-    <div class="card shadow-sm border-0 h-100">
-      <div class="card-body text-center">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-building fs-3 text-secondary me-2"></i>
-          <span class="text-muted small" style="font-size:14px">Connected Sites</span>
-        </div>
-        <h3 class="fw-bold" style="font-size:30px;">
-          ${data.no_of_connecetd_sites ?? "--"}
-        </h3>
-      </div>
-    </div>
-  </div>
-
-</div>
- <!-- End-user Network -->
-  <div class="col-12 col-md-12 mt-3">
-    <div class="card shadow-sm border-0 h-100">
-      <div class="card-body text-center">
-        <div class="d-flex align-items-center mb-2">
-          <i class="bi bi-router  fs-3 text-warning me-2"></i>
-          <span class="text-muted small" style="font-size:14px">Network</span>
-        </div>
-        <h3 class="fw-bold" style="font-size:30px;">
-        ${data.network_backup 
-          ? data.network_backup.charAt(0).toUpperCase() + data.network_backup.slice(1).toLowerCase() 
-          : "--"}
-      </h3>
-      </div>
-    </div>
-  </div>
-
-    </div>
-
-    <!-- Bottom row for large lists -->
-    <div class="col-12">
-      <div class="row g-4">
-
-      
-
-    
-
-      </div>
-    </div>
-
-  </div>`;
-}
-
-// ********************** end get municpilities detsils *********************************
-// ********************** start EDIT municpilities detsils *********************************
-const editBtnCard = document.getElementById("editWizardBtn");
-const homeBtnCard = document.getElementById("wizardHomeBtn");
-const wizardDiv = document.getElementById("mainContentInnerWizerdFormToShow");
-const cardDiv = document.getElementById("showMuncipilatiyDetaislMainDiv").parentElement;
-
-// Show wizard on edit
-editBtnCard.addEventListener("click", () => {
-  cardDiv.classList.add("d-none");
-  wizardDiv.classList.remove("d-none");
-   $("#muncipalityInformationHeader").addClass("d-none");
-    // Fetch the data
-  getMuncipilitiesDataForWizard();
-});
-
-// Show card on Home
-homeBtnCard.addEventListener("click", () => {
-  wizardDiv.classList.add("d-none");
-  cardDiv.classList.remove("d-none");
-    $("#muncipalityInformationHeader").removeClass("d-none");
-});
-// ================= START: Fetch & Populate Municipality Wizard =================
-function getMuncipilitiesDataForWizard() {
-  const apiBody = JSON.stringify({
-    auth_token: authToken,
-  });
-
-  $.ajax({
-    url: MAIN_API_PATH + getMunicipalityWizardSetAPI,
-    method: "POST",
-    contentType: "application/json",
-    dataType: "json",
-    data: apiBody,
-    statusCode: {
-      200: function (response) {
-        const apiData = response.message;
-
-        // ----------------- Populate Basic Info -----------------
-        $("#municipalityWizerdFormName").val(apiData.municipality_name || "");
-        $("#municipalityHelpName").text("Enter the official name of the municipality");
-
-        $("#muncipalityWizerdFormPopulationSize").val(apiData.population_size || "");
-        $("#municipalityHelpPopulation").text("Enter the total population size");
-
-        $("#municipalityWizerdFormAssociatedCounty").val(apiData.county || "");
-        $("#municipalityHelpCounty").text("Select the county this municipality belongs to");
-
-        $("#muncipalityWizerdFormCountryWebsiteURL").val(apiData.website_url || "");
-        $("#municipalityHelpWebsite").text("Provide the official website URL");
-
-        // ----------------- Populate Contact Info -----------------
-        $("#municipalityWizerdFormContactName").val(apiData.primary_contact_name || "");
-        $("#municipalityHelpContactName").text("Enter the name of the primary contact");
-
-        $("#muncipalityWizerdFormEmail").val(apiData.primary_contact_email || "");
-        $("#municipalityHelpEmail").text("Enter the contact email address");
-
-        $("#muncipalityWizerdFormPhone").val(apiData.primary_contact_phone || "");
-        $("#municipalityHelpPhone").text("Enter the primary contact phone number");
-
-        // ----------------- Populate Stats -----------------
-        $("#muncipalityWizerdFormTotalEmployees").val(apiData.total_employees || "");
-        $("#municipalityHelpTotalEmployees").text("Total number of employees in municipality");
-
-        $("#muncipalityWizerdFormNumberOfITEmployees").val(apiData.it_employees || "");
-        $("#municipalityHelpITEmployees").text("Total number of IT employees");
-
-        $("#muncipalityWizerdFormEndUserDevices").val(apiData.end_user_devices || "");
-        $("#municipalityHelpEndUserDevices").text("Number of end-user devices");
-
-        $("#muncipalityWizerdFormServers").val(apiData.servers || "");
-        $("#municipalityHelpServers").text("Number of servers deployed");
-
-        $("#muncipalityWizerdFormSpecializedDevices").val(apiData.specialized_devices || "");
-        $("#municipalityHelpSpecializedDevices").text("Specialized devices in use");
-
-        $("#muncipalityWizerdFormNumberOfConnectedSites").val(apiData.no_of_connecetd_sites || "");
-        $("#municipalityHelpConnectedSites").text("Total connected sites");
-
-        // ----------------- Radio Buttons -----------------
-        if(apiData.cyber_vendors){
-          $(`input[name='cyberVendors'][value='${apiData.cyber_vendors}']`).prop("checked", true);
-        }
-        if(apiData.network_backup){
-          $(`input[name='backupInternetRedundancy'][value='${apiData.network_backup}']`).prop("checked", true);
-        }
-
-        // ----------------- Multi-select Fields (Tom Select) -----------------
-        if(apiData.key_priorities){
-          const keyPrioritiesSelect = new TomSelect("#muncipalityWizerdFormKeyPrioritiesUpTo3");
-          keyPrioritiesSelect.setValue(apiData.key_priorities);
-        }
-
-        if(apiData.departments){
-          const departmentsSelect = new TomSelect("#muncipalityWizerdFormDepartmentsUnderMunicipality");
-          departmentsSelect.setValue(apiData.departments);
-        }
-
-        if(apiData.cloud_apps_in_use){
-          const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
-          cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
-        }
-
-        if(apiData.cloud_workloads){
-          const cloudWorkloadsSelect = new TomSelect("#muncipalityWizerdFormCloudWorkloads");
-          cloudWorkloadsSelect.setValue(apiData.cloud_workloads);
-        }
-
-      },
-      400: function () {
-        alert("Error fetching municipality data.");
-      },
-    },
-  });
-}
-// ================= END: Fetch & Populate Municipality Wizard =================
-
-
 
 // Intilize the Step wizerd
 function reIntiateWizerd() {
@@ -1745,7 +1302,6 @@ function reIntiateWizerd() {
     validator: HSBsValidation.init(".js-validate"),
   });
 }
-
 
 // ================= END: Step wizerd =================
 

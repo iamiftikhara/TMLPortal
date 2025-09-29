@@ -221,38 +221,9 @@
 
 
 
-
-      <!-- ***************************** Start Orgnization Details *********************************** -->
-
-      <div id="showMuncipilatiyDetaisl" class="mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="text-center">
-              <img class="" src="files/images/logo/logo.png" alt="Image Description" style="width: 10rem; opacity:0.3">
-              <h1 class="mb-1" id="welcomeHeading">Welcome!</h1>
-              <p class="mb-0" id="welcomeText">We're glad to have you here.</p>
-            </div>
-          </div>
-          <!-- <div class="card-body" id="dynamicContent">
-  <div class="text-center" id="welcomeDiv">
-    <img class="mb-4" src="files/images/logo/logo.png" alt="Image Description"
-      style="width: 10rem; opacity:0.3">
-    <h1 class="mb-1" id="welcomeHeading">Welcome!</h1>
-    <p class="mb-0" id="welcomeText">We're glad to have you here.</p>
-  </div>
-</div> -->
-        </div>
-      </div>
-
-
-
-      <!-- ***************************** End Orgnization Details *********************************** -->
-
-
-
       <!-- ***************************** Start Muncipility Details *********************************** -->
 
-      <div id="mainContentInnerWizerdFormToShow" class="d-none card">
+      <div id="mainContentInnerWizerdFormToShow" class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <h5 class="mb-0">Municipality Wizard</h5>
           <button class="btn btn-outline-secondary" id="wizardHomeBtn">
@@ -318,69 +289,148 @@
               <!-- start basics details -->
               <div id="municipalityWizerdFormBasics" class="active">
 
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Basic Details</h3>
+                <div class="card col-8-custom">
+                  <div class="card-header pb-2">
+                    <h4 class="card-title text-dark" id="permissivePolicyHeadingText">Policy <span
+                        class="text-danger">*</span>
+                    </h4>
                   </div>
+                  <!-- Body -->
                   <div class="card-body">
-                    <div class="d-flex mb-4">
-                      <!-- Form -->
-                      <div class="col-12 col-md-6 pe-4">
-                        <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:</label>
-                        <input type="text" class="form-control" id="municipalityWizerdFormName" maxlength="25"
-                          name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example"
-                          required>
-                      </div>
-                      <!-- End Form -->
+                    <div class="row">
 
-                      <!-- start size -->
-                      <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormPopulationSize">Population
-                          Size:</label>
-                        <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
-                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="muncipalityWizerdFormPopulationSize" name="muncipalityWizerdFormPopulationSize"
-                            required>
-                            <option class="p-2" value="">Select</option>
-                          </select>
+                      <!-- Premissive -->
+                      <div class="col-3 mb-0 p-0 px-1">
+                        <!-- Card -->
+                        <div class="card card-lg form-check ps-0 cursor-pointer" title="Click to select the policy."
+                          onclick="setPolicyValue(1)" id="permissivePolicyCard">
+                          <div class="card-header text-center pb-2">
+                            <!-- Form Check -->
+                            <span class="icon icon-sm icon-circle float-end mt-n1 me-n5 text-light d-none"
+                              style="background-color: rgb(192, 55, 9);" id="permissivePolicyCheck">
+                              <i class="bi bi-check-circle"></i>
+                            </span>
+                            <!-- End Form Check -->
+                            <h4 class="card-title  text-dark" id="permissivePolicyHeadingText">Permissive </h4>
+                            <!-- <p class="card-text">Forever free</p> -->
+                          </div>
+
+                          <div class="card-body d-flex p-4 justify-content-center">
+                            <!-- List Checked -->
+                            <ul class="list-checked list-checked-primary mb-0">
+                              <li class="list-checked-item">Block deny list</li>
+                              <li class="list-checked-item">Block phishing</li>
+                              <li class="list-checked-item">Block malicious</li>
+                              <li class="mb-2"><span class="bi-x-lg text-danger"></span><span class="mx-3">Block adult
+                                  sites</span></li>
+                              <li class="mb-0"><span class="bi-x-lg text-danger"></span><span class="mx-3">Block
+                                  adware</span>
+                              </li>
+                              <!-- End List Checked -->
+                            </ul>
+                          </div>
                         </div>
-                        <!-- End Select -->
+                        <!-- End Card -->
                       </div>
-                      <!-- end size -->
+                      <!-- End Col -->
+                      <!-- Strict -->
+                      <div class="col-3 mb-0 p-0 px-1">
+                        <!-- Card -->
+                        <div class="card card-lg ps-0 cursor-pointer" title="Click to select the policy."
+                          onclick="setPolicyValue(2)" id="strictPolicyCard">
+                          <div class="card-header text-center pb-2">
+                            <!-- Form Check -->
+                            <span class="icon icon-sm icon-circle float-end mt-n1 me-n5 text-light d-none"
+                              style="background-color: rgb(192, 55, 9);" id="strictPolicyCheck">
+                              <i class="bi bi-check-circle"></i></span>
+                            <!-- End Form Check -->
+                            <h4 class="card-title  text-dark" id="strictPolicyHeadingText">Strict</h4>
+
+                          </div>
+
+                          <div class="card-body d-flex p-4 justify-content-center">
+                            <!-- List Checked -->
+                            <ul class="list-checked list-checked-primary mb-0">
+                              <li class="list-checked-item">Block deny list</li>
+                              <li class="list-checked-item">Block phishing</li>
+                              <li class="list-checked-item">Block malicious</li>
+                              <li class="list-checked-item">Block adult sites</li>
+                              <li class="mb-0"><span class="bi-x-lg text-danger"></span><span class="mx-3">Block
+                                  adware</span>
+                              </li>
+                            </ul>
+                            <!-- End List Checked -->
+                          </div>
+                        </div>
+                        <!-- End Card -->
+                      </div>
+                      <!-- End Col -->
+                      <!-- Restrictive -->
+                      <div class="col-3 mb-0 p-0 px-1">
+                        <!-- Card -->
+                        <div class="card card-lg form-check ps-0 cursor-pointer" title="Click to select the policy."
+                          onclick="setPolicyValue(3)" id="restrictivePolicyCard">
+                          <div class="card-header text-center pb-2">
+                            <!-- Form Check -->
+                            <span class="icon icon-sm icon-circle float-end mt-n1 me-n5 text-light d-none"
+                              style="background-color: rgb(192, 55, 9);" id="restrictivePolicyCheck">
+                              <i class="bi bi-check-circle"></i>
+                            </span>
+                            <!-- End Form Check -->
+                            <h4 class="card-title  text-dark" id="restrictivePolicyHeadingText">Restrictive</h4>
+                          </div>
+
+                          <div class="card-body d-flex p-4 justify-content-center">
+                            <!-- List Checked -->
+                            <ul class="list-checked list-checked-primary mb-0">
+                              <li class="list-checked-item">Block deny list</li>
+                              <li class="list-checked-item">Block phishing</li>
+                              <li class="list-checked-item">Block malicious</li>
+                              <li class="list-checked-item">Block adult sites</li>
+                              <li class="list-checked-item">Block adware</li>
+                            </ul>
+                            <!-- End List Checked -->
+                          </div>
+
+                        </div>
+                        <!-- End Card -->
+                      </div>
+                      <!-- End Col -->
+
+                      <!-- Custom Policy -->
+                      <div class="col-3 mb-0 p-0 px-1">
+                        <!-- Card -->
+                        <div class="card card-lg form-check ps-0 cursor-pointer" title="Click to select the policy."
+                          onclick="setPolicyValue(4)" id="cutomePolicyCard">
+                          <div class="card-header text-center pb-2">
+                            <!-- Form Check -->
+                            <span class="icon icon-sm icon-circle float-end mt-n1 me-n5 text-light d-none"
+                              style="background-color: rgb(192, 55, 9);" id="customePolicyCheck">
+                              <i class="bi bi-check-circle"></i>
+                            </span>
+                            <!-- End Form Check -->
+                            <h4 class="card-title  text-dark" id="customePolicyHeadingText">Custom</h4>
+                          </div>
+
+                          <div class="card-body d-flex p-4 justify-content-center">
+                            <!-- List Checked -->
+                            <ul class="list-checked list-checked-primary mb-0">
+                              <li class="list-checked-item">Block all traffic</li>
+                              <li class="list-checked-item">Permit list domains</li>
+                              <li class="mb-2 text-center">--</li>
+                              <li class="mb-2 text-center">--</li>
+                              <li class="mb-0 text-center">--</li>
+
+
+
+                            </ul>
+                            <!-- End List Checked -->
+                          </div>
+                        </div>
+                        <!-- End Card -->
+                      </div>
+                      <!-- End Col -->
                     </div>
-
-
-
-                    <div class="d-flex">
-
-                      <!-- Form -->
-                      <div class="col-12 col-md-6 pe-4">
-                        <label for="municipalityWizerdFormAssociatedCounty" class="form-label">Associated County (if
-                          any):</label>
-                        <input type="text" class="form-control" id="municipalityWizerdFormAssociatedCounty"
-                          name="municipalityWizerdFormAssociatedCounty" placeholder="Example County" maxlength="25"
-                          aria-label="Example County" required>
-                      </div>
-                      <!-- End Form -->
-
-
-                      <!-- Form -->
-                      <div class="col-12 col-md-6 ps-4">
-                        <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County
-                          Website/URL:</label>
-                        <input type="text" class="form-control" id="muncipalityWizerdFormCountryWebsiteURL"
-                          name="muncipalityWizerdFormCountryWebsiteURL" placeholder="https://www.example.com"
-                          aria-label="https://www.example.com" required>
-                      </div>
-                      <!-- End Form -->
-
-
-                    </div>
-
                   </div>
                 </div>
 
@@ -449,6 +499,8 @@
               <!-- start Organization snapshot -->
               <div id="municipalityWizerdFormOrganizationSnapshot" style="display: none;">
 
+
+                <div id="ordersDataTableContainer" class=""></div>
 
                 <div class="card mb-4">
                   <div class="card-header">
@@ -798,205 +850,7 @@
         </div>
       </div>
 
-      <div id="showMuncipilatiyDetaisl" class="mb-4 ">
-        <div class="card">
-          <div class="card-header d-flex justify-content-between align-items-center d-none"
-            id="muncipalityInformationHeader">
-            <h4 class="card-header-title mb-2 mb-sm-0 d-flex ">Information</h4>
-            <button class="btn btn-sm btn-outline-danger" id="editWizardBtn">
-              <i class="bi bi-pencil"></i> Edit
-            </button>
-          </div>
-          <div class="card-body">
 
-
-
-
-            <!-- Start Loader -->
-            <div class=" d-none" id="showMuncipilatiyDetaislLoader">
-              <div class="d-flex justify-content-center p-5">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </div>
-            </div>
-            <!-- End Loader -->
-
-            <!-- Start Error Div -->
-            <div class="text-center d-none" id="showMuncipilatiyDetaislErrorTextDiv">
-              <img class="mb-4" src="files/images/logo/logo.png" alt="Image Description"
-                style="width: 10rem; opacity:0.3">
-              <p class="mb-0" id="showMuncipilatiyDetaislErrorText">Error</p>
-            </div>
-            <!-- End Error Div -->
-
-            <!-- Start Main Data Div -->
-
-            <div id="showMuncipilatiyDetaislMainDiv" class="d-none"></div>
-
-            <!-- End Main Data Div -->
-
-
-          </div>
-        </div>
-
-
-
-        <!-- ***************************** End Muncipility Details *********************************** -->
-
-
-        <div id="mainContentInnerDataToShow" class="d-none">
-
-
-
-
-
-          <!-- start data table -->
-          <div id="ordersDataTableContainer" class="mt-4"></div>
-          <!-- end data table -->
-
-          <!-- start details div -->
-
-          <div id="orderDetailsContainer" class="d-none mt-4">
-
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-header-title">Order Details</h3>
-              </div>
-
-              <div class="card-body">
-
-                <div class="col-md-6 mb-4 mb-md-0">
-                  <h5>Order ID: <span class="fw-normal" id="orderDetailsOrderId"></span></h5>
-                  <h4>Service: <span class="fw-normal" id="orderDetailsService"></span></h4>
-                  <h5>Date: <span class="fw-normal" id="orderDetailsOrderDate"></span></h5>
-                  <h5>Payment Status: <span class="fw-normal" id="orderDetailsOrderStatus"></span></h5>
-                </div>
-
-
-
-              </div>
-            </div>
-
-
-
-            <!-- start order payment with card -->
-            <div class="card mt-4">
-              <div class="card-header">
-                <h3 class="card-header-title">Order Payment</h3>
-              </div>
-
-              <div class="card-body">
-
-                <!-- start credit card selection -->
-                <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
-                  <div class="col-12 col-md-6 pe-0 pe-md-3">
-                    <!-- Input Group -->
-                    <div class="mb-4">
-                      <div class="input-group input-group-merge ">
-                        <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
-                          <i class="bi-credit-card"></i>
-                        </div>
-                        <input type="text" class="form-control ps-3" id="paymentMethodCard"
-                          placeholder="Pay with Card (Stripe)" aria-label="Pay with Card (Stripe)"
-                          aria-describedby="inputGroupLightEmailOptionalAddOn">
-                      </div>
-                    </div>
-                    <!-- End Input Group -->
-                  </div>
-
-                  <div class="col-12 col-md-6 pe-0 ps-md-3">
-                    <!-- Input Group -->
-                    <div class="mb-4">
-                      <div class="input-group input-group-merge ">
-                        <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
-                          <i class="bi-paypal"></i>
-                        </div>
-                        <input type="text" class="form-control ps-3" id="paymentMethodPaypal"
-                          placeholder="Pay with PayPal" aria-label="Pay with PayPal"
-                          aria-describedby="inputGroupLightEmailOptionalAddOn">
-                      </div>
-                    </div>
-                    <!-- End Input Group -->
-                  </div>
-                </div>
-                <!-- end credit card selection -->
-
-                <!-- start card holder details -->
-                <div class="d-flex justify-content-between align-items-center mb-4 flex-column">
-                  <div class="col-12 col-md-12 pe-0">
-                    <!-- Input Group -->
-                    <div class="mb-4">
-                      <div class="input-group input-group-merge ">
-                        <input type="text" class="form-control" id="cardHolderName" placeholder="Card Holder Name"
-                          aria-label="Card Holder Name" aria-describedby="inputGroupLightEmailOptionalAddOn">
-                      </div>
-                    </div>
-                    <!-- End Input Group -->
-                  </div>
-
-                  <div class="col-12 col-md-12 pe-0">
-                    <!-- Input Group -->
-                    <div class="mb-4">
-                      <div class="input-group input-group-merge ">
-                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 2345 XXXX"
-                          aria-label="1234 5678 2345 XXXX" aria-describedby="inputGroupLightEmailOptionalAddOn">
-                      </div>
-                    </div>
-                    <!-- End Input Group -->
-                  </div>
-
-                  <div class="col-12 col-md-12 pe-0">
-                    <!-- Input Group -->
-                    <div class="mb-4">
-                      <div class="input-group input-group-merge ">
-                        <input type="text" class="form-control" id="otpInput" placeholder="Enter OTP"
-                          aria-label="Enter OTP" aria-describedby="inputGroupLightEmailOptionalAddOn">
-                      </div>
-                    </div>
-                    <!-- End Input Group -->
-                  </div>
-                </div>
-                <!-- end card holder details -->
-
-                <!-- start credit card expiry date -->
-                <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
-                  <div class="col-12 col-md-6 pe-0 pe-md-3">
-                    <!-- Flatpickr -->
-                    <label class="input-label">Issue date</label>
-                    <input style="cursor: pointer !important;" type="text" id="issueDateOfCard" name="issueDateOfCard"
-                      required class="form-control flatpickr-custom w-25 bg-white ps-1 cursor-pointer"
-                      placeholder="Select date" data-hs-flatpickr-options='{
-                                                "dateFormat": "Y-m-d"
-                                                }'>
-                    <!-- End Flatpickr -->
-                  </div>
-
-                  <div class="col-12 col-md-6 pe-0 ps-md-3">
-                    <!-- Flatpickr -->
-                    <label class="input-label">Due date</label>
-                    <input style="cursor: pointer !important;" disabled type="text" id="dueDateOfCard"
-                      name="dueDateOfCard" required class="form-control flatpickr-custom w-25 ps-1 cursor-pointer"
-                      placeholder="Select date" data-hs-flatpickr-options='{
-                                            "dateFormat": "Y-m-d"
-                                            }'>
-                    <!-- End Flatpickr -->
-                  </div>
-                </div>
-                <!-- end credit card expiry date -->
-
-
-              </div>
-
-              <!-- end details div -->
-
-
-            </div>
-
-          </div>
-
-        </div>
-      </div>
 
       <!-- ***************************** End Muncipility Details *********************************** -->
 
@@ -1217,8 +1071,8 @@
   <script src="/files/my-scripts/constants.js"></script>
 
   <!-- page js -->
-  <script src="/files/my-scripts/index.js"></script>
-  <script src="/files/table-config/index-table-confg.js"></script>
+  <script src="/files/my-scripts/careate-order.js"></script>
+  <script src="/files/table-config/create-order-table-confg.js"></script>
 
 
   <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>

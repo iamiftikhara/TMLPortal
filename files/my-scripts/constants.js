@@ -58,6 +58,14 @@ const tmlUpdateProfile = 'tml/update/profile'
 // account security
 const changePasswordAPI= 'tml/change-password'
 
+
+
+
+// Enroll Services
+const setEnrollServicesDataAPI= 'tml/admin/set/bundle'
+
+
+
 // ********************** Start Admin message ***********************
 let TMLAdminServiceAdd = "tml/admin/services/add"
 let getserviceManagementAPI =  `tml/admin/services/view`
