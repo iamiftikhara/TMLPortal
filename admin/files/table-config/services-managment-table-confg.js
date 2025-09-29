@@ -25,10 +25,9 @@ const createBundleDataTable = {
   "tableIndexNo": 2, // Table number (Required)
   "tablePagination": true,
   "tableHeaderHTMLContent": ` <div class="d-flex">
-                                <button type="button" class="btn btn-outline-primary read_only" id="createBundleBtn" data-bs-toggle="modal"
-                                    data-bs-target="#creatBundleModal">
+                                <a  class="btn btn-outline-primary read_only" id="createBundleBtn" href="create-bundle.html">
                                     Create Bundle
-                                </button>
+                                </a>
                               </div>`,
   // "columns": null,
   "columns": [

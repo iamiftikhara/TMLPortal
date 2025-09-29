@@ -288,7 +288,7 @@ function getServiceManagementTableData(skip, page) {
             `<td>${title}</td>`,
             `<td><span style="white-space: pre-wrap; word-wrap: break-word; text-align: justify;">${description}</span></td>`,
             `<td>${estimated_cost}</td>`,
-            `<td>${cost_type}</td>`,
+            `<td>${cost_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</td>`,
             `<td>${cost_unit}</td>`,
             `<td>${availability}</td>`,
             `<td>${actions}</td>`
