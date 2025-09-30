@@ -284,12 +284,16 @@ function getServiceManagementTableData(skip, page) {
             item.estimated_cost != null ? item.estimated_cost : "--";
           const cost_type = item.cost_type || "--";
           const cost_unit = item.cost_unit || "--";
-          const availability =
-            item.availability != null
-              ? item.availability
-                ? "Yes"
-                : "No"
-              : "--";
+        const availability =
+  item.availability != null
+    ? `<div class="form-check form-switch">
+         <input class="form-check-input availability-toggle"
+                type="checkbox"
+                data-id="${item.bundle_id}"
+                ${item.availability ? "checked" : ""}>
+       </div>`
+    : "--";
+
 
           // Action buttons
           const actions = `
@@ -413,6 +417,48 @@ function getServiceManagementTableData(skip, page) {
 function exportServiceManagementDataTableData() {
   console.log("exportServiceManagementDataTableData called");
 }
+// Availability Toogle
+$(document).on("change", ".availability-toggle", function () {
+    var checkbox = $(this);
+    var bundleId = checkbox.data("id");
+    var previousState = !checkbox.prop("checked"); // previous state
+
+    swal({
+        title: "Are you sure?",
+        text: "Do you want to change availability?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "Cancel",
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+    function(isConfirm) {
+        if (isConfirm) {
+            // User clicked Yes -> API call
+            $.ajax({
+                url: "/updateAvailability", // replace with your API
+                method: "POST",
+                data: {
+                    bundle_id: bundleId,
+                    availability: checkbox.prop("checked")
+                },
+                success: function(response) {
+                    swal("Updated!", "Availability has been updated.", "success");
+                },
+                error: function() {
+                    swal("Error!", "Something went wrong.", "error");
+                    checkbox.prop("checked", previousState); // revert on error
+                }
+            });
+        } else {
+            // User clicked Cancel -> revert toggle
+            checkbox.prop("checked", previousState);
+        }
+    });
+});
+
+// End Availability
 
 // href click to open modal
 $(document).on("click", "#clickToOpenModal", function () {

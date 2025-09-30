@@ -18,7 +18,7 @@ const options = JSON.stringify({
 
 const dataSourceIPconfig = {
   "tableHTMLIdToAppend": "serviceManagementDataTableContainer", //append to html DOM Id (Required)
-  "tableName": "Inventory",
+  "tableName": "Services",
   "tableId": "serviceManagementDataTable", //table name (Unique) Required
   "tableExportFunc": exportServiceManagementDataTableData, // Null = d-none // ""= for no pagination // functionName for 
   "tableMainApiCallFunc": getServiceManagementTableData, // Main API Call function name for datatable
@@ -27,7 +27,7 @@ const dataSourceIPconfig = {
   "tableHeaderHTMLContent": ` <div class="d-flex">
                                 <button type="button" class="btn btn-outline-primary read_only" data-bs-toggle="modal"
                                     data-bs-target="#serviceManagementDetailsModal">
-                                    System Management
+                                    Add Service
                                 </button>
                               </div>`,
   // "columns": null,

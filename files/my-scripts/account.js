@@ -1431,7 +1431,7 @@ function logoutUser(SessionId) {
     $('#cover-spin').show()
 
     setTimeout(() => {
-      window.location.href = 'signin.html';
+      window.location.href = '/signin.html';
     }, 1500);
 
 

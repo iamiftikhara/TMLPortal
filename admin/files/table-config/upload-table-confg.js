@@ -18,7 +18,7 @@ const options4 = JSON.stringify({
 
 const addFilesDataTableShow = {
   "tableHTMLIdToAppend": "uploadFileDataTableContainer", //append to html DOM Id (Required)
-  "tableName": "Files",
+  "tableName": "Resources",
   "tableId": "addFilesDataTable", //table name (Unique) Required
   "tableExportFunc": exportaddFilesDataTableData, // Null = d-none // ""= for no pagination // functionName for 
   "tableMainApiCallFunc": getaddFilesTableData, // Main API Call function name for datatable

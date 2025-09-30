@@ -297,7 +297,7 @@ $('#signinForm').submit(function (e) {
           localStorage.setItem('_at', encryptedAES)
 
           if(userDetails.role === 'admin'){
-            window.location.href = 'admin/service-managements.html'
+            window.location.href = 'admin/quotes-review.html'
           }else if(userDetails.role === 'user'){
             window.location.href = 'index.html'
           }

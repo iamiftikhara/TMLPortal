@@ -16,7 +16,7 @@ const options1 = JSON.stringify({
 
 const createBundleDataTable = {
   "tableHTMLIdToAppend": "createBundleDataTableContainer", 
-  "tableName": "Inventory",
+  "tableName": "Bundles",
   "tableId": "createBundleDataTable", 
   "tableExportFunc": exportCreateBundleDataTableData, 
   "tableMainApiCallFunc": getCreateBundleTableData, 
