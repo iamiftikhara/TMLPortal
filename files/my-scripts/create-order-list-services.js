@@ -150,7 +150,11 @@ function renderServices(services, preSelectedIds = [], disableSelected = false) 
           
           <!-- Card Header -->
           <div class="card-header text-dark fw-bold text-start">
-            ${service.title}
+          <span class="icon icon-sm icon-circle float-end mt-n1 me-n1 text-light d-none bundle-check"
+                style="background-color: rgb(25, 135, 84);">
+            <i class="bi bi-check-circle"></i>
+          </span>
+          <h4 class="card-title text-dark mb-0">${service.title}</h4>
           </div>
 
           <!-- Card Body -->
@@ -200,12 +204,15 @@ function handleServiceClick(id) {
 
 
   const serviceId = $(serviceMainCard).data("id");
+  const check = serviceMainCard.find('.bundle-check');
 
   if ($(serviceMainCard).hasClass("border-primary")) {
+    if (check) check.addClass('d-none');
     // 🔴 Unselect
     $(serviceMainCard).removeClass("border-primary shadow-lg");
     selectedServices = selectedServices.filter(id => id !== serviceId);
   } else {
+    if (check) check.removeClass('d-none');
     // 🟢 Select
     $(serviceMainCard).addClass("border-primary shadow-lg");
     if (!selectedServices.includes(serviceId)) {

@@ -465,7 +465,7 @@ const tierHeaderClass = title => {
 
 
 // Public function you can hook into (like old setPolicyValue)
-function selectBundle(bundleId) {
+function selectBundle(bundleId, directCall) {
   // selectedBundleID_Name = bundleId;
   console.log(bundleId)
 
@@ -481,14 +481,19 @@ function selectBundle(bundleId) {
     if (check) check.classList.toggle('d-none', !isActive);
   });
 
-  setBundleRecall(bundleId)
+  setBundleRecall(bundleId, directCall)
 
 }
 
+let clearSelectedServices = () => {
+  selectedServices = [];
+  $('.service-card').removeClass("border-primary shadow-lg");
+  $('.service-card .bundle-check').addClass('d-none');
+}
+let clearSelectedServicesCheck = false
 
-function setBundleRecall(val) {
+function setBundleRecall(val, directCall) {
   selectedBundleID_Name = val
-  customServiceCheck = false;
 
   // to get services list
   const bundle = bundlesDataReceivedFromAPI.find(b => b.bundle_id === selectedBundleID_Name);
@@ -499,12 +504,17 @@ function setBundleRecall(val) {
 
   console.log(selectedBundleID_Name, bundleName)
 
+
   if (bundleName == 'Custom') {
+    if (directCall == 'true' && clearSelectedServicesCheck == false) {
+      clearSelectedServicesCheck = true
+      clearSelectedServices()
+    }
     return
   }
+  clearSelectedServicesCheck = false
+  clearSelectedServices()
 
-  selectedServices = [];
-  $('.service-card').removeClass("border-primary shadow-lg");
 
 
   for (let service of servicesList) {
@@ -537,7 +547,7 @@ function renderBundles(bundles) {
       <div class="card card-lg ps-0 cursor-pointer h-100"
            title="Click to select this bundle."
            data-bundle-id="${escapeHtml(b.bundle_id)}"
-           onclick="selectBundle('${escapeHtml(b.bundle_id)}')">
+           onclick="selectBundle('${escapeHtml(b.bundle_id)}', 'true')">
 
         <div class="card-header text-center pb-2 ${tierHeaderClass(b.title)}">
           <span class="icon icon-sm icon-circle float-end mt-n1 me-n1 text-light d-none bundle-check"
