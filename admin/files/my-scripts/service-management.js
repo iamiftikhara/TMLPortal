@@ -19,6 +19,13 @@ let enrollServicesDataTableInit
 let enrollServicesDataReceived = "";
 let enrollServicesSerachObj = {};
 
+
+
+let addFilesDataTableInit
+let addFilesDataReceived = "";
+let addFilesSerachObj = {};
+
+
 let checkedServicesToEnrollList = [];
 
 
@@ -90,11 +97,14 @@ $(document).ready(function () {
   // enroll services Data Table Initialization
   enrollServicesDataTableInit = createTableComponent(enrolServicesCreatBundleDataTable, options1);
 
+   // File Data Table Initialization
+  addFilesDataTableInit = createTableComponent(addFilesDataTableShow, options4);
+
 
   // getMuncipilityDetails()
 
   getServiceManagementTableData(10, 1);
-  getServiceManagementFilesTableData(10, 1)
+  getaddFilesTableData(10, 1)
   getCreateBundleTableData(10, 1)
   // SERVICE MANAGEMNT
   // Validation rules define
@@ -286,7 +296,13 @@ function getServiceManagementTableData(skip, page) {
 
           serviceManagementDataTableInit.row.add([
             `<td>${title}</td>`,
-            `<td><span style="white-space: pre-wrap; word-wrap: break-word; text-align: justify;">${description}</span></td>`,
+            `<td><span style="
+        display: inline-block;
+        max-width: 200px;  /* width fix */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    " title="${description}">${description}</span></td>`,
             `<td>${estimated_cost}</td>`,
             `<td>${cost_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</td>`,
             `<td>${cost_unit}</td>`,
@@ -892,51 +908,6 @@ $('#serviceManagementDetailsModal').on('hidden.bs.modal', function () {
 
 
 // ********************** Start Upload Service *********************************
-//  Dropzone.autoDiscover = false;
-
-//   var myDropzone = new Dropzone("#attachFilesNewProjectLabel", {
-//     url: "/dummy",              // dummy (hum apna ajax likhenge)
-//     autoProcessQueue: false,    // Dropzone ka default upload off
-//     paramName: "file",
-//     maxFilesize: 10,
-//     acceptedFiles: ".jpg,.png,.pdf,.doc,.docx"
-//   });
-
-//   myDropzone.on("addedfile", function (file) {
-//     console.log("📂 File added:", file.name);
-
-//     // ✅ FormData object banayein
-//     var form = new FormData();
-
-//     // 👇 Static fields (aap apne hisaab se badal sakte ho)
-//     form.append("title", "Test Title");
-//     form.append("description", "Static description");
-//     form.append("type", "file");
-//     form.append("source", "");
-//     form.append("created_at", new Date().toISOString());
-//      formData.append("auth_token", authToken);
-
-//     // 👇 File append karo
-//     form.append("file", file, file.name);
-
-//     // ✅ AJAX call
-//     $.ajax({
-//       url: "/tml/admin/documents/add",   // 👈 aapki API
-//       method: "POST",
-//       processData: false,
-//       contentType: false,
-//       data: form,
-//       success: function (response) {
-//         console.log("✅ Upload success:", response);
-//         myDropzone.emit("success", file, response); // Dropzone ko batana
-//       },
-//       error: function (jqXHR, textStatus, errorThrown) {
-//         console.error("❌ Upload error:", textStatus, errorThrown);
-//         myDropzone.emit("error", file, errorThrown);
-//       }
-//     });
-//   });
-
 
 
 // ********************** End Upload Service *********************************
@@ -944,6 +915,9 @@ $('#serviceManagementDetailsModal').on('hidden.bs.modal', function () {
 
 
 // Handle type change
+
+
+
 function updateFields() {
   var type = $("#fileType").val();
   if (type === "file") {
@@ -1014,15 +988,153 @@ $("#submitFileBtn").on("click", function () {
 
 
 // Main API Call function for datatable
-function getServiceManagementFilesTableData(skip, page) {
+// function getServiceManagementFilesTableData(skip, page) {
+
+//   let requirePayloadData;
+//   if (Object.keys(searchOject).length > 0) {
+//     requirePayloadData = JSON.stringify({
+//       auth_token: authToken,
+//       skip: Number(skip),
+//       page,
+//       search: searchOject,
+//     });
+//   } else {
+//     requirePayloadData = JSON.stringify({
+//       auth_token: authToken,
+//       skip: Number(skip),
+//       page,
+//     });
+//   }
+
+//   // Ajax call
+//   $.ajax({
+//     url: MAIN_API_PATH + adminDocumentsView,
+//     method: POST,
+//     contentType: Content_Type,
+//     dataType: "json",
+//     data: requirePayloadData,
+//     statusCode: {
+//       200: function (data) {
+//         // Hide page laoder Spiner
+//         $("#cover-spin").hide();
+
+     
+
+//       },
+//       204: function () {
+//         $("#cover-spin").hide();
+//         hideDataTableLoaderError("serviceManagementDataTable");
+//         if (Object.keys(searchOject).length > 0) {
+//           $("#serviceManagementDataTableErrorDiv").addClass("d-none");
+//           $(
+//             "#serviceManagementDataTable, #serviceManagementDataTableDatatableMainHeading"
+//           ).removeClass("d-none");
+//         }
+//         serviceManagementDataTableInit.clear().draw();
+//         $("#serviceManagementDataTableErrorText").text(noDataFoundText204Case);
+//       },
+//     },
+//     error: function (xhr, status, error) {
+//       $("#cover-spin").hide();
+//       hideDataTableLoaderError("serviceManagementDataTable");
+
+//       if (xhr.status === 400) {
+//         $("#serviceManagementDataTableErrorText").text(invalidRequest400Error);
+//       } else if (xhr.status === 401) {
+//         $("#serviceManagementDataTableErrorText").text(unauthorizedRequest401Error);
+//       } else if (xhr.status === 404) {
+//         // $('#cover-spin').hide(0);
+//         $("#serviceManagementDataTableErrorText").text(notFound404Error);
+//       } else if (xhr.status === 503) {
+//         // $('#cover-spin').hide(0);
+//         $("#serviceManagementDataTableErrorText").text(serverError503Error);
+//       } else if (xhr.status === 408) {
+//         swal(
+//           {
+//             title: " ",
+//             text: sessionExpired408Error,
+//             type: "info",
+//             showCancelButton: false,
+//             confirmButtonText: "Logout",
+//           },
+//           function (isConfirm) {
+//             if (isConfirm) {
+//               localStorage.clear();
+//               window.location.href = redirectToSignInPage408;
+//             }
+//           }
+//         );
+//       } else if (xhr.status === 410) {
+//         $.ajax({
+//           url: MAIN_API_PATH + getGmtAPI,
+//           method: POST,
+//           contentType: Content_Type,
+//           dataType: "json",
+//           success: function (data, textStatus, xhr) {
+//             const encrypt = new JSEncrypt();
+//             encrypt.setPublicKey(sitePublicKey);
+//             const currentDateString = String(data.unixtime);
+//             securityKeyEncrypted = encrypt.encrypt(
+//               pageName + currentDateString
+//             );
+//             SecurityKeyTime = false;
+//             getServiceManagementTableData(skip, page, search);
+//           },
+//           error: function (xhr, status, error) {
+//             $.getJSON(worldTimeAPI, function (data) {
+//               const encrypt = new JSEncrypt();
+//               encrypt.setPublicKey(sitePublicKey);
+//               const currentDateString = String(data.unixtime);
+//               securityKeyEncrypted = encrypt.encrypt(
+//                 pageName + currentDateString
+//               );
+//               SecurityKeyTime = false;
+//               getServiceManagementTableData(skip, page, search);
+//             });
+//           },
+//         });
+//       } else {
+//         // $('#cover-spin').hide(0);
+//         $("#serviceManagementDataTableErrorText").text(serverError503Error);
+//       }
+//     },
+//   });
+// }
+
+// start create Bundle Data Table Initialization
+
+function addFilesSearchObjectCreation(search) {
+  addFilesSerachObj = search;
+}
+
+// Main API Call function for datatable
+function getaddFilesTableData(skip, page) {
+  let data = [
+    {
+      order_id: "ORD12345",
+      municipality: "Springfield",
+      service: "Cloud Hosting",
+      date: "2024-01-15",
+      payment: "Paid",
+      status: "In Provisioning",
+    },
+    {
+      order_id: "ORDdf5",
+      municipality: "Springfield",
+      service: "Cloud Hosting",
+      date: "2024-01-13",
+      payment: "Pending",
+      status: "Pending Kickoff",
+    },
+  ];
 
   let requirePayloadData;
-  if (Object.keys(searchOject).length > 0) {
+  if (Object.keys(addFilesSerachObj).length > 0) {
     requirePayloadData = JSON.stringify({
       auth_token: authToken,
       skip: Number(skip),
       page,
-      search: searchOject,
+      search: addFilesSerachObj,
     });
   } else {
     requirePayloadData = JSON.stringify({
@@ -1044,80 +1156,119 @@ function getServiceManagementFilesTableData(skip, page) {
         // Hide page laoder Spiner
         $("#cover-spin").hide();
 
-        //       hideDataTableLoader200("serviceManagementDataTable");
+        hideDataTableLoader200("addFilesDataTable");
 
-        //       let apiData = data.message; // or data.message if your API uses 'message'
-        //       serviceManagementDataReceived = apiData;
+        // Response data (IPs)
+        response = data.message;
+        ordersDataReceived = response.message;
+        localStorage.setItem("addFilesDataTableTotal", data.count);
+        // If No IPs found
 
-        //       // Save correct length
-        //       localStorage.setItem("serviceManagementDataTableTotal", data.count);
+        // loop through response to add data in datatable
+        for (let i = 0; i < response.length; i++) {
+            const doc = response[i];
 
-        //       // Loop through response to add data in datatable
-        //       for (let i = 0; i < apiData.length; i++) {
-        //         const item = apiData[i];
+  // Format source
+  let sourceDisplay = "";
+  if (doc.type === "url") {
+    sourceDisplay = `<a href="${doc.source}"  target="_blank">Open Link</a>`;
+  } else if (doc.type === "text") {
+    sourceDisplay = `<span  style="
+        display: inline-block;
+        max-width: 200px;  /* width fix */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    " title="${doc.source}">${doc.source}</span>`;
+  } else if (doc.type === "file") {
+    sourceDisplay = `<a href="${doc.source}" download>Download File</a>`;
+  }
 
-        //         const service_id = item.service_id || "--";
-        //         const title = item.title || "--";
-        //         const description = item.description || "--";
-        //         const estimated_cost = item.estimated_cost != null ? item.estimated_cost : "--";
-        //         const cost_type = item.cost_type || "--";
-        //         const cost_unit = item.cost_unit || "--";
-        //         const availability = item.availability != null ? (item.availability ? "Yes" : "No") : "--";
+  // Format created_at
+  let createdDate = new Date(doc.created_at * 1000).toLocaleString();
 
-        //         // Action buttons
-        //         const actions = `
-        //   <button class="btn btn-sm btn-outline-primary edit-service" data-service-id="${service_id}">Edit</button>
-        //   <button class="btn btn-sm btn-outline-danger delete-service" data-service-id="${service_id}">Delete</button>
-        // `;
+  // Action buttons
+  let actions = `
+    <button class="btn btn-sm btn-outline-primary edit-document" data-id="${doc.document_id}">Edit</button>
+    <button class="btn btn-sm btn-outline-danger delete-document" data-id="${doc.document_id}">Delete</button>
+  `;
+   
+          
 
-        //         serviceManagementDataTableInit.row.add([
-        //           `<td>${title}</td>`,
-        //           `<td><span style="white-space: pre-wrap; word-wrap: break-word; text-align: justify;">${description}</span></td>`,
-        //           `<td>${estimated_cost}</td>`,
-        //           `<td>${cost_type}</td>`,
-        //           `<td>${cost_unit}</td>`,
-        //           `<td>${availability}</td>`,
-        //           `<td>${actions}</td>`
-        //         ]).draw();
+       
 
-        //         datatablePagination(
-        //           "serviceManagementDataTable",
-        //           1,
-        //           "serviceManagementDataTableTotal",
-        //           getServiceManagementTableData
-        //         );
-        //       }
-        //       // Attach click events after table is rendered
-        //       attachServiceManagementActions();
+          addFilesDataTableInit.row
+            .add([
+             
+                 doc.title,
+  `<span class="truncate-text" title="${doc.description || '--'}" style="
+    display: inline-block;
+    max-width: 200px;  /* width fix */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+">${doc.description ? doc.description : '--'}</span>`,
 
+      `<span class="badge badge-type" style="
+        background-color: ${doc.type === 'file' ? '#f39c12' : doc.type === 'url' ? '#3498db' : '#2ecc71'};
+        color: #fff;
+        text-transform: uppercase;
+        padding: 0.25em 0.5em;
+        border-radius: 0.25rem;
+        font-size: 0.8rem;
+    ">${doc.type}</span>`,
+    
+    sourceDisplay,
+    createdDate,
+    `<span>${actions}</span>`
+            ])
+            .draw();
+          datatablePagination(
+            "addFilesDataTable",
+            4,
+            "addFilesDataTableTotal",
+            getaddFilesTableData
+          );
+
+          let viewOrderDetailsButtons = document.querySelectorAll(
+            ".view-order-details"
+          );
+          viewOrderDetailsButtons.forEach((button) => {
+            button.addEventListener("click", function () {
+              let orderId = this.getAttribute("data-order-id");
+              // Redirect to order details page
+              showOrderDetails(orderId);
+            });
+          });
+        }
       },
       204: function () {
         $("#cover-spin").hide();
-        hideDataTableLoaderError("serviceManagementDataTable");
-        if (Object.keys(searchOject).length > 0) {
-          $("#serviceManagementDataTableErrorDiv").addClass("d-none");
+        hideDataTableLoaderError("addFilesDataTable");
+        if (Object.keys(addFilesSerachObj).length > 0) {
+          $("#addFilesDataTableErrorDiv").addClass("d-none");
           $(
-            "#serviceManagementDataTable, #serviceManagementDataTableDatatableMainHeading"
+            "#addFilesDataTable, #addFilesDataTableDatatableMainHeading"
           ).removeClass("d-none");
         }
-        serviceManagementDataTableInit.clear().draw();
-        $("#serviceManagementDataTableErrorText").text(noDataFoundText204Case);
+        addFilesDataTableInit.clear().draw();
+        $("#addFilesDataTableErrorText").text(noDataFoundText204Case);
       },
     },
     error: function (xhr, status, error) {
       $("#cover-spin").hide();
-      hideDataTableLoaderError("serviceManagementDataTable");
+      hideDataTableLoaderError("addFilesDataTable");
 
       if (xhr.status === 400) {
-        $("#serviceManagementDataTableErrorText").text(invalidRequest400Error);
+        $("#addFilesDataTableErrorText").text(invalidRequest400Error);
       } else if (xhr.status === 401) {
-        $("#serviceManagementDataTableErrorText").text(unauthorizedRequest401Error);
+        $("#addFilesDataTableErrorText").text(unauthorizedRequest401Error);
       } else if (xhr.status === 404) {
         // $('#cover-spin').hide(0);
-        $("#serviceManagementDataTableErrorText").text(notFound404Error);
+        $("#addFilesDataTableErrorText").text(notFound404Error);
       } else if (xhr.status === 503) {
         // $('#cover-spin').hide(0);
-        $("#serviceManagementDataTableErrorText").text(serverError503Error);
+        $("#addFilesDataTableErrorText").text(serverError503Error);
       } else if (xhr.status === 408) {
         swal(
           {
@@ -1148,7 +1299,7 @@ function getServiceManagementFilesTableData(skip, page) {
               pageName + currentDateString
             );
             SecurityKeyTime = false;
-            getServiceManagementTableData(skip, page, search);
+            getaddFilesTableData(skip, page, search);
           },
           error: function (xhr, status, error) {
             $.getJSON(worldTimeAPI, function (data) {
@@ -1159,17 +1310,24 @@ function getServiceManagementFilesTableData(skip, page) {
                 pageName + currentDateString
               );
               SecurityKeyTime = false;
-              getServiceManagementTableData(skip, page, search);
+              getaddFilesTableData(skip, page, search);
             });
           },
         });
       } else {
         // $('#cover-spin').hide(0);
-        $("#serviceManagementDataTableErrorText").text(serverError503Error);
+        $("#addFilesDataTableErrorText").text(serverError503Error);
       }
     },
   });
 }
+
+// function to export data from datatable
+function exportaddFilesDataTableData() {
+  console.log("exportaddFilesDataTableData called");
+}
+
+// end Add File Data Table Initialization
 
 
 
@@ -1220,7 +1378,7 @@ function getCreateBundleTableData(skip, page) {
 
   // Ajax call
   $.ajax({
-    url: MAIN_API_PATH + getOrdersAPI,
+    url: MAIN_API_PATH + "tml/admin/list/bundle",
     method: POST,
     contentType: Content_Type,
     dataType: "json",

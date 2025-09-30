@@ -27,7 +27,7 @@ const dataSourceIPconfig = {
   "tableHeaderHTMLContent": ` <div class="d-flex">
                                 <button type="button" class="btn btn-outline-primary read_only" data-bs-toggle="modal"
                                     data-bs-target="#serviceManagementDetailsModal">
-                                    Service Management
+                                    System Management
                                 </button>
                               </div>`,
   // "columns": null,
