@@ -30,6 +30,10 @@ let muncipalityWizerdFormCloudApplicationInit,
 let muncipalityWizerdFormCloudWorkloadsInit,
   muncipalityWizerdFormNumberOfConnectedSitesInit;
 
+
+let selectedBundleID_Name = "";
+let bundlesDataReceivedFromAPI = "";
+
 $(document).ready(function () {
   // Show main content and hide loader
 
@@ -295,37 +299,39 @@ $(document).ready(function () {
 
 
   getBundlesList()
+  getServiceManagementTableData()
+
 });
 
 
-const servicesCatalog =  {
+const servicesCatalog = {
   "svc_1759018030049": {
-      "title": "Network",
-      "description": ""
+    "title": "Network",
+    "description": ""
   },
   "svc_1759176897262": {
-      "title": "EDR",
-      "description": "Lorem ipsum is typically a corrupted version of De finibus bonorum et malorum, a 1st-century "
+    "title": "EDR",
+    "description": "Lorem ipsum is typically a corrupted version of De finibus bonorum et malorum, a 1st-century "
   },
   "svc_1759176984893": {
-      "title": "Cloud App",
-      "description": "Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/ LOR-əm IP-səm) is a dummy"
+    "title": "Cloud App",
+    "description": "Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/ LOR-əm IP-səm) is a dummy"
   },
   "svc_1759177045891": {
-      "title": "Phishing",
-      "description": "Its purpose is to permit a page layout to be designed, independently of the copy that will subsequently populate it, "
+    "title": "Phishing",
+    "description": "Its purpose is to permit a page layout to be designed, independently of the copy that will subsequently populate it, "
   },
   "svc_1759177807239": {
-      "title": "Regulatory Compliance",
-      "description": "Regulatory Compliance"
-    }
+    "title": "Regulatory Compliance",
+    "description": "Regulatory Compliance"
+  }
 }
 
 
 
 
 
-function getBundlesList(){
+function getBundlesList() {
 
   const apiBody = JSON.stringify({
     auth_token: authToken,
@@ -344,125 +350,99 @@ function getBundlesList(){
         $("#cover-spin").hide(0);
         //  const data = response.message;
         const apiData = data.message;
+        bundlesDataReceivedFromAPI = apiData
+        // ==== Init render ====
+        renderBundles(apiData);
 
-      // ==== Init render ====
-      renderBundles(apiData);
+        $('#createOrderBundleDivLoader, #createOrderBundleLDivErrorDiv').addClass('d-none');
+        $('#createOrderBundleDivMainDiv').removeClass('d-none');
+        $('#createOrderBundleDivMainDivNextBtn').attr('disabled', false);
+
+
+
+
       },
       204: function () {
+        $('#createOrderBundleDivLoader, #createOrderBundleLDivErrorDiv').addClass('d-none');
+        $('#createOrderBundleDivMainDiv').addClass('d-none');
+        $('#createOrderBundleLDivErrorDiv').removeClass('d-none');
+        $('#createOrderBundleDivMainDivNextBtn').attr('disabled', true);
+
+        $('#createOrderBundleLText').text(noDataFoundText204Case);
+
+
+
       },
     },
     error: function (xhr, status, error) {
-      $("#cover-spin").hide();
+      $('#cover-spin').hide()
+      $('#createOrderBundleDivLoader, #createOrderBundleLDivErrorDiv').addClass('d-none');
+      $('#createOrderBundleDivMainDiv').addClass('d-none');
+      $('#createOrderBundleLDivErrorDiv').removeClass('d-none');
+      $('#createOrderBundleDivMainDivNextBtn').attr('disabled', true);
+
+
       if (xhr.status === 400) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          invalidRequest400Error
-        );
+        $('#createOrderBundleLText').text(invalidRequest400Error)
       } else if (xhr.status === 401) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          unauthorizedRequest401Error
-        );
+        $('#createOrderBundleLText').text(unauthorizedRequest401Error)
       } else if (xhr.status === 404) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          notFound404Error
-        );
-      } else if (xhr.status === 409) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          alreadyExist409Error
-        );
+        // $('#cover-spin').hide(0);
+        $('#createOrderBundleLText').text(notFound404Error)
       } else if (xhr.status === 503) {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
+        // $('#cover-spin').hide(0);
+        $('#createOrderBundleLText').text(serverError503Error)
       } else if (xhr.status === 408) {
         swal(
           {
-            title: " ",
+            title: ' ',
             text: sessionExpired408Error,
-            type: "info",
+            type: 'info',
             showCancelButton: false,
-            confirmButtonText: "Logout",
+            confirmButtonText: 'Logout'
           },
           function (isConfirm) {
             if (isConfirm) {
-              localStorage.clear();
-              window.location.href = redirectToSignInPage408;
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
             }
           }
-        );
+        )
       } else if (xhr.status === 410) {
-        $("#cover-spin").hide();
-
         $.ajax({
           url: MAIN_API_PATH + getGmtAPI,
           method: POST,
           contentType: Content_Type,
-          dataType: "json",
+          dataType: 'json',
           success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt();
-            encrypt.setPublicKey(sitePublicKey);
-            const dateString = String(pageName + data.unixtime);
-            securityKeyEncrypted = encrypt.encrypt(dateString);
-            SecurityKeyTime = false;
-            setMuncipilitiesData();
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const currentDateString = String(data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+            SecurityKeyTime = false
+            getBundlesList(skip, page, search)
           },
           error: function (xhr, status, error) {
             $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt();
-              encrypt.setPublicKey(sitePublicKey);
-              const dateString = String(pageName + data.unixtime);
-              securityKeyEncrypted = encrypt.encrypt(dateString);
-              SecurityKeyTime = false;
-              setMuncipilitiesData();
-            });
-          },
-        });
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const currentDateString = String(data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+              SecurityKeyTime = false
+              getBundlesList(skip, page, search)
+            })
+          }
+        })
       } else {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
+        // $('#cover-spin').hide(0);
+        $('#createOrderBundleLText').text(serverError503Error)
       }
-    },
+    }
   });
 }
 
-const escapeHtml = (s='') =>
-  s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const escapeHtml = (s = '') =>
+  s.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 
 // servicesCatalog is now an object: { "svc_id": { title, description }, ... }
 
@@ -470,25 +450,25 @@ const serviceInfoById = (id) => servicesCatalog[id] || null;
 
 const serviceTitleById = (id) => serviceInfoById(id)?.title || id;
 
-const serviceDescById  = (id) => serviceInfoById(id)?.description || '';
+const serviceDescById = (id) => serviceInfoById(id)?.description || '';
 
 // Light header colors per tier (tweak as you like)
 const tierHeaderClass = title => {
   switch ((title || '').toLowerCase()) {
-    case 'bronze':   return 'bg-warning bg-opacity-25 text-warning';
-    case 'silver':   return 'bg-secondary bg-opacity-25 text-secondary';
-    case 'gold':     return 'bg-warning bg-opacity-50 text-dark'; // a bit richer
+    case 'bronze': return 'bg-warning bg-opacity-25 text-warning';
+    case 'silver': return 'bg-secondary bg-opacity-25 text-secondary';
+    case 'gold': return 'bg-warning bg-opacity-50 text-dark'; // a bit richer
     case 'platinum': return 'bg-info bg-opacity-25 text-info';
-    default:         return 'bg-light text-dark';
+    default: return 'bg-light text-dark';
   }
 };
 
-// Selection state
-let selectedBundleId = null;
 
 // Public function you can hook into (like old setPolicyValue)
 function selectBundle(bundleId) {
-  selectedBundleId = bundleId;
+  // selectedBundleID_Name = bundleId;
+  console.log(bundleId)
+
 
   // Toggle check badge & card border
   document.querySelectorAll('[data-bundle-id]').forEach(card => {
@@ -501,10 +481,44 @@ function selectBundle(bundleId) {
     if (check) check.classList.toggle('d-none', !isActive);
   });
 
-  // TODO: call your existing handler here if needed
-  // setPolicyValue(...) or send selectedBundleId to your form
-  // console.log('Selected bundle:', selectedBundleId);
+  setBundleRecall(bundleId)
+
 }
+
+
+function setBundleRecall(val) {
+  selectedBundleID_Name = val
+  customServiceCheck = false;
+
+  // to get services list
+  const bundle = bundlesDataReceivedFromAPI.find(b => b.bundle_id === selectedBundleID_Name);
+  const servicesList = bundle?.list_of_services || [];
+  let bundleName = bundle?.title || 'Bundle'
+  servicesListFromBundle = servicesList
+
+
+  console.log(selectedBundleID_Name, bundleName)
+
+  if (bundleName == 'Custom') {
+    return
+  }
+
+  selectedServices = [];
+  $('.service-card').removeClass("border-primary shadow-lg");
+
+
+  for (let service of servicesList) {
+    console.log(service)
+    setTimeout(() => {
+      customServiceCheck = false;
+      handleServiceClick(service)
+    }, 100);
+  }
+
+  // handleServiceClick(selectedBundleID_Name)
+
+}
+
 
 // Render function
 function renderBundles(bundles) {
@@ -546,11 +560,10 @@ function renderBundles(bundles) {
 
         <div class="card-footer d-flex justify-content-between align-items-center p-2">
           <small class="text-muted">Updated: ${new Date(Number(b.updated_at) * 1000).toLocaleDateString()}</small>
-          ${
-            b.cost
-              ? `<span class="badge text-bg-primary">£${Number(b.cost_value || 0).toLocaleString()}</span>`
-              : `<span class="badge text-bg-secondary">Included</span>`
-          }
+          ${b.cost
+        ? `<span class="badge text-bg-primary">£${Number(b.cost_value || 0).toLocaleString()}</span>`
+        : `<span class="badge text-bg-secondary d-none">Included</span>`
+      }
         </div>
       </div>
     `;
@@ -614,142 +627,9 @@ homeBtnCard.addEventListener("click", () => {
 
 // ********************* start bundle selection *********************************
 
-// Set policy value recived front End (fucntion called from frontEnd)
-function setPolicyValue(val, firstSet) {
-  // when custome Policy is called to be activated
-  if (val === 4) {
-    if (firstSet !== true) {
-      swal(
-        {
-          title: 'Important ',
-          text: 'This policy will block all domains on your network except domains you have added in permit list.',
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Confirm',
-          cancelButtonText: 'Cancel'
-        }, function (isConfirm) {
-          if (isConfirm) {
-            switchAnchorState('#DenyListAncherTag', '#PermitListAncherTag', 'Deny list not allowed on this policy.');
-
-            // To add check
-            $('#restrictivePolicyCheck, #permissivePolicyCheck, #strictPolicyCheck').addClass('d-none')
-            $('#customePolicyCheck').removeClass('d-none')
 
 
-            // Resize the box
-            $('#permissivePolicyCard, #restrictivePolicyCard, #strictPolicyCard').css({
-              transform: 'scale(0.9)',
-              'box-shadow': 'none',
-              border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
-            })
-            $('#cutomePolicyCard').css({
-              transform: 'scale(1)',
-              'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
-              border: '1px solid rgb(192, 55, 9)'
-            })
-            setPolicyRecall(val)
-          }
-        }
-      )
-    } else {
-      switchAnchorState('#DenyListAncherTag', '#PermitListAncherTag', 'Deny list not allowed on this policy.');
 
-      // To add check
-      $('#restrictivePolicyCheck, #permissivePolicyCheck, #strictPolicyCheck').addClass('d-none')
-      $('#customePolicyCheck').removeClass('d-none')
-
-
-      // Resize the box
-      $('#permissivePolicyCard, #restrictivePolicyCard, #strictPolicyCard').css({
-        transform: 'scale(0.9)',
-        'box-shadow': 'none',
-        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
-      })
-      $('#cutomePolicyCard').css({
-        transform: 'scale(1)',
-        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
-        border: '1px solid rgb(192, 55, 9)'
-      })
-      setPolicyRecall(val)
-    }
-
-  } else {
-
-    // when permissive Policy is called to be activated
-    if (val === 1) {
-      switchAnchorState('#PermitListAncherTag', '#DenyListAncherTag', 'Permissive list not allowed on this policy.');
-
-
-      // To add check
-      $('#customePolicyCheck, #strictPolicyCheck, #restrictivePolicyCheck').addClass('d-none')
-      $('#permissivePolicyCheck').removeClass('d-none')
-
-      // Resize the box
-      $('#restrictivePolicyCard, #cutomePolicyCard, #strictPolicyCard').css({
-        transform: 'scale(0.9)',
-        'box-shadow': 'none',
-        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
-      })
-      $('#permissivePolicyCard').css({
-        transform: 'scale(1)',
-        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
-        border: '1px solid rgb(192, 55, 9)'
-      })
-      // function to set policy on backend
-      setPolicyRecall(val)
-    }
-    // when strict Policy is called to be activated
-    else if (val === 2) {
-      switchAnchorState('#PermitListAncherTag', '#DenyListAncherTag', 'Permissive list not allowed on this policy.');
-
-      // To add check
-      $('#customePolicyCheck, #permissivePolicyCheck, #restrictivePolicyCheck').addClass('d-none')
-      $('#strictPolicyCheck').removeClass('d-none')
-
-      // Resize the box
-      $('#permissivePolicyCard, #restrictivePolicyCard, #cutomePolicyCard').css({
-        transform: 'scale(0.9)',
-        'box-shadow': 'none',
-        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
-      })
-      $('#strictPolicyCard').css({
-        transform: 'scale(1)',
-        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
-        border: '1px solid rgb(192, 55, 9)'
-      })
-      // function to set policy on backend
-      setPolicyRecall(val)
-    }
-    // when Restrictive Policy is called to be activated
-    else if (val === 3) {
-      switchAnchorState('#PermitListAncherTag', '#DenyListAncherTag', 'Permissive list not allowed on this policy.');
-
-      // To add check
-      $('#customePolicyCheck, #permissivePolicyCheck, #strictPolicyCheck').addClass('d-none')
-      $('#restrictivePolicyCheck').removeClass('d-none')
-
-      // Resize the box
-      $('#permissivePolicyCard, #strictPolicyCard, #cutomePolicyCard').css({
-        transform: 'scale(0.9)',
-        'box-shadow': 'none',
-        border: 'var(--bs-card-border-width) solid var(--bs-card-border-color)'
-      })
-      $('#restrictivePolicyCard').css({
-        transform: 'scale(1)',
-        'box-shadow': '0 0.5rem 1.5rem rgba(0, 0, 0, 0.175)',
-        border: '1px solid rgb(192, 55, 9)'
-      })
-      // function to set policy on backend
-      setPolicyRecall(val)
-    }
-  }
-}
-
-
-function setPolicyRecall(val) {
-  selectedPolicyID = val
-  enableElements('.disabled-from-div', '.disabled-from-div .nav-item');
-}
 
 
 function switchAnchorState(disableSelector, enableSelector, message) {
@@ -1578,3 +1458,5 @@ $(document).on("click", "#createOrderBtn", function () {
   window.location.href = "/create-order.html";
 });
 // ================= END: Create Order Button Click Event =================
+
+

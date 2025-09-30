@@ -27,8 +27,7 @@ const dataSourceIPconfig = {
   "tableIndexNo": 1, // Table number (Required)
   "tablePagination": true,
   "tableHeaderHTMLContent": ` <div class="d-flex">
-                                <button type="button" class="btn btn-primary btn-sm read_only" data-bs-toggle="modal"
-                                    data-bs-target="#addUserDetailsModal">
+                                <button type="button" class="btn btn-primary btn-sm read_only" id="createOrderBtn">
                                     Create Order
                                 </button>
                               </div>`,

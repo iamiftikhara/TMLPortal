@@ -654,3 +654,10 @@ function showOrderDetails(orderId) {
   );
 
 }
+
+
+// ================= Create Order Button Click Event =================
+$(document).on("click", "#createOrderBtn", function () {
+  window.location.href = "/create-order.html";
+});
+// ================= END: Create Order Button Click Event =================

@@ -1929,7 +1929,6 @@ function reIntiateWizerd() {
 // ================= END: Step wizerd =================
 
 // ================= Create Order Button Click Event =================
-// button not working
 $(document).on("click", "#createOrderBtn", function () {
   window.location.href = "/create-order.html";
 });

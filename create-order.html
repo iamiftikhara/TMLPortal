@@ -286,80 +286,104 @@
             <!-- Content Step Form -->
             <div id="validationFormContent">
 
+
+
               <!-- start basics details -->
               <div id="municipalityWizerdFormBasics" class="active">
 
-                <div class="card col-8-custom mb-4">
+                <div class=" card p-5" id="createOrderBundleDivLoader">
+                  <div class="d-flex justify-content-center p-5">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card p-5 d-none" id="createOrderBundleLDivErrorDiv">
+                  <div class=" justify-content-center align-items-center">
+                    <div class="text-center p-1">
+                      <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
+                        style="width: 10rem; opacity:0.3">
+                      <p class="mb-0" id="createOrderBundleLText">Error</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card col-8-custom mb-4 d-none" id="createOrderBundleDivMainDiv">
                   <div class="card-header pb-2">
-                    <h4 class="card-title text-dark" id="permissivePolicyHeadingText">Policy <span
+                    <h4 class="card-title text-dark" id="permissivePolicyHeadingText">Bundle <span
                         class="text-danger">*</span>
                     </h4>
                   </div>
                   <!-- Body -->
                   <div class="card-body">
-                    
 
-                      <div id="bundleCardsRow" class="row g-2">
 
-                      </div>
+                    <div id="bundleCardsRow" class="row g-2">
 
-                      
-                    
+                    </div>
+
+
+
                   </div>
                 </div>
 
 
-                <div class="card mb-4">
+                <div class="mt-4" id="servicesListingMainStartDiv">
+
+
+                    <div class=" card p-5" id="servicesListingDivLoader">
+                  <div class="d-flex justify-content-center p-5">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card p-5 d-none" id="servicesListingDivErrorDiv">
+                  <div class=" justify-content-center align-items-center">
+                    <div class="text-center p-1">
+                      <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
+                        style="width: 10rem; opacity:0.3">
+                      <p class="mb-0" id="servicesListingText">Error</p>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="card d-none" id="servicesListingMainDiv">
                   <div class="card-header">
-                    <h3 class="card-header-title">Primary Contact</h3>
+                    <h3 class="card-header-title">Select Services <span class="text-danger">*</span></h3>
                   </div>
                   <div class="card-body">
 
-                    <div class="d-flex mb-4">
-
-
-                      <!-- Form -->
-                      <div class="col-12 col-md-6 pe-4">
-                        <label for="municipalityWizerdFormContactName" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="municipalityWizerdFormContactName"
-                          name="municipalityWizerdFormContactName" placeholder="Enter your name"
-                          aria-label="Enter your name" required maxlength="25">
+                    <!-- Dynamic Services -->
+                    <div class="mt-4">
+                      <div class="mt-3 text-end">
+                        <h5>Total Cost: <span id="totalCost" class="text-primary fw-bold">0</span> USD</h5>
                       </div>
-                      <!-- End Form -->
-
-                      <!-- Form -->
-                      <div class="col-12 col-md-6 ps-4">
-                        <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
-                          name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com"
-                          required>
+                      </h6>
+                      <div class="row" id="servicesContainer">
+                        <!-- cards will be injected here -->
                       </div>
-                      <!-- End Form -->
-
-                    </div>
+                      <input type="hidden" id="selectedServiceIds" name="selectedServiceIds">
 
 
-                    <div class="d-flex">
-
-                      <!-- Form -->
-                      <div class="col-12 col-md-6 pe-4">
-                        <label for="muncipalityWizerdFormPhone" class="form-label">Phone:</label>
-                        <input type="text" class="form-control" id="muncipalityWizerdFormPhone"
-                          name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000"
-                          aria-label="+1 (123) 456 0000" required>
-                      </div>
-                      <!-- End Form -->
 
                     </div>
                   </div>
 
+                </div>
                 </div>
 
 
                 <!-- Footer -->
-                <div class="d-flex align-items-center justify-content-end">
+                <div class="d-flex align-items-center justify-content-end mt-4"
+                  id="">
                   <div class="">
-                    <button type="button" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
+                    <button type="button" id="createOrderBundleDivMainDivNextBtn" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
                                           "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
                                         }'>
                       Next <i class="bi-chevron-right small"></i>
@@ -946,6 +970,8 @@
 
   <!-- page js -->
   <script src="/files/my-scripts/careate-order.js"></script>
+  <script src="/files/my-scripts/create-order-list-services.js"></script>
+
   <script src="/files/table-config/create-order-table-confg.js"></script>
 
 
