@@ -73,6 +73,52 @@ $(document).ready(function () {
     },
   });
 
+    $("#serviceManagementForm").validate({
+    debug: true,
+    rules: {
+      title: {
+        atLeastOneCharacter: true,
+        SomeSpecialCharactersAllowed: true,
+        minlength: 3,
+        onlyDigitsNotAllowed: true,
+        required: true
+      },
+      cost_type: {
+        required: true // optional
+      }
+    },
+    messages: {
+      title: {
+        required: "Title is required.",
+      },
+      estimated_cost: "Estimated cost is required and must be a number.",
+      cost_type: "Cost type is required.",
+      // cost_unit: "Cost unit is required.",  
+      // availability: "Availability must be selected.",
+    },
+    errorClass: "error invalid-feedback",
+    validClass: "success",
+    errorElement: "span",
+    highlight: function (element, errorClass, validClass) {
+      $(element)
+        .parents("div.control-group")
+        .addClass(errorClass)
+        .removeClass(validClass);
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).parents(".error").removeClass(errorClass).addClass(validClass);
+    },
+    // the errorPlacement has to take the table layout into account
+    errorPlacement: function (error, element) {
+      // if (element.attr("name") === "cost_type") {
+      //   error.appendTo(element.parent().parent().parent().parent().parent());
+      // } else {
+        error.appendTo(element.parent());
+      // }
+    },
+  });
+
+
   // costDetailsInit
   costDetailsInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
     "cost_type",
@@ -102,12 +148,12 @@ $(document).ready(function () {
   );
 
   // File Data Table Initialization
-  addFilesDataTableInit = createTableComponent(addFilesDataTableShow, options4);
+  // addFilesDataTableInit = createTableComponent(addFilesDataTableShow, options4);
 
   // getMuncipilityDetails()
 
   getServiceManagementTableData(10, 1);
-  getaddFilesTableData(10, 1);
+  // getaddFilesTableData(10, 1);
   getCreateBundleTableData(10, 1);
   // SERVICE MANAGEMNT
   // Validation rules define
@@ -280,8 +326,7 @@ function getServiceManagementTableData(skip, page) {
           const service_id = item.service_id || "--";
           const title = item.title || "--";
           const description = item.description || "--";
-          const estimated_cost =
-            item.estimated_cost != null ? item.estimated_cost : "--";
+          const estimated_cost = item.estimated_cost != null ? Number(item.estimated_cost).toLocaleString() : "--";
           const cost_type = item.cost_type || "--";
           const cost_unit = item.cost_unit || "--";
         const availability =
@@ -315,7 +360,7 @@ function getServiceManagementTableData(skip, page) {
               `<td>${cost_type
                 .replace(/_/g, " ")
                 .replace(/\b\w/g, (l) => l.toUpperCase())}</td>`,
-              `<td>${cost_unit}</td>`,
+              // `<td>${cost_unit}</td>`,
               `<td>${availability}</td>`,
               `<td>${actions}</td>`,
             ])
@@ -491,8 +536,8 @@ $("#serviceManagementSubmit").on("click", function (e) {
     const description = $("#description").val();
     const estimated_cost = parseFloat($("#estimated_cost").val()) || 0;
     const cost_type = $("#cost_type").val();
-    const cost_unit = $("#cost_unit").val();
-    const availability = $("#availability").prop("checked");
+    // const cost_unit = $("#cost_unit").val();
+    // const availability = $("#availability").prop("checked");
 
     // Prepare payload
     const payload = {
@@ -501,8 +546,8 @@ $("#serviceManagementSubmit").on("click", function (e) {
       description,
       estimated_cost,
       cost_type,
-      cost_unit,
-      availability,
+      cost_unit: 'USD',
+      availability: true,
       service_id: serviceId,
       timestamp: Math.floor(Date.now() / 1000),
     };
@@ -540,8 +585,8 @@ function setMuncipilitiesData() {
   const description = $("#description").val(); // optional
   const estimated_cost = parseFloat($("#estimated_cost").val()) || 0;
   const cost_type = $("#cost_type").val();
-  const cost_unit = $("#cost_unit").val();
-  const availability = $("#availability").prop("checked"); // true/false
+  // const cost_unit = $("#cost_unit").val();
+  // const availability = $("#availability").prop("checked"); // true/false
 
   // Prepare payload
   const payload = JSON.stringify({
@@ -550,8 +595,8 @@ function setMuncipilitiesData() {
     description,
     estimated_cost,
     cost_type,
-    cost_unit,
-    availability,
+    cost_unit: 'USD',
+    availability: true,
     created_at,
   });
 
@@ -717,8 +762,8 @@ function attachServiceManagementActions() {
       $("#description").val(serviceData.description);
       $("#estimated_cost").val(serviceData.estimated_cost);
       costDetailsInit.setValue(serviceData.cost_type);
-      $("#cost_unit").val(serviceData.cost_unit);
-      $("#availability").prop("checked", serviceData.availability);
+      // $("#cost_unit").val(serviceData.cost_unit);
+      // $("#availability").prop("checked", serviceData.availability);
 
       // Store original values for comparison
       const originalValues = {
@@ -726,8 +771,10 @@ function attachServiceManagementActions() {
         description: serviceData.description,
         estimated_cost: serviceData.estimated_cost,
         cost_type: serviceData.cost_type,
-        cost_unit: serviceData.cost_unit,
-        availability: serviceData.availability,
+        // cost_unit: serviceData.cost_unit,
+        // availability: serviceData.availability,
+        cost_unit: 'USD',
+        availability: true,
       };
       $("#serviceManagementDetailsModal").data(
         "original-values",
@@ -955,6 +1002,8 @@ $("#serviceManagementDetailsModal").on("hidden.bs.modal", function () {
 
   // Remove any stored service ID
   $(this).removeData("service-id");
+
+  $(".error").html("");
 });
 
 // ********************** Start Upload Service *********************************
@@ -963,85 +1012,85 @@ $("#serviceManagementDetailsModal").on("hidden.bs.modal", function () {
 
 // Handle type change
 
-function updateFields() {
-  var type = $("#fileType").val();
-  if (type === "file") {
-    $("#fileUploadWrapper").show();
-    $("#sourceWrapper").hide();
-  } else {
-    $("#fileUploadWrapper").hide();
-    $("#sourceWrapper").show();
-    $("#fileSource").val(""); // clear previous value
-    $("#fileSource").attr(
-      "placeholder",
-      type === "url" ? "Enter URL" : "Enter Text"
-    );
-  }
-}
+// function updateFields() {
+//   var type = $("#fileType").val();
+//   if (type === "file") {
+//     $("#fileUploadWrapper").show();
+//     $("#sourceWrapper").hide();
+//   } else {
+//     $("#fileUploadWrapper").hide();
+//     $("#sourceWrapper").show();
+//     $("#fileSource").val(""); // clear previous value
+//     $("#fileSource").attr(
+//       "placeholder",
+//       type === "url" ? "Enter URL" : "Enter Text"
+//     );
+//   }
+// }
 
-$("#fileType").on("change", updateFields);
-updateFields(); // initialize
+// $("#fileType").on("change", updateFields);
+// updateFields(); // initialize
 
 // Submit form
-$("#submitFileBtn").on("click", function () {
-  var title = $("#fileTitle").val().trim();
-  var description = $("#fileDescription").val().trim();
-  var type = $("#fileType").val();
-  var source = $("#fileSource").val().trim();
-  var fileInputEl = document.getElementById("fileInput");
-  var file =
-    fileInputEl && fileInputEl.files.length ? fileInputEl.files[0] : null;
+// $("#submitFileBtn").on("click", function () {
+//   var title = $("#fileTitle").val().trim();
+//   var description = $("#fileDescription").val().trim();
+//   var type = $("#fileType").val();
+//   var source = $("#fileSource").val().trim();
+//   var fileInputEl = document.getElementById("fileInput");
+//   var file =
+//     fileInputEl && fileInputEl.files.length ? fileInputEl.files[0] : null;
 
-  if (!title) {
-    alert("Title is required");
-    return;
-  }
+//   if (!title) {
+//     alert("Title is required");
+//     return;
+//   }
 
-  var formData = new FormData();
-  formData.append("title", title);
-  formData.append("description", description);
-  formData.append("type", type);
+//   var formData = new FormData();
+//   formData.append("title", title);
+//   formData.append("description", description);
+//   formData.append("type", type);
 
-  formData.append("created_at", Math.floor(Date.now() / 1000));
-  formData.append("auth_token", authToken);
+//   formData.append("created_at", Math.floor(Date.now() / 1000));
+//   formData.append("auth_token", authToken);
 
-  if (type === "file") {
-    if (!file) {
-      alert("Please select a file");
-      return;
-    }
-    formData.append("file", file, file.name);
-    formData.append("source", "");
-  } else {
-    if (!source) {
-      alert("Please enter source");
-      return;
-    }
-    formData.append("source", source);
-  }
+//   if (type === "file") {
+//     if (!file) {
+//       alert("Please select a file");
+//       return;
+//     }
+//     formData.append("file", file, file.name);
+//     formData.append("source", "");
+//   } else {
+//     if (!source) {
+//       alert("Please enter source");
+//       return;
+//     }
+//     formData.append("source", source);
+//   }
 
-  // AJAX request
-  $.ajax({
-    url: MAIN_API_PATH + adminDocumentsAdd, // replace with your API
-    method: "POST",
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (response) {
-      console.log("Upload success:", response);
-      alert("File added successfully!");
-      var modalEl = document.getElementById("addFileModal");
-      var modal = bootstrap.Modal.getInstance(modalEl);
-      modal.hide(); // close modal
-      $("#addFileForm")[0].reset(); // reset form
-      updateFields(); // reset fields visibility
-    },
-    error: function (err) {
-      console.error("Upload error:", err);
-      alert("Error uploading file!");
-    },
-  });
-});
+//   // AJAX request
+//   $.ajax({
+//     url: MAIN_API_PATH + adminDocumentsAdd, // replace with your API
+//     method: "POST",
+//     data: formData,
+//     processData: false,
+//     contentType: false,
+//     success: function (response) {
+//       console.log("Upload success:", response);
+//       alert("File added successfully!");
+//       var modalEl = document.getElementById("addFileModal");
+//       var modal = bootstrap.Modal.getInstance(modalEl);
+//       modal.hide(); // close modal
+//       $("#addFileForm")[0].reset(); // reset form
+//       updateFields(); // reset fields visibility
+//     },
+//     error: function (err) {
+//       console.error("Upload error:", err);
+//       alert("Error uploading file!");
+//     },
+//   });
+// });
 
 // Main API Call function for datatable
 // function getServiceManagementFilesTableData(skip, page) {
@@ -1162,220 +1211,220 @@ function addFilesSearchObjectCreation(search) {
 }
 
 // Main API Call function for datatable
-function getaddFilesTableData(skip, page) {
-  let data = [
-    {
-      order_id: "ORD12345",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-15",
-      payment: "Paid",
-      status: "In Provisioning",
-    },
-    {
-      order_id: "ORDdf5",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-13",
-      payment: "Pending",
-      status: "Pending Kickoff",
-    },
-  ];
+// function getaddFilesTableData(skip, page) {
+//   let data = [
+//     {
+//       order_id: "ORD12345",
+//       municipality: "Springfield",
+//       service: "Cloud Hosting",
+//       date: "2024-01-15",
+//       payment: "Paid",
+//       status: "In Provisioning",
+//     },
+//     {
+//       order_id: "ORDdf5",
+//       municipality: "Springfield",
+//       service: "Cloud Hosting",
+//       date: "2024-01-13",
+//       payment: "Pending",
+//       status: "Pending Kickoff",
+//     },
+//   ];
 
-  let requirePayloadData;
-  if (Object.keys(addFilesSerachObj).length > 0) {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-      search: addFilesSerachObj,
-    });
-  } else {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-    });
-  }
+//   let requirePayloadData;
+//   if (Object.keys(addFilesSerachObj).length > 0) {
+//     requirePayloadData = JSON.stringify({
+//       auth_token: authToken,
+//       skip: Number(skip),
+//       page,
+//       search: addFilesSerachObj,
+//     });
+//   } else {
+//     requirePayloadData = JSON.stringify({
+//       auth_token: authToken,
+//       skip: Number(skip),
+//       page,
+//     });
+//   }
 
-  // Ajax call
-  $.ajax({
-    url: MAIN_API_PATH + adminDocumentsView,
-    method: POST,
-    contentType: Content_Type,
-    dataType: "json",
-    data: requirePayloadData,
-    statusCode: {
-      200: function (data) {
-        // Hide page laoder Spiner
-        $("#cover-spin").hide();
+//   // Ajax call
+//   $.ajax({
+//     url: MAIN_API_PATH + adminDocumentsView,
+//     method: POST,
+//     contentType: Content_Type,
+//     dataType: "json",
+//     data: requirePayloadData,
+//     statusCode: {
+//       200: function (data) {
+//         // Hide page laoder Spiner
+//         $("#cover-spin").hide();
 
-        hideDataTableLoader200("addFilesDataTable");
+//         hideDataTableLoader200("addFilesDataTable");
 
-        // Response data (IPs)
-        response = data.message;
-        ordersDataReceived = response.message;
-        localStorage.setItem("addFilesDataTableTotal", data.count);
-        // If No IPs found
+//         // Response data (IPs)
+//         response = data.message;
+//         ordersDataReceived = response.message;
+//         localStorage.setItem("addFilesDataTableTotal", data.count);
+//         // If No IPs found
 
-        // loop through response to add data in datatable
-        for (let i = 0; i < response.length; i++) {
-          const doc = response[i];
+//         // loop through response to add data in datatable
+//         for (let i = 0; i < response.length; i++) {
+//           const doc = response[i];
 
-          // Format source
-          let sourceDisplay = "";
-          if (doc.type === "url") {
-            sourceDisplay = `<a href="${doc.source}"  target="_blank">Open Link</a>`;
-          } else if (doc.type === "text") {
-            sourceDisplay = `<span  style="
-        display: inline-block;
-        max-width: 200px;  /* width fix */
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    " title="${doc.source}">${doc.source}</span>`;
-          } else if (doc.type === "file") {
-            sourceDisplay = `<a href="${doc.source}" download>Download File</a>`;
-          }
+//           // Format source
+//           let sourceDisplay = "";
+//           if (doc.type === "url") {
+//             sourceDisplay = `<a href="${doc.source}"  target="_blank">Open Link</a>`;
+//           } else if (doc.type === "text") {
+//             sourceDisplay = `<span  style="
+//         display: inline-block;
+//         max-width: 200px;  /* width fix */
+//         white-space: nowrap;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//     " title="${doc.source}">${doc.source}</span>`;
+//           } else if (doc.type === "file") {
+//             sourceDisplay = `<a href="${doc.source}" download>Download File</a>`;
+//           }
 
-          // Format created_at
-          let createdDate = new Date(doc.created_at * 1000).toLocaleString();
+//           // Format created_at
+//           let createdDate = new Date(doc.created_at * 1000).toLocaleString();
 
-          // Action buttons
-          let actions = `
-    <button class="btn btn-sm btn-outline-primary edit-document" data-id="${doc.document_id}">Edit</button>
-    <button class="btn btn-sm btn-outline-danger delete-document" data-id="${doc.document_id}">Delete</button>
-  `;
+//           // Action buttons
+//           let actions = `
+//     <button class="btn btn-sm btn-outline-primary edit-document" data-id="${doc.document_id}">Edit</button>
+//     <button class="btn btn-sm btn-outline-danger delete-document" data-id="${doc.document_id}">Delete</button>
+//   `;
 
-          addFilesDataTableInit.row
-            .add([
-              doc.title,
-              `<span class="truncate-text" title="${doc.description || "--"
-              }" style="
-    display: inline-block;
-    max-width: 200px;  /* width fix */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-">${doc.description ? doc.description : "--"}</span>`,
+// //           addFilesDataTableInit.row
+// //             .add([
+// //               doc.title,
+// //               `<span class="truncate-text" title="${doc.description || "--"
+// //               }" style="
+// //     display: inline-block;
+// //     max-width: 200px;  /* width fix */
+// //     white-space: nowrap;
+// //     overflow: hidden;
+// //     text-overflow: ellipsis;
+// // ">${doc.description ? doc.description : "--"}</span>`,
 
-              `<span class="badge badge-type" style="
-        background-color: ${doc.type === "file"
-                ? "#f39c12"
-                : doc.type === "url"
-                  ? "#3498db"
-                  : "#2ecc71"
-              };
-        color: #fff;
-        text-transform: uppercase;
-        padding: 0.25em 0.5em;
-        border-radius: 0.25rem;
-        font-size: 0.8rem;
-    ">${doc.type}</span>`,
+// //               `<span class="badge badge-type" style="
+// //         background-color: ${doc.type === "file"
+// //                 ? "#f39c12"
+// //                 : doc.type === "url"
+// //                   ? "#3498db"
+// //                   : "#2ecc71"
+// //               };
+// //         color: #fff;
+// //         text-transform: uppercase;
+// //         padding: 0.25em 0.5em;
+// //         border-radius: 0.25rem;
+// //         font-size: 0.8rem;
+// //     ">${doc.type}</span>`,
 
-              sourceDisplay,
-              createdDate,
-              `<span>${actions}</span>`,
-            ])
-            .draw();
-          datatablePagination(
-            "addFilesDataTable",
-            4,
-            "addFilesDataTableTotal",
-            getaddFilesTableData
-          );
+// //               sourceDisplay,
+// //               createdDate,
+// //               `<span>${actions}</span>`,
+// //             ])
+// //             .draw();
+// //           datatablePagination(
+// //             "addFilesDataTable",
+// //             4,
+// //             "addFilesDataTableTotal",
+// //             getaddFilesTableData
+// //           );
 
-          let viewOrderDetailsButtons = document.querySelectorAll(
-            ".view-order-details"
-          );
-          viewOrderDetailsButtons.forEach((button) => {
-            button.addEventListener("click", function () {
-              let orderId = this.getAttribute("data-order-id");
-              // Redirect to order details page
-              showOrderDetails(orderId);
-            });
-          });
-        }
-      },
-      204: function () {
-        $("#cover-spin").hide();
-        hideDataTableLoaderError("addFilesDataTable");
-        if (Object.keys(addFilesSerachObj).length > 0) {
-          $("#addFilesDataTableErrorDiv").addClass("d-none");
-          $(
-            "#addFilesDataTable, #addFilesDataTableDatatableMainHeading"
-          ).removeClass("d-none");
-        }
-        addFilesDataTableInit.clear().draw();
-        $("#addFilesDataTableErrorText").text(noDataFoundText204Case);
-      },
-    },
-    error: function (xhr, status, error) {
-      $("#cover-spin").hide();
-      hideDataTableLoaderError("addFilesDataTable");
+//           let viewOrderDetailsButtons = document.querySelectorAll(
+//             ".view-order-details"
+//           );
+//           viewOrderDetailsButtons.forEach((button) => {
+//             button.addEventListener("click", function () {
+//               let orderId = this.getAttribute("data-order-id");
+//               // Redirect to order details page
+//               showOrderDetails(orderId);
+//             });
+//           });
+//         }
+//       },
+//       204: function () {
+//         $("#cover-spin").hide();
+//         hideDataTableLoaderError("addFilesDataTable");
+//         if (Object.keys(addFilesSerachObj).length > 0) {
+//           $("#addFilesDataTableErrorDiv").addClass("d-none");
+//           $(
+//             "#addFilesDataTable, #addFilesDataTableDatatableMainHeading"
+//           ).removeClass("d-none");
+//         }
+//         addFilesDataTableInit.clear().draw();
+//         $("#addFilesDataTableErrorText").text(noDataFoundText204Case);
+//       },
+//     },
+//     error: function (xhr, status, error) {
+//       $("#cover-spin").hide();
+//       hideDataTableLoaderError("addFilesDataTable");
 
-      if (xhr.status === 400) {
-        $("#addFilesDataTableErrorText").text(invalidRequest400Error);
-      } else if (xhr.status === 401) {
-        $("#addFilesDataTableErrorText").text(unauthorizedRequest401Error);
-      } else if (xhr.status === 404) {
-        // $('#cover-spin').hide(0);
-        $("#addFilesDataTableErrorText").text(notFound404Error);
-      } else if (xhr.status === 503) {
-        // $('#cover-spin').hide(0);
-        $("#addFilesDataTableErrorText").text(serverError503Error);
-      } else if (xhr.status === 408) {
-        swal(
-          {
-            title: " ",
-            text: sessionExpired408Error,
-            type: "info",
-            showCancelButton: false,
-            confirmButtonText: "Logout",
-          },
-          function (isConfirm) {
-            if (isConfirm) {
-              localStorage.clear();
-              window.location.href = redirectToSignInPage408;
-            }
-          }
-        );
-      } else if (xhr.status === 410) {
-        $.ajax({
-          url: MAIN_API_PATH + getGmtAPI,
-          method: POST,
-          contentType: Content_Type,
-          dataType: "json",
-          success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt();
-            encrypt.setPublicKey(sitePublicKey);
-            const currentDateString = String(data.unixtime);
-            securityKeyEncrypted = encrypt.encrypt(
-              pageName + currentDateString
-            );
-            SecurityKeyTime = false;
-            getaddFilesTableData(skip, page, search);
-          },
-          error: function (xhr, status, error) {
-            $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt();
-              encrypt.setPublicKey(sitePublicKey);
-              const currentDateString = String(data.unixtime);
-              securityKeyEncrypted = encrypt.encrypt(
-                pageName + currentDateString
-              );
-              SecurityKeyTime = false;
-              getaddFilesTableData(skip, page, search);
-            });
-          },
-        });
-      } else {
-        // $('#cover-spin').hide(0);
-        $("#addFilesDataTableErrorText").text(serverError503Error);
-      }
-    },
-  });
-}
+//       if (xhr.status === 400) {
+//         $("#addFilesDataTableErrorText").text(invalidRequest400Error);
+//       } else if (xhr.status === 401) {
+//         $("#addFilesDataTableErrorText").text(unauthorizedRequest401Error);
+//       } else if (xhr.status === 404) {
+//         // $('#cover-spin').hide(0);
+//         $("#addFilesDataTableErrorText").text(notFound404Error);
+//       } else if (xhr.status === 503) {
+//         // $('#cover-spin').hide(0);
+//         $("#addFilesDataTableErrorText").text(serverError503Error);
+//       } else if (xhr.status === 408) {
+//         swal(
+//           {
+//             title: " ",
+//             text: sessionExpired408Error,
+//             type: "info",
+//             showCancelButton: false,
+//             confirmButtonText: "Logout",
+//           },
+//           function (isConfirm) {
+//             if (isConfirm) {
+//               localStorage.clear();
+//               window.location.href = redirectToSignInPage408;
+//             }
+//           }
+//         );
+//       } else if (xhr.status === 410) {
+//         $.ajax({
+//           url: MAIN_API_PATH + getGmtAPI,
+//           method: POST,
+//           contentType: Content_Type,
+//           dataType: "json",
+//           success: function (data, textStatus, xhr) {
+//             const encrypt = new JSEncrypt();
+//             encrypt.setPublicKey(sitePublicKey);
+//             const currentDateString = String(data.unixtime);
+//             securityKeyEncrypted = encrypt.encrypt(
+//               pageName + currentDateString
+//             );
+//             SecurityKeyTime = false;
+//             getaddFilesTableData(skip, page, search);
+//           },
+//           error: function (xhr, status, error) {
+//             $.getJSON(worldTimeAPI, function (data) {
+//               const encrypt = new JSEncrypt();
+//               encrypt.setPublicKey(sitePublicKey);
+//               const currentDateString = String(data.unixtime);
+//               securityKeyEncrypted = encrypt.encrypt(
+//                 pageName + currentDateString
+//               );
+//               SecurityKeyTime = false;
+//               getaddFilesTableData(skip, page, search);
+//             });
+//           },
+//         });
+//       } else {
+//         // $('#cover-spin').hide(0);
+//         $("#addFilesDataTableErrorText").text(serverError503Error);
+//       }
+//     },
+//   });
+// }
 
 // function to export data from datatable
 function exportaddFilesDataTableData() {

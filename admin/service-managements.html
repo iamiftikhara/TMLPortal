@@ -216,7 +216,7 @@
       <!-- ***************************** End Service Management Details *********************************** -->
 
       <!-- ***************************** Start Service Management Upload Files *********************************** -->
-        <div id="uploadFileDataTableContainer" class="mt-4"></div>
+        <!-- <div id="uploadFileDataTableContainer" class="mt-4"></div> -->
   
       <!-- ***************************** End Service Management Upload Files *********************************** -->
 
@@ -243,7 +243,7 @@
                 <!-- Title -->
                 <div class="mb-3">
                   <label for="title" class="form-label required-label">Title:</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Title of the item"
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Title of the item" maxlength="50"
                     required>
                 </div>
 
@@ -251,16 +251,10 @@
                 <div class="mb-3">
                   <label for="description" class="form-label">Description:</label> <!-- Optional, no asterisk -->
                   <textarea class="form-control" id="description" name="description" placeholder="Description here"
-                    rows="3"></textarea>
+                    rows="3" maxlength="150"></textarea>
                 </div>
                 <div class="row">
-                  <!-- Estimated Cost -->
-                  <div class="col-6 mb-3">
-                    <label for="estimated_cost" class="form-label required-label">Estimated Cost:</label>
-                    <input type="number" class="form-control" id="estimated_cost" name="estimated_cost"
-                      placeholder="1000" required>
-                  </div>
-
+                  
                   <!-- Cost Type -->
                   <div class="col-6 mb-3">
                     <label for="cost_type" class="form-label required-label">Cost Type:</label>
@@ -273,14 +267,22 @@
                     </div>
                   </div>
 
-                  <!-- Cost Unit -->
+                  <!-- Estimated Cost -->
                   <div class="col-6 mb-3">
+                    <label for="estimated_cost" class="form-label required-label">Estimated Cost ($):</label>
+                    <input type="number" class="form-control" id="estimated_cost" name="estimated_cost"
+                      placeholder="1000" maxlength="50" required>
+                  </div>
+
+
+                  <!-- Cost Unit -->
+                  <div class="col-6 mb-3 d-none">
                     <label for="cost_unit" class="form-label required-label">Cost Unit:</label>
                     <input type="text" class="form-control" id="cost_unit" name="cost_unit" placeholder="Unit" required>
                   </div>
 
                   <!-- Availability Toggle -->
-                  <div class="col-6 mb-3">
+                  <div class="col-6 mb-3 d-none">
                     <label class="form-label required-label me-2">Availability:</label>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="availability" name="availability" required>
@@ -462,7 +464,7 @@
   <script src="files/my-scripts/service-management.js"></script>
   <script src="files/table-config/index-table-confg.js"></script>
   <script src="files/table-config/services-managment-table-confg.js"></script>
-   <script src="files/table-config/upload-table-confg.js"></script>
+   <!-- <script src="files/table-config/upload-table-confg.js"></script> -->
 
 
 

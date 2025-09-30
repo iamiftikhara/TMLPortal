@@ -93,6 +93,48 @@ $(document).ready(function () {
     }
   })
 
+  // Init validation
+  $("#changePasswordForm").validate({
+    debug: true,
+    focusInvalid: false,
+    ignore: [],
+    rules: {
+      securityOldPassword: {
+        required: true
+      },
+      securityNewPassword: {
+        required: true,
+        strongPassword: true
+      },
+      securityConfirmNewPassword: {
+        required: true,
+        equalTo: "#securityNewPassword"
+      }
+    },
+    messages: {
+      securityOldPassword: "Old password is required",
+      securityNewPassword: {
+        required: "New password is required"
+      },
+      securityConfirmNewPassword: {
+        required: "Confirm password is required",
+        equalTo: "Passwords do not match"
+      }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent());
+    },
+    errorClass: "error invalid-feedback",
+    validClass: "success",
+    errorElement: "span",
+    highlight: function(element, errorClass, validClass) {
+      $(element).addClass("is-invalid").removeClass("is-valid");
+    },
+    unhighlight: function(element, errorClass, validClass) {
+      $(element).removeClass("is-invalid").addClass("is-valid");
+    }
+  });
+
   $('#editUserDetailsModalForm').validate({
     debug: true,
     rules: {
@@ -215,6 +257,19 @@ $(document).ready(function () {
   }
 // ================= END: Sidebar Role-Based Visibility =================
 // ******************** Start Add User ************************
+
+$("#saveProfileBtn").prop("disabled", true);
+
+$("#editProfile input, #editProfile select, #editProfile textarea").on("input change", function () {
+  let hasValue = false;
+  $("#editProfile input, #editProfile select, #editProfile textarea").each(function () {
+    if ($(this).val().trim() !== "") {
+      hasValue = true;
+      return false; // break loop early
+    }
+  });
+  $("#saveProfileBtn").prop("disabled", !hasValue);
+});
 
 
 $('#saveProfileBtn').on('click', function () {
@@ -437,6 +492,13 @@ function generateSpan(data, key, customClass = "", style = "") {
 
 
 // ******************** Start Add User ************************
+// Disable initially
+$("#saveSecuritySettingBtn").prop("disabled", true);
+
+// Enable submit on any change in password fields
+$("#securityOldPassword, #securityNewPassword, #securityConfirmNewPassword").on("input change", function () {
+  $("#saveSecuritySettingBtn").prop("disabled", false);
+});
 
 
 $('#saveSecuritySettingBtn').on('click', function () {

@@ -36,9 +36,9 @@ const dataSourceIPconfig = {
     { "name": "Municipality", "id": "municipality", "columnNo": 1, "visible": true },
     { "name": "Service", "id": "service", "columnNo": 2, "visible": true },
     { "name": "Date", "id": "date", "columnNo": 3, "visible": true },
-    { "name": "Payment", "id": "payment", "columnNo": 4, "visible": true },
-    { "name": "Status", "id": "status", "columnNo": 5, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 6, "visible": true }
+    // { "name": "Payment", "id": "payment", "columnNo": 4, "visible": true },
+    { "name": "Status", "id": "status", "columnNo": 4, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 5, "visible": true }
 
   ],
   //  "searchFields": null,
@@ -118,9 +118,9 @@ const dataSourceIPconfig = {
   "tableHeader": [
     { "name": "Title", "widthClass": "w-5" },
     { "name": "description", "widthClass": "w-5" },
-    { "name": "estimated cost", "widthClass": "w-5" },
+    { "name": "estimated cost ($)", "widthClass": "w-5" },
     { "name": "cost type", "widthClass": "w-5" },
-    { "name": "cost unit", "widthClass": "w-5" },
+    // { "name": "cost unit", "widthClass": "w-5" },
     { "name": "availability", "widthClass": "w-5" },
     { "name": "Actions", "widthClass": "w-5" }
   ],

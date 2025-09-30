@@ -52,6 +52,7 @@
   </style>
 
   <style>
+    
     .required-label::after {
       content: " *";
       color: red;
@@ -200,62 +201,264 @@
       </div>
 
 
+
+
+
+
+      <!-- ***************************** Start Service Management Details *********************************** -->
+
+      <div id="mainContentInnerDataToShow">
+        <!-- start data table -->
+        <!-- <div id="serviceManagementDataTableContainer"></div> -->
+         <div id="uploadFileDataTableContainer" class="mt-4"></div>
+        <!-- end data table -->
+      </div>
+
+      <!-- ***************************** End Service Management Details *********************************** -->
+
+      <!-- ***************************** Start Service Management Upload Files *********************************** -->
+        <!-- <div id="uploadFileDataTableContainer" class="mt-4"></div> -->
+  
+      <!-- ***************************** End Service Management Upload Files *********************************** -->
+
+
+      <!-- ***************************** Start create bundle *********************************** -->
+
+      <!-- <div id="createBundleDataTableContainer" class="mt-4"></div> -->
+
+      <!-- ***************************** End create bundle *********************************** -->
+
+      <!-- ***************************** Start Service Management Modal *********************************** -->
+      <!-- Modal -->
+      <div class="modal fade" id="serviceManagementDetailsModal" tabindex="-1" role="dialog"
+        aria-labelledby="serviceManagementFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="serviceManagementFormModalLabel">Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="serviceManagementForm">
+
+                <!-- Title -->
+                <div class="mb-3">
+                  <label for="title" class="form-label required-label">Title:</label>
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Title of the item"
+                    required>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description:</label> <!-- Optional, no asterisk -->
+                  <textarea class="form-control" id="description" name="description" placeholder="Description here"
+                    rows="3"></textarea>
+                </div>
+                <div class="row">
+                  
+                  <!-- Cost Type -->
+                  <div class="col-6 mb-3">
+                    <label for="cost_type" class="form-label required-label">Cost Type:</label>
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" id="cost_type" name="cost_type" required>
+                        <option value="">Select</option>
+                        <option value="of_module">Of Module</option>
+                        <option value="per_entity">Per Entity</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Estimated Cost -->
+                  <div class="col-6 mb-3">
+                    <label for="estimated_cost" class="form-label required-label">Estimated Cost:</label>
+                    <input type="number" class="form-control" id="estimated_cost" name="estimated_cost"
+                      placeholder="1000" required>
+                  </div>
+
+
+                  <!-- Cost Unit -->
+                  <div class="col-6 mb-3 d-none">
+                    <label for="cost_unit" class="form-label required-label">Cost Unit:</label>
+                    <input type="text" class="form-control" id="cost_unit" name="cost_unit" placeholder="Unit" required>
+                  </div>
+
+                  <!-- Availability Toggle -->
+                  <div class="col-6 mb-3 d-none">
+                    <label class="form-label required-label me-2">Availability:</label>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="availability" name="availability" required>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-outline-primary" id="serviceManagementSubmit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- ***************************** End Service Management Modal *********************************** -->
+      <!-- Add Resource Modal Start -->
+      <div class="modal fade" id="addFileModal" tabindex="-1" aria-labelledby="addFileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addFileModalLabel">Add Resource</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="addFileForm">
+                <div class="mb-3">
+                  <label for="fileTitle" class="form-label">Title</label><span class="text-danger"> *</span>
+                  <input type="text" class="form-control" id="fileTitle" name="fileTitle" placeholder="Enter resource title" maxlength="50" required>
+                </div>
+                <div class="mb-3">
+                  <label for="fileDescription" class="form-label">Description</label>
+                  <textarea class="form-control" id="fileDescription" name="fileDescription" placeholder="Description here" maxlength="150"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="fileType" class="form-label">Type</label><span class="text-danger"> *</span>
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" id="fileType" name="fileType" required>
+                      <option value="file">File</option>
+                      <option value="url">URL</option>
+                      <option value="text">Text</option>
+                    </select>
+                  </div>
+
+                </div>
+                <div class="mb-3" id="sourceWrapper">
+                  <label for="fileSource" class="form-label">Source</label><span class="text-danger"> *</span>
+                  <input type="text" class="form-control" id="fileSource">
+                </div>
+                <div class="mb-3" id="fileUploadWrapper">
+                  <label for="fileInput" class="form-label">Upload File</label><span class="text-danger"> *</span>
+                  <input type="file" class="form-control" id="fileInput" name="fileInput" required>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="submitFileBtn">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Add Resource Modal End Content -->
+
       <!-- ***************************** Start Create bundle Modal **********************************-->
 
-     <div class="card shadow-lg border-0 rounded-3 w-75 mx-auto mt-5">
-  <div class="card-header text-white d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">Create Bundle</h5>
-  </div>
-  <div class="card-body">
-    <form id="enrollServicesForm">
-      <!-- Title -->
-      <div class="mb-3">
-        <label for="enrollServicesFormTitle" class="form-label">
-          Title <span class="text-danger">*</span>
-        </label>
-        <input type="text" class="form-control" id="enrollServicesFormTitle"
-          name="enrollServicesFormTitle" placeholder="Enter title" required>
-      </div>
-
-      <!-- Description -->
-      <div class="mb-3">
-        <label for="enrollServicesFormDescription" class="form-label">
-          Description <span class="text-danger">*</span>
-        </label>
-        <textarea class="form-control" placeholder="Enter description"
-          id="enrollServicesFormDescription"
-          name="enrollServicesFormDescription"></textarea>
-      </div>
-
-      <!-- Dynamic Services -->
-      <div class="mt-4">
-        <h6>Select Services <span class="text-danger">*</span>
-            <div class="mt-3 text-end">
-  <h5>Total Cost: <span id="totalCost" class="text-primary fw-bold">0</span> USD</h5>
-</div>
-        </h6>
-        <div class="row" id="servicesContainer">
-          <!-- cards will be injected here -->
+      <div class="modal fade" id="creatBundleModal" tabindex="-1" aria-labelledby="creatBundleModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addFileModalLabel">Create Bundle</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="enrollServicesForm">
+                <div class="mb-3">
+                  <label for="fileTitle" class="form-label">Title <span class="text-danger">*</span></label><i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                      data-bs-placement="right" data-bs-html="true" title="
+                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
+                        <ul>
+                        <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
+                        <li>Maximum length should be 50 characters.</li>
+                        <li>Minimum length should be 3 characters.</li>
+                        <li>Only digits are not allowed.</li>
+                        <li>Whitespaces are allowed.</li>
+                        </ul>"></i>
+                  <input type="text" class="form-control" id="enrollServicesFormTitle" name="enrollServicesFormTitle" placeholder="Enter title" required>
+                </div>
+                <div class="mb-3">
+                  <label for="fileDescription" class="form-label">Description</label><span class="text-danger">*</span>
+                  <textarea class="form-control" placeholder="Enter description" id="enrollServicesFormDescription" name="enrollServicesFormDescription"></textarea>
+                </div>
+                <div id="enroleServicesForCreateBundleTableContainer" class="mt-4"></div>
+                
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="enrollServicesSubmitBtn">Submit</button>
+            </div>
+          </div>
         </div>
-         <input type="hidden" id="selectedServiceIds" name="selectedServiceIds">
-
-
-
       </div>
-      
-
-   
-    </form>
-  </div>
-  <div class="card-footer d-flex justify-content-end">
-    <!-- <button type="button" class="btn btn-outline-secondary me-2">Close</button> -->
-     <button type="button" class="btn btn-outline-secondary me-2" onclick="window.history.back()">Close</button>
-    <button type="submit" class="btn btn-outline-primary" form="enrollServicesForm">Submit</button>
-  </div>
-</div>
 
        <!-- ***************************** End Create bundle Modal ********************************** -->
 
+      <!-- ***************************** Start Resource bundle Modal **********************************-->
+      
+        <div class="modal fade" id="editFileModal" tabindex="-1" aria-labelledby="editFileModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editFileModalLabel">Edit Resource</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editFileForm">
+                    <div class="mb-3">
+                        <label for="editFileTitle" class="form-label">Title</label><span class="text-danger"> *</span>
+                        <input type="text" class="form-control" id="editFileTitle" name="editFileTitle" placeholder="Enter resource title" maxlength="50" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editFileDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="editFileDescription" name="editFileDescription" placeholder="Description here" maxlength="150"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editFileType" class="form-label">Type</label><span class="text-danger"> *</span>
+                        <div class="tom-select-custom" style="cursor: pointer;">
+                        <select class="form-select" id="editFileType" name="editFileType" required>
+                            <option value="file">File</option>
+                            <option value="url">URL</option>
+                            <option value="text">Text</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="mb-3" id="editSourceWrapper">
+                        <label for="editFileSource" class="form-label">Source</label><span class="text-danger"> *</span>
+                        <input type="text" class="form-control" id="editFileSource">
+                    </div>
+                    <div class="mb-3" id="editFileUploadWrapper">
+                        <label for="editFileInput" class="form-label">Upload File</label><span class="text-danger"> *</span>
+                        <input type="file" class="form-control" id="editFileInput" name="editFileInput">
+                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateFileBtn">Update</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+
+      <!-- ***************************** End Edit Resource Modal **********************************-->
+
+
+<div class="modal fade" id="servicesModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Services</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="servicesModalBody">
+        <!-- Data will be injected here -->
+      </div>
+    </div>
+  </div>
+</div>
 
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
@@ -310,7 +513,10 @@
   <script src="/files/my-scripts/constants.js"></script>
 
   <!-- page js -->
-  <script src="files/my-scripts/create-bundle.js"></script>
+  <script src="files/my-scripts/resources.js"></script>
+  <!-- <script src="files/table-config/index-table-confg.js"></script> -->
+  <!-- <script src="files/table-config/services-managment-table-confg.js"></script> -->
+   <script src="files/table-config/upload-table-confg.js"></script>
 
 
 

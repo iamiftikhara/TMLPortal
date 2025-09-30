@@ -27,7 +27,7 @@ const addFilesDataTableShow = {
   "tableHeaderHTMLContent": ` <div class="d-flex">
                                  <button type="button" class="btn btn-outline-primary read_only" data-bs-toggle="modal"
                                     data-bs-target="#addFileModal">
-                                    Add File
+                                    Add Resource
                                 </button>
                               </div>`,
   // "columns": null,
