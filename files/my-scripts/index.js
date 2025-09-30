@@ -30,6 +30,22 @@ let muncipalityWizerdFormCloudApplicationInit,
 let muncipalityWizerdFormCloudWorkloadsInit,
   muncipalityWizerdFormNumberOfConnectedSitesInit;
 
+
+  let filterSizeData;
+  let numberOfEmployeesData;
+  let numberOfITEmployeesData;
+  let muncipalityWizerdFormPopulationSizeData;
+  let muncipalityWizerdFormKeyPrioritiesUpTo3Data;
+  let muncipalityWizerdFormDepartmentsUnderMunicipalityData;
+  let muncipalityWizerdFormNumberOfEmployeesData;
+  let muncipalityWizerdFormMumberOfITEmployeesData;
+  let muncipalityWizerdFormCloudApplicationData;
+  let muncipalityWizerdFormEndUserDevicesData;
+  let muncipalityWizerdFormServersData;
+  let muncipalityWizerdFormSpecializedDevicesData;
+  let muncipalityWizerdFormCloudWorkloadsData;
+  let muncipalityWizerdFormNumberOfConnectedSitesData;
+
 $(document).ready(function () {
   // Show main content and hide loader
 
@@ -738,15 +754,17 @@ $(document).on("click", "#closeWizerd", function () {
 
 // update select data options
 function updateFiltersSelectDataOptions() {
+
+  
   // municipality size population data
-  let filterSizeData = [
+  filterSizeData = [
     { id: "<50000", title: "<50,000" },
     { id: "50000-500000", title: "50,000-500,000" },
     { id: ">500000", title: ">500,000" },
   ];
 
   // number of employees data
-  let numberOfEmployeesData = [
+  numberOfEmployeesData = [
     { id: "1-50", title: "1-50" },
     { id: "51-200", title: "51-200" },
     { id: "201-500", title: "201-500" },
@@ -754,7 +772,7 @@ function updateFiltersSelectDataOptions() {
     { id: "1001+", title: "1001+" },
   ];
 
-  let numberOfITEmployeesData = [
+  numberOfITEmployeesData = [
     { id: "1-50", title: "1-50" },
     { id: "51-200", title: "51-200" },
     { id: "201-500", title: "201-500" },
@@ -763,14 +781,14 @@ function updateFiltersSelectDataOptions() {
   ];
 
   // wizerd form population data
-  let muncipalityWizerdFormPopulationSizeData = [
+  muncipalityWizerdFormPopulationSizeData = [
     { id: "<10000", title: "<10,000" },
     { id: "10000-50000", title: "10,000-50,000" },
     { id: "50000-100000", title: "50,000-100,000" },
     { id: ">100000", title: ">100,000" },
   ];
 
-  let muncipalityWizerdFormKeyPrioritiesUpTo3Data = [
+  muncipalityWizerdFormKeyPrioritiesUpTo3Data = [
     { id: "improveCybersecurity", title: "Improve cybersecurity" },
     { id: "upgradeITSystem", title: "Upgrade IT systems" },
     {
@@ -784,7 +802,7 @@ function updateFiltersSelectDataOptions() {
     { id: "other", title: "Other" },
   ];
 
-  let muncipalityWizerdFormDepartmentsUnderMunicipalityData = [
+  muncipalityWizerdFormDepartmentsUnderMunicipalityData = [
     { id: "policeFireEMS", title: "Police / Fire / EMS" },
     { id: "utilities", title: "Utilities (Water, Power, Waste)" },
     { id: "financeTax", title: "Finance / Tax" },
@@ -793,7 +811,7 @@ function updateFiltersSelectDataOptions() {
     { id: "other", title: "Other" },
   ];
 
-  let muncipalityWizerdFormNumberOfEmployeesData = [
+  muncipalityWizerdFormNumberOfEmployeesData = [
     { id: "1-50", title: "1-50" },
     { id: "51-200", title: "51-200" },
     { id: "201-500", title: "201-500" },
@@ -801,7 +819,7 @@ function updateFiltersSelectDataOptions() {
     { id: "1001+", title: "1001+" },
   ];
 
-  let muncipalityWizerdFormMumberOfITEmployeesData = [
+  muncipalityWizerdFormMumberOfITEmployeesData = [
     { id: "1-50", title: "1-50" },
     { id: "51-200", title: "51-200" },
     { id: "201-500", title: "201-500" },
@@ -809,14 +827,14 @@ function updateFiltersSelectDataOptions() {
     { id: "1001+", title: "1001+" },
   ];
 
-  let muncipalityWizerdFormCloudApplicationData = [
+  muncipalityWizerdFormCloudApplicationData = [
     { id: "microsoft365", title: "Microsoft 365" },
     { id: "googleWorkspace", title: "Google Workspace" },
     { id: "otherBusinessApplications", title: "Other business applications" },
     { id: "none", title: "None / Not sure" },
   ];
 
-  let muncipalityWizerdFormEndUserDevicesData = [
+  muncipalityWizerdFormEndUserDevicesData = [
     { id: "1-50", title: "1-50" },
     { id: "51-200", title: "51-200" },
     { id: "201-500", title: "201-500" },
@@ -824,7 +842,7 @@ function updateFiltersSelectDataOptions() {
     { id: "1001+", title: "1001+" },
   ];
 
-  let muncipalityWizerdFormServersData = [
+  muncipalityWizerdFormServersData = [
     { id: "1-50", title: "1-50" },
     { id: "51-200", title: "51-200" },
     { id: "201-500", title: "201-500" },
@@ -832,7 +850,7 @@ function updateFiltersSelectDataOptions() {
     { id: "1001+", title: "1001+" },
   ];
 
-  let muncipalityWizerdFormSpecializedDevicesData = [
+  muncipalityWizerdFormSpecializedDevicesData = [
     { id: "1-50", title: "1-50" },
     { id: "51-200", title: "51-200" },
     { id: "201-500", title: "201-500" },
@@ -840,14 +858,14 @@ function updateFiltersSelectDataOptions() {
     { id: "1001+", title: "1001+" },
   ];
 
-  let muncipalityWizerdFormCloudWorkloadsData = [
+  muncipalityWizerdFormCloudWorkloadsData = [
     { id: "mostlyCloudBased", title: "Mostly cloud-based" },
     { id: "mixOfCloudAndLocalSevers", title: "Mix of cloud and local servers" },
     { id: "mostlyOnPremises", title: "Mostly on-premises" },
     { id: "none", title: "Not sure" },
   ];
 
-  let muncipalityWizerdFormNumberOfConnectedSitesData = [
+  muncipalityWizerdFormNumberOfConnectedSitesData = [
     { id: "1", title: "1" },
     { id: "2-5", title: "2-5" },
     { id: "6-10", title: "6-10" },
@@ -994,24 +1012,45 @@ function setMuncipilitiesData() {
   const primary_contact_email = $("#muncipalityWizerdFormEmail").val();
   const primary_contact_phone = $("#muncipalityWizerdFormPhone").val();
   const website_url = $("#muncipalityWizerdFormCountryWebsiteURL").val();
-  const key_priorities = $("#muncipalityWizerdFormKeyPrioritiesUpTo3").val();
-  // Match ids with titles
- key_priorities = selectedKeys.map(id => {
-  const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(item => item.id === id);
-  return found ? found.title : id;
-});
-  const departments = $(
-    "#muncipalityWizerdFormDepartmentsUnderMunicipality"
-  ).val();
+  // 1. Get selected IDs (array)
+  const selectedKeys = $("#muncipalityWizerdFormKeyPrioritiesUpTo3").val() || [];
+
+  // 2. Map each ID to its matching title
+  const key_priorities = selectedKeys.map(id => {
+    const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(item => item.id === id);
+    return found ? found.title : id; // fallback to id if no match
+  });
+
+console.log(key_priorities); 
+
+const selectedDepartments = $("#muncipalityWizerdFormDepartmentsUnderMunicipality").val() || [];
+  // 2. Map each ID to its matching title
+  const departments = selectedDepartments.map(id => {
+    const found = muncipalityWizerdFormDepartmentsUnderMunicipalityData.find(item => item.id === id);
+    return found ? found.title : id; // fallback to id if no match
+  });
+  
   const total_employees =
     parseInt($("#muncipalityWizerdFormTotalEmployees").val()) || 0;
   const it_employees =
     parseInt($("#muncipalityWizerdFormNumberOfITEmployees").val()) || 0;
   const outsourced_it = $('input[name="cyberVendors"]:checked').val();
-  const cloud_apps_in_use = $("#muncipalityWizerdFormCloudApplication").val();
-  const cloud_workloads_in_use = $(
-    "#muncipalityWizerdFormCloudWorkloads"
-  ).val();
+
+  const selectedCloudApps = $("#muncipalityWizerdFormCloudApplication").val();
+  const cloud_apps_in_use = selectedCloudApps.map(id => {
+    const found = muncipalityWizerdFormCloudApplicationData.find(item => item.id === id);
+    return found ? found.title : id; // fallback to id if no match
+  });
+
+
+  const selectedCloudWorkLoads = $("#muncipalityWizerdFormCloudWorkloads").val();
+  const cloud_workloads_in_use = selectedCloudWorkLoads.map(id => {
+    const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.id === id);
+    return found ? found.title : id; // fallback to id if no match
+  });
+
+ 
+
   const end_user_devices =
     parseInt($("#muncipalityWizerdFormEndUserDevices").val()) || 0;
   const servers = parseInt($("#muncipalityWizerdFormServers").val()) || 0;
@@ -1029,37 +1068,77 @@ function setMuncipilitiesData() {
   // Current epoch time in **seconds**
   const created_at = Math.floor(Date.now() / 1000);
 
-  const apiBody = JSON.stringify({
-    auth_token: authToken,
-    municipality_name,
-    county,
-    population_size,
-    primary_contact_name,
-    primary_contact_email,
-    primary_contact_phone,
-    website_url,
-    key_priorities,
-    departments,
-    total_employees,
-    it_employees,
-    outsourced_it,
-    cloud_apps_in_use,
-    cloud_workloads_in_use,
-    end_user_devices,
-    servers,
-    specialized_devices,
-    no_of_connecetd_sites,
-    network_backup,
-    created_at,
-  });
+let payload = {}
+let apiendpoint;
+  if(localStorage.getItem('municipality_id')){
+
+    payload = {
+      municipality_id: localStorage.getItem('municipality_id'),
+      auth_token: authToken,
+      municipality_name,
+      county,
+      population_size,
+      primary_contact_name,
+      primary_contact_email,
+      primary_contact_phone,
+      website_url,
+      key_priorities,
+      departments,
+      total_employees,
+      it_employees,
+      outsourced_it,
+      cloud_apps_in_use,
+      cloud_workloads_in_use,
+      end_user_devices,
+      servers,
+      specialized_devices,
+      no_of_connecetd_sites,
+      network_backup,
+      created_at,
+    };
+
+    apiendpoint = updateMunicipalityWizardSetAPI
+
+  }else{
+
+    payload = {
+      auth_token: authToken,
+      municipality_name,
+      county,
+      population_size,
+      primary_contact_name,
+      primary_contact_email,
+      primary_contact_phone,
+      website_url,
+      key_priorities,
+      departments,
+      total_employees,
+      it_employees,
+      outsourced_it,
+      cloud_apps_in_use,
+      cloud_workloads_in_use,
+      end_user_devices,
+      servers,
+      specialized_devices,
+      no_of_connecetd_sites,
+      network_backup,
+      created_at,
+    };
+
+    apiendpoint = setMunicipalityWizardSetAPI
+  }
+
+
+  // console.log("payload", payload);
+  // return
 
   // return 0
   $.ajax({
-    url: MAIN_API_PATH + setMunicipalityWizardSetAPI,
+    url: MAIN_API_PATH + apiendpoint,
     method: POST,
     contentType: Content_Type,
     dataType: "json",
-    data: apiBody,
+    data: JSON.stringify(payload),
     statusCode: {
       200: function (data) {
         $("#cover-spin").hide(0);
@@ -1070,9 +1149,7 @@ function setMuncipilitiesData() {
         teamMembersAPIResponse = [];
         showDataTableLoader("profileTeamDataTable");
 
-        profileTeamDataTableInit.clear().draw();
-        let pageEntries = Number($("#datatableEntries1").val());
-        getProfileTeamTableData(pageEntries, 1);
+        window.location.reload();
       },
       204: function () {
         $("#cover-spin").hide(0);
@@ -1385,7 +1462,7 @@ function renderMunicipalityCards(data) {
     <div class="card-header bg-primary text-white fw-bold">
       <i class="bi-buildings me-2"></i>  Basic Information
     </div>
-    <div class="card-body">
+    <div class="card-body pb-0">
       <!-- Municipality -->
       <p class="text-muted mb-1">
         <i class="bi bi-building me-1"></i> Municipality
@@ -1417,6 +1494,30 @@ function renderMunicipalityCards(data) {
   </div>
 </div>
 
+<!-- Key Priorities -->
+        <div class="col-md-3">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-warning fw-bold">
+              <i class="bi bi-flag me-2"></i> Key Priorities
+            </div>
+            <div class="card-body">
+              ${renderList(data.key_priorities)}
+            </div>
+          </div>
+        </div>
+
+        <!-- Departments -->
+        <div class="col-md-3">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-light fw-bold">
+              <i class="bi bi-diagram-3 me-2"></i> Departments
+            </div>
+            <div class="card-body">
+              ${renderList(data.departments)}
+            </div>
+          </div>
+        </div>
+
 
      <!-- Primary Contact -->
 <div class="col-md-6">
@@ -1424,7 +1525,7 @@ function renderMunicipalityCards(data) {
     <div class="card-header bg-success text-white fw-bold">
       <i class="bi bi-person-lines-fill me-2"></i> Primary Contact
     </div>
-    <div class="card-body">
+    <div class="card-body pb-0">
       <!-- Name -->
       <p class="text-muted mb-1">
         <i class="bi bi-person me-1"></i> Name
@@ -1446,38 +1547,28 @@ function renderMunicipalityCards(data) {
   </div>
 </div>
 
-          <!-- Key Priorities -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm border-0 h-100">
-            <div class="card-header bg-warning fw-bold">
-              <i class="bi bi-flag me-2"></i> Key Priorities
-            </div>
-            <div class="card-body">
-              ${renderList(data.key_priorities)}
-            </div>
-          </div>
-        </div>
-
-        <!-- Departments -->
-        <div class="col-md-6 col-lg-4">
-          <div class="card shadow-sm border-0 h-100">
-            <div class="card-header bg-light fw-bold">
-              <i class="bi bi-diagram-3 me-2"></i> Departments
-            </div>
-            <div class="card-body">
-              ${renderList(data.departments)}
-            </div>
-          </div>
-        </div>
+          
 
         <!-- Cloud Applications -->
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-3">
           <div class="card shadow-sm border-0 h-100">
             <div class="card-header bg-secondary text-white fw-bold">
               <i class="bi bi-cloud-check me-2"></i> Cloud Apps
             </div>
             <div class="card-body">
               ${renderList(data.cloud_apps_in_use)}
+            </div>
+          </div>
+        </div>
+
+        <!-- Cloud Workloads -->
+        <div class="col-md-3">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-danger text-white fw-bold">
+              <i class="bi bi-cloud-haze2 me-2"></i> Cloud Workloads
+            </div>
+            <div class="card-body">
+              ${renderList(data.cloud_workloads_in_use)}
             </div>
           </div>
         </div>
@@ -1579,10 +1670,8 @@ function renderMunicipalityCards(data) {
       </div>
     </div>
   </div>
-
-</div>
- <!-- End-user Network -->
-  <div class="col-12 col-md-12 mt-3">
+<!-- End-user Network -->
+  <div class="col-6 col-md-6 mt-3">
     <div class="card shadow-sm border-0 h-100">
       <div class="card-body text-center">
         <div class="d-flex align-items-center mb-2">
@@ -1597,6 +1686,25 @@ function renderMunicipalityCards(data) {
       </div>
     </div>
   </div>
+
+  <!-- Outsourced IT -->
+  <div class="col-6 col-md-6 mt-3">
+    <div class="card shadow-sm border-0 h-100">
+      <div class="card-body text-center">
+        <div class="d-flex align-items-center mb-2">
+          <i class="bi bi-shield-check  fs-3 text-warning me-2"></i>
+          <span class="text-muted small" style="font-size:14px">Cyber Vendors</span>
+        </div>
+        <h3 class="fw-bold" style="font-size:30px;">
+        ${data.outsourced_it 
+          ? data.outsourced_it.charAt(0).toUpperCase() + data.outsourced_it.slice(1).toLowerCase() 
+          : "--"}
+      </h3>
+      </div>
+    </div>
+  </div>
+</div>
+ 
 
     </div>
 
@@ -1652,11 +1760,18 @@ function getMuncipilitiesDataForWizard() {
       200: function (response) {
         const apiData = response.message;
 
+
+        if(apiData.municipality_id){
+          localStorage.setItem('municipality_id', apiData.municipality_id);
+        }
+        
+
         // ----------------- Populate Basic Info -----------------
         $("#municipalityWizerdFormName").val(apiData.municipality_name || "");
         $("#municipalityHelpName").text("Enter the official name of the municipality");
 
-        $("#muncipalityWizerdFormPopulationSize").val(apiData.population_size || "");
+        muncipalityWizerdFormPopulationSizeInit.setValue(apiData.population_size || "");
+        // $("#muncipalityWizerdFormPopulationSize").val(apiData.population_size || "");
         $("#municipalityHelpPopulation").text("Enter the total population size");
 
         $("#municipalityWizerdFormAssociatedCounty").val(apiData.county || "");
@@ -1695,8 +1810,8 @@ function getMuncipilitiesDataForWizard() {
         $("#municipalityHelpConnectedSites").text("Total connected sites");
 
         // ----------------- Radio Buttons -----------------
-        if(apiData.cyber_vendors){
-          $(`input[name='cyberVendors'][value='${apiData.cyber_vendors}']`).prop("checked", true);
+        if(apiData.outsourced_it){
+          $(`input[name='cyberVendors'][value='${apiData.outsourced_it}']`).prop("checked", true);
         }
         if(apiData.network_backup){
           $(`input[name='backupInternetRedundancy'][value='${apiData.network_backup}']`).prop("checked", true);
@@ -1704,23 +1819,51 @@ function getMuncipilitiesDataForWizard() {
 
         // ----------------- Multi-select Fields (Tom Select) -----------------
         if(apiData.key_priorities){
-          const keyPrioritiesSelect = new TomSelect("#muncipalityWizerdFormKeyPrioritiesUpTo3");
-          keyPrioritiesSelect.setValue(apiData.key_priorities);
+          // const keyPrioritiesSelect = new TomSelect("#muncipalityWizerdFormKeyPrioritiesUpTo3");
+           // keyPrioritiesSelect.setValue(apiData.key_priorities);
+
+
+           const idsToSelect = apiData.key_priorities.map(title => {
+            const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(item => item.title === title);
+            return found ? found.id : null;
+          }).filter(Boolean); // remove nulls if any
+
+          muncipalityWizerdFormKeyPrioritiesUpTo3Init.setValue(idsToSelect);
+         
         }
 
         if(apiData.departments){
-          const departmentsSelect = new TomSelect("#muncipalityWizerdFormDepartmentsUnderMunicipality");
-          departmentsSelect.setValue(apiData.departments);
+          // const departmentsSelect = new TomSelect("#muncipalityWizerdFormDepartmentsUnderMunicipality");
+          // departmentsSelect.setValue(apiData.departments);
+
+          const idsToSelect = apiData.departments.map(title => {
+            const found = muncipalityWizerdFormDepartmentsUnderMunicipalityData.find(item => item.title === title);
+            return found ? found.id : null;
+          }).filter(Boolean); // remove nulls if any
+          muncipalityWizerdFormDepartmentsUnderMunicipalityInit.setValue(idsToSelect);
         }
 
         if(apiData.cloud_apps_in_use){
-          const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
-          cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
+          // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
+          // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
+
+          const idsToSelect = apiData.cloud_apps_in_use.map(title => {
+            const found = muncipalityWizerdFormCloudApplicationData.find(item => item.title === title);
+            return found ? found.id : null;
+          }).filter(Boolean); // remove nulls if any
+
+          muncipalityWizerdFormCloudApplicationInit.setValue(idsToSelect);
         }
 
-        if(apiData.cloud_workloads){
-          const cloudWorkloadsSelect = new TomSelect("#muncipalityWizerdFormCloudWorkloads");
-          cloudWorkloadsSelect.setValue(apiData.cloud_workloads);
+        if(apiData.cloud_workloads_in_use){
+          // const cloudWorkloadsSelect = new TomSelect("#muncipalityWizerdFormCloudWorkloads");
+          // cloudWorkloadsSelect.setValue(apiData.cloud_workloads);
+
+          const idsToSelect = apiData.cloud_workloads_in_use.map(title => {
+            const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.title === title);
+            return found ? found.id : null;
+          }).filter(Boolean); // remove nulls if any
+          muncipalityWizerdFormCloudWorkloadsInit.setValue(idsToSelect);
         }
 
       },

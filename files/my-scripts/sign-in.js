@@ -284,6 +284,9 @@ $('#signinForm').submit(function (e) {
           localStorage.setItem('_ia', true)
 
 
+         
+
+
           // localStorage.setItem('_read', xhr.read_write)
 
           const tokens = xhr.auth_token
@@ -292,7 +295,13 @@ $('#signinForm').submit(function (e) {
             'My Secret Passphrase'
           )
           localStorage.setItem('_at', encryptedAES)
-          window.location.href = 'index.html'
+
+          if(userDetails.role === 'admin'){
+            window.location.href = 'admin/service-managements.html'
+          }else if(userDetails.role === 'user'){
+            window.location.href = 'index.html'
+          }
+         
           setTimeout(function () {
             $('#signinBtn').text('Sign In')
             $('#signinBtn').attr('disabled', false)

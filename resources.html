@@ -203,11 +203,11 @@
 
         <div class="card">
           <div class="card-header d-flex justify-content-start align-items-center">
-            <h3 class="card-header-title mb-2 mb-sm-0">Documentation Library</h3>
+            <h3 class="card-header-title mb-2 mb-sm-0">Resources</h3>
           </div>
           <div class="card-body">
             <!-- start service catalog search -->
-            <div class="row mt-4" id="serviceCatalogRow">
+            <div class="row mt-4 d-none" id="serviceCatalogRow">
               <!-- start search -->
               <div class="d-flex align-items-center col-7">
                 <div class="input-group input-group-merge ">
@@ -234,7 +234,7 @@
 
             <div class="d-flex" id="resourcesListDiv">
               <!-- start resources list -->
-              <div class="row mt-4" id="resourcesListRow">
+              <div class="row mt-0 col-12" id="resourcesListRow">
 
               </div>
               <!-- End resources list -->
@@ -244,6 +244,16 @@
             </div>
 
 
+             <!-- Offcanvas for text documents -->
+              <div class="offcanvas offcanvas-end" tabindex="-1" id="textOffcanvas" aria-labelledby="textOffcanvasLabel">
+                <div class="offcanvas-header">
+                  <h5 id="textOffcanvasLabel" class="mb-0"></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body" id="textOffcanvasBody">
+                  <!-- Text content will appear here -->
+                </div>
+              </div>
 
           </div>
         </div>

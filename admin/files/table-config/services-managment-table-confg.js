@@ -2,7 +2,7 @@ const options1 = JSON.stringify({
   dom: 'Bfrtip',
   columnDefs: [
     {
-      targets: [0, 1],
+      targets: [0, 4],
       // orderable: true
     }
   ],
@@ -14,50 +14,36 @@ const options1 = JSON.stringify({
   isShowPaging: true
 })
 
-
-
 const createBundleDataTable = {
-  "tableHTMLIdToAppend": "createBundleDataTableContainer", //append to html DOM Id (Required)
+  "tableHTMLIdToAppend": "createBundleDataTableContainer", 
   "tableName": "Inventory",
-  "tableId": "createBundleDataTable", //table name (Unique) Required
-  "tableExportFunc": exportCreateBundleDataTableData, // Null = d-none // ""= for no pagination // functionName for 
-  "tableMainApiCallFunc": getCreateBundleTableData, // Main API Call function name for datatable
-  "tableIndexNo": 2, // Table number (Required)
+  "tableId": "createBundleDataTable", 
+  "tableExportFunc": exportCreateBundleDataTableData, 
+  "tableMainApiCallFunc": getCreateBundleTableData, 
+  "tableIndexNo": 2, 
   "tablePagination": true,
   "tableHeaderHTMLContent": ` <div class="d-flex">
                                 <a  class="btn btn-outline-primary read_only" id="createBundleBtn" href="create-bundle.html">
                                     Create Bundle
                                 </a>
                               </div>`,
-  // "columns": null,
   "columns": [
-
-    { "name": "Municipality", "id": "municipality", "columnNo": 1, "visible": true },
+    { "name": "Title", "id": "title", "columnNo": 0, "visible": true },
+    { "name": "Description", "id": "description", "columnNo": 1, "visible": true },
     { "name": "Service", "id": "service", "columnNo": 2, "visible": true },
-    { "name": "Date", "id": "date", "columnNo": 3, "visible": true },
-    { "name": "Payment", "id": "payment", "columnNo": 4, "visible": true },
-    { "name": "Status", "id": "status", "columnNo": 5, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 6, "visible": true }
-
+    { "name": "Availability", "id": "availability", "columnNo": 3, "visible": true },
+    { "name": "Created At", "id": "created_at", "columnNo": 4, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 5, "visible": true }
   ],
-  //  "searchFields": null,
   "searchFields": {
-    // "searchFuncForTomSelect": searchFunctionForTomSelectInit, // if we have tom select in search make a function
     "searchFunctionForSearchObj": createBundleSearchObjectCreation,
     "fields": [
       {
-        "label": "Order ID",
-        "id": "order_id",
-        "placeholder": "Enter Order ID",
+        "label": "Title",
+        "id": "title",
+        "placeholder": "Enter Title",
         "type": "text",
         "checked": true,
-      },
-      {
-        "label": "Municipality",
-        "id": "municipality",
-        "placeholder": "Enter Municipality",
-        "type": "text",
-        "checked": false,
       },
       {
         "label": "Service",
@@ -68,63 +54,41 @@ const createBundleDataTable = {
       }
     ]
   },
-  // "filterFields": null,
   "filterFields": [
     {
       "type": "text",
-      "label": "Order ID",
-      "id": "order_id",
-      "placeholder": "Enter Order ID",
+      "label": "Title",
+      "id": "title",
+      "placeholder": "Enter Title",
       "columnNo": 0,
-      "hidden": false // This field is shown
-    },
-    {
-      "type": "text",
-      "label": "Municipality",
-      "id": "municipality",
-      "placeholder": "Enter Municipality",
-      "columnNo": 1,
-      "hidden": false // This field is shown
+      "hidden": false 
     },
     {
       "type": "text",
       "label": "Service",
       "id": "service",
       "placeholder": "Enter Service",
+      "columnNo": 1,
+      "hidden": false 
+    },
+    {
+      "type": "text",
+      "label": "Availability",
+      "id": "availability",
+      "placeholder": "Enter Availability",
       "columnNo": 2,
-      "hidden": false // This field is shown
-    },
-    {
-      "type": "text",
-      "label": "Payment",
-      "id": "payment",
-      "placeholder": "Enter Payment",
-      "columnNo": 4,
-      "hidden": false // This field is shown
-    },
-    {
-      "type": "text",
-      "label": "Status",
-      "id": "status",
-      "placeholder": "Enter Status",
-      "columnNo": 5,
-      "hidden": false // This field is shown
+      "hidden": false 
     }
-
-
-
   ],
   "tableHeader": [
     { "name": "Title", "widthClass": "w-5" },
-    { "name": "description", "widthClass": "w-5" },
-    { "name": "estimated cost", "widthClass": "w-5" },
-    { "name": "cost type", "widthClass": "w-5" },
-    { "name": "cost unit", "widthClass": "w-5" },
-    { "name": "availability", "widthClass": "w-5" },
+    { "name": "Description", "widthClass": "w-5" },
+    { "name": "Service", "widthClass": "w-5" },
+    { "name": "Availability", "widthClass": "w-5" },
+    { "name": "Created At", "widthClass": "w-5" },
     { "name": "Actions", "widthClass": "w-5" }
   ],
 };
-
 
 
 const enrolServicesCreatBundleDataTable = {

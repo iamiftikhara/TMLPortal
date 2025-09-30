@@ -144,35 +144,7 @@ function searchObjectCreation(search) {
 // Main API Call function for datatable
 function getOrdersTableData(skip, page) {
 
-  let data = [
-    {
-      order_id: 'ORD12345',
-      municipality: 'Springfield',
-      service: 'Cloud Hosting',
-      date: '2024-01-15',
-      payment: 'Paid',
-      status: 'In Provisioning',
-    },
-    {
-      order_id: 'ORDdf5',
-      municipality: 'Springfield',
-      service: 'Cloud Hosting',
-      date: '2024-01-13',
-      payment: 'Pending',
-      status: 'Pending Kickoff',
-    },
-
-
-
-
-  ]
-
-
-
-
-
-
-
+  
   let requirePayloadData
   if ((Object.keys(searchOject).length > 0)) {
     requirePayloadData = JSON.stringify({
@@ -199,50 +171,50 @@ function getOrdersTableData(skip, page) {
     dataType: 'json',
     data: requirePayloadData,
     statusCode: {
-      200: function (data) {
+      200: function (res) {
         // Single dummy data array with roles & orders combined
-        // const data = [
-        //   {
-        //     order_id: "ORD-1001",
-        //     municipality: "Lahore",
-        //     service: "Water Connection",
-        //     date: "2025-09-29",
-        //     payment: "PKR 5,000",
-        //     status: "Pending Kickoff",
-        //     key: "Admin",
-        //     is_integrated: true
-        //   },
-        //   {
-        //     order_id: "ORD-1002",
-        //     municipality: "Karachi",
-        //     service: "Electricity",
-        //     date: "2025-09-25",
-        //     payment: "PKR 3,200",
-        //     status: "Completed",
-        //     key: "Manager",
-        //     is_integrated: false
-        //   },
-        //   {
-        //     order_id: "ORD-1003",
-        //     municipality: "Islamabad",
-        //     service: "Gas Connection",
-        //     date: "2025-09-20",
-        //     payment: "PKR 7,800",
-        //     status: "In Progress",
-        //     key: "Viewer",
-        //     is_integrated: ["Viewer"]
-        //   },
-        //   {
-        //     order_id: "ORD-1004",
-        //     municipality: "Multan",
-        //     service: "Internet Setup",
-        //     date: "2025-09-15",
-        //     payment: "PKR 2,500",
-        //     status: "Cancelled",
-        //     key: "Editor",
-        //     is_integrated: []
-        //   }
-        // ];
+        const data = [
+          {
+            order_id: "ORD-1001",
+            municipality: "Lahore",
+            service: "Water Connection",
+            date: "2025-09-29",
+            payment: "PKR 5,000",
+            status: "Pending Kickoff",
+            key: "Admin",
+            is_integrated: true
+          },
+          {
+            order_id: "ORD-1002",
+            municipality: "Karachi",
+            service: "Electricity",
+            date: "2025-09-25",
+            payment: "PKR 3,200",
+            status: "Completed",
+            key: "Manager",
+            is_integrated: false
+          },
+          {
+            order_id: "ORD-1003",
+            municipality: "Islamabad",
+            service: "Gas Connection",
+            date: "2025-09-20",
+            payment: "PKR 7,800",
+            status: "In Progress",
+            key: "Viewer",
+            is_integrated: ["Viewer"]
+          },
+          {
+            order_id: "ORD-1004",
+            municipality: "Multan",
+            service: "Internet Setup",
+            date: "2025-09-15",
+            payment: "PKR 2,500",
+            status: "Cancelled",
+            key: "Editor",
+            is_integrated: []
+          }
+        ];
 
         const mainArray = [];
         const apiCheckboxArr = [];

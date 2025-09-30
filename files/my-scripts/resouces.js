@@ -5,7 +5,7 @@ if (localStorage.getItem('_ia') !== 'true') {
 const tokenAuth = localStorage.getItem('_at')
 const decryptedByte = CryptoJS.AES.decrypt(tokenAuth, 'My Secret Passphrase')
 const authToken = decryptedByte.toString(CryptoJS.enc.Utf8)
-
+let searchOject = {}
 let municipalitySizeSelectInit, municipalityTechnologySelectInit, municipalityComplianceSelectInit
 
 $(document).ready(function () {
@@ -14,13 +14,117 @@ $(document).ready(function () {
   $('#mainContentInnerDataToShow').removeClass('d-none')
 
 
-
-
-
-
+  getResourcesData(10,1);
 
 });
 
+
+
+// Main API Call function for datatable
+function getResourcesData(skip, page) {
+
+  
+  let requirePayloadData
+  if ((Object.keys(searchOject).length > 0)) {
+    requirePayloadData = JSON.stringify({
+      auth_token: authToken,
+      skip: Number(skip),
+      page,
+      search: searchOject,
+      availability: true
+    })
+  } else {
+    requirePayloadData = JSON.stringify({
+      auth_token: authToken,
+      skip: Number(skip),
+      page,
+      availability: true
+    })
+  }
+
+
+  // Ajax call
+  $.ajax({
+    url: MAIN_API_PATH + adminDocumentsView,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: requirePayloadData,
+    statusCode: {
+      200: function (res) {
+       
+        $('#cover-spin').hide()
+        // call the function to populate service cards to UI
+        populateServiceCardsToUI(res.message)
+      },
+      204: function () {
+        $('#cover-spin').hide()
+        
+        $('#ordersDataTableErrorText').text(noDataFoundText204Case)
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+     
+
+      if (xhr.status === 400) {
+        $('#ordersDataTableErrorText').text(invalidRequest400Error)
+      } else if (xhr.status === 401) {
+        $('#ordersDataTableErrorText').text(unauthorizedRequest401Error)
+      } else if (xhr.status === 404) {
+        // $('#cover-spin').hide(0);
+        $('#ordersDataTableErrorText').text(notFound404Error)
+      } else if (xhr.status === 503) {
+        // $('#cover-spin').hide(0);
+        $('#ordersDataTableErrorText').text(serverError503Error)
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const currentDateString = String(data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+            SecurityKeyTime = false
+            getResourcesData(skip, page, search)
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const currentDateString = String(data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
+              SecurityKeyTime = false
+              getResourcesData(skip, page, search)
+            })
+          }
+        })
+      } else {
+        // $('#cover-spin').hide(0);
+        $('#ordersDataTableErrorText').text(serverError503Error)
+      }
+    }
+  })
+}
 
 
 // populate service cards
@@ -39,30 +143,58 @@ function populateServiceCardsToUI(dataArray) {
   dataArray.forEach(data => {
     // Create the card wrapper
     const cardHolderDiv = document.createElement("div");
-    cardHolderDiv.className = "p-2 mt-4 col-4";
+    cardHolderDiv.className = "p-2 mt-0 col-4";
     const card = document.createElement("div");
     card.className = "card h-100 w-100";
     card.style.border = "1px solid #97a3af";
 
-    // Inner HTML
     card.innerHTML = `
-        <div class="card-body">
-          <div class="col-12 d-flex flex-column singleStepWithBulletsDiv">
-            <div class="col-12">
-              <h3>${data.title}</h3>
-              <p class='fs-3'>${data.description}</p>
-            </div>
-            <div class="col-12 d-flex justify-content-center align-items-center mt-2">
-              <button type="button" class="btn btn-primary btn-sm px-4 w-75" data-id="${data.id}">View</button>
-              <button type="button" class="btn btn-secondary btn-sm px-4 ms-4 w-75" data-id="${data.id}">Download</button>
-            </div>
+      <div class="card h-100 d-flex flex-column">
+        <div class="card-header 
+          ${data.type === 'file' ? 'bg-primary bg-opacity-25 text-primary' : 
+            data.type === 'url' ? 'bg-success bg-opacity-25 text-success' : 
+            'bg-danger bg-opacity-25 text-danger'}">
+          <h5 class="mb-0">${escapeHtml(data.title || 'Untitled')}</h5>
+        </div>
+
+        <div class="card-body d-flex flex-column justify-content-between">
+          <p class="mb-0 fs-6">${escapeHtml(data.description || '&nbsp;')}</p>
+        </div>
+
+        <div class="card-footer p-2">
+          <div class="d-flex justify-content-between">
+            <small class="text-dark mt-2">
+              Updated: ${new Date(Number(data.updated_at) * 1000).toLocaleDateString()}
+            </small>
+            ${
+              data.type === 'file'
+                ? `<button type="button" class="btn btn-outline-primary btn-sm px-4"
+                    data-id="${data.document_id}"
+                    data-source="${encodeURIComponent(data.source)}"
+                    data-title="${encodeURIComponent(data.title)}"
+                    onclick="downloadDocument(decodeURIComponent(this.dataset.source), decodeURIComponent(this.dataset.title))">
+                    Download</button>`
+              : data.type === 'url'
+                ? `<button type="button" class="btn btn-outline-success btn-sm px-4"
+                    data-id="${data.document_id}"
+                    data-source="${encodeURIComponent(data.source)}"
+                    onclick="openUrlInNewTab(decodeURIComponent(this.dataset.source))">
+                    Open Link</button>`
+                : `<button type="button" class="btn btn-outline-danger btn-sm px-4"
+                    data-id="${data.document_id}"
+                    data-title="${encodeURIComponent(data.title)}"
+                    data-source="${encodeURIComponent(data.source)}"
+                    onclick="showInCanvas(decodeURIComponent(this.dataset.title), decodeURIComponent(this.dataset.source))">
+                    View</button>`
+            }
           </div>
         </div>
-        <div class="card-footer p-3 pb-0" style="background-color: #d9d9d9;">
-          <p class='text-dark'>Updated: ${data.date_modified}</p>
-        </div>
-      `;
+      </div>
+    `;
 
+  
+
+  
     cardHolderDiv.appendChild(card);
     // Append card to container
     container.appendChild(cardHolderDiv);
@@ -70,46 +202,119 @@ function populateServiceCardsToUI(dataArray) {
 
 }
 
-let resourcesDocumentationData = [
-  {
-    title: "Onboarding Guide",
-    description: "Step-by-step instructions for setting up your first cybersecurity service.",
-    date_modified: "June 2024",
-    id: 1
-  },
-  {
-    title: "Incident Response Plan Template",
-    description: "A customizable template to help you create an effective incident response plan.",
-    date_modified: "July 2024",
-    id: 2
-  },
-  {
-    title: "Cybersecurity Best Practices",
-    description: "A comprehensive guide on best practices to enhance your organization's cybersecurity posture.",
-    date_modified: "August 2024",
-    id: 3
-  },
-  {
-    title: "Compliance Checklist",
-    description: "A checklist to ensure your organization meets key cybersecurity compliance requirements.",
-    date_modified: "September 2024",
-    id: 4
-  },
-  {
-    title: "Phishing Awareness Training",
-    description: "Materials and resources to educate your team about phishing threats and prevention.",
-    date_modified: "October 2024",
-    id: 5
-  },
-  {
-    title: "Vulnerability Management Guide",
-    description: "Guidelines for identifying, assessing, and mitigating vulnerabilities in your systems.",
-    date_modified: "November 2024",
-    id: 6
-  },
+function downloadDocument(fileUrl, document_Name) {
+  $("#cover-spin").show();
 
 
-]
+  const payload = JSON.stringify({
+      download_file: fileUrl,
+      
+  });
 
-// call the function to populate service cards to UI
-populateServiceCardsToUI(resourcesDocumentationData)
+  const options = {
+    method: "POST",
+    body: payload,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  let mainPath = "https://min.cytex.io/ctxio/download/file";
+
+  fetch(mainPath, options)
+    .then((xhr) => {
+      if (xhr.status === 200) {
+        return xhr.blob();
+      } else {
+        $("#cover-spin").hide();
+        if (xhr.status === 400) {
+          showNotificationError("bg-orange", null, null, null, null, null, invalidRequest400Error);
+        } else if (xhr.status === 401) {
+          showNotificationError("bg-orange", null, null, null, null, null, unauthorizedRequest401Error);
+        } else if (xhr.status === 404) {
+          showNotificationError("bg-orange", null, null, null, null, null, notFound404Error);
+        } else if (xhr.status === 503) {
+          showNotificationError("bg-red", null, null, null, null, null, serverError503Error);
+        } else if (xhr.status === 408) {
+          swal(
+            {
+              title: " ",
+              text: sessionExpired408Error,
+              type: "info",
+              showCancelButton: false,
+              confirmButtonText: "Logout",
+            },
+            function (isConfirm) {
+              if (isConfirm) {
+                localStorage.clear();
+                window.location.href = redirectToSignInPage408;
+              }
+            }
+          );
+        } else if (xhr.status === 410) {
+          $("#cover-spin").show();
+          $.ajax({
+            url: MAIN_API_PATH + getGmtAPI,
+            method: POST,
+            contentType: Content_Type,
+            dataType: "json",
+            success: function (data) {
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const DateString = String(data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(pageName + DateString);
+              SecurityKeyTime = false;
+              downloadUploadedFile(fileUrl,document_Name);
+            },
+            error: function () {
+              $.getJSON(worldTimeAPI, function (data) {
+                const encrypt = new JSEncrypt();
+                encrypt.setPublicKey(sitePublicKey);
+                const DateString = String(data.unixtime);
+                securityKeyEncrypted = encrypt.encrypt(pageName + DateString);
+                SecurityKeyTime = false;
+                downloadUploadedFile(fileUrl, document_Name);
+              });
+            },
+          });
+        } else {
+          showNotificationError("bg-red", null, null, null, null, null, serverError503Error);
+        }
+      }
+    })
+    .then((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+
+      // Use the function parameter for file name
+      a.download = document_Name;
+
+      document.body.appendChild(a);
+      a.click();
+
+      $("#cover-spin").hide();
+    })
+    .catch((err) => console.log("FILE", err));
+}
+
+
+
+function  showInCanvas(title, content) {
+  document.getElementById('textOffcanvasLabel').textContent = title;
+  document.getElementById('textOffcanvasBody').textContent = content || '(no text)';
+  const offcanvas = new bootstrap.Offcanvas('#textOffcanvas');
+  offcanvas.show();
+}
+
+
+function openUrlInNewTab(url) {
+  // Opens the URL safely in a new tab
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function escapeHtml(str = '') {
+  return str.replace(/[&<>"']/g, m => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[m]));
+}

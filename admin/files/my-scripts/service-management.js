@@ -9,25 +9,21 @@ const authToken = decryptedByte.toString(CryptoJS.enc.Utf8);
 let serviceManagementDataTableInit;
 let searchOject = {};
 let serviceManagementDataReceived = "";
-let costDetailsInit
+let costDetailsInit;
 
-let createBundleDataTableInit
+let createBundleDataTableInit;
 let createBundleDataReceived = "";
 let createBundleSerachObj = {};
 
-let enrollServicesDataTableInit
+let enrollServicesDataTableInit;
 let enrollServicesDataReceived = "";
 let enrollServicesSerachObj = {};
 
-
-
-let addFilesDataTableInit
+let addFilesDataTableInit;
 let addFilesDataReceived = "";
 let addFilesSerachObj = {};
 
-
 let checkedServicesToEnrollList = [];
-
 
 $(document).ready(function () {
   // Show main content and hide loader
@@ -35,15 +31,14 @@ $(document).ready(function () {
   $("#mainContentInnerLoader").addClass("d-none");
   $("#mainContentInnerDataToShow").removeClass("d-none");
 
-
-  $('#enrollServicesForm').validate({
+  $("#enrollServicesForm").validate({
     debug: true,
     rules: {
       enrollServicesFormTitle: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
         minlength: 3,
-        onlyDigitsNotAllowed: true
+        onlyDigitsNotAllowed: true,
       },
       // enrollServicesFormDescription: {
       //   required: false // optional
@@ -54,124 +49,129 @@ $(document).ready(function () {
       estimated_cost: "Estimated cost is required and must be a number",
       cost_type: "Cost type is required",
       cost_unit: "Cost unit is required",
-      availability: "Availability must be selected"
+      availability: "Availability must be selected",
     },
-    errorClass: 'error invalid-feedback',
-    validClass: 'success',
-    errorElement: 'span',
+    errorClass: "error invalid-feedback",
+    validClass: "success",
+    errorElement: "span",
     highlight: function (element, errorClass, validClass) {
-      $(element).parents('div.control-group').addClass(errorClass).removeClass(validClass);
+      $(element)
+        .parents("div.control-group")
+        .addClass(errorClass)
+        .removeClass(validClass);
     },
     unhighlight: function (element, errorClass, validClass) {
-      $(element).parents('.error').removeClass(errorClass).addClass(validClass);
+      $(element).parents(".error").removeClass(errorClass).addClass(validClass);
     },
     // the errorPlacement has to take the table layout into account
     errorPlacement: function (error, element) {
       if (element.attr("name") === "cost_type") {
-        error.appendTo(element.parent().parent().parent().parent().parent())
+        error.appendTo(element.parent().parent().parent().parent().parent());
       } else {
-        error.appendTo(element.parent())
+        error.appendTo(element.parent());
       }
-    }
+    },
   });
 
-
-  // costDetailsInit 
-  costDetailsInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "cost_type",
-      true
-    );
-  // FileType 
-  fileTypeInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "fileType",
-      true
-    );
+  // costDetailsInit
+  costDetailsInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+    "cost_type",
+    true
+  );
+  // FileType
+  fileTypeInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+    "fileType",
+    true
+  );
   // First Data Table Initialization
-  serviceManagementDataTableInit = createTableComponent(dataSourceIPconfig, options);
+  serviceManagementDataTableInit = createTableComponent(
+    dataSourceIPconfig,
+    options
+  );
 
   // create Bundle Data Table Initialization
-  createBundleDataTableInit = createTableComponent(createBundleDataTable, options1);
+  createBundleDataTableInit = createTableComponent(
+    createBundleDataTable,
+    options1
+  );
 
   // enroll services Data Table Initialization
-  enrollServicesDataTableInit = createTableComponent(enrolServicesCreatBundleDataTable, options1);
+  enrollServicesDataTableInit = createTableComponent(
+    enrolServicesCreatBundleDataTable,
+    options1
+  );
 
-   // File Data Table Initialization
+  // File Data Table Initialization
   addFilesDataTableInit = createTableComponent(addFilesDataTableShow, options4);
-
 
   // getMuncipilityDetails()
 
   getServiceManagementTableData(10, 1);
-  getaddFilesTableData(10, 1)
-  getCreateBundleTableData(10, 1)
+  getaddFilesTableData(10, 1);
+  getCreateBundleTableData(10, 1);
   // SERVICE MANAGEMNT
   // Validation rules define
-  $('#yourFormId').validate({
+  $("#yourFormId").validate({
     debug: true,
     rules: {
       title: {
-        required: true
+        required: true,
       },
       description: {
-        required: false // optional
+        required: false, // optional
       },
       estimated_cost: {
         required: true,
-        number: true
+        number: true,
       },
       cost_type: {
-        required: true
+        required: true,
       },
       cost_unit: {
-        required: true
+        required: true,
       },
       availability: {
-        required: true
-      }
+        required: true,
+      },
     },
     messages: {
       title: "Title is required",
       estimated_cost: "Estimated cost is required and must be a number",
       cost_type: "Cost type is required",
       cost_unit: "Cost unit is required",
-      availability: "Availability must be selected"
+      availability: "Availability must be selected",
     },
-    errorClass: 'error invalid-feedback',
-    validClass: 'success',
-    errorElement: 'span',
+    errorClass: "error invalid-feedback",
+    validClass: "success",
+    errorElement: "span",
     highlight: function (element, errorClass, validClass) {
-      $(element).parents('div.control-group').addClass(errorClass).removeClass(validClass);
+      $(element)
+        .parents("div.control-group")
+        .addClass(errorClass)
+        .removeClass(validClass);
     },
     unhighlight: function (element, errorClass, validClass) {
-      $(element).parents('.error').removeClass(errorClass).addClass(validClass);
+      $(element).parents(".error").removeClass(errorClass).addClass(validClass);
     },
     // the errorPlacement has to take the table layout into account
     errorPlacement: function (error, element) {
       if (element.attr("name") === "cost_type") {
-        error.appendTo(element.parent().parent().parent().parent().parent())
+        error.appendTo(element.parent().parent().parent().parent().parent());
       } else {
-        error.appendTo(element.parent())
+        error.appendTo(element.parent());
       }
-    }
+    },
   });
-
-
-
 });
-
 
 // get span for change
 function generateSpan(data, key, customClass = "", style = "") {
+  let sepecficKeys = ["cost_type"];
 
-  let sepecficKeys = ['cost_type']
-
-  let keyValue={
-    'per_entity': "Per Entity",
-    'per_unit': "Per Unit"
-  }
-
+  let keyValue = {
+    per_entity: "Per Entity",
+    per_unit: "Per Unit",
+  };
 
   let spanContent = "";
 
@@ -197,23 +197,20 @@ function generateSpan(data, key, customClass = "", style = "") {
     // If the key is an array, join its values with commas and display in a span
     const displayValue = data[key].toFixed(2);
     spanContent = `<span class="${customClass}" style="${style}" title="${displayValue}">${displayValue}</span>`;
-  }
-  else if(sepecficKeys.includes(key)){
+  } else if (sepecficKeys.includes(key)) {
     // If the key is a simple value
-    const displayValue = keyValue[data[key]] || data[key] ;
+    const displayValue = keyValue[data[key]] || data[key];
     const title = displayValue;
     spanContent = `<span class="${customClass}" style="${style}" title="${title}">${displayValue}</span>`;
-  }else{
+  } else {
     // If the key is a simple value
-    const displayValue = data[key] ;
+    const displayValue = data[key];
     const title = displayValue;
     spanContent = `<span class="${customClass}" style="${style}" title="${title}">${displayValue}</span>`;
   }
 
   return spanContent;
 }
-
-
 
 function searchObjectCreation(search) {
   searchOject = search;
@@ -283,10 +280,16 @@ function getServiceManagementTableData(skip, page) {
           const service_id = item.service_id || "--";
           const title = item.title || "--";
           const description = item.description || "--";
-          const estimated_cost = item.estimated_cost != null ? item.estimated_cost : "--";
+          const estimated_cost =
+            item.estimated_cost != null ? item.estimated_cost : "--";
           const cost_type = item.cost_type || "--";
           const cost_unit = item.cost_unit || "--";
-          const availability = item.availability != null ? (item.availability ? "Yes" : "No") : "--";
+          const availability =
+            item.availability != null
+              ? item.availability
+                ? "Yes"
+                : "No"
+              : "--";
 
           // Action buttons
           const actions = `
@@ -294,21 +297,25 @@ function getServiceManagementTableData(skip, page) {
     <button class="btn btn-sm btn-outline-danger delete-service" data-service-id="${service_id}">Delete</button>
   `;
 
-          serviceManagementDataTableInit.row.add([
-            `<td>${title}</td>`,
-            `<td><span style="
+          serviceManagementDataTableInit.row
+            .add([
+              `<td>${title}</td>`,
+              `<td><span style="
         display: inline-block;
         max-width: 200px;  /* width fix */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     " title="${description}">${description}</span></td>`,
-            `<td>${estimated_cost}</td>`,
-            `<td>${cost_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</td>`,
-            `<td>${cost_unit}</td>`,
-            `<td>${availability}</td>`,
-            `<td>${actions}</td>`
-          ]).draw();
+              `<td>${estimated_cost}</td>`,
+              `<td>${cost_type
+                .replace(/_/g, " ")
+                .replace(/\b\w/g, (l) => l.toUpperCase())}</td>`,
+              `<td>${cost_unit}</td>`,
+              `<td>${availability}</td>`,
+              `<td>${actions}</td>`,
+            ])
+            .draw();
 
           datatablePagination(
             "serviceManagementDataTable",
@@ -319,7 +326,6 @@ function getServiceManagementTableData(skip, page) {
         }
         // Attach click events after table is rendered
         attachServiceManagementActions();
-
       },
       204: function () {
         $("#cover-spin").hide();
@@ -341,7 +347,9 @@ function getServiceManagementTableData(skip, page) {
       if (xhr.status === 400) {
         $("#serviceManagementDataTableErrorText").text(invalidRequest400Error);
       } else if (xhr.status === 401) {
-        $("#serviceManagementDataTableErrorText").text(unauthorizedRequest401Error);
+        $("#serviceManagementDataTableErrorText").text(
+          unauthorizedRequest401Error
+        );
       } else if (xhr.status === 404) {
         // $('#cover-spin').hide(0);
         $("#serviceManagementDataTableErrorText").text(notFound404Error);
@@ -406,13 +414,10 @@ function exportServiceManagementDataTableData() {
   console.log("exportServiceManagementDataTableData called");
 }
 
-
 // href click to open modal
 $(document).on("click", "#clickToOpenModal", function () {
   $("#companyDetailsFormModal").modal("show");
 });
-
-
 
 // ********************** start set/Edit municpilities detsils *********************************
 
@@ -453,7 +458,7 @@ $("#serviceManagementSubmit").on("click", function (e) {
       cost_unit,
       availability,
       service_id: serviceId,
-      timestamp: Math.floor(Date.now() / 1000)
+      timestamp: Math.floor(Date.now() / 1000),
     };
 
     // Update service
@@ -477,14 +482,11 @@ $("#serviceManagementSubmit").on("click", function (e) {
     });
   } else {
     // Add new service
-    setMuncipilitiesData()
+    setMuncipilitiesData();
   }
 });
 
-
 function setMuncipilitiesData() {
-
-
   // Current epoch time in **seconds**
   const created_at = Math.floor(Date.now() / 1000);
   // Get values from modal
@@ -495,7 +497,6 @@ function setMuncipilitiesData() {
   const cost_unit = $("#cost_unit").val();
   const availability = $("#availability").prop("checked"); // true/false
 
-
   // Prepare payload
   const payload = JSON.stringify({
     auth_token: authToken,
@@ -505,11 +506,10 @@ function setMuncipilitiesData() {
     cost_type,
     cost_unit,
     availability,
-    created_at
+    created_at,
   });
 
   console.log("Modal form payload:", payload);
-
 
   // return 0
   $.ajax({
@@ -661,7 +661,9 @@ function attachServiceManagementActions() {
   document.querySelectorAll(".edit-service").forEach((btn) => {
     btn.addEventListener("click", function () {
       const serviceId = this.dataset.serviceId;
-      const serviceData = serviceManagementDataReceived.find(s => s.service_id === serviceId);
+      const serviceData = serviceManagementDataReceived.find(
+        (s) => s.service_id === serviceId
+      );
       if (!serviceData) return;
 
       // Prefill modal inputs
@@ -679,9 +681,12 @@ function attachServiceManagementActions() {
         estimated_cost: serviceData.estimated_cost,
         cost_type: serviceData.cost_type,
         cost_unit: serviceData.cost_unit,
-        availability: serviceData.availability
+        availability: serviceData.availability,
       };
-      $("#serviceManagementDetailsModal").data("original-values", originalValues);
+      $("#serviceManagementDetailsModal").data(
+        "original-values",
+        originalValues
+      );
 
       // Store service_id in modal for update
       $("#serviceManagementDetailsModal").data("service-id", serviceId);
@@ -692,173 +697,176 @@ function attachServiceManagementActions() {
       // Disable submit button initially
       $("#serviceManagementSubmit").prop("disabled", true);
     });
-
   });
 
   document.querySelectorAll(".delete-service").forEach((btn) => {
     btn.addEventListener("click", function () {
       const serviceId = this.dataset.serviceId;
-      swal({
-        title: 'Deleting Record',
-        text: 'Are you sure you want to delete?',
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Confirm',
-        cancelButtonText: 'Cancel'
-      }, function () {
-        $('#cover-spin').show()
+      swal(
+        {
+          title: "Deleting Record",
+          text: "Are you sure you want to delete?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Confirm",
+          cancelButtonText: "Cancel",
+        },
+        function () {
+          $("#cover-spin").show();
 
-        const apiBody = JSON.stringify({
-          auth_token: authToken,
-          service_id: serviceId,
-        })
-        // return 0 
-        $.ajax({
-          url: MAIN_API_PATH + deleteserviceManagementAPI,
-          method: POST,
-          contentType: Content_Type,
-          dataType: 'json',
-          data: apiBody,
-          statusCode: {
-            200: function (data) {
-              $('#cover-spin').hide(0)
+          const apiBody = JSON.stringify({
+            auth_token: authToken,
+            service_id: serviceId,
+          });
+          // return 0
+          $.ajax({
+            url: MAIN_API_PATH + deleteserviceManagementAPI,
+            method: POST,
+            contentType: Content_Type,
+            dataType: "json",
+            data: apiBody,
+            statusCode: {
+              200: function (data) {
+                $("#cover-spin").hide(0);
 
-              showNotificationError(
-                'bg-green',
-                null,
-                null,
-                null,
-                null,
-                null,
-                DELETE
-              )
+                showNotificationError(
+                  "bg-green",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  DELETE
+                );
 
-              teamMembersAPIResponse = [];
-              showDataTableLoader("profileTeamDataTable");
+                teamMembersAPIResponse = [];
+                showDataTableLoader("profileTeamDataTable");
 
-              serviceManagementDataTableInit.clear().draw();
-              let pageEntries = Number($("#datatableEntries1").val());
-              getServiceManagementTableData(pageEntries, 1);
-
+                serviceManagementDataTableInit.clear().draw();
+                let pageEntries = Number($("#datatableEntries1").val());
+                getServiceManagementTableData(pageEntries, 1);
+              },
+              204: function () {
+                $("#cover-spin").hide(0);
+              },
             },
-            204: function () {
-              $('#cover-spin').hide(0)
-            }
-          },
-          error: function (xhr, status, error) {
-            $('#cover-spin').hide()
-            if (xhr.status === 400) {
-              showNotificationError(
-                'bg-orange',
-                null,
-                null,
-                null,
-                null,
-                null,
-                invalidRequest400Error
-              )
-            } else if (xhr.status === 401) {
-              showNotificationError(
-                'bg-orange',
-                null,
-                null,
-                null,
-                null,
-                null,
-                unauthorizedRequest401Error
-              )
-            } else if (xhr.status === 404) {
-              showNotificationError(
-                'bg-orange',
-                null,
-                null,
-                null,
-                null,
-                null,
-                notFound404Error
-              )
-            } else if (xhr.status === 409) {
-              showNotificationError(
-                'bg-orange',
-                null,
-                null,
-                null,
-                null,
-                null,
-                alreadyExist409Error
-              )
-            } else if (xhr.status === 503) {
-              showNotificationError(
-                'bg-red',
-                null,
-                null,
-                null,
-                null,
-                null,
-                serverError503Error
-              )
-            } else if (xhr.status === 408) {
-              swal(
-                {
-                  title: ' ',
-                  text: sessionExpired408Error,
-                  type: 'info',
-                  showCancelButton: false,
-                  confirmButtonText: 'Logout'
-                },
-                function (isConfirm) {
-                  if (isConfirm) {
-                    localStorage.clear()
-                    window.location.href = redirectToSignInPage408
+            error: function (xhr, status, error) {
+              $("#cover-spin").hide();
+              if (xhr.status === 400) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  invalidRequest400Error
+                );
+              } else if (xhr.status === 401) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  unauthorizedRequest401Error
+                );
+              } else if (xhr.status === 404) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  notFound404Error
+                );
+              } else if (xhr.status === 409) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  alreadyExist409Error
+                );
+              } else if (xhr.status === 503) {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              } else if (xhr.status === 408) {
+                swal(
+                  {
+                    title: " ",
+                    text: sessionExpired408Error,
+                    type: "info",
+                    showCancelButton: false,
+                    confirmButtonText: "Logout",
+                  },
+                  function (isConfirm) {
+                    if (isConfirm) {
+                      localStorage.clear();
+                      window.location.href = redirectToSignInPage408;
+                    }
                   }
-                }
-              )
-            } else if (xhr.status === 410) {
-              $('#cover-spin').hide()
+                );
+              } else if (xhr.status === 410) {
+                $("#cover-spin").hide();
 
-              $.ajax({
-                url: MAIN_API_PATH + getGmtAPI,
-                method: POST,
-                contentType: Content_Type,
-                dataType: 'json',
-                success: function (data, textStatus, xhr) {
-                  const encrypt = new JSEncrypt()
-                  encrypt.setPublicKey(sitePublicKey)
-                  const dateString = String(pageName + data.unixtime)
-                  securityKeyEncrypted = encrypt.encrypt(dateString)
-                  SecurityKeyTime = false
-                  editPolicyAndSessions()
-                },
-                error: function (xhr, status, error) {
-                  $.getJSON(worldTimeAPI, function (data) {
-                    const encrypt = new JSEncrypt()
-                    encrypt.setPublicKey(sitePublicKey)
-                    const dateString = String(pageName + data.unixtime)
-                    securityKeyEncrypted = encrypt.encrypt(dateString)
-                    SecurityKeyTime = false
-                    editPolicyAndSessions()
-                  })
-                }
-              })
-            } else {
-              showNotificationError(
-                'bg-red',
-                null,
-                null,
-                null,
-                null,
-                null,
-                serverError503Error
-              )
-            }
-          }
-        })
-      })
+                $.ajax({
+                  url: MAIN_API_PATH + getGmtAPI,
+                  method: POST,
+                  contentType: Content_Type,
+                  dataType: "json",
+                  success: function (data, textStatus, xhr) {
+                    const encrypt = new JSEncrypt();
+                    encrypt.setPublicKey(sitePublicKey);
+                    const dateString = String(pageName + data.unixtime);
+                    securityKeyEncrypted = encrypt.encrypt(dateString);
+                    SecurityKeyTime = false;
+                    editPolicyAndSessions();
+                  },
+                  error: function (xhr, status, error) {
+                    $.getJSON(worldTimeAPI, function (data) {
+                      const encrypt = new JSEncrypt();
+                      encrypt.setPublicKey(sitePublicKey);
+                      const dateString = String(pageName + data.unixtime);
+                      securityKeyEncrypted = encrypt.encrypt(dateString);
+                      SecurityKeyTime = false;
+                      editPolicyAndSessions();
+                    });
+                  },
+                });
+              } else {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              }
+            },
+          });
+        }
+      );
     });
   });
 }
 
-$("#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, #serviceManagementDetailsModal textarea").on("input change", function () {
+$(
+  "#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, #serviceManagementDetailsModal textarea"
+).on("input change", function () {
   const original = $("#serviceManagementDetailsModal").data("original-values");
   const serviceId = $("#serviceManagementDetailsModal").data("service-id");
 
@@ -875,10 +883,12 @@ $("#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, 
     estimated_cost: parseFloat($("#estimated_cost").val()) || 0,
     cost_type: $("#cost_type").val(),
     cost_unit: $("#cost_unit").val(),
-    availability: $("#availability").prop("checked")
+    availability: $("#availability").prop("checked"),
   };
 
-  const changed = Object.keys(currentValues).some(key => currentValues[key] !== original[key]);
+  const changed = Object.keys(currentValues).some(
+    (key) => currentValues[key] !== original[key]
+  );
 
   // Enable submit only if some value changed
   $("#serviceManagementSubmit").prop("disabled", !changed);
@@ -886,37 +896,26 @@ $("#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, 
 
 // ********************** end Edit municpilities Value *********************************
 
-
-
-
 // Reset modal inputs when it is closed
-$('#serviceManagementDetailsModal').on('hidden.bs.modal', function () {
+$("#serviceManagementDetailsModal").on("hidden.bs.modal", function () {
   // Clear all input/select/textarea
-  $(this).find('input[type="text"], input[type="number"], textarea').val('');
+  $(this).find('input[type="text"], input[type="number"], textarea').val("");
 
   // Reset select dropdowns
-  $(this).find('select').val('').trigger('change');
-  costDetailsInit.setValue('');
+  $(this).find("select").val("").trigger("change");
+  costDetailsInit.setValue("");
   // Reset checkbox
-  $(this).find('input[type="checkbox"]').prop('checked', false);
+  $(this).find('input[type="checkbox"]').prop("checked", false);
 
   // Remove any stored service ID
-  $(this).removeData('service-id');
+  $(this).removeData("service-id");
 });
-
-
-
 
 // ********************** Start Upload Service *********************************
 
-
 // ********************** End Upload Service *********************************
 
-
-
 // Handle type change
-
-
 
 function updateFields() {
   var type = $("#fileType").val();
@@ -927,7 +926,10 @@ function updateFields() {
     $("#fileUploadWrapper").hide();
     $("#sourceWrapper").show();
     $("#fileSource").val(""); // clear previous value
-    $("#fileSource").attr("placeholder", type === "url" ? "Enter URL" : "Enter Text");
+    $("#fileSource").attr(
+      "placeholder",
+      type === "url" ? "Enter URL" : "Enter Text"
+    );
   }
 }
 
@@ -941,9 +943,13 @@ $("#submitFileBtn").on("click", function () {
   var type = $("#fileType").val();
   var source = $("#fileSource").val().trim();
   var fileInputEl = document.getElementById("fileInput");
-  var file = fileInputEl && fileInputEl.files.length ? fileInputEl.files[0] : null;
+  var file =
+    fileInputEl && fileInputEl.files.length ? fileInputEl.files[0] : null;
 
-  if (!title) { alert("Title is required"); return; }
+  if (!title) {
+    alert("Title is required");
+    return;
+  }
 
   var formData = new FormData();
   formData.append("title", title);
@@ -954,17 +960,23 @@ $("#submitFileBtn").on("click", function () {
   formData.append("auth_token", authToken);
 
   if (type === "file") {
-    if (!file) { alert("Please select a file"); return; }
+    if (!file) {
+      alert("Please select a file");
+      return;
+    }
     formData.append("file", file, file.name);
     formData.append("source", "");
   } else {
-    if (!source) { alert("Please enter source"); return; }
+    if (!source) {
+      alert("Please enter source");
+      return;
+    }
     formData.append("source", source);
   }
 
   // AJAX request
   $.ajax({
-    url: MAIN_API_PATH + adminDocumentsAdd,  // replace with your API
+    url: MAIN_API_PATH + adminDocumentsAdd, // replace with your API
     method: "POST",
     data: formData,
     processData: false,
@@ -972,7 +984,7 @@ $("#submitFileBtn").on("click", function () {
     success: function (response) {
       console.log("Upload success:", response);
       alert("File added successfully!");
-      var modalEl = document.getElementById('addFileModal');
+      var modalEl = document.getElementById("addFileModal");
       var modal = bootstrap.Modal.getInstance(modalEl);
       modal.hide(); // close modal
       $("#addFileForm")[0].reset(); // reset form
@@ -981,11 +993,9 @@ $("#submitFileBtn").on("click", function () {
     error: function (err) {
       console.error("Upload error:", err);
       alert("Error uploading file!");
-    }
+    },
   });
 });
-
-
 
 // Main API Call function for datatable
 // function getServiceManagementFilesTableData(skip, page) {
@@ -1017,8 +1027,6 @@ $("#submitFileBtn").on("click", function () {
 //       200: function (data) {
 //         // Hide page laoder Spiner
 //         $("#cover-spin").hide();
-
-     
 
 //       },
 //       204: function () {
@@ -1166,61 +1174,62 @@ function getaddFilesTableData(skip, page) {
 
         // loop through response to add data in datatable
         for (let i = 0; i < response.length; i++) {
-            const doc = response[i];
+          const doc = response[i];
 
-  // Format source
-  let sourceDisplay = "";
-  if (doc.type === "url") {
-    sourceDisplay = `<a href="${doc.source}"  target="_blank">Open Link</a>`;
-  } else if (doc.type === "text") {
-    sourceDisplay = `<span  style="
+          // Format source
+          let sourceDisplay = "";
+          if (doc.type === "url") {
+            sourceDisplay = `<a href="${doc.source}"  target="_blank">Open Link</a>`;
+          } else if (doc.type === "text") {
+            sourceDisplay = `<span  style="
         display: inline-block;
         max-width: 200px;  /* width fix */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     " title="${doc.source}">${doc.source}</span>`;
-  } else if (doc.type === "file") {
-    sourceDisplay = `<a href="${doc.source}" download>Download File</a>`;
-  }
+          } else if (doc.type === "file") {
+            sourceDisplay = `<a href="${doc.source}" download>Download File</a>`;
+          }
 
-  // Format created_at
-  let createdDate = new Date(doc.created_at * 1000).toLocaleString();
+          // Format created_at
+          let createdDate = new Date(doc.created_at * 1000).toLocaleString();
 
-  // Action buttons
-  let actions = `
+          // Action buttons
+          let actions = `
     <button class="btn btn-sm btn-outline-primary edit-document" data-id="${doc.document_id}">Edit</button>
     <button class="btn btn-sm btn-outline-danger delete-document" data-id="${doc.document_id}">Delete</button>
   `;
-   
-          
-
-       
 
           addFilesDataTableInit.row
             .add([
-             
-                 doc.title,
-  `<span class="truncate-text" title="${doc.description || '--'}" style="
+              doc.title,
+              `<span class="truncate-text" title="${doc.description || "--"
+              }" style="
     display: inline-block;
     max-width: 200px;  /* width fix */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-">${doc.description ? doc.description : '--'}</span>`,
+">${doc.description ? doc.description : "--"}</span>`,
 
-      `<span class="badge badge-type" style="
-        background-color: ${doc.type === 'file' ? '#f39c12' : doc.type === 'url' ? '#3498db' : '#2ecc71'};
+              `<span class="badge badge-type" style="
+        background-color: ${doc.type === "file"
+                ? "#f39c12"
+                : doc.type === "url"
+                  ? "#3498db"
+                  : "#2ecc71"
+              };
         color: #fff;
         text-transform: uppercase;
         padding: 0.25em 0.5em;
         border-radius: 0.25rem;
         font-size: 0.8rem;
     ">${doc.type}</span>`,
-    
-    sourceDisplay,
-    createdDate,
-    `<span>${actions}</span>`
+
+              sourceDisplay,
+              createdDate,
+              `<span>${actions}</span>`,
             ])
             .draw();
           datatablePagination(
@@ -1329,10 +1338,6 @@ function exportaddFilesDataTableData() {
 
 // end Add File Data Table Initialization
 
-
-
-
-
 // start create Bundle Data Table Initialization
 
 function createBundleSearchObjectCreation(search) {
@@ -1391,41 +1396,73 @@ function getCreateBundleTableData(skip, page) {
         hideDataTableLoader200("createBundleDataTable");
 
         // Response data (IPs)
-        response = data;
-        ordersDataReceived = response;
+        response = data.message;
+        ordersDataReceived = response.message;
         localStorage.setItem("createBundleDataTableTotal", data.length);
         // If No IPs found
 
         // loop through response to add data in datatable
         for (let i = 0; i < response.length; i++) {
-          let order_id = generateSpan(response[i], "order_id", "", "");
-          let municipality = generateSpan(response[i], "municipality", "", "");
-          let service = generateSpan(response[i], "service", "", "");
-          let date = generateSpan(response[i], "date", "", "");
-          let payment = generateSpan(response[i], "payment", "", "");
-          let status = generateSpan(response[i], "status", "", "");
-          if (response[i].status === "Pending Kickoff") {
-            status = `<div class='d-flex flex-column'>
-      ${status}
-      <button class="btn btn-sm btn-danger view-order-details p-1 ms-2 px-4" style='font-size: 10px; width: fit-content' data-order-id="${response[i].order_id}">Pay Now</button>
-      </div>      
-      `;
-          }
+          let bundle = response[i];
+          // description ellipsis + hover
+          const description =
+            bundle.description && bundle.description.trim() !== ""
+              ? `<span class="truncate-text" title="${bundle.description}" style="
+            display:inline-block;
+            max-width:200px;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;">
+            ${bundle.description}
+         </span>`
+              : `--`;
 
-          let actions = `
-      <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
-      <button class="btn btn-sm btn-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
-    `;
+          // services count (click to open modal)
+          const servicesCount = `<a href="javascript:void(0)" 
+                            class="services-count" 
+                            data-service-ids='${JSON.stringify(
+            bundle.list_of_services
+          )}'>
+                            ${bundle.list_of_services.length}
+                         </a>`;
+
+          // availability toggle
+          let availabilityToggle = `
+    <div class="form-check form-switch">
+      <input class="form-check-input availability-toggle" 
+             type="checkbox" 
+             data-id="${bundle.bundle_id}" 
+             ${bundle.availability ? "checked" : ""}>
+    </div>
+  `;
+
+          // created date
+          const createdDate = new Date(
+            bundle.created_at * 1000
+          ).toLocaleDateString();
+
+          // actions (edit + delete)
+          const actions = `
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-outline-primary edit-bundle"
+              data-bundle-id="${bundle.bundle_id}">
+       Edit
+      </button>
+      <button class="btn btn-sm btn-outline-danger delete-bundle"
+              data-bundle-id="${bundle.bundle_id}">
+        Delete
+      </button>
+    </div>
+  `;
 
           createBundleDataTableInit.row
             .add([
-              `<td ><span >#${order_id}</span></td>`,
-              `<td ><span >${municipality}</span></td>`,
-              `<td ><span >${service}</span></td>`,
-              `<td ><span >${date}</span></td>`,
-              `<td ><span >${payment}</span></td>`,
-              `<td ><span >${status}</span></td>`,
-              `<td ><span >${actions}</span></td>`,
+              bundle.title,
+              description,
+              servicesCount,
+              availabilityToggle,
+              createdDate,
+              actions,
             ])
             .draw();
           datatablePagination(
@@ -1526,7 +1563,50 @@ function getCreateBundleTableData(skip, page) {
     },
   });
 }
+// services count click → open modal and fetch services
+$(document).on("click", ".services-count", function () {
+  let serviceIds = $(this).data("service-ids");
+  // yahan API call karke service list modal me show karo
+  fetchServicesByIds(serviceIds);
+});
 
+// availability toggle click
+$(document).on("change", ".toggle-availability", function () {
+  let bundleId = $(this).data("bundle-id");
+  let newStatus = $(this).is(":checked");
+
+  fetch(`/api/bundles/${bundleId}/availability`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ availability: newStatus }),
+  });
+});
+
+// edit button
+$(document).on("click", ".edit-bundle", function () {
+  let bundleId = $(this).data("bundle-id");
+  openEditBundleModal(bundleId); // custom modal open function
+});
+
+// delete button
+$(document).on("click", ".delete-bundle", function () {
+  let bundleId = $(this).data("bundle-id");
+
+  if (confirm("Are you sure you want to delete this bundle?")) {
+    fetch(`/api/bundles/${bundleId}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          alert("Bundle deleted successfully!");
+          getCreateBundleTableData(); // datatable reload
+        } else {
+          alert("Error deleting bundle!");
+        }
+      });
+  }
+});
 // function to export data from datatable
 function exportCreateBundleDataTableData() {
   console.log("exportcreateBundleDataTableData called");
@@ -1534,15 +1614,13 @@ function exportCreateBundleDataTableData() {
 
 // end create Bundle Data Table Initialization
 
-
 // start enroll services Data Table Initialization
 
 $(document).on("click", "#createBundleBtn", function () {
   enrollServicesDataTableInit.clear().draw();
-  let tableEntries = Number($('#datatableEntries3').val())
-  getEnrollServicesTableData(tableEntries, 1)
+  let tableEntries = Number($("#datatableEntries3").val());
+  getEnrollServicesTableData(tableEntries, 1);
 });
-
 
 function enrollServicesSearchObjectCreation(search) {
   enrollServicesSerachObj = search;
@@ -1582,7 +1660,7 @@ function getEnrollServicesTableData(skip, page) {
       auth_token: authToken,
       skip: Number(skip),
       page,
-      avalilabe: true
+      avalilabe: true,
     });
   }
 
@@ -1602,7 +1680,10 @@ function getEnrollServicesTableData(skip, page) {
 
         // Response data (IPs)
         response = data.message;
-        enrollServicesDataReceived = [...enrollServicesDataReceived, ...response];
+        enrollServicesDataReceived = [
+          ...enrollServicesDataReceived,
+          ...response,
+        ];
         localStorage.setItem("enrolServicesDataTableTotal", data.count);
         // If No IPs found
 
@@ -1613,20 +1694,20 @@ function getEnrollServicesTableData(skip, page) {
           const description = generateSpan(response[i], "description", "", "");
           const cost_type = generateSpan(response[i], "cost_type", "", "");
 
-          let estimated_cost_span
+          let estimated_cost_span;
           if (response[i].cost_unit === "USD") {
-            estimated_cost_span = `<span >$${response[i].estimated_cost.toLocaleString()}</span>`
+            estimated_cost_span = `<span >$${response[
+              i
+            ].estimated_cost.toLocaleString()}</span>`;
+          } else {
+            estimated_cost_span = `<span >$${response[
+              i
+            ].estimated_cost.toLocaleString()}</span>`;
           }
-          else {
-            estimated_cost_span = `<span >$${response[i].estimated_cost.toLocaleString()}</span>`
-          }
 
+          let defaultCheckbox;
 
-
-          let defaultCheckbox
-
-          defaultCheckbox = `<input title="Click to enroll service"   style="margin: 0 10px 0 0; cursor: pointer;text-align:center;" type="checkbox" class="selectSrviceToEnrollCheckBox" name="selectSrviceToEnrollCheckBox" value="${service_id}" >`
-
+          defaultCheckbox = `<input title="Click to enroll service"   style="margin: 0 10px 0 0; cursor: pointer;text-align:center;" type="checkbox" class="selectSrviceToEnrollCheckBox" name="selectSrviceToEnrollCheckBox" value="${service_id}" >`;
 
           let actions = `
           <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
@@ -1648,9 +1729,7 @@ function getEnrollServicesTableData(skip, page) {
             "enrolServicesDataTableTotal",
             getEnrollServicesTableData
           );
-
         }
-
 
         let viewOrderDetailsButtons = document.querySelectorAll(
           ".view-order-details"
@@ -1748,80 +1827,99 @@ function exportenrolServicesDataTableData() {
   console.log("exportenrolServicesDataTableData called");
 }
 
-
 // end enroll services Data Table Initialization
-
 
 // function to export data from datatable
 function exportenrolServicesDataTableData() {
   console.log("exportenrolServicesDataTableData called");
 }
 
-
-
 // Function to get information of all the users at once when "All" checkbox is checked
-$('#enroleServicesForCreateBundleTableContainer').on('click', "#selectAllServicesList", function (event) {
-  // on click
-  const checked = this.checked
-  // Temporary array to store selected categories
-  domainListDatatableInit.column(0).nodes().to$().each(function (index) {
-    const checkbox = $(this).find('input[name="selectSrviceToEnrollCheckBox"]')
+$("#enroleServicesForCreateBundleTableContainer").on(
+  "click",
+  "#selectAllServicesList",
+  function (event) {
+    // on click
+    const checked = this.checked;
+    // Temporary array to store selected categories
+    domainListDatatableInit
+      .column(0)
+      .nodes()
+      .to$()
+      .each(function (index) {
+        const checkbox = $(this).find(
+          'input[name="selectSrviceToEnrollCheckBox"]'
+        );
 
-    if (checked === false) {
-      checkbox.prop('checked', false)
-      checkedServicesToEnrollList = []
-    } else {
-      checkbox.prop('checked', 'checked')
-      if (checkbox.is(':checked')) {
-        const checkBoxValue = checkbox.val()
-        // Add selected category object to the temporary array
-        let exists = checkedServicesToEnrollList.some(item => item === checkBoxValue);
+        if (checked === false) {
+          checkbox.prop("checked", false);
+          checkedServicesToEnrollList = [];
+        } else {
+          checkbox.prop("checked", "checked");
+          if (checkbox.is(":checked")) {
+            const checkBoxValue = checkbox.val();
+            // Add selected category object to the temporary array
+            let exists = checkedServicesToEnrollList.some(
+              (item) => item === checkBoxValue
+            );
 
-        if (!exists) {
-          checkedServicesToEnrollList.push(checkBoxValue);
+            if (!exists) {
+              checkedServicesToEnrollList.push(checkBoxValue);
+            }
+          }
         }
-
-      }
-    }
-  })
-  calculateCostOfServices()
-  console.log('this is to check api response', checkedServicesToEnrollList, enrollServicesDataReceived)
-})
+      });
+    calculateCostOfServices();
+    console.log(
+      "this is to check api response",
+      checkedServicesToEnrollList,
+      enrollServicesDataReceived
+    );
+  }
+);
 
 // Checkbox for the Deleted domains
-$('#enroleServicesForCreateBundleTableContainer').on('change', "input[name='selectSrviceToEnrollCheckBox']", function (e) {
+$("#enroleServicesForCreateBundleTableContainer").on(
+  "change",
+  "input[name='selectSrviceToEnrollCheckBox']",
+  function (e) {
+    let checkBoxValue;
+    let categoryValue;
+    if ($(this).is(":checked")) {
+      checkBoxValue = $(this).val();
 
-  let checkBoxValue
-  let categoryValue
-  if ($(this).is(':checked')) {
-    checkBoxValue = $(this).val()
+      checkedServicesToEnrollList.push(checkBoxValue);
+    } else {
+      checkBoxValue = $(this).val();
 
-    checkedServicesToEnrollList.push(checkBoxValue)
+      checkedServicesToEnrollList = checkedServicesToEnrollList.filter(
+        function (el) {
+          return el !== checkBoxValue;
+        }
+      );
+    }
+    if (
+      $(".selectSrviceToEnrollCheckBox").length ===
+      $(".selectSrviceToEnrollCheckBox:checked").length
+    ) {
+      $("#selectAllServicesList").prop("checked", true);
+    } else {
+      $("#selectAllServicesList").prop("checked", false);
+    }
 
-  } else {
-    checkBoxValue = $(this).val()
-
-    checkedServicesToEnrollList = checkedServicesToEnrollList.filter(function (el) { return el !== checkBoxValue })
-
-
+    calculateCostOfServices();
+    console.log(
+      "this is to check api response",
+      checkedServicesToEnrollList,
+      enrollServicesDataReceived
+    );
   }
-  if ($('.selectSrviceToEnrollCheckBox').length === $('.selectSrviceToEnrollCheckBox:checked').length) {
-    $('#selectAllServicesList').prop('checked', true)
-  }
-  else {
-    $('#selectAllServicesList').prop('checked', false)
-  }
+);
 
-  calculateCostOfServices()
-  console.log('this is to check api response', checkedServicesToEnrollList, enrollServicesDataReceived)
-})
-
-
-
-$('#enrollServicesSubmitBtn').on('click', function (e) {
-  e.preventDefault()
+$("#enrollServicesSubmitBtn").on("click", function (e) {
+  e.preventDefault();
   if ($("#enrollServicesForm").validate().form()) {
-    console.log('this is to check api response', checkedServicesToEnrollList)
+    console.log("this is to check api response", checkedServicesToEnrollList);
     if (checkedServicesToEnrollList.length <= 0) {
       showNotificationError(
         "bg-orange",
@@ -1832,201 +1930,182 @@ $('#enrollServicesSubmitBtn').on('click', function (e) {
         null,
         "Services to enroll are required."
       );
-    } {
-      setEnrollServicesData()
     }
-
+    {
+      setEnrollServicesData();
+    }
   }
-})
-
-
-
+});
 
 function setEnrollServicesData() {
-  $('#cover-spin').show()
-  const title = $('#enrollServicesFormTitle').val();
-  const description = $('#enrollServicesFormDescription').val();
-  const services = checkedServicesToEnrollList.join(',');
+  $("#cover-spin").show();
+  const title = $("#enrollServicesFormTitle").val();
+  const description = $("#enrollServicesFormDescription").val();
+  const services = checkedServicesToEnrollList.join(",");
 
-
-  console.log('this is to check api response', title, description, services)
-
-
+  console.log("this is to check api response", title, description, services);
 
   const apiBody = JSON.stringify({
     title: title,
     description: description,
-    services: services
-  })
-  // return 0 
+    services: services,
+  });
+  // return 0
   $.ajax({
     url: MAIN_API_PATH + setEnrollServicesDataAPI,
     method: POST,
     contentType: Content_Type,
-    dataType: 'json',
+    dataType: "json",
     data: apiBody,
     statusCode: {
       200: function (data) {
-        $('#cover-spin').hide(0)
+        $("#cover-spin").hide(0);
 
-        showNotificationError(
-          'bg-green',
-          null,
-          null,
-          null,
-          null,
-          null,
-          UPDATE
-        )
+        showNotificationError("bg-green", null, null, null, null, null, UPDATE);
 
-
-        $('#enrollServicesFormTitle').val('');
-        $('#enrollServicesFormDescription').val('');
-        $('#selectAllServicesList').prop('checked', false)
-        checkedServicesToEnrollList = []
-
-
-
+        $("#enrollServicesFormTitle").val("");
+        $("#enrollServicesFormDescription").val("");
+        $("#selectAllServicesList").prop("checked", false);
+        checkedServicesToEnrollList = [];
       },
       204: function () {
-        $('#cover-spin').hide(0)
-      }
+        $("#cover-spin").hide(0);
+      },
     },
     error: function (xhr, status, error) {
-      $('#cover-spin').hide()
+      $("#cover-spin").hide();
       if (xhr.status === 400) {
         showNotificationError(
-          'bg-orange',
+          "bg-orange",
           null,
           null,
           null,
           null,
           null,
           invalidRequest400Error
-        )
+        );
       } else if (xhr.status === 401) {
         showNotificationError(
-          'bg-orange',
+          "bg-orange",
           null,
           null,
           null,
           null,
           null,
           unauthorizedRequest401Error
-        )
+        );
       } else if (xhr.status === 404) {
         showNotificationError(
-          'bg-orange',
+          "bg-orange",
           null,
           null,
           null,
           null,
           null,
           notFound404Error
-        )
+        );
       } else if (xhr.status === 409) {
         showNotificationError(
-          'bg-orange',
+          "bg-orange",
           null,
           null,
           null,
           null,
           null,
           alreadyExist409Error
-        )
+        );
       } else if (xhr.status === 503) {
         showNotificationError(
-          'bg-red',
+          "bg-red",
           null,
           null,
           null,
           null,
           null,
           serverError503Error
-        )
+        );
       } else if (xhr.status === 408) {
         swal(
           {
-            title: ' ',
+            title: " ",
             text: sessionExpired408Error,
-            type: 'info',
+            type: "info",
             showCancelButton: false,
-            confirmButtonText: 'Logout'
+            confirmButtonText: "Logout",
           },
           function (isConfirm) {
             if (isConfirm) {
-              localStorage.clear()
-              window.location.href = redirectToSignInPage408
+              localStorage.clear();
+              window.location.href = redirectToSignInPage408;
             }
           }
-        )
+        );
       } else if (xhr.status === 410) {
-        $('#cover-spin').hide()
+        $("#cover-spin").hide();
 
         $.ajax({
           url: MAIN_API_PATH + getGmtAPI,
           method: POST,
           contentType: Content_Type,
-          dataType: 'json',
+          dataType: "json",
           success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt()
-            encrypt.setPublicKey(sitePublicKey)
-            const dateString = String(pageName + data.unixtime)
-            securityKeyEncrypted = encrypt.encrypt(dateString)
-            SecurityKeyTime = false
-            setEnrollServicesData()
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(sitePublicKey);
+            const dateString = String(pageName + data.unixtime);
+            securityKeyEncrypted = encrypt.encrypt(dateString);
+            SecurityKeyTime = false;
+            setEnrollServicesData();
           },
           error: function (xhr, status, error) {
             $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt()
-              encrypt.setPublicKey(sitePublicKey)
-              const dateString = String(pageName + data.unixtime)
-              securityKeyEncrypted = encrypt.encrypt(dateString)
-              SecurityKeyTime = false
-              setEnrollServicesData()
-            })
-          }
-        })
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const dateString = String(pageName + data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(dateString);
+              SecurityKeyTime = false;
+              setEnrollServicesData();
+            });
+          },
+        });
       } else {
         showNotificationError(
-          'bg-red',
+          "bg-red",
           null,
           null,
           null,
           null,
           null,
           serverError503Error
-        )
+        );
       }
-    }
-  })
-
+    },
+  });
 }
 
-
 // per entity to let user input number
-// 
+//
 
-let costVariableToSet =''
+let costVariableToSet = "";
 
 function calculateCostOfServices() {
-  let totalCost = 0
+  let totalCost = 0;
   // Calculate total cost
-  checkedServicesToEnrollList.forEach(enrolled => {
-    const matchedService = enrollServicesDataReceived.find(s => s.service_id === enrolled);
+  checkedServicesToEnrollList.forEach((enrolled) => {
+    const matchedService = enrollServicesDataReceived.find(
+      (s) => s.service_id === enrolled
+    );
     if (matchedService) {
       totalCost += Number(matchedService.estimated_cost);
     }
   });
 
-  console.log(totalCost)
-  if (totalCost <=0 || totalCost == null) {
-    $('#totalCostMainDiv').addClass('d-none')
+  console.log(totalCost);
+  if (totalCost <= 0 || totalCost == null) {
+    $("#totalCostMainDiv").addClass("d-none");
   } else {
-    $('#totalCosecalculated').text('$' + totalCost.toFixed(2))
-    $('#totalCostMainDiv').removeClass('d-none')
+    $("#totalCosecalculated").text("$" + totalCost.toFixed(2));
+    $("#totalCostMainDiv").removeClass("d-none");
   }
 }
-
 
 // end enroll services Data Table Initialization

@@ -42,9 +42,11 @@ const setPasswordAPI = "tml/set-password"
 
 
 // Index
+const updateMunicipalityWizardSetAPI = 'tml/municipality/wizard/update'
 const setMunicipalityWizardSetAPI= 'tml/municipality/wizard/set'
 const getMunicipalityWizardSetAPI= 'tml/municipality/wizard/get'
 const getOrdersAPI = "tml/client/orders/list";
+const getAdminListBundle = "tml/admin/list/bundle"
 
 
 

@@ -292,7 +292,274 @@ $(document).ready(function () {
 
   updateFiltersSelectDataOptions();
   reIntiateWizerd();
+
+
+  getBundlesList()
 });
+
+
+const servicesCatalog =  {
+  "svc_1759018030049": {
+      "title": "Network",
+      "description": ""
+  },
+  "svc_1759176897262": {
+      "title": "EDR",
+      "description": "Lorem ipsum is typically a corrupted version of De finibus bonorum et malorum, a 1st-century "
+  },
+  "svc_1759176984893": {
+      "title": "Cloud App",
+      "description": "Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/ LOR-əm IP-səm) is a dummy"
+  },
+  "svc_1759177045891": {
+      "title": "Phishing",
+      "description": "Its purpose is to permit a page layout to be designed, independently of the copy that will subsequently populate it, "
+  },
+  "svc_1759177807239": {
+      "title": "Regulatory Compliance",
+      "description": "Regulatory Compliance"
+    }
+}
+
+
+
+
+
+function getBundlesList(){
+
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+    availability: true
+  });
+
+  // return 0
+  $.ajax({
+    url: MAIN_API_PATH + getAdminListBundle,
+    method: POST,
+    contentType: Content_Type,
+    dataType: "json",
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $("#cover-spin").hide(0);
+        //  const data = response.message;
+        const apiData = data.message;
+
+      // ==== Init render ====
+      renderBundles(apiData);
+      },
+      204: function () {
+      },
+    },
+    error: function (xhr, status, error) {
+      $("#cover-spin").hide();
+      if (xhr.status === 400) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        );
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        );
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        );
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        );
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: " ",
+            text: sessionExpired408Error,
+            type: "info",
+            showCancelButton: false,
+            confirmButtonText: "Logout",
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear();
+              window.location.href = redirectToSignInPage408;
+            }
+          }
+        );
+      } else if (xhr.status === 410) {
+        $("#cover-spin").hide();
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: "json",
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(sitePublicKey);
+            const dateString = String(pageName + data.unixtime);
+            securityKeyEncrypted = encrypt.encrypt(dateString);
+            SecurityKeyTime = false;
+            setMuncipilitiesData();
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const dateString = String(pageName + data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(dateString);
+              SecurityKeyTime = false;
+              setMuncipilitiesData();
+            });
+          },
+        });
+      } else {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      }
+    },
+  });
+}
+
+const escapeHtml = (s='') =>
+  s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+// servicesCatalog is now an object: { "svc_id": { title, description }, ... }
+
+const serviceInfoById = (id) => servicesCatalog[id] || null;
+
+const serviceTitleById = (id) => serviceInfoById(id)?.title || id;
+
+const serviceDescById  = (id) => serviceInfoById(id)?.description || '';
+
+// Light header colors per tier (tweak as you like)
+const tierHeaderClass = title => {
+  switch ((title || '').toLowerCase()) {
+    case 'bronze':   return 'bg-warning bg-opacity-25 text-warning';
+    case 'silver':   return 'bg-secondary bg-opacity-25 text-secondary';
+    case 'gold':     return 'bg-warning bg-opacity-50 text-dark'; // a bit richer
+    case 'platinum': return 'bg-info bg-opacity-25 text-info';
+    default:         return 'bg-light text-dark';
+  }
+};
+
+// Selection state
+let selectedBundleId = null;
+
+// Public function you can hook into (like old setPolicyValue)
+function selectBundle(bundleId) {
+  selectedBundleId = bundleId;
+
+  // Toggle check badge & card border
+  document.querySelectorAll('[data-bundle-id]').forEach(card => {
+    const isActive = (card.getAttribute('data-bundle-id') === bundleId);
+    card.classList.toggle('border', true);
+    card.classList.toggle('border-2', isActive);
+    card.classList.toggle('border-primary', isActive);
+
+    const check = card.querySelector('.bundle-check');
+    if (check) check.classList.toggle('d-none', !isActive);
+  });
+
+  // TODO: call your existing handler here if needed
+  // setPolicyValue(...) or send selectedBundleId to your form
+  // console.log('Selected bundle:', selectedBundleId);
+}
+
+// Render function
+function renderBundles(bundles) {
+  const row = document.getElementById('bundleCardsRow');
+  row.innerHTML = '';
+
+  bundles.forEach(b => {
+    const col = document.createElement('div');
+    col.className = 'col-12 col-md-6 col-lg-3 mb-0 p-0 px-1';
+
+    const servicesHtml = (b.list_of_services || [])
+      .map(sid => `<li class="list-checked-item">${escapeHtml(serviceTitleById(sid))}</li>`)
+      .join('');
+
+    col.innerHTML = `
+      <div class="card card-lg ps-0 cursor-pointer h-100"
+           title="Click to select this bundle."
+           data-bundle-id="${escapeHtml(b.bundle_id)}"
+           onclick="selectBundle('${escapeHtml(b.bundle_id)}')">
+
+        <div class="card-header text-center pb-2 ${tierHeaderClass(b.title)}">
+          <span class="icon icon-sm icon-circle float-end mt-n1 me-n1 text-light d-none bundle-check"
+                style="background-color: rgb(25, 135, 84);">
+            <i class="bi bi-check-circle"></i>
+          </span>
+          <h4 class="card-title text-dark mb-0">${escapeHtml(b.title || 'Bundle')}</h4>
+        </div>
+
+        <div class="card-body d-flex flex-column p-3 justify-content-center">
+          <p class="mb-3 small text-muted">${escapeHtml(b.description || '')}</p>
+
+          <div class="flex-grow-1 d-flex align-items-center">
+            <ul class="list-checked list-checked-primary mb-0 w-100">
+              ${servicesHtml || '<li class="text-muted">No services</li>'}
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="card-footer d-flex justify-content-between align-items-center p-2">
+          <small class="text-muted">Updated: ${new Date(Number(b.updated_at) * 1000).toLocaleDateString()}</small>
+          ${
+            b.cost
+              ? `<span class="badge text-bg-primary">£${Number(b.cost_value || 0).toLocaleString()}</span>`
+              : `<span class="badge text-bg-secondary">Included</span>`
+          }
+        </div>
+      </div>
+    `;
+
+    row.appendChild(col);
+  });
+}
+
+
 
 // get span for change
 function generateSpan(data, key, customClass = "", style = "") {
