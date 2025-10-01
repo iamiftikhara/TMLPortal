@@ -217,92 +217,15 @@
       <!-- ***************************** End Service Management Details *********************************** -->
 
       <!-- ***************************** Start Service Management Upload Files *********************************** -->
-        <!-- <div id="uploadFileDataTableContainer" class="mt-4"></div> -->
   
       <!-- ***************************** End Service Management Upload Files *********************************** -->
 
 
       <!-- ***************************** Start create bundle *********************************** -->
 
-      <!-- <div id="createBundleDataTableContainer" class="mt-4"></div> -->
-
       <!-- ***************************** End create bundle *********************************** -->
 
       <!-- ***************************** Start Service Management Modal *********************************** -->
-      <!-- Modal -->
-      <div class="modal fade" id="serviceManagementDetailsModal" tabindex="-1" role="dialog"
-        aria-labelledby="serviceManagementFormModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="serviceManagementFormModalLabel">Details</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form id="serviceManagementForm">
-
-                <!-- Title -->
-                <div class="mb-3">
-                  <label for="title" class="form-label required-label">Title:</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Title of the item"
-                    required>
-                </div>
-
-                <!-- Description -->
-                <div class="mb-3">
-                  <label for="description" class="form-label">Description:</label> <!-- Optional, no asterisk -->
-                  <textarea class="form-control" id="description" name="description" placeholder="Description here"
-                    rows="3"></textarea>
-                </div>
-                <div class="row">
-                  
-                  <!-- Cost Type -->
-                  <div class="col-6 mb-3">
-                    <label for="cost_type" class="form-label required-label">Cost Type:</label>
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" id="cost_type" name="cost_type" required>
-                        <option value="">Select</option>
-                        <option value="of_module">Of Module</option>
-                        <option value="per_entity">Per Entity</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <!-- Estimated Cost -->
-                  <div class="col-6 mb-3">
-                    <label for="estimated_cost" class="form-label required-label">Estimated Cost:</label>
-                    <input type="number" class="form-control" id="estimated_cost" name="estimated_cost"
-                      placeholder="1000" required>
-                  </div>
-
-
-                  <!-- Cost Unit -->
-                  <div class="col-6 mb-3 d-none">
-                    <label for="cost_unit" class="form-label required-label">Cost Unit:</label>
-                    <input type="text" class="form-control" id="cost_unit" name="cost_unit" placeholder="Unit" required>
-                  </div>
-
-                  <!-- Availability Toggle -->
-                  <div class="col-6 mb-3 d-none">
-                    <label class="form-label required-label me-2">Availability:</label>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="availability" name="availability" required>
-                    </div>
-                  </div>
-                </div>
-
-
-
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-outline-primary" id="serviceManagementSubmit">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End Modal -->
 
       <!-- ***************************** End Service Management Modal *********************************** -->
       <!-- Add Resource Modal Start -->
@@ -355,7 +278,7 @@
 
       <!-- ***************************** Start Create bundle Modal **********************************-->
 
-      <div class="modal fade" id="creatBundleModal" tabindex="-1" aria-labelledby="creatBundleModal" aria-hidden="true">
+      <!-- <div class="modal fade" id="creatBundleModal" tabindex="-1" aria-labelledby="creatBundleModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -391,7 +314,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
        <!-- ***************************** End Create bundle Modal ********************************** -->
 
@@ -426,11 +349,16 @@
                     </div>
                     <div class="mb-3" id="editSourceWrapper">
                         <label for="editFileSource" class="form-label">Source</label><span class="text-danger"> *</span>
-                        <input type="text" class="form-control" id="editFileSource">
+                        <input type="text" class="form-control" id="editFileSource" name="editFileSource">
                     </div>
                     <div class="mb-3" id="editFileUploadWrapper">
                         <label for="editFileInput" class="form-label">Upload File</label><span class="text-danger"> *</span>
                         <input type="file" class="form-control" id="editFileInput" name="editFileInput">
+                        <!-- Add this for showing existing file name -->
+                        <div class="d-flex" id="fileCardPreview">
+                            <img id="editFilePreview" class="m-2" src="/files/images/file-count.png" width="20px" alt="File Preview">
+                            <div id="editFileNamePreview" class="mt-2 text-muted"></div>
+                        </div>
                     </div>
                     </form>
                 </div>
@@ -444,21 +372,19 @@
 
 
       <!-- ***************************** End Edit Resource Modal **********************************-->
-
-
-<div class="modal fade" id="servicesModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Services</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="servicesModalBody">
-        <!-- Data will be injected here -->
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="modal fade" id="servicesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Services</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="servicesModalBody">
+                <!-- Data will be injected here -->
+            </div>
+            </div>
+        </div>
+        </div>
 
   </main>
   <!-- ========== END MAIN CONTENT ========== -->

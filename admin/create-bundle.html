@@ -204,7 +204,7 @@
 
      <div class="card shadow-lg border-0 rounded-3 w-75 mx-auto mt-5">
   <div class="card-header text-white d-flex justify-content-between align-items-center">
-    <h5 class="mb-0">Create Bundle</h5>
+    <h5 class="mb-0" id="createBundleModalLabel">Create Bundle</h5>
   </div>
   <div class="card-body">
     <form id="enrollServicesForm">
@@ -220,7 +220,7 @@
       <!-- Description -->
       <div class="mb-3">
         <label for="enrollServicesFormDescription" class="form-label">
-          Description <span class="text-danger">*</span>
+          Description
         </label>
         <textarea class="form-control" placeholder="Enter description"
           id="enrollServicesFormDescription"
@@ -249,8 +249,8 @@
   </div>
   <div class="card-footer d-flex justify-content-end">
     <!-- <button type="button" class="btn btn-outline-secondary me-2">Close</button> -->
-     <button type="button" class="btn btn-outline-secondary me-2" onclick="window.history.back()">Close</button>
-    <button type="submit" class="btn btn-outline-primary" form="enrollServicesForm">Submit</button>
+     <button type="button" class="btn btn-outline-secondary me-2" onclick="closeFunction()">Close</button>
+    <button type="submit" class="btn btn-outline-primary" form="enrollServicesForm" disabled>Submit</button>
   </div>
 </div>
 

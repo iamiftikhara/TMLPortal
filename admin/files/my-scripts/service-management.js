@@ -1540,7 +1540,7 @@ function getCreateBundleTableData(skip, page) {
           const actions = `
     <div class="d-flex align-items-center gap-2">
       <button class="btn btn-sm btn-outline-primary edit-bundle"
-              data-bundle-id="${bundle.bundle_id}">
+             data-bundle='${JSON.stringify(bundle)}'>
        Edit
       </button>
       <button class="btn btn-sm btn-outline-danger delete-bundle"
@@ -1679,9 +1679,17 @@ $(document).on("change", ".toggle-availability", function () {
 
 // edit button
 $(document).on("click", ".edit-bundle", function () {
-  let bundleId = $(this).data("bundle-id");
-  openEditBundleModal(bundleId); // custom modal open function
+  let bundleData = $(this).data("bundle");
+  localStorage.setItem("editBundle", JSON.stringify(bundleData));
+  window.location.href = "create-bundle.html";
 });
+
+// $(document).on("click", ".edit-bundle", function () {
+//   let bundleId = $(this).data("bundle-id");
+//   localStorage.setItem("editBundleId", bundleId);
+//   window.location.href = "create-bundle.html";
+//   // openEditBundleModal(bundleId); // custom modal open function
+// });
 
 // delete button
 $(document).on("click", ".delete-bundle", function () {

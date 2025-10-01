@@ -37,7 +37,8 @@ const addFilesDataTableShow = {
   { "name": "Type", "id": "type", "columnNo": 2, "visible": true },
   { "name": "Source", "id": "sourceDisplay", "columnNo": 3, "visible": true },
   { "name": "Created Date", "id": "createdDate", "columnNo": 4, "visible": true },
-  { "name": "Actions", "id": "actions", "columnNo": 5, "visible": true }
+  { "name": "Availability", "id": "Availability", "columnNo": 5, "visible": true },
+  { "name": "Actions", "id": "actions", "columnNo": 6, "visible": true }
 ],
 
   //  "searchFields": null,
@@ -116,6 +117,7 @@ const addFilesDataTableShow = {
   { "name": "Type", "widthClass": "w-5" },
   { "name": "Source", "widthClass": "w-5" },
   { "name": "Created Date", "widthClass": "w-5" },
+  { "name": "availability", "widthClass": "w-5" },
   { "name": "Actions", "widthClass": "w-5" }
 ]
 

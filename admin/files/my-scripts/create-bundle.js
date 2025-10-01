@@ -20,14 +20,87 @@ let enrollServicesDataReceived = "";
 let enrollServicesSerachObj = {};
 
 let checkedServicesToEnrollList = [];
-
+const storedBundle = localStorage.getItem("editBundle");
+const submitSelector = "button[form='enrollServicesForm'][type='submit']";
 
 $(document).ready(function () {
-  // Show main content and hide loader
 
-  $("#mainContentInnerLoader").addClass("d-none");
-  $("#mainContentInnerDataToShow").removeClass("d-none");
+  if (storedBundle) {
+    const bundle = JSON.parse(storedBundle);
+    $("#createBundleModalLabel").text("Edit Bundle");
+    $(submitSelector).prop("disabled", true);
+    // Mark as edit
+    isEdit = true;
+    editingBundleId = bundle.bundle_id;
+
+    // Fill fields
+    $("#enrollServicesFormTitle").val(bundle.title);
+    $("#enrollServicesFormDescription").val(bundle.description);
+
+    // Preselect services
+    selectedServices = bundle.list_of_services || [];
+    $("#selectedServiceIds").val(selectedServices.join(","));
+  } else {
+    $("#createBundleModalLabel").text("Create Bundle");
+    $(submitSelector).prop("disabled", false);
+  }
+    getServiceManagementTableData();
+
 });
+
+// Enable on any change inside the form (delegated so it works for dynamic fields)
+  $("#enrollServicesForm").on("input change", "input, textarea, select", function () {
+    $(submitSelector).prop("disabled", false);
+  });
+
+  // Also enable when user clicks a service card (select/unselect)
+  $(document).on("click", ".service-card", function () {
+    // only enable if card is not disabled
+    if (!$(this).hasClass("disabled-card")) {
+      $(submitSelector).prop("disabled", false);
+    }
+  });
+
+// $(function () {
+//   // pick the button by the form attribute
+//   const submitSelector = "button[form='enrollServicesForm'][type='submit']";
+
+//   // check edit mode
+//   const storedBundle = localStorage.getItem("editBundle");
+
+//   if (storedBundle) {
+//     alert("Editing existing bundle");
+
+//     // Edit Case → disable initially
+//     $(submitSelector).prop("disabled", true);
+
+//     // Enable on any change inside the form (delegated so it works for dynamic fields)
+//     $("#enrollServicesForm").on("input change", "input, textarea, select", function () {
+//       $(submitSelector).prop("disabled", false);
+//     });
+
+//     // Also enable when user clicks a service card (select/unselect)
+//     $(document).on("click", ".service-card", function () {
+//       // only enable if card is not disabled
+//       if (!$(this).hasClass("disabled-card")) {
+//         $(submitSelector).prop("disabled", false);
+//       }
+//     });
+
+//     // Also enable when the hidden selectedServiceIds changes programmatically
+//     $("#selectedServiceIds").on("change", function () {
+//       $(submitSelector).prop("disabled", false);
+//     });
+
+//     // IMPORTANT: when you update selectedServiceIds in your service-card click handler,
+//     // trigger change so the handler above runs:
+//     // $("#selectedServiceIds").val(selectedServices.join(",")).trigger("change");
+
+//   } else {
+//     // Create Case → always enabled
+//     $(submitSelector).prop("disabled", false);
+//   }
+// });
 
 // ------------ INIT ------------------
 
@@ -54,76 +127,152 @@ function getServiceManagementTableData() {
     statusCode: {
       200: function (data) {
         $("#cover-spin").hide();
-         servicesResponse = data.message || []; // <-- ensure array
-        renderServices(servicesResponse);     // <-- render here
+        servicesResponse = data.message || []; // <-- ensure array
+        // renderServices(servicesResponse);     // <-- render here
+        renderServices(servicesResponse, selectedServices);
+        updateTotalCost();
       },
       204: function () {
         $("#cover-spin").hide();
         $("#serviceManagementDataTableErrorText").text(noDataFoundText204Case);
       }
     },
-    error: function (xhr, status, error) {
+     error: function (xhr, status, error) {
       $("#cover-spin").hide();
-      console.error("Service API error:", xhr.status, error);
-    }
+      if (xhr.status === 400) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        );
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        );
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        );
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        );
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: " ",
+            text: sessionExpired408Error,
+            type: "info",
+            showCancelButton: false,
+            confirmButtonText: "Logout",
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear();
+              window.location.href = redirectToSignInPage408;
+            }
+          }
+        );
+      } else if (xhr.status === 410) {
+        $("#cover-spin").hide();
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: "json",
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(sitePublicKey);
+            const dateString = String(pageName + data.unixtime);
+            securityKeyEncrypted = encrypt.encrypt(dateString);
+            SecurityKeyTime = false;
+            getServiceManagementTableData();
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const dateString = String(pageName + data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(dateString);
+              SecurityKeyTime = false;
+              getServiceManagementTableData();
+            });
+          },
+        });
+      } else {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      }
+    },
   });
 }
-
-// Call this on page load
-getServiceManagementTableData();
-
-
 
 // Array to store selected service IDs
 let selectedServices = [];
 
-// Render dynamic service cards
-function renderServices(services, preSelectedIds = [], disableSelected = false) {
+function renderServices(services, preSelectedIds = []) {
   const container = $("#servicesContainer");
   container.empty();
 
   services.forEach(service => {
-    const isDisabled = disableSelected && preSelectedIds.includes(service.service_id);
-    const isSelected = preSelectedIds.includes(service.service_id) || selectedServices.includes(service.service_id);
-
-    // cost_type ko readable format mai convert karo
-    const formattedType = service.cost_type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-    // badge color customize
-    let badgeColor = "bg-secondary"; // default
-    if (service.cost_type === "per_entity") badgeColor = "bg-info";
-    else if (service.cost_type === "of_module") badgeColor = "bg-success";
-    else badgeColor = "bg-warning";
+    const isSelected = preSelectedIds.includes(service.service_id);
 
     const card = `
       <div class="col-md-4 col-lg-4 mb-4">
         <div class="service-card card h-100 shadow-sm 
-            ${isDisabled ? 'disabled-card bg-light border-secondary' : 'border'} 
-            ${isSelected ? 'border-primary shadow-lg' : ''}" 
+            ${isSelected ? 'border-primary shadow-lg' : 'border'}" 
             data-id="${service.service_id}" 
-            data-cost="${service.estimated_cost}" 
-            data-type="${service.cost_type}"
-            style="cursor: ${isDisabled ? 'not-allowed' : 'pointer'};">
+            data-cost="${service.estimated_cost}">
           
-          <!-- Card Header -->
           <div class="card-header text-dark fw-bold text-start">
             ${service.title}
           </div>
-
-          <!-- Card Body -->
           <div class="card-body">
-            <p class="card-text text-muted" style="font-size: 14px; line-height: 1.4;">
-              ${service.description || 'No description available'}
-            </p>
+            <p class="card-text text-muted">${service.description || 'No description available'}</p>
           </div>
-
-          <!-- Card Footer -->
           <div class="card-footer d-flex justify-content-between align-items-center">
-          Estimate Cost:
-            <span class="fw-bold text-primary" style="font-size: 22px;">
-              $${service.estimated_cost}
-            </span>/ ${formattedType}
-            
+            Estimate Cost: 
+            <span class="fw-bold text-primary">$${service.estimated_cost}</span>
           </div>
         </div>
       </div>
@@ -131,7 +280,6 @@ function renderServices(services, preSelectedIds = [], disableSelected = false) 
     container.append(card);
   });
 }
-
 
 // Service card click handler (multi-select toggle)
 function updateTotalCost() {
@@ -174,9 +322,6 @@ $(document).on("click", ".service-card", function () {
   updateTotalCost();
 });
 
-
-
-
 // ------------ VALIDATION ------------------
 
 $('#enrollServicesForm').validate({
@@ -213,8 +358,6 @@ $('#enrollServicesForm').validate({
   }
 });
 
-
-
 // ------------ SUBMIT HANDLER ------------------
 let isEdit = false;
 let editingBundleId = null;
@@ -239,7 +382,7 @@ function handleSubmit() {
   }
 
   const url = isEdit ? MAIN_API_PATH + API_UPDATE_BUNDLE : MAIN_API_PATH + API_SET_BUNDLE;
-
+  let messageStatus = isEdit ? UPDATE : SAVED;
   if (isEdit) {
     payload.bundle_id = editingBundleId;
   }
@@ -250,37 +393,271 @@ function handleSubmit() {
     data: JSON.stringify(payload),
     contentType: "application/json",
     success: function (res) {
-      alert("Bundle saved successfully!");
+      showNotificationError("bg-green", null, null, null, null, null, messageStatus );
+      $("#cover-spin").show();
+      window.location.href = "service-managements.html";
+      // clear storage after submission
+      localStorage.removeItem("editBundle");
     },
-    error: function (err) {
-      console.error(err);
-      alert("Error saving bundle");
-    }
+     error: function (xhr, status, error) {
+      $("#cover-spin").hide();
+      if (xhr.status === 400) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        );
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        );
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        );
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        );
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: " ",
+            text: sessionExpired408Error,
+            type: "info",
+            showCancelButton: false,
+            confirmButtonText: "Logout",
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear();
+              window.location.href = redirectToSignInPage408;
+            }
+          }
+        );
+      } else if (xhr.status === 410) {
+        $("#cover-spin").hide();
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: "json",
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(sitePublicKey);
+            const dateString = String(pageName + data.unixtime);
+            securityKeyEncrypted = encrypt.encrypt(dateString);
+            SecurityKeyTime = false;
+            handleSubmit();
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const dateString = String(pageName + data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(dateString);
+              SecurityKeyTime = false;
+              handleSubmit();
+            });
+          },
+        });
+      } else {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      }
+    },
   });
 }
 
 
 // ------------ LOAD EDIT DATA ------------------
 
-function loadBundleForEdit(bundleId) {
-  isEdit = true;
-  editingBundleId = bundleId;
+// function loadBundleForEdit(bundleId) {
+//   isEdit = true;
+//   editingBundleId = bundleId;
 
-  $.get(`${API_LIST_BUNDLE}?id=${bundleId}`, function (bundleData) {
-    $("#enrollServicesFormTitle").val(bundleData.title);
-    $("#enrollServicesFormDescription").val(bundleData.description);
+//   // 👇 API call to get bundle by ID
+//   $.ajax({
+//     url: MAIN_API_PATH + API_LIST_BUNDLE,
+//     type: "POST",
+//     contentType: "application/json",
+//     data: JSON.stringify({
+//       auth_token: authToken,
+//       bundle_id: bundleId
+//     }),
+//     success: function (res) {
+//       const bundleData = res.message; // depends on your API response
+//       // clear storage after submission
+//       localStorage.removeItem("editBundle");
+//       // Pre-fill fields
+//       $("#enrollServicesFormTitle").val(bundleData.title);
+//       $("#enrollServicesFormDescription").val(bundleData.description);
 
-    renderServices(servicesResponse.message, bundleData.selectedServices, true);
+//       // Pre-fill selected services
+//       selectedServices = bundleData.list_of_services || [];
+//       $("#selectedServiceIds").val(selectedServices.join(","));
 
-    if (bundleData.selectedServices.length > 0) {
-      $("#selectedServiceId").val(bundleData.selectedServices[0]);
-    }
-  });
+//       // Re-render services with pre-selected
+//       renderServices(servicesResponse, selectedServices, false);
+
+//       // Update total cost
+//       updateTotalCost();
+
+
+//     },
+//     error: function (xhr, status, error) {
+//       $("#cover-spin").hide();
+//       if (xhr.status === 400) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           invalidRequest400Error
+//         );
+//       } else if (xhr.status === 401) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           unauthorizedRequest401Error
+//         );
+//       } else if (xhr.status === 404) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           notFound404Error
+//         );
+//       } else if (xhr.status === 409) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           alreadyExist409Error
+//         );
+//       } else if (xhr.status === 503) {
+//         showNotificationError(
+//           "bg-red",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           serverError503Error
+//         );
+//       } else if (xhr.status === 408) {
+//         swal(
+//           {
+//             title: " ",
+//             text: sessionExpired408Error,
+//             type: "info",
+//             showCancelButton: false,
+//             confirmButtonText: "Logout",
+//           },
+//           function (isConfirm) {
+//             if (isConfirm) {
+//               localStorage.clear();
+//               window.location.href = redirectToSignInPage408;
+//             }
+//           }
+//         );
+//       } else if (xhr.status === 410) {
+//         $("#cover-spin").hide();
+
+//         $.ajax({
+//           url: MAIN_API_PATH + getGmtAPI,
+//           method: POST,
+//           contentType: Content_Type,
+//           dataType: "json",
+//           success: function (data, textStatus, xhr) {
+//             const encrypt = new JSEncrypt();
+//             encrypt.setPublicKey(sitePublicKey);
+//             const dateString = String(pageName + data.unixtime);
+//             securityKeyEncrypted = encrypt.encrypt(dateString);
+//             SecurityKeyTime = false;
+//             loadBundleForEdit();
+//           },
+//           error: function (xhr, status, error) {
+//             $.getJSON(worldTimeAPI, function (data) {
+//               const encrypt = new JSEncrypt();
+//               encrypt.setPublicKey(sitePublicKey);
+//               const dateString = String(pageName + data.unixtime);
+//               securityKeyEncrypted = encrypt.encrypt(dateString);
+//               SecurityKeyTime = false;
+//               loadBundleForEdit();
+//             });
+//           },
+//         });
+//       } else {
+//         showNotificationError(
+//           "bg-red",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           serverError503Error
+//         );
+//       }
+//     },
+//   });
+// }
+
+function closeFunction() {
+  localStorage.removeItem("editBundle");
+  window.history.back();
 }
 
 // ------------ INIT CREATE ------------------
-
-// renderServices(servicesResponse.message);
-
-// Example for edit usage
-// loadBundleForEdit("bundle_123");

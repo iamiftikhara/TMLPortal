@@ -26,9 +26,48 @@ $(document).ready(function () {
   } else {
     $('#editUserDetailsSuperAccess').prop('disabled', true)
     $('#editUserDetailsSuperAccess').parent().attr('title', 'You are not supper user.')
-
-
   }
+
+    // Init validation
+  $("#changePasswordForm").validate({
+    debug: true,
+    rules: {
+      securityOldPassword: {
+        required: true,
+        strongPassword:true
+      },
+      securityNewPassword: {
+        required: true,
+        strongPassword: true
+      },
+      securityConfirmNewPassword: {
+        required: true,
+        equalTo: "#securityNewPassword"
+      }
+    },
+    messages: {
+      securityOldPassword: "Old password is required",
+      securityNewPassword: {
+        required: "New password is required"
+      },
+      securityConfirmNewPassword: {
+        required: "Confirm password is required",
+        equalTo: "Passwords do not match"
+      }
+    },
+    errorPlacement: function(error, element) {
+      error.appendTo(element.parent());
+    },
+    errorClass: "error invalid-feedback",
+    validClass: "success",
+    errorElement: "span",
+    highlight: function(element, errorClass, validClass) {
+      $(element).addClass("is-invalid").removeClass("is-valid");
+    },
+    unhighlight: function(element, errorClass, validClass) {
+      $(element).removeClass("is-invalid").addClass("is-valid");
+    }
+  });
 
   // First Data Table Initialization
   profileTeamDataTableInit = createTableComponent(profileTeamConfig, options)
@@ -93,47 +132,7 @@ $(document).ready(function () {
     }
   })
 
-  // Init validation
-  $("#changePasswordForm").validate({
-    debug: true,
-    focusInvalid: false,
-    ignore: [],
-    rules: {
-      securityOldPassword: {
-        required: true
-      },
-      securityNewPassword: {
-        required: true,
-        strongPassword: true
-      },
-      securityConfirmNewPassword: {
-        required: true,
-        equalTo: "#securityNewPassword"
-      }
-    },
-    messages: {
-      securityOldPassword: "Old password is required",
-      securityNewPassword: {
-        required: "New password is required"
-      },
-      securityConfirmNewPassword: {
-        required: "Confirm password is required",
-        equalTo: "Passwords do not match"
-      }
-    },
-    errorPlacement: function(error, element) {
-      error.appendTo(element.parent());
-    },
-    errorClass: "error invalid-feedback",
-    validClass: "success",
-    errorElement: "span",
-    highlight: function(element, errorClass, validClass) {
-      $(element).addClass("is-invalid").removeClass("is-valid");
-    },
-    unhighlight: function(element, errorClass, validClass) {
-      $(element).removeClass("is-invalid").addClass("is-valid");
-    }
-  });
+
 
   $('#editUserDetailsModalForm').validate({
     debug: true,
@@ -231,6 +230,14 @@ $(document).ready(function () {
   }
 
 });
+
+$('#saveSecuritySettingBtn').on('click', function (e) {
+  e.preventDefault()
+  if ($('#changePasswordForm').validate().form()) {
+    changePassword()
+  }
+})
+
 
 // ================= START: Sidebar Role-Based Visibility =================
   const userRole = localStorage.getItem("_role"); // assume role is stored as "admin", "user", etc.
@@ -492,20 +499,6 @@ function generateSpan(data, key, customClass = "", style = "") {
 
 
 // ******************** Start Add User ************************
-// Disable initially
-$("#saveSecuritySettingBtn").prop("disabled", true);
-
-// Enable submit on any change in password fields
-$("#securityOldPassword, #securityNewPassword, #securityConfirmNewPassword").on("input change", function () {
-  $("#saveSecuritySettingBtn").prop("disabled", false);
-});
-
-
-$('#saveSecuritySettingBtn').on('click', function () {
-  $('#cover-spin').show()
-  changePassword()
-})
-
 
 function changePassword() {
 

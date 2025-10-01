@@ -140,16 +140,9 @@ $(document).ready(function () {
 //     "cost_type",
 //     true
 //   );
-  // FileType
-  fileTypeInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-    "fileType",
-    true
-  );
-
-  editFileTypeInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-    "editFileType",
-    true
-  );
+  // FileType Add/ Edit
+  fileTypeInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue("fileType", true);
+  editFileTypeInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue("editFileType", true);
   // First Data Table Initialization
 //   serviceManagementDataTableInit = createTableComponent(
 //     dataSourceIPconfig,
@@ -178,106 +171,103 @@ $(document).ready(function () {
 //   getCreateBundleTableData(10, 1);
   // SERVICE MANAGEMNT
   // Validation rules define
-  $("#yourFormId").validate({
-    debug: true,
-    rules: {
-      title: {
-        required: true,
-      },
-      description: {
-        required: false, // optional
-      },
-      estimated_cost: {
-        required: true,
-        number: true,
-      },
-      cost_type: {
-        required: true,
-      },
-      cost_unit: {
-        required: true,
-      },
-      availability: {
-        required: true,
-      },
-    },
-    messages: {
-      title: "Title is required",
-      estimated_cost: "Estimated cost is required and must be a number",
-      cost_type: "Cost type is required",
-      cost_unit: "Cost unit is required",
-      availability: "Availability must be selected",
-    },
-    errorClass: "error invalid-feedback",
-    validClass: "success",
-    errorElement: "span",
-    highlight: function (element, errorClass, validClass) {
-      $(element)
-        .parents("div.control-group")
-        .addClass(errorClass)
-        .removeClass(validClass);
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).parents(".error").removeClass(errorClass).addClass(validClass);
-    },
-    // the errorPlacement has to take the table layout into account
-    errorPlacement: function (error, element) {
-      if (element.attr("name") === "cost_type") {
-        error.appendTo(element.parent().parent().parent().parent().parent());
-      } else {
-        error.appendTo(element.parent());
-      }
-    },
-  });
+  // $("#yourFormId").validate({
+  //   debug: true,
+  //   rules: {
+  //     title: {
+  //       required: true,
+  //     },
+  //     description: {
+  //       required: false, // optional
+  //     },
+  //     estimated_cost: {
+  //       required: true,
+  //       number: true,
+  //     },
+  //     cost_type: {
+  //       required: true,
+  //     },
+  //     cost_unit: {
+  //       required: true,
+  //     },
+  //     availability: {
+  //       required: true,
+  //     },
+  //   },
+  //   messages: {
+  //     title: "Title is required.",
+  //     estimated_cost: "Estimated cost is required and must be a number.",
+  //     cost_type: "Cost type is required.",
+  //     cost_unit: "Cost unit is required.",
+  //     availability: "Availability must be selected.",
+  //   },
+  //   errorClass: "error invalid-feedback",
+  //   validClass: "success",
+  //   errorElement: "span",
+  //   highlight: function (element, errorClass, validClass) {
+  //     $(element).parents("div.control-group").addClass(errorClass).removeClass(validClass);
+  //   },
+  //   unhighlight: function (element, errorClass, validClass) {
+  //     $(element).parents(".error").removeClass(errorClass).addClass(validClass);
+  //   },
+  //   // the errorPlacement has to take the table layout into account
+  //   errorPlacement: function (error, element) {
+  //     if (element.attr("name") === "cost_type") {
+  //       error.appendTo(element.parent().parent().parent().parent().parent());
+  //     } else {
+  //       error.appendTo(element.parent());
+  //     }
+  //   },
+  // });
 });
 
 // get span for change
-function generateSpan(data, key, customClass = "", style = "") {
-  let sepecficKeys = ["cost_type"];
+// function generateSpan(data, key, customClass = "", style = "") {
+//   let sepecficKeys = ["cost_type"];
 
-  let keyValue = {
-    per_entity: "Per Entity",
-    per_unit: "Per Unit",
-  };
+//   let keyValue = {
+//     per_entity: "Per Entity",
+//     per_unit: "Per Unit",
+//   };
 
-  let spanContent = "";
+//   let spanContent = "";
 
-  if (
-    data[key] == "nil" ||
-    data[key] == "nill" ||
-    data[key] == "" ||
-    data[key] == " " ||
-    data[key] == null
-  ) {
-    spanContent = `<span class="${customClass}">--</span>`;
-  } else if (
-    data[key] == "true" ||
-    data[key] == true ||
-    data[key] == "false" ||
-    data[key] == false
-  ) {
-    // If the key is an array, join its values with commas and display in a span
-    const displayValue =
-      data[key] == true || data[key] == "true" ? "True" : "False";
-    spanContent = `<span class="${customClass}" style="${style}" title="${displayValue}">${displayValue}</span>`;
-  } else if (isNumber(data[key])) {
-    // If the key is an array, join its values with commas and display in a span
-    const displayValue = data[key].toFixed(2);
-    spanContent = `<span class="${customClass}" style="${style}" title="${displayValue}">${displayValue}</span>`;
-  } else if (sepecficKeys.includes(key)) {
-    // If the key is a simple value
-    const displayValue = keyValue[data[key]] || data[key];
-    const title = displayValue;
-    spanContent = `<span class="${customClass}" style="${style}" title="${title}">${displayValue}</span>`;
-  } else {
-    // If the key is a simple value
-    const displayValue = data[key];
-    const title = displayValue;
-    spanContent = `<span class="${customClass}" style="${style}" title="${title}">${displayValue}</span>`;
-  }
+//   if (
+//     data[key] == "nil" ||
+//     data[key] == "nill" ||
+//     data[key] == "" ||
+//     data[key] == " " ||
+//     data[key] == null
+//   ) {
+//     spanContent = `<span class="${customClass}">--</span>`;
+//   } else if (
+//     data[key] == "true" ||
+//     data[key] == true ||
+//     data[key] == "false" ||
+//     data[key] == false
+//   ) {
+//     // If the key is an array, join its values with commas and display in a span
+//     const displayValue =
+//       data[key] == true || data[key] == "true" ? "True" : "False";
+//     spanContent = `<span class="${customClass}" style="${style}" title="${displayValue}">${displayValue}</span>`;
+//   } else if (isNumber(data[key])) {
+//     // If the key is an array, join its values with commas and display in a span
+//     const displayValue = data[key].toFixed(2);
+//     spanContent = `<span class="${customClass}" style="${style}" title="${displayValue}">${displayValue}</span>`;
+//   } else if (sepecficKeys.includes(key)) {
+//     // If the key is a simple value
+//     const displayValue = keyValue[data[key]] || data[key];
+//     const title = displayValue;
+//     spanContent = `<span class="${customClass}" style="${style}" title="${title}">${displayValue}</span>`;
+//   } else {
+//     // If the key is a simple value
+//     const displayValue = data[key];
+//     const title = displayValue;
+//     spanContent = `<span class="${customClass}" style="${style}" title="${title}">${displayValue}</span>`;
+//   }
 
-  return spanContent;
-}
+//   return spanContent;
+// }
 
 // function searchObjectCreation(search) {
 //   searchOject = search;
@@ -485,45 +475,106 @@ function generateSpan(data, key, customClass = "", style = "") {
 //   console.log("exportServiceManagementDataTableData called");
 // }
 // Availability Toogle
-$(document).on("change", ".availability-toggle", function () {
-    var checkbox = $(this);
-    var bundleId = checkbox.data("id");
-    var previousState = !checkbox.prop("checked"); // previous state
+$(document).on("click", ".delete-document", function () {
+  var checkbox = $(this);
+  var bundleId = checkbox.data("id");
+  var previousState = !checkbox.prop("checked"); // previous state
 
-    swal({
-        title: "Are you sure?",
-        text: "Do you want to change availability?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "Cancel",
-        closeOnConfirm: false,
-        closeOnCancel: true
-    },
-    function(isConfirm) {
-        if (isConfirm) {
-            // User clicked Yes -> API call
-            $.ajax({
-                url: "/updateAvailability", // replace with your API
-                method: "POST",
-                data: {
-                    bundle_id: bundleId,
-                    availability: checkbox.prop("checked")
-                },
-                success: function(response) {
-                    swal("Updated!", "Availability has been updated.", "success");
-                },
-                error: function() {
-                    swal("Error!", "Something went wrong.", "error");
-                    checkbox.prop("checked", previousState); // revert on error
-                }
-            });
-        } else {
-            // User clicked Cancel -> revert toggle
-            checkbox.prop("checked", previousState);
-        }
-    });
+  swal({
+    title: 'Deleting Record',
+    text: 'Are you sure you want to delete?',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Confirm',
+    cancelButtonText: 'Cancel'
+  }, function (isConfirm) {
+      if (isConfirm) {
+        // Prepare JSON payload
+        const payload = JSON.stringify({
+          auth_token: authToken,
+          document_id: bundleId,
+          availability: checkbox.prop("checked"),
+        });
+
+        // User clicked Yes -> API call
+        $.ajax({
+          url: MAIN_API_PATH + "tml/admin/documents/delete", // replace with your API
+          method: "POST",
+          data: payload,
+          contentType: "application/json", // tell server it's JSON
+          dataType: "json", // expect JSON response
+          success: function (response) {
+            showDataTableLoader("addFilesDataTable");
+            $("#cover-spin").show();
+            addFilesDataTableInit.clear().draw();
+            getaddFilesTableData(10, 1);
+            // swal("Updated!", "Availability has been updated.", "success");
+          },
+          error: function () {
+            swal("Error!", "Something went wrong.", "error");
+            checkbox.prop("checked", previousState); // revert on error
+          },
+        });
+      } else {
+        // User clicked Cancel -> revert toggle
+        checkbox.prop("checked", previousState);
+      }
+    }
+  );
 });
+
+// Availability Toogle
+$(document).on("change", ".availability-toggle", function () {
+  var checkbox = $(this);
+  var bundleId = checkbox.data("id");
+  var previousState = !checkbox.prop("checked"); // previous state
+
+  swal(
+    {
+      title: "Are you sure?",
+      text: "Do you want to change availability?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel'
+    },
+    function (isConfirm) {
+      if (isConfirm) {
+        showDataTableLoader("addFilesDataTable");
+        $("#cover-spin").show();
+        // Prepare JSON payload
+        const payload = JSON.stringify({
+          auth_token: authToken,
+          document_id: bundleId,
+          availability: checkbox.prop("checked"),
+        });
+
+        // User clicked Yes -> API call
+        $.ajax({
+          url: MAIN_API_PATH + "tml/admin/document/available/false", // replace with your API
+          method: "POST",
+          data: payload,
+          contentType: "application/json", // tell server it's JSON
+          dataType: "json", // expect JSON response
+          success: function (response) {
+            // swal("Updated!", "Availability has been updated.", "success");
+            showNotificationError("bg-green", null, null, null, null, null, UPDATE);
+            addFilesDataTableInit.clear().draw();
+            getaddFilesTableData(10, 1);
+          },
+          error: function () {
+            swal("Error!", "Something went wrong.", "error");
+            checkbox.prop("checked", previousState); // revert on error
+          },
+        });
+      } else {
+        // User clicked Cancel -> revert toggle
+        checkbox.prop("checked", previousState);
+      }
+    }
+  );
+});
+
 
 // End Availability
 
@@ -977,9 +1028,7 @@ $(document).on("click", "#clickToOpenModal", function () {
 //   });
 // }
 
-$(
-  "#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, #serviceManagementDetailsModal textarea"
-).on("input change", function () {
+$("#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, #serviceManagementDetailsModal textarea").on("input change", function () {
   const original = $("#serviceManagementDetailsModal").data("original-values");
   const serviceId = $("#serviceManagementDetailsModal").data("service-id");
 
@@ -1087,6 +1136,67 @@ function updateEditFields() {
 $("#editFileType").on("change", updateEditFields);
 updateEditFields()
 
+// Submit EDIT form
+$("#updateFileBtn").on("click", function () {
+  if ($("#editFileForm").validate().form()) {
+    var title = $("#editFileTitle").val().trim();
+    var description = $("#editFileDescription").val().trim();
+    var type = $("#editFileType").val();
+    var source = $("#editFileSource").val().trim();
+    var fileInputEl = document.getElementById("editFileInput");
+    var file =
+      fileInputEl && fileInputEl.files.length ? fileInputEl.files[0] : null;
+
+    var serviceId = $("#editFileModal").data("service-id");
+
+    var formData = new FormData();
+    formData.append("document_id", serviceId);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("type", type);
+    formData.append("updated_at", Math.floor(Date.now() / 1000));
+    formData.append("auth_token", authToken);
+
+    if (type === "file") {
+      if (file) {
+        formData.append("file", file, file.name);
+        formData.append("source", "");
+      } else {
+        // no new file selected → keep old source (from original values)
+        const original = $("#editFileModal").data("original-values");
+        formData.append("source", original.source || "");
+      }
+    } else {
+      formData.append("source", source);
+    }
+
+    // AJAX request
+    $.ajax({
+      url: MAIN_API_PATH + "tml/admin/documents/update", // EDIT API endpoint
+      method: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        var modalEl = document.getElementById("editFileModal");
+        var modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide(); // close modal
+        showNotificationError("bg-green", null, null, null, null, null, UPDATE);
+        showDataTableLoader("addFilesDataTable");
+        $("#cover-spin").show();
+        addFilesDataTableInit.clear().draw();
+        getaddFilesTableData(10, 1);
+        $("#editFileForm")[0].reset(); // reset form
+        updateEditFields(); // reset field visibility
+      },
+      error: function (err) {
+        console.error("Update error:", err);
+        alert("Error updating file!");
+      },
+    });
+  }
+});
+
 // Submit form
 $("#submitFileBtn").on("click", function () {
  if ($("#addFileForm").validate().form()) {
@@ -1135,11 +1245,16 @@ $("#submitFileBtn").on("click", function () {
     processData: false,
     contentType: false,
     success: function (response) {
-      console.log("Upload success:", response);
-      alert("File added successfully!");
+      // console.log("Upload success:", response);
+      // alert("File added successfully!");
+      showNotificationError("bg-green", null, null, null, null, null, SAVED);
       var modalEl = document.getElementById("addFileModal");
       var modal = bootstrap.Modal.getInstance(modalEl);
       modal.hide(); // close modal
+      showDataTableLoader("addFilesDataTable");
+      $("#cover-spin").show();
+      addFilesDataTableInit.clear().draw();
+      getaddFilesTableData(10, 1);
       $("#addFileForm")[0].reset(); // reset form
       updateFields(); // reset fields visibility
     },
@@ -1355,6 +1470,15 @@ function getaddFilesTableData(skip, page) {
     <button class="btn btn-sm btn-outline-danger delete-document" data-id="${doc.document_id}">Delete</button>
   `;
 
+  const availability = doc.availability != null
+          ? `<div class="form-check form-switch">
+              <input class="form-check-input availability-toggle"
+                      type="checkbox"
+                      data-id="${doc.document_id}"
+                      ${doc.availability ? "checked" : ""}>
+            </div>`
+          : "--";
+
           addFilesDataTableInit.row
             .add([
               doc.title,
@@ -1383,6 +1507,7 @@ function getaddFilesTableData(skip, page) {
 
               sourceDisplay,
               createdDate,
+              `<td><span>${availability}</span></td>`,
               `<span>${actions}</span>`,
             ])
             .draw();
@@ -1505,20 +1630,39 @@ function attachEditResourcesActions() {
       if (editFileTypeInit) {
         editFileTypeInit.setValue(serviceData.type, true);
       }
-      console.log("Editing document type:", serviceData.type);
+      console.log("Editing document type:", serviceData.source);
 
       if (serviceData.type === "file") {
         $("#editFileUploadWrapper").show();
         $("#editSourceWrapper").hide();
 
         // Can't set file directly, show preview label
-        $("#editFileInput").val(""); // reset
+        $("#editFileInput").val(''); // reset
         if (serviceData.source) {
           $("#editFileNamePreview").text("Current file: " + serviceData.source);
         } else {
           $("#editFileNamePreview").text("No file uploaded yet");
         }
+      }if (serviceData.type === "file") {
+        $('#fileCardPreview').removeClass('d-none');
+        $('#fileCardPreview').addClass('d-flex');
+        $("#editFileUploadWrapper").show();
+        $("#editSourceWrapper").hide();
+
+        // Always reset the file input
+        $("#editFileInput").val('');
+
+        // Show existing file name in preview text (not in input)
+        if (serviceData.source) {
+          const fileName = serviceData.source.split('/').pop(); // get only the filename from path/URL
+          $("#editFileNamePreview").text("Current file: " + fileName);
+        } else {
+          $("#editFileNamePreview").text("No file uploaded yet");
+        }
       } else {
+        $('#fileCardPreview').addClass('d-none');
+        $('#fileCardPreview').removeClass('d-flex');
+
         $("#editFileUploadWrapper").hide();
         $("#editSourceWrapper").show();
         $("#editFileSource")
@@ -1907,496 +2051,496 @@ function exportCreateBundleDataTableData() {
 
 // start enroll services Data Table Initialization
 
-$(document).on("click", "#createBundleBtn", function () {
-  enrollServicesDataTableInit.clear().draw();
-  let tableEntries = Number($("#datatableEntries3").val());
-  getEnrollServicesTableData(tableEntries, 1);
-});
+// $(document).on("click", "#createBundleBtn", function () {
+//   enrollServicesDataTableInit.clear().draw();
+//   let tableEntries = Number($("#datatableEntries3").val());
+//   getEnrollServicesTableData(tableEntries, 1);
+// });
 
-function enrollServicesSearchObjectCreation(search) {
-  enrollServicesSerachObj = search;
-}
+// function enrollServicesSearchObjectCreation(search) {
+//   enrollServicesSerachObj = search;
+// }
 
 // Main API Call function for datatable
-function getEnrollServicesTableData(skip, page) {
-  let data = [
-    {
-      order_id: "ORD12345",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-15",
-      payment: "Paid",
-      status: "In Provisioning",
-    },
-    {
-      order_id: "ORDdf5",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-13",
-      payment: "Pending",
-      status: "Pending Kickoff",
-    },
-  ];
+// function getEnrollServicesTableData(skip, page) {
+//   let data = [
+//     {
+//       order_id: "ORD12345",
+//       municipality: "Springfield",
+//       service: "Cloud Hosting",
+//       date: "2024-01-15",
+//       payment: "Paid",
+//       status: "In Provisioning",
+//     },
+//     {
+//       order_id: "ORDdf5",
+//       municipality: "Springfield",
+//       service: "Cloud Hosting",
+//       date: "2024-01-13",
+//       payment: "Pending",
+//       status: "Pending Kickoff",
+//     },
+//   ];
 
-  let requirePayloadData;
-  if (Object.keys(enrollServicesSerachObj).length > 0) {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-      search: enrollServicesSerachObj,
-    });
-  } else {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-      avalilabe: true,
-    });
-  }
+//   let requirePayloadData;
+//   if (Object.keys(enrollServicesSerachObj).length > 0) {
+//     requirePayloadData = JSON.stringify({
+//       auth_token: authToken,
+//       skip: Number(skip),
+//       page,
+//       search: enrollServicesSerachObj,
+//     });
+//   } else {
+//     requirePayloadData = JSON.stringify({
+//       auth_token: authToken,
+//       skip: Number(skip),
+//       page,
+//       avalilabe: true,
+//     });
+//   }
 
-  // Ajax call
-  $.ajax({
-    url: MAIN_API_PATH + getserviceManagementAPI,
-    method: POST,
-    contentType: Content_Type,
-    dataType: "json",
-    data: requirePayloadData,
-    statusCode: {
-      200: function (data) {
-        // Hide page laoder Spiner
-        $("#cover-spin").hide();
+//   // Ajax call
+//   $.ajax({
+//     url: MAIN_API_PATH + getserviceManagementAPI,
+//     method: POST,
+//     contentType: Content_Type,
+//     dataType: "json",
+//     data: requirePayloadData,
+//     statusCode: {
+//       200: function (data) {
+//         // Hide page laoder Spiner
+//         $("#cover-spin").hide();
 
-        hideDataTableLoader200("enrolServicesDataTable");
+//         hideDataTableLoader200("enrolServicesDataTable");
 
-        // Response data (IPs)
-        response = data.message;
-        enrollServicesDataReceived = [
-          ...enrollServicesDataReceived,
-          ...response,
-        ];
-        localStorage.setItem("enrolServicesDataTableTotal", data.count);
-        // If No IPs found
+//         // Response data (IPs)
+//         response = data.message;
+//         enrollServicesDataReceived = [
+//           ...enrollServicesDataReceived,
+//           ...response,
+//         ];
+//         localStorage.setItem("enrolServicesDataTableTotal", data.count);
+//         // If No IPs found
 
-        // loop through response to add data in datatable
-        for (let i = 0; i < response.length; i++) {
-          let service_id = response[i].service_id;
-          const title = generateSpan(response[i], "title", "", "");
-          const description = generateSpan(response[i], "description", "", "");
-          const cost_type = generateSpan(response[i], "cost_type", "", "");
+//         // loop through response to add data in datatable
+//         for (let i = 0; i < response.length; i++) {
+//           let service_id = response[i].service_id;
+//           const title = generateSpan(response[i], "title", "", "");
+//           const description = generateSpan(response[i], "description", "", "");
+//           const cost_type = generateSpan(response[i], "cost_type", "", "");
 
-          let estimated_cost_span;
-          if (response[i].cost_unit === "USD") {
-            estimated_cost_span = `<span >$${response[
-              i
-            ].estimated_cost.toLocaleString()}</span>`;
-          } else {
-            estimated_cost_span = `<span >$${response[
-              i
-            ].estimated_cost.toLocaleString()}</span>`;
-          }
+//           let estimated_cost_span;
+//           if (response[i].cost_unit === "USD") {
+//             estimated_cost_span = `<span >$${response[
+//               i
+//             ].estimated_cost.toLocaleString()}</span>`;
+//           } else {
+//             estimated_cost_span = `<span >$${response[
+//               i
+//             ].estimated_cost.toLocaleString()}</span>`;
+//           }
 
-          let defaultCheckbox;
+//           let defaultCheckbox;
 
-          defaultCheckbox = `<input title="Click to enroll service"   style="margin: 0 10px 0 0; cursor: pointer;text-align:center;" type="checkbox" class="selectSrviceToEnrollCheckBox" name="selectSrviceToEnrollCheckBox" value="${service_id}" >`;
+//           defaultCheckbox = `<input title="Click to enroll service"   style="margin: 0 10px 0 0; cursor: pointer;text-align:center;" type="checkbox" class="selectSrviceToEnrollCheckBox" name="selectSrviceToEnrollCheckBox" value="${service_id}" >`;
 
-          let actions = `
-          <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
-          <button class="btn btn-sm btn-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
-        `;
+//           let actions = `
+//           <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
+//           <button class="btn btn-sm btn-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
+//         `;
 
-          enrollServicesDataTableInit.row
-            .add([
-              defaultCheckbox,
-              `<td ><span >${title}</span></td>`,
-              `<td ><span >${description}</span></td>`,
-              `<td ><span >${cost_type}</span></td>`,
-              `<td ><span >${estimated_cost_span}</span></td>`,
-            ])
-            .draw();
-          datatablePagination(
-            "enrolServicesDataTable",
-            3,
-            "enrolServicesDataTableTotal",
-            getEnrollServicesTableData
-          );
-        }
+//           enrollServicesDataTableInit.row
+//             .add([
+//               defaultCheckbox,
+//               `<td ><span >${title}</span></td>`,
+//               `<td ><span >${description}</span></td>`,
+//               `<td ><span >${cost_type}</span></td>`,
+//               `<td ><span >${estimated_cost_span}</span></td>`,
+//             ])
+//             .draw();
+//           datatablePagination(
+//             "enrolServicesDataTable",
+//             3,
+//             "enrolServicesDataTableTotal",
+//             getEnrollServicesTableData
+//           );
+//         }
 
-        let viewOrderDetailsButtons = document.querySelectorAll(
-          ".view-order-details"
-        );
-        viewOrderDetailsButtons.forEach((button) => {
-          button.addEventListener("click", function () {
-            let orderId = this.getAttribute("data-order-id");
-            // Redirect to order details page
-            showOrderDetails(orderId);
-          });
-        });
-      },
-      204: function () {
-        $("#cover-spin").hide();
-        hideDataTableLoaderError("enrolServicesDataTable");
-        if (Object.keys(enrollServicesSerachObj).length > 0) {
-          $("#enrolServicesDataTableErrorDiv").addClass("d-none");
-          $(
-            "#enrolServicesDataTable, #enrolServicesDataTableDatatableMainHeading"
-          ).removeClass("d-none");
-        }
-        enrollServicesDataTableInit.clear().draw();
-        $("#enrolServicesDataTableErrorText").text(noDataFoundText204Case);
-      },
-    },
-    error: function (xhr, status, error) {
-      $("#cover-spin").hide();
-      hideDataTableLoaderError("enrolServicesDataTable");
+//         let viewOrderDetailsButtons = document.querySelectorAll(
+//           ".view-order-details"
+//         );
+//         viewOrderDetailsButtons.forEach((button) => {
+//           button.addEventListener("click", function () {
+//             let orderId = this.getAttribute("data-order-id");
+//             // Redirect to order details page
+//             showOrderDetails(orderId);
+//           });
+//         });
+//       },
+//       204: function () {
+//         $("#cover-spin").hide();
+//         hideDataTableLoaderError("enrolServicesDataTable");
+//         if (Object.keys(enrollServicesSerachObj).length > 0) {
+//           $("#enrolServicesDataTableErrorDiv").addClass("d-none");
+//           $(
+//             "#enrolServicesDataTable, #enrolServicesDataTableDatatableMainHeading"
+//           ).removeClass("d-none");
+//         }
+//         enrollServicesDataTableInit.clear().draw();
+//         $("#enrolServicesDataTableErrorText").text(noDataFoundText204Case);
+//       },
+//     },
+//     error: function (xhr, status, error) {
+//       $("#cover-spin").hide();
+//       hideDataTableLoaderError("enrolServicesDataTable");
 
-      if (xhr.status === 400) {
-        $("#enrolServicesDataTableErrorText").text(invalidRequest400Error);
-      } else if (xhr.status === 401) {
-        $("#enrolServicesDataTableErrorText").text(unauthorizedRequest401Error);
-      } else if (xhr.status === 404) {
-        // $('#cover-spin').hide(0);
-        $("#enrolServicesDataTableErrorText").text(notFound404Error);
-      } else if (xhr.status === 503) {
-        // $('#cover-spin').hide(0);
-        $("#enrolServicesDataTableErrorText").text(serverError503Error);
-      } else if (xhr.status === 408) {
-        swal(
-          {
-            title: " ",
-            text: sessionExpired408Error,
-            type: "info",
-            showCancelButton: false,
-            confirmButtonText: "Logout",
-          },
-          function (isConfirm) {
-            if (isConfirm) {
-              localStorage.clear();
-              window.location.href = redirectToSignInPage408;
-            }
-          }
-        );
-      } else if (xhr.status === 410) {
-        $.ajax({
-          url: MAIN_API_PATH + getGmtAPI,
-          method: POST,
-          contentType: Content_Type,
-          dataType: "json",
-          success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt();
-            encrypt.setPublicKey(sitePublicKey);
-            const currentDateString = String(data.unixtime);
-            securityKeyEncrypted = encrypt.encrypt(
-              pageName + currentDateString
-            );
-            SecurityKeyTime = false;
-            getEnrollServicesTableData(skip, page, search);
-          },
-          error: function (xhr, status, error) {
-            $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt();
-              encrypt.setPublicKey(sitePublicKey);
-              const currentDateString = String(data.unixtime);
-              securityKeyEncrypted = encrypt.encrypt(
-                pageName + currentDateString
-              );
-              SecurityKeyTime = false;
-              getEnrollServicesTableData(skip, page, search);
-            });
-          },
-        });
-      } else {
-        // $('#cover-spin').hide(0);
-        $("#enrolServicesDataTableErrorText").text(serverError503Error);
-      }
-    },
-  });
-}
+//       if (xhr.status === 400) {
+//         $("#enrolServicesDataTableErrorText").text(invalidRequest400Error);
+//       } else if (xhr.status === 401) {
+//         $("#enrolServicesDataTableErrorText").text(unauthorizedRequest401Error);
+//       } else if (xhr.status === 404) {
+//         // $('#cover-spin').hide(0);
+//         $("#enrolServicesDataTableErrorText").text(notFound404Error);
+//       } else if (xhr.status === 503) {
+//         // $('#cover-spin').hide(0);
+//         $("#enrolServicesDataTableErrorText").text(serverError503Error);
+//       } else if (xhr.status === 408) {
+//         swal(
+//           {
+//             title: " ",
+//             text: sessionExpired408Error,
+//             type: "info",
+//             showCancelButton: false,
+//             confirmButtonText: "Logout",
+//           },
+//           function (isConfirm) {
+//             if (isConfirm) {
+//               localStorage.clear();
+//               window.location.href = redirectToSignInPage408;
+//             }
+//           }
+//         );
+//       } else if (xhr.status === 410) {
+//         $.ajax({
+//           url: MAIN_API_PATH + getGmtAPI,
+//           method: POST,
+//           contentType: Content_Type,
+//           dataType: "json",
+//           success: function (data, textStatus, xhr) {
+//             const encrypt = new JSEncrypt();
+//             encrypt.setPublicKey(sitePublicKey);
+//             const currentDateString = String(data.unixtime);
+//             securityKeyEncrypted = encrypt.encrypt(
+//               pageName + currentDateString
+//             );
+//             SecurityKeyTime = false;
+//             getEnrollServicesTableData(skip, page, search);
+//           },
+//           error: function (xhr, status, error) {
+//             $.getJSON(worldTimeAPI, function (data) {
+//               const encrypt = new JSEncrypt();
+//               encrypt.setPublicKey(sitePublicKey);
+//               const currentDateString = String(data.unixtime);
+//               securityKeyEncrypted = encrypt.encrypt(
+//                 pageName + currentDateString
+//               );
+//               SecurityKeyTime = false;
+//               getEnrollServicesTableData(skip, page, search);
+//             });
+//           },
+//         });
+//       } else {
+//         // $('#cover-spin').hide(0);
+//         $("#enrolServicesDataTableErrorText").text(serverError503Error);
+//       }
+//     },
+//   });
+// }
 
 // function to export data from datatable
-function exportenrolServicesDataTableData() {
-  console.log("exportenrolServicesDataTableData called");
-}
+// function exportenrolServicesDataTableData() {
+//   console.log("exportenrolServicesDataTableData called");
+// }
 
 // end enroll services Data Table Initialization
 
 // function to export data from datatable
-function exportenrolServicesDataTableData() {
-  console.log("exportenrolServicesDataTableData called");
-}
+// function exportenrolServicesDataTableData() {
+//   console.log("exportenrolServicesDataTableData called");
+// }
 
 // Function to get information of all the users at once when "All" checkbox is checked
-$("#enroleServicesForCreateBundleTableContainer").on(
-  "click",
-  "#selectAllServicesList",
-  function (event) {
-    // on click
-    const checked = this.checked;
-    // Temporary array to store selected categories
-    domainListDatatableInit
-      .column(0)
-      .nodes()
-      .to$()
-      .each(function (index) {
-        const checkbox = $(this).find(
-          'input[name="selectSrviceToEnrollCheckBox"]'
-        );
+// $("#enroleServicesForCreateBundleTableContainer").on(
+//   "click",
+//   "#selectAllServicesList",
+//   function (event) {
+//     // on click
+//     const checked = this.checked;
+//     // Temporary array to store selected categories
+//     domainListDatatableInit
+//       .column(0)
+//       .nodes()
+//       .to$()
+//       .each(function (index) {
+//         const checkbox = $(this).find(
+//           'input[name="selectSrviceToEnrollCheckBox"]'
+//         );
 
-        if (checked === false) {
-          checkbox.prop("checked", false);
-          checkedServicesToEnrollList = [];
-        } else {
-          checkbox.prop("checked", "checked");
-          if (checkbox.is(":checked")) {
-            const checkBoxValue = checkbox.val();
-            // Add selected category object to the temporary array
-            let exists = checkedServicesToEnrollList.some(
-              (item) => item === checkBoxValue
-            );
+//         if (checked === false) {
+//           checkbox.prop("checked", false);
+//           checkedServicesToEnrollList = [];
+//         } else {
+//           checkbox.prop("checked", "checked");
+//           if (checkbox.is(":checked")) {
+//             const checkBoxValue = checkbox.val();
+//             // Add selected category object to the temporary array
+//             let exists = checkedServicesToEnrollList.some(
+//               (item) => item === checkBoxValue
+//             );
 
-            if (!exists) {
-              checkedServicesToEnrollList.push(checkBoxValue);
-            }
-          }
-        }
-      });
-    calculateCostOfServices();
-    console.log(
-      "this is to check api response",
-      checkedServicesToEnrollList,
-      enrollServicesDataReceived
-    );
-  }
-);
+//             if (!exists) {
+//               checkedServicesToEnrollList.push(checkBoxValue);
+//             }
+//           }
+//         }
+//       });
+//     calculateCostOfServices();
+//     console.log(
+//       "this is to check api response",
+//       checkedServicesToEnrollList,
+//       enrollServicesDataReceived
+//     );
+//   }
+// );
 
 // Checkbox for the Deleted domains
-$("#enroleServicesForCreateBundleTableContainer").on(
-  "change",
-  "input[name='selectSrviceToEnrollCheckBox']",
-  function (e) {
-    let checkBoxValue;
-    let categoryValue;
-    if ($(this).is(":checked")) {
-      checkBoxValue = $(this).val();
+// $("#enroleServicesForCreateBundleTableContainer").on(
+//   "change",
+//   "input[name='selectSrviceToEnrollCheckBox']",
+//   function (e) {
+//     let checkBoxValue;
+//     let categoryValue;
+//     if ($(this).is(":checked")) {
+//       checkBoxValue = $(this).val();
 
-      checkedServicesToEnrollList.push(checkBoxValue);
-    } else {
-      checkBoxValue = $(this).val();
+//       checkedServicesToEnrollList.push(checkBoxValue);
+//     } else {
+//       checkBoxValue = $(this).val();
 
-      checkedServicesToEnrollList = checkedServicesToEnrollList.filter(
-        function (el) {
-          return el !== checkBoxValue;
-        }
-      );
-    }
-    if (
-      $(".selectSrviceToEnrollCheckBox").length ===
-      $(".selectSrviceToEnrollCheckBox:checked").length
-    ) {
-      $("#selectAllServicesList").prop("checked", true);
-    } else {
-      $("#selectAllServicesList").prop("checked", false);
-    }
+//       checkedServicesToEnrollList = checkedServicesToEnrollList.filter(
+//         function (el) {
+//           return el !== checkBoxValue;
+//         }
+//       );
+//     }
+//     if (
+//       $(".selectSrviceToEnrollCheckBox").length ===
+//       $(".selectSrviceToEnrollCheckBox:checked").length
+//     ) {
+//       $("#selectAllServicesList").prop("checked", true);
+//     } else {
+//       $("#selectAllServicesList").prop("checked", false);
+//     }
 
-    calculateCostOfServices();
-    console.log(
-      "this is to check api response",
-      checkedServicesToEnrollList,
-      enrollServicesDataReceived
-    );
-  }
-);
+//     calculateCostOfServices();
+//     console.log(
+//       "this is to check api response",
+//       checkedServicesToEnrollList,
+//       enrollServicesDataReceived
+//     );
+//   }
+// );
 
-$("#enrollServicesSubmitBtn").on("click", function (e) {
-  e.preventDefault();
-  if ($("#enrollServicesForm").validate().form()) {
-    console.log("this is to check api response", checkedServicesToEnrollList);
-    if (checkedServicesToEnrollList.length <= 0) {
-      showNotificationError(
-        "bg-orange",
-        null,
-        null,
-        null,
-        null,
-        null,
-        "Services to enroll are required."
-      );
-    }
-    {
-      setEnrollServicesData();
-    }
-  }
-});
+// $("#enrollServicesSubmitBtn").on("click", function (e) {
+//   e.preventDefault();
+//   if ($("#enrollServicesForm").validate().form()) {
+//     console.log("this is to check api response", checkedServicesToEnrollList);
+//     if (checkedServicesToEnrollList.length <= 0) {
+//       showNotificationError(
+//         "bg-orange",
+//         null,
+//         null,
+//         null,
+//         null,
+//         null,
+//         "Services to enroll are required."
+//       );
+//     }
+//     {
+//       setEnrollServicesData();
+//     }
+//   }
+// });
 
-function setEnrollServicesData() {
-  $("#cover-spin").show();
-  const title = $("#enrollServicesFormTitle").val();
-  const description = $("#enrollServicesFormDescription").val();
-  const services = checkedServicesToEnrollList.join(",");
+// function setEnrollServicesData() {
+//   $("#cover-spin").show();
+//   const title = $("#enrollServicesFormTitle").val();
+//   const description = $("#enrollServicesFormDescription").val();
+//   const services = checkedServicesToEnrollList.join(",");
 
-  console.log("this is to check api response", title, description, services);
+//   console.log("this is to check api response", title, description, services);
 
-  const apiBody = JSON.stringify({
-    title: title,
-    description: description,
-    services: services,
-  });
-  // return 0
-  $.ajax({
-    url: MAIN_API_PATH + setEnrollServicesDataAPI,
-    method: POST,
-    contentType: Content_Type,
-    dataType: "json",
-    data: apiBody,
-    statusCode: {
-      200: function (data) {
-        $("#cover-spin").hide(0);
+//   const apiBody = JSON.stringify({
+//     title: title,
+//     description: description,
+//     services: services,
+//   });
+//   // return 0
+//   $.ajax({
+//     url: MAIN_API_PATH + setEnrollServicesDataAPI,
+//     method: POST,
+//     contentType: Content_Type,
+//     dataType: "json",
+//     data: apiBody,
+//     statusCode: {
+//       200: function (data) {
+//         $("#cover-spin").hide(0);
 
-        showNotificationError("bg-green", null, null, null, null, null, UPDATE);
+//         showNotificationError("bg-green", null, null, null, null, null, UPDATE);
 
-        $("#enrollServicesFormTitle").val("");
-        $("#enrollServicesFormDescription").val("");
-        $("#selectAllServicesList").prop("checked", false);
-        checkedServicesToEnrollList = [];
-      },
-      204: function () {
-        $("#cover-spin").hide(0);
-      },
-    },
-    error: function (xhr, status, error) {
-      $("#cover-spin").hide();
-      if (xhr.status === 400) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          invalidRequest400Error
-        );
-      } else if (xhr.status === 401) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          unauthorizedRequest401Error
-        );
-      } else if (xhr.status === 404) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          notFound404Error
-        );
-      } else if (xhr.status === 409) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          alreadyExist409Error
-        );
-      } else if (xhr.status === 503) {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
-      } else if (xhr.status === 408) {
-        swal(
-          {
-            title: " ",
-            text: sessionExpired408Error,
-            type: "info",
-            showCancelButton: false,
-            confirmButtonText: "Logout",
-          },
-          function (isConfirm) {
-            if (isConfirm) {
-              localStorage.clear();
-              window.location.href = redirectToSignInPage408;
-            }
-          }
-        );
-      } else if (xhr.status === 410) {
-        $("#cover-spin").hide();
+//         $("#enrollServicesFormTitle").val("");
+//         $("#enrollServicesFormDescription").val("");
+//         $("#selectAllServicesList").prop("checked", false);
+//         checkedServicesToEnrollList = [];
+//       },
+//       204: function () {
+//         $("#cover-spin").hide(0);
+//       },
+//     },
+//     error: function (xhr, status, error) {
+//       $("#cover-spin").hide();
+//       if (xhr.status === 400) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           invalidRequest400Error
+//         );
+//       } else if (xhr.status === 401) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           unauthorizedRequest401Error
+//         );
+//       } else if (xhr.status === 404) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           notFound404Error
+//         );
+//       } else if (xhr.status === 409) {
+//         showNotificationError(
+//           "bg-orange",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           alreadyExist409Error
+//         );
+//       } else if (xhr.status === 503) {
+//         showNotificationError(
+//           "bg-red",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           serverError503Error
+//         );
+//       } else if (xhr.status === 408) {
+//         swal(
+//           {
+//             title: " ",
+//             text: sessionExpired408Error,
+//             type: "info",
+//             showCancelButton: false,
+//             confirmButtonText: "Logout",
+//           },
+//           function (isConfirm) {
+//             if (isConfirm) {
+//               localStorage.clear();
+//               window.location.href = redirectToSignInPage408;
+//             }
+//           }
+//         );
+//       } else if (xhr.status === 410) {
+//         $("#cover-spin").hide();
 
-        $.ajax({
-          url: MAIN_API_PATH + getGmtAPI,
-          method: POST,
-          contentType: Content_Type,
-          dataType: "json",
-          success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt();
-            encrypt.setPublicKey(sitePublicKey);
-            const dateString = String(pageName + data.unixtime);
-            securityKeyEncrypted = encrypt.encrypt(dateString);
-            SecurityKeyTime = false;
-            setEnrollServicesData();
-          },
-          error: function (xhr, status, error) {
-            $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt();
-              encrypt.setPublicKey(sitePublicKey);
-              const dateString = String(pageName + data.unixtime);
-              securityKeyEncrypted = encrypt.encrypt(dateString);
-              SecurityKeyTime = false;
-              setEnrollServicesData();
-            });
-          },
-        });
-      } else {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
-      }
-    },
-  });
-}
+//         $.ajax({
+//           url: MAIN_API_PATH + getGmtAPI,
+//           method: POST,
+//           contentType: Content_Type,
+//           dataType: "json",
+//           success: function (data, textStatus, xhr) {
+//             const encrypt = new JSEncrypt();
+//             encrypt.setPublicKey(sitePublicKey);
+//             const dateString = String(pageName + data.unixtime);
+//             securityKeyEncrypted = encrypt.encrypt(dateString);
+//             SecurityKeyTime = false;
+//             setEnrollServicesData();
+//           },
+//           error: function (xhr, status, error) {
+//             $.getJSON(worldTimeAPI, function (data) {
+//               const encrypt = new JSEncrypt();
+//               encrypt.setPublicKey(sitePublicKey);
+//               const dateString = String(pageName + data.unixtime);
+//               securityKeyEncrypted = encrypt.encrypt(dateString);
+//               SecurityKeyTime = false;
+//               setEnrollServicesData();
+//             });
+//           },
+//         });
+//       } else {
+//         showNotificationError(
+//           "bg-red",
+//           null,
+//           null,
+//           null,
+//           null,
+//           null,
+//           serverError503Error
+//         );
+//       }
+//     },
+//   });
+// }
 
 // per entity to let user input number
 //
 
-let costVariableToSet = "";
+// let costVariableToSet = "";
 
-function calculateCostOfServices() {
-  let totalCost = 0;
-  // Calculate total cost
-  checkedServicesToEnrollList.forEach((enrolled) => {
-    const matchedService = enrollServicesDataReceived.find(
-      (s) => s.service_id === enrolled
-    );
-    if (matchedService) {
-      totalCost += Number(matchedService.estimated_cost);
-    }
-  });
+// function calculateCostOfServices() {
+//   let totalCost = 0;
+//   // Calculate total cost
+//   checkedServicesToEnrollList.forEach((enrolled) => {
+//     const matchedService = enrollServicesDataReceived.find(
+//       (s) => s.service_id === enrolled
+//     );
+//     if (matchedService) {
+//       totalCost += Number(matchedService.estimated_cost);
+//     }
+//   });
 
-  console.log(totalCost);
-  if (totalCost <= 0 || totalCost == null) {
-    $("#totalCostMainDiv").addClass("d-none");
-  } else {
-    $("#totalCosecalculated").text("$" + totalCost.toFixed(2));
-    $("#totalCostMainDiv").removeClass("d-none");
-  }
-}
+//   console.log(totalCost);
+//   if (totalCost <= 0 || totalCost == null) {
+//     $("#totalCostMainDiv").addClass("d-none");
+//   } else {
+//     $("#totalCosecalculated").text("$" + totalCost.toFixed(2));
+//     $("#totalCostMainDiv").removeClass("d-none");
+//   }
+// }
 
 // end enroll services Data Table Initialization
