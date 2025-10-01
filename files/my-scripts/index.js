@@ -46,6 +46,8 @@ let muncipalityWizerdFormCloudWorkloadsInit,
   let muncipalityWizerdFormCloudWorkloadsData;
   let muncipalityWizerdFormNumberOfConnectedSitesData;
 
+  let muncipalityWizerdFormCompliancesInUseInit
+
 $(document).ready(function () {
   // Show main content and hide loader
 
@@ -103,6 +105,12 @@ $(document).ready(function () {
       null
     );
   // muncipalityWizerdFormNumberOfConnectedSitesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfConnectedSites', false);
+  muncipalityWizerdFormCompliancesInUseInit =
+    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+      "muncipalityWizerdFormCompliancesInUse",
+      true,
+      null
+    );
 
   // First Data Table Initialization
   ordersDataTableInit = createTableComponent(dataSourceIPconfig, options);
@@ -873,6 +881,15 @@ function updateFiltersSelectDataOptions() {
     { id: "21+", title: "21+" },
   ];
 
+
+  let muncipalityWizerdFormCompliancesInUseData = [
+    { id: "complianceWithRegulations", title: "Compliance with regulations" },
+    { id: "complianceWithIndustryStandards", title: "Compliance with industry standards" },
+    { id: "complianceWithLocalLaw", title: "Compliance with local law" },
+    { id: "none", title: "None / Not sure" },
+  ]
+
+
   populationSizeCompanyDetailsInit.addOption(filterSizeData);
   populationSizeCompanyDetailsInit.setValue("<50000");
 
@@ -922,6 +939,11 @@ function updateFiltersSelectDataOptions() {
     muncipalityWizerdFormCloudWorkloadsData
   );
   // muncipalityWizerdFormCloudWorkloadsInit.setValue('mostlyCloudBased')
+
+  muncipalityWizerdFormCompliancesInUseInit.addOption(
+    muncipalityWizerdFormCompliancesInUseData
+  );
+  // muncipalityWizerdFormCompliancesInUseInit.setValue('complianceWithRegulations')
 
   // muncipalityWizerdFormNumberOfConnectedSitesInit.addOption(muncipalityWizerdFormNumberOfConnectedSitesData);
   // muncipalityWizerdFormNumberOfConnectedSitesInit.setValue('1')
