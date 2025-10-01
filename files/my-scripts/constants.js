@@ -45,8 +45,11 @@ const setPasswordAPI = "tml/set-password"
 const updateMunicipalityWizardSetAPI = 'tml/municipality/wizard/update'
 const setMunicipalityWizardSetAPI= 'tml/municipality/wizard/set'
 const getMunicipalityWizardSetAPI= 'tml/municipality/wizard/get'
-const getOrdersAPI = "tml/client/orders/list";
 const getAdminListBundle = "tml/admin/list/bundle"
+
+// Create Order
+const createOrderAPI = 'tml/client/order/create'
+const getOrdersAPI = "tml/client/orders/list";
 
 
 
@@ -239,4 +242,56 @@ function isNumber(value) {
 // Capitalize first later
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
+
+
+function timeFormat(date) {
+    
+    if(date <= 9999999999){
+        date *= 1000
+    }
+    
+    
+    if (localStorage.getItem('_tz') !== null && localStorage.getItem('_tz').trim() !== "" && localStorage.getItem('_tz') !== undefined && localStorage.getItem('_tz') !== 'undefined')  {
+        const utcDateTime = moment(date).utc();
+        var selectedTimeZone = localStorage.getItem('_tz');
+        const timestamp = utcDateTime.unix();
+        const offset = moment.tz(selectedTimeZone).utcOffset() * 60;
+        const localDateTime = moment.unix(timestamp + offset).utc();
+
+        var formatString = 'MMM/DD/YYYY HH:mm';
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+            formatString = 'MMM-DD-YYYY HH:mm';
+        }
+
+        var formattedDateTime = localDateTime.format(formatString);
+
+        if (localStorage.getItem('_tf') == '12') {
+            var jsDate = new Date(formattedDateTime);
+            var formattedHours = jsDate.getHours() % 12 || 12;
+            var formattedMinutes = ('0' + jsDate.getMinutes()).slice(-2);
+            var amOrPm = jsDate.getHours() >= 12 ? 'pm' : 'am';
+        } else if (localStorage.getItem('_tf') == '24') {
+            var jsDate = new Date(formattedDateTime);
+            var formattedHours = ('0' + jsDate.getHours()).slice(-2);
+            var formattedMinutes = ('0' + jsDate.getMinutes()).slice(-2);
+        }
+
+        var month = ('0' + (jsDate.getMonth() + 1)).slice(-2);
+        var day = ('0' + jsDate.getDate()).slice(-2);
+        var year = jsDate.getFullYear();
+
+        formattedDateTime = `${month}/${day}/${year} ${formattedHours}:${formattedMinutes} ${amOrPm || ''}`;
+        return formattedDateTime;
+    } else {
+        var myDate = new Date(date);
+        var month = ('0' + (myDate.getMonth() + 1)).slice(-2);
+        var day = ('0' + myDate.getDate()).slice(-2);
+        var year = myDate.getFullYear();
+        var hours = ('0' + myDate.getHours()).slice(-2);
+        var minutes = ('0' + myDate.getMinutes()).slice(-2);
+        var formattedDate = `${month}/${day}/${year} ${hours}:${minutes}`;
+        return formattedDate;
+    }
 }

@@ -168,7 +168,7 @@ function renderServices(services, preSelectedIds = [], disableSelected = false) 
           <div class="card-footer d-flex justify-content-between align-items-center">
           Estimate Cost:
             <span class="fw-bold text-primary" style="font-size: 22px;">
-              $${service.estimated_cost}
+              ${Number(service.estimated_cost || 0).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
             </span>/ ${formattedType}
             
           </div>
@@ -187,6 +187,7 @@ function updateTotalCost() {
     total += parseFloat($(this).data("cost"));
   });
   $("#totalCost").text(total);
+  selectedBundleAndServicesCount = total
 }
 
 function handleServiceClick(id) {

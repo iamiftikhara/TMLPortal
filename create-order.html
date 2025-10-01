@@ -249,7 +249,7 @@
                               }'>
                   <span class="step-icon step-icon-soft-dark">1</span>
                   <div class="step-content">
-                    <span class="step-title">Municipality Basics</span>
+                    <span class="step-title">Plan</span>
                   </div>
                 </a>
               </li>
@@ -262,24 +262,11 @@
                                   }'>
                   <span class="step-icon step-icon-soft-dark">2</span>
                   <div class="step-content">
-                    <span class="step-title">Organization Snapshot</span>
+                    <span class="step-title">Preview Plan</span>
                   </div>
                 </a>
               </li>
               <!-- end second step -->
-
-              <!-- start third step -->
-              <li class="step-item">
-                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                                        "targetSelector": "#municipalityWizerdTechnologyEnvironment"
-                                      }'>
-                  <span class="step-icon step-icon-soft-dark">3</span>
-                  <div class="step-content">
-                    <span class="step-title">Technology Environment</span>
-                  </div>
-                </a>
-              </li>
-              <!-- end third step -->
             </ul>
             <!-- End Step -->
 
@@ -333,57 +320,57 @@
                 <div class="mt-4" id="servicesListingMainStartDiv">
 
 
-                    <div class=" card p-5" id="servicesListingDivLoader">
-                  <div class="d-flex justify-content-center p-5">
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="card p-5 d-none" id="servicesListingDivErrorDiv">
-                  <div class=" justify-content-center align-items-center">
-                    <div class="text-center p-1">
-                      <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
-                        style="width: 10rem; opacity:0.3">
-                      <p class="mb-0" id="servicesListingText">Error</p>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="card d-none" id="servicesListingMainDiv">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Select Services <span class="text-danger">*</span></h3>
-                  </div>
-                  <div class="card-body">
-
-                    <!-- Dynamic Services -->
-                    <div class="mt-4">
-                      <div class="mt-3 text-end">
-                        <h5>Total Cost: <span id="totalCost" class="text-primary fw-bold">0</span> USD</h5>
+                  <div class=" card p-5" id="servicesListingDivLoader">
+                    <div class="d-flex justify-content-center p-5">
+                      <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
                       </div>
-                      </h6>
-                      <div class="row" id="servicesContainer">
-                        <!-- cards will be injected here -->
-                      </div>
-                      <input type="hidden" id="selectedServiceIds" name="selectedServiceIds">
-
-
-
                     </div>
                   </div>
 
-                </div>
+
+                  <div class="card p-5 d-none" id="servicesListingDivErrorDiv">
+                    <div class=" justify-content-center align-items-center">
+                      <div class="text-center p-1">
+                        <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
+                          style="width: 10rem; opacity:0.3">
+                        <p class="mb-0" id="servicesListingText">Error</p>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="card d-none" id="servicesListingMainDiv">
+                    <div class="card-header">
+                      <h3 class="card-header-title">Select Services <span class="text-danger">*</span></h3>
+                    </div>
+                    <div class="card-body">
+
+                      <!-- Dynamic Services -->
+                      <div class="mt-4">
+                        <div class="mt-3 text-end">
+                          <h5>Total Cost: <span id="totalCost" class="text-primary fw-bold">0</span> USD</h5>
+                        </div>
+                        </h6>
+                        <div class="row" id="servicesContainer">
+                          <!-- cards will be injected here -->
+                        </div>
+                        <input type="hidden" id="selectedServiceIds" name="selectedServiceIds">
+
+
+
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
 
 
                 <!-- Footer -->
-                <div class="d-flex align-items-center justify-content-end mt-4"
-                  id="">
+                <div class="d-flex align-items-center justify-content-end mt-4" id="">
                   <div class="">
-                    <button type="button" id="createOrderBundleDivMainDivNextBtn" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
+                    <button type="button" id="createOrderBundleDivMainDivNextBtn" class="btn btn-primary formNextButton"
+                      data-hs-step-form-next-options='{
                                           "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
                                         }'>
                       Next <i class="bi-chevron-right small"></i>
@@ -398,129 +385,42 @@
               <div id="municipalityWizerdFormOrganizationSnapshot" style="display: none;">
 
 
-                <div id="ordersDataTableContainer" class=""></div>
-
                 <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Priorities</h3>
+                  <div class="card-header  bg-light d-flex justify-content-between align-items-center">
+                    <div>
+                      <span class="fw-bold text-dark">Selected Bundle: </span>
+                      <span class="badge border-primary" id="selectedBundleName">${bundleName}</span>
+                    </div>
+                    <div>
+                      <span class="fw-bold">Estimated Cost:</span>
+                      <span class="fw-bold text-primary fs-5" id="selectedBundleCost">$2000</span>
+                      <span class="fw-bold">/Monthly</span>
+                    </div>
                   </div>
                   <div class="card-body">
 
-                    <div class="d-flex">
 
-                      <!-- start size -->
-                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for
-                          the Next
-                          12–24 Months (choose up to 3):</label>
-                        <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
-                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                                "hideSearch": true,
-                                "placeholder": "Select"
-                                }' id="muncipalityWizerdFormKeyPrioritiesUpTo3"
-                            name="muncipalityWizerdFormKeyPrioritiesUpTo3" required>
-                            <option class="p-2" value="">Select</option>
-                          </select>
-                        </div>
-                        <!-- End Select -->
+
+                    <!-- Services Section -->
+                    <div class="card">
+                      <div class="card-header">
+                        <h4 class="card-title mb-0">Services</h4>
                       </div>
-                      <!-- end size -->
+                      <div class="card-body">
 
-                      <!-- start size -->
-                      <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormDepartmentsUnderMunicipality">Departments
-                          Under
-                          Municipality (check all that apply):</label>
-                        <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
-                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                                  "hideSearch": true,
-                                  "placeholder": "Select"
-                                  }' id="muncipalityWizerdFormDepartmentsUnderMunicipality"
-                            name="muncipalityWizerdFormDepartmentsUnderMunicipality" required>
-                            <option class="p-2" value="">Select</option>
-                          </select>
-                        </div>
-                        <!-- End Select -->
+                        <div id="previewOrderDetails"></div>
+
+
+
                       </div>
-                      <!-- end size -->
-
                     </div>
+
                   </div>
                 </div>
 
 
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Staffing</h3>
-                  </div>
-                  <div class="card-body">
-
-                    <div class="d-flex mb-4">
-
-                      <!-- start size -->
-                      <div class="col-12 col-md-6 pe-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormTotalEmployees">Approx. total
-                          employees:</label>
-                        <!-- Select -->
-                        <input type="text" class="form-control" id="muncipalityWizerdFormTotalEmployees"
-                          name="muncipalityWizerdFormTotalEmployees" placeholder="Enter approx. total employees"
-                          maxlength="25" aria-label="Enter approx. total employees" required>
-
-                      </div>
-                      <!-- end size -->
-
-                      <!-- start size -->
-                      <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of IT
-                          employees:</label>
-                        <input type="text" class="form-control" id="muncipalityWizerdFormNumberOfITEmployees"
-                          name="muncipalityWizerdFormNumberOfITEmployees"
-                          placeholder="Enter approx. number of IT employees" maxlength="25"
-                          aria-label="Enter approx. number of IT employees" required>
-
-                      </div>
-                      <!-- end size -->
-
-                    </div>
 
 
-
-                    <div class="mb-4">
-                      <label class="form-label">Do you use outsourced IT/cyber vendors?</label>
-
-                      <div class="d-flex">
-
-                        <!-- Yes -->
-                        <div class="form-check mb-1">
-                          <input type="radio" id="cyberVendorsYes" class="form-check-input border-dark"
-                            name="cyberVendors" value="Yes">
-                          <label class="form-check-label" for="cyberVendorsYes">Yes</label>
-                        </div>
-
-                        <!-- No -->
-                        <div class="form-check mb-1 ms-3">
-                          <input type="radio" id="cyberVendorsNo" class="form-check-input border-dark"
-                            name="cyberVendors" value="No">
-                          <label class="form-check-label" for="cyberVendorsNo">No</label>
-                        </div>
-
-                        <!-- Not Sure -->
-                        <div class="form-check mb-1 ms-3">
-                          <input type="radio" id="cyberVendorsNotSure" class="form-check-input border-dark"
-                            name="cyberVendors" value="Not sure">
-                          <label class="form-check-label" for="cyberVendorsNotSure">Not sure</label>
-                        </div>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-                </div>
 
                 <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn"
                   data-hs-step-form-prev-options='{
@@ -532,13 +432,15 @@
                 <div class="d-flex align-items-center justify-content-end">
 
 
-                  <div class="">
-                    <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-primary formNextButton"
-                      data-hs-step-form-next-options='{
-                                "targetSelector": "#municipalityWizerdTechnologyEnvironment"
-                              }'>
-                      Next <i class="bi-chevron-right small"></i>
-                    </button>
+                  <div class="d-sm-flex align-items-center justify-content-end">
+                    <button type="button" class="btn btn-white me-2" id="closeWizerd" data-dismiss="modal"
+                      aria-label="Close">Cancel</button>
+
+                    <div class="d-flex justify-content-end ">
+                      <button id="validationFormFinishBtn" type="submit" class="btn btn-primary me-2">Save
+                        changes</button>
+
+                    </div>
                   </div>
                 </div>
                 <!-- End Footer -->
@@ -549,176 +451,10 @@
               <div id="municipalityWizerdTechnologyEnvironment" style="display: none;">
 
 
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Cloud Applications</h3>
-                  </div>
-                  <div class="card-body">
-
-                    <div class="d-flex">
-
-                      <!-- start size -->
-                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormCloudApplication">Cloud Applications in
-                          Use:</label>
-                        <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
-                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                              "hideSearch": true,
-                              "placeholder": "Select"
-                              }' id="muncipalityWizerdFormCloudApplication"
-                            name="muncipalityWizerdFormCloudApplication" required>
-                            <option class="p-2" value="">Select</option>
-                          </select>
-                        </div>
-                        <!-- End Select -->
-                      </div>
-                      <!-- end size -->
-
-                      <!-- start size -->
-                      <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormCloudWorkloads">Cloud
-                          Workloads:</label>
-                        <!-- Select -->
-                        <div class="tom-select-custom" style="cursor: pointer;">
-                          <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                              "hideSearch": true,
-                              "placeholder": "Select"
-                              }' id="muncipalityWizerdFormCloudWorkloads" name="muncipalityWizerdFormCloudWorkloads"
-                            required>
-                            <option class="p-2" value="">Select</option>
-                          </select>
-                        </div>
-                        <!-- End Select -->
-                      </div>
-                      <!-- end size -->
-
-
-
-                    </div>
-
-                  </div>
-                </div>
-
-
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Devices & Endpoints</h3>
-                  </div>
-                  <div class="card-body">
-
-                    <div class="d-flex mb-4">
-
-
-
-                      <!-- start size -->
-                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices (desktops,
-                          laptops, tablets):</label>
-                        <input type="text" class="form-control" id="muncipalityWizerdFormEndUserDevices"
-                          name="muncipalityWizerdFormEndUserDevices"
-                          placeholder="Enter end-user devices (desktops, laptops, tablets)" maxlength="25"
-                          aria-label="Enter end-user devices (desktops, laptops, tablets)" required>
-
-                      </div>
-                      <!-- end size -->
-
-                      <!-- start size -->
-                      <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormServers">Servers (on-premises or
-                          virtual):</label>
-                        <input type="text" class="form-control" id="muncipalityWizerdFormServers"
-                          name="muncipalityWizerdFormServers" placeholder="Enter servers" maxlength="25" aria-label="Enter servers (on-premises or
-                          virtual)" required>
-
-                      </div>
-                      <!-- end size -->
 
 
 
 
-
-
-                    </div>
-
-                    <!-- start size -->
-                    <div class="col-12 col-md-6" id="populationSizeDiv">
-                      <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices
-                        (IoT, cameras, dispatch systems):</label>
-                      <input type="text" class="form-control" id="muncipalityWizerdFormSpecializedDevices"
-                        name="muncipalityWizerdFormSpecializedDevices" placeholder="Enter specialized devices"
-                        maxlength="25" aria-label="Enter specialized devices" required>
-
-                    </div>
-                    <!-- end size -->
-
-
-                  </div>
-                </div>
-
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Network Structure </h3>
-                  </div>
-                  <div class="card-body">
-
-                    <div class="d-flex">
-
-
-                      <!-- start size -->
-                      <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
-                        <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number
-                          of connected sites (City Hall, stations, libraries, etc.):</label>
-                        <input type="text" class="form-control" id="muncipalityWizerdFormNumberOfConnectedSites"
-                          name="muncipalityWizerdFormNumberOfConnectedSites"
-                          placeholder="Enter approx. number of connected sites" maxlength="25"
-                          aria-label="Enter approx. number of connected sites" required>
-
-                      </div>
-                      <!-- end size -->
-
-
-                      <div class="col-12 col-md-6 ps-4">
-                        <label class="form-label">Do you have backup internet/redundancy?</label>
-
-                        <div class="d-flex">
-
-                          <!-- Checkbox -->
-                          <div class="form-check mb-1">
-                            <input type="radio" id="backupInternetRedundancyYes" class="form-check-input border-dark"
-                              name="backupInternetRedundancy">
-                            <label class="form-check-label" for="backupInternetRedundancyYes">Yes</label>
-                          </div>
-                          <!-- End Checkbox -->
-
-                          <!-- Checkbox -->
-                          <div class="form-check mb-1 ms-3">
-                            <input type="radio" id="backupInternetRedundancyNo" class="form-check-input border-dark"
-                              name="backupInternetRedundancy">
-                            <label class="form-check-label" for="backupInternetRedundancyNo">No</label>
-                          </div>
-                          <!-- End Checkbox -->
-
-                          <!-- Checkbox -->
-                          <div class="form-check mb-1 ms-3">
-                            <input type="radio" id="backupInternetRedundancyNotSure"
-                              class="form-check-input border-dark" name="backupInternetRedundancy">
-                            <label class="form-check-label" for="backupInternetRedundancyNotSure">Not sure</label>
-                          </div>
-
-                        </div>
-                      </div>
-
-
-                    </div>
-
-
-
-
-                  </div>
-                </div>
 
                 <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2" data-hs-step-form-prev-options='{
                       "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
@@ -914,6 +650,7 @@
         </div>
       </div>
       <!-- End Modal -->
+
 
       <!-- End Content -->
   </main>

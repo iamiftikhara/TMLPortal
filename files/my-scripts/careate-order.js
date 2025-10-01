@@ -31,8 +31,12 @@ let muncipalityWizerdFormCloudWorkloadsInit,
   muncipalityWizerdFormNumberOfConnectedSitesInit;
 
 
-let selectedBundleID_Name = "";
+let selectedBundleID = "";
+let selectedBundleName = "";
+let selectedBundleAndServicesCount = '';
+
 let bundlesDataReceivedFromAPI = "";
+
 
 $(document).ready(function () {
   // Show main content and hide loader
@@ -40,60 +44,60 @@ $(document).ready(function () {
   $("#mainContentInnerLoader").addClass("d-none");
   $("#mainContentInnerDataToShow").removeClass("d-none");
 
-  populationSizeCompanyDetailsInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "populationSizeCompanyDetails",
-      false
-    );
-  NumberOfEmployeesSelectInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "numberOfEmployeesSelect",
-      false
-    );
-  NumberOfITEmployeesSelectInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "numberOfITEmployeesSelect",
-      false
-    );
-  // muncipalityWizerdFormPopulationSizeInit =
+  // populationSizeCompanyDetailsInit =
   //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-  //     "muncipalityWizerdFormPopulationSize",
+  //     "populationSizeCompanyDetails",
   //     false
   //   );
-  muncipalityWizerdFormKeyPrioritiesUpTo3Init =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "muncipalityWizerdFormKeyPrioritiesUpTo3",
-      true,
-      null
-    );
-  muncipalityWizerdFormDepartmentsUnderMunicipalityInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "muncipalityWizerdFormDepartmentsUnderMunicipality",
-      true,
-      null
-    );
-  // muncipalityWizerdFormTotalEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormTotalEmployees', false);
-  // muncipalityWizerdFormTotalITEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfITEmployees', false);
+  // NumberOfEmployeesSelectInit =
+  //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  //     "numberOfEmployeesSelect",
+  //     false
+  //   );
+  // NumberOfITEmployeesSelectInit =
+  //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  //     "numberOfITEmployeesSelect",
+  //     false
+  //   );
+  // // muncipalityWizerdFormPopulationSizeInit =
+  // //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  // //     "muncipalityWizerdFormPopulationSize",
+  // //     false
+  // //   );
+  // muncipalityWizerdFormKeyPrioritiesUpTo3Init =
+  //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  //     "muncipalityWizerdFormKeyPrioritiesUpTo3",
+  //     true,
+  //     null
+  //   );
+  // muncipalityWizerdFormDepartmentsUnderMunicipalityInit =
+  //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  //     "muncipalityWizerdFormDepartmentsUnderMunicipality",
+  //     true,
+  //     null
+  //   );
+  // // muncipalityWizerdFormTotalEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormTotalEmployees', false);
+  // // muncipalityWizerdFormTotalITEmployeesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfITEmployees', false);
 
-  muncipalityWizerdFormCloudApplicationInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "muncipalityWizerdFormCloudApplication",
-      true,
-      null
-    );
-  // muncipalityWizerdFormEndUserDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormEndUserDevices', false);
-  // muncipalityWizerdFormServersInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormServers', false);
-  // muncipalityWizerdFormSpecializedDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormSpecializedDevices', false);
-  muncipalityWizerdFormCloudWorkloadsInit =
-    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
-      "muncipalityWizerdFormCloudWorkloads",
-      true,
-      null
-    );
+  // muncipalityWizerdFormCloudApplicationInit =
+  //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  //     "muncipalityWizerdFormCloudApplication",
+  //     true,
+  //     null
+  //   );
+  // // muncipalityWizerdFormEndUserDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormEndUserDevices', false);
+  // // muncipalityWizerdFormServersInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormServers', false);
+  // // muncipalityWizerdFormSpecializedDevicesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormSpecializedDevices', false);
+  // muncipalityWizerdFormCloudWorkloadsInit =
+  //   initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+  //     "muncipalityWizerdFormCloudWorkloads",
+  //     true,
+  //     null
+  //   );
   // muncipalityWizerdFormNumberOfConnectedSitesInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('muncipalityWizerdFormNumberOfConnectedSites', false);
 
   // First Data Table Initialization
-  ordersDataTableInit = createTableComponent(dataSourceIPconfig, options);
+  // ordersDataTableInit = createTableComponent(dataSourceIPconfig, options);
 
   //  validation rules define
   $("#muncipalityWizerdForm").validate({
@@ -292,9 +296,8 @@ $(document).ready(function () {
 
   // getMuncipilityDetails()
 
-  getOrdersTableData(10, 1);
 
-  updateFiltersSelectDataOptions();
+  // updateFiltersSelectDataOptions();
   reIntiateWizerd();
 
 
@@ -466,7 +469,7 @@ const tierHeaderClass = title => {
 
 // Public function you can hook into (like old setPolicyValue)
 function selectBundle(bundleId, directCall) {
-  // selectedBundleID_Name = bundleId;
+  // selectedBundleID = bundleId;
   console.log(bundleId)
 
 
@@ -493,16 +496,16 @@ let clearSelectedServices = () => {
 let clearSelectedServicesCheck = false
 
 function setBundleRecall(val, directCall) {
-  selectedBundleID_Name = val
+  selectedBundleID = val
 
   // to get services list
-  const bundle = bundlesDataReceivedFromAPI.find(b => b.bundle_id === selectedBundleID_Name);
+  const bundle = bundlesDataReceivedFromAPI.find(b => b.bundle_id === selectedBundleID);
   const servicesList = bundle?.list_of_services || [];
   let bundleName = bundle?.title || 'Bundle'
   servicesListFromBundle = servicesList
+ selectedBundleName = bundleName
 
-
-  console.log(selectedBundleID_Name, bundleName)
+  console.log(selectedBundleID, bundleName)
 
 
   if (bundleName == 'Custom') {
@@ -525,7 +528,7 @@ function setBundleRecall(val, directCall) {
     }, 100);
   }
 
-  // handleServiceClick(selectedBundleID_Name)
+  // handleServiceClick(selectedBundleID)
 
 }
 
@@ -703,222 +706,7 @@ function enableElements(selector1, selector2) {
 // ********************* end bundle selection *********************************
 
 
-function searchObjectCreation(search) {
-  searchOject = search;
-}
 
-// Main API Call function for datatable
-function getOrdersTableData(skip, page) {
-  let data = [
-    {
-      order_id: "ORD12345",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-15",
-      payment: "Paid",
-      status: "In Provisioning",
-    },
-    {
-      order_id: "ORDdf5",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-13",
-      payment: "Pending",
-      status: "Pending Kickoff",
-    },
-  ];
-
-  let requirePayloadData;
-  if (Object.keys(searchOject).length > 0) {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-      search: searchOject,
-    });
-  } else {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-    });
-  }
-
-  // Ajax call
-  $.ajax({
-    url: MAIN_API_PATH + getOrdersAPI,
-    method: POST,
-    contentType: Content_Type,
-    dataType: "json",
-    data: requirePayloadData,
-    statusCode: {
-      200: function (data) {
-        // Hide page laoder Spiner
-        $("#cover-spin").hide();
-
-        hideDataTableLoader200("ordersDataTable");
-
-        // Response data (IPs)
-        response = data;
-        ordersDataReceived = response;
-        localStorage.setItem("ordersDataTableTotal", data.length);
-        // If No IPs found
-
-        // loop through response to add data in datatable
-        for (let i = 0; i < response.length; i++) {
-          let order_id = generateSpan(response[i], "order_id", "", "");
-          let municipality = generateSpan(response[i], "municipality", "", "");
-          let service = generateSpan(response[i], "service", "", "");
-          let date = generateSpan(response[i], "date", "", "");
-          let payment = generateSpan(response[i], "payment", "", "");
-          let status = generateSpan(response[i], "status", "", "");
-          if (response[i].status === "Pending Kickoff") {
-            status = `<div class='d-flex flex-column'>
-      ${status}
-      <button class="btn btn-sm btn-danger view-order-details p-1 ms-2 px-4" style='font-size: 10px; width: fit-content' data-order-id="${response[i].order_id}">Pay Now</button>
-      </div>      
-      `;
-          }
-
-          let actions = `
-      <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
-      <button class="btn btn-sm btn-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
-    `;
-
-          ordersDataTableInit.row
-            .add([
-              `<td ><span >#${order_id}</span></td>`,
-              `<td ><span >${municipality}</span></td>`,
-              `<td ><span >${service}</span></td>`,
-              `<td ><span >${date}</span></td>`,
-              `<td ><span >${payment}</span></td>`,
-              `<td ><span >${status}</span></td>`,
-              `<td ><span >${actions}</span></td>`,
-            ])
-            .draw();
-          datatablePagination(
-            "ordersDataTable",
-            1,
-            "ordersDataTableTotal",
-            getOrdersTableData
-          );
-
-          let viewOrderDetailsButtons = document.querySelectorAll(
-            ".view-order-details"
-          );
-          viewOrderDetailsButtons.forEach((button) => {
-            button.addEventListener("click", function () {
-              let orderId = this.getAttribute("data-order-id");
-              // Redirect to order details page
-              showOrderDetails(orderId);
-            });
-          });
-        }
-      },
-      204: function () {
-        $("#cover-spin").hide();
-        hideDataTableLoaderError("ordersDataTable");
-        if (Object.keys(searchOject).length > 0) {
-          $("#ordersDataTableErrorDiv").addClass("d-none");
-          $(
-            "#ordersDataTable, #ordersDataTableDatatableMainHeading"
-          ).removeClass("d-none");
-        }
-        ordersDataTableInit.clear().draw();
-        $("#ordersDataTableErrorText").text(noDataFoundText204Case);
-      },
-    },
-    error: function (xhr, status, error) {
-      $("#cover-spin").hide();
-      hideDataTableLoaderError("ordersDataTable");
-
-      if (xhr.status === 400) {
-        $("#ordersDataTableErrorText").text(invalidRequest400Error);
-      } else if (xhr.status === 401) {
-        $("#ordersDataTableErrorText").text(unauthorizedRequest401Error);
-      } else if (xhr.status === 404) {
-        // $('#cover-spin').hide(0);
-        $("#ordersDataTableErrorText").text(notFound404Error);
-      } else if (xhr.status === 503) {
-        // $('#cover-spin').hide(0);
-        $("#ordersDataTableErrorText").text(serverError503Error);
-      } else if (xhr.status === 408) {
-        swal(
-          {
-            title: " ",
-            text: sessionExpired408Error,
-            type: "info",
-            showCancelButton: false,
-            confirmButtonText: "Logout",
-          },
-          function (isConfirm) {
-            if (isConfirm) {
-              localStorage.clear();
-              window.location.href = redirectToSignInPage408;
-            }
-          }
-        );
-      } else if (xhr.status === 410) {
-        $.ajax({
-          url: MAIN_API_PATH + getGmtAPI,
-          method: POST,
-          contentType: Content_Type,
-          dataType: "json",
-          success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt();
-            encrypt.setPublicKey(sitePublicKey);
-            const currentDateString = String(data.unixtime);
-            securityKeyEncrypted = encrypt.encrypt(
-              pageName + currentDateString
-            );
-            SecurityKeyTime = false;
-            getOrdersTableData(skip, page, search);
-          },
-          error: function (xhr, status, error) {
-            $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt();
-              encrypt.setPublicKey(sitePublicKey);
-              const currentDateString = String(data.unixtime);
-              securityKeyEncrypted = encrypt.encrypt(
-                pageName + currentDateString
-              );
-              SecurityKeyTime = false;
-              getOrdersTableData(skip, page, search);
-            });
-          },
-        });
-      } else {
-        // $('#cover-spin').hide(0);
-        $("#ordersDataTableErrorText").text(serverError503Error);
-      }
-    },
-  });
-}
-
-// function to export data from datatable
-function exportOrdersDataTableData() {
-  console.log("exportOrdersDataTableData called");
-}
-
-function showOrderDetails(orderId) {
-  let order = ordersDataReceived.find((o) => o.order_id === orderId);
-
-  $("#orderDetailsOrderId").text(`#${order.order_id}`);
-  $("#orderDetailsService").text(order.service);
-  $("#orderDetailsOrderDate").text(order.date);
-  $("#orderDetailsOrderStatus").text(order.payment);
-
-  $("#orderDetailsContainer").removeClass("d-none");
-  $("html, body").animate(
-    { scrollTop: $("#orderDetailsContainer").offset().top },
-    600 // duration in ms (600ms = smooth speed)
-  );
-}
-
-// href click to open modal
-$(document).on("click", "#clickToOpenModal", function () {
-  $("#companyDetailsFormModal").modal("show");
-});
 
 // href click to open wizerd
 $(document).on("click", "#clickToOpenWizerd", function () {
@@ -1153,38 +941,141 @@ function setThePreivousButtonTarget(id, targetID) {
 // Wizerd Next button
 $(".formNextButton").on("click", function (e) {
   e.preventDefault();
-  let selectedOptions = $("#muncipalityWizerdFormKeyPrioritiesUpTo3").val()
-    .length;
-  const isChecked = $('input[name="cyberVendors"]:checked').length > 0;
-  console.log("isChecked!!!", isChecked);
 
   $("#muncipalityWizerdForm").validate().form();
-  if (selectedOptions > 3 || (selectedOptions === 3 && isChecked === true)) {
+  if (selectedServices.length > 0) {
     setTheNextButtonTarget(
-      "firstStepAccountTypeNextButton",
-      "municipalityWizerdTechnologyEnvironment"
+      "createOrderBundleDivMainDivNextBtn",
+      "municipalityWizerdFormOrganizationSnapshot"
     );
     setThePreivousButtonTarget(
       "thiredStepGetAccessCountPreviousBtn",
       "municipalityWizerdFormOrganizationSnapshot"
     );
 
+    // Generate order preview
+    previewOrderDetails();
+
     addNumberingTOtheWizerd();
     reIntiateWizerd();
   } else {
+
+    showNotificationError(
+      "bg-orange",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Select at lest one service or bundle."
+    );
+
     setTheNextButtonTarget(
-      "firstStepAccountTypeNextButton",
-      "municipalityWizerdFormOrganizationSnapshot"
+      "createOrderBundleDivMainDivNextBtn",
+      "municipalityWizerdFormBasics"
     );
     setTheNextButtonTarget(
       "secondStepAccountNameNextBtn",
       "municipalityWizerdFormOrganizationSnapshot"
     );
 
-    addNumberingTOtheWizerd();
-    reIntiateWizerd();
+    // addNumberingTOtheWizerd();
+    // reIntiateWizerd();
   }
 });
+
+
+// start preview order details
+function previewOrderDetails(containerId = '#previewOrderDetails') {
+  // Get the container div
+  const container = $(containerId);
+  
+  
+  // Clear existing content
+  container.empty();
+  
+  // Get bundle name
+  let bundleName = 'Custom Bundle';
+  if (selectedBundleID && bundlesDataReceivedFromAPI) {
+    const bundle = bundlesDataReceivedFromAPI.find(b => b.bundle_id === selectedBundleID);
+    bundleName = bundle?.title || 'Custom Bundle';
+  }
+
+  let bg_color = 'bg-primary';
+  // if (bundleName == 'Bronze') {
+  //   bg_color = 'bg-warning bg-opacity-25 text-dark';
+  // } else if (bundleName == 'Silver') {
+  //   bg_color = 'bg-secondary bg-opacity-25 text-dark';
+  // } else if (bundleName == 'Gold') {
+  //   bg_color = ' bg-warning bg-opacity-50 text-dark';
+  // }else if (bundleName == 'Custom') {
+  //   bg_color = 'bg-light text-dark';
+  // }
+
+  $('#selectedBundleName').text(bundleName)
+  $('#selectedBundleName').addClass(bg_color)
+
+
+
+  
+  // Get selected services data
+  const selectedServicesData = [];
+  if (selectedServices && selectedServices.length > 0 && servicesResponse) {
+    selectedServices.forEach(serviceId => {
+      const service = servicesResponse.find(s => s.service_id === serviceId);
+      if (service) {
+        selectedServicesData.push(service);
+      }
+    });
+  }
+  
+  // Calculate total cost
+  let totalCost = 0;
+  selectedServicesData.forEach(service => {
+    totalCost += parseFloat(service.estimated_cost || 0);
+  });
+  
+  $('#selectedBundleCost').text(`${totalCost.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) || 0}`)
+
+  
+  // Add services section
+  if (selectedServicesData.length > 0) {
+    
+    // Generate service items
+    selectedServicesData.forEach(service => {
+      const serviceItem = `
+        <div class="card mb-3 border">
+          <div class="card-header d-flex justify-content-between align-items-center py-2">
+            <div>
+              <span class="fw-bold text-dark">${service.title || 'Service'}</span>
+            </div>
+            <div>
+              <span class="fw-bold">Cost:</span>
+              <span class="fw-bold text-success">${service.estimated_cost.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) || 0}</span>
+              <span class="fw-bold text-success">/Monthly</span>
+
+            </div>
+          </div>
+          <div class="card-body py-2">
+            <p class=" mb-0 ">${service.description || 'No description available'}</p>
+          </div>
+        </div>
+      `;
+      container.append(serviceItem);
+    });
+  } else {
+    // No services selected
+    const noServicesMessage = `
+      <div class="text-center py-4">
+        <i class="bi bi-info-circle " style="font-size: 2rem;"></i>
+        <p class=" mt-2">No services selected</p>
+      </div>
+    `;
+    container.append(noServicesMessage);
+  }
+}
+
+// end preview order details
 
 // ********************** start set municpilities detsils *********************************
 
@@ -1192,82 +1083,30 @@ $(".formNextButton").on("click", function (e) {
 $("#validationFormFinishBtn").on("click", function (e) {
   e.preventDefault();
   if ($("#muncipalityWizerdForm").validate().form()) {
-    setMuncipilitiesData();
+    $("#cover-spin").show(1);
+    createOrderBasedOnSelections();
   }
 });
 
-function setMuncipilitiesData() {
-  const municipality_name = $("#municipalityWizerdFormName").val();
-  const county = $("#municipalityWizerdFormAssociatedCounty").val();
-  const population_size = $("#muncipalityWizerdFormPopulationSize").val();
-  const primary_contact_name = $("#municipalityWizerdFormContactName").val();
-  const primary_contact_email = $("#muncipalityWizerdFormEmail").val();
-  const primary_contact_phone = $("#muncipalityWizerdFormPhone").val();
-  const website_url = $("#muncipalityWizerdFormCountryWebsiteURL").val();
-  const key_priorities = $("#muncipalityWizerdFormKeyPrioritiesUpTo3").val();
-  // Match ids with titles
-  key_priorities = selectedKeys.map((id) => {
-    const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(
-      (item) => item.id === id
-    );
-    return found ? found.title : id;
-  });
-  const departments = $(
-    "#muncipalityWizerdFormDepartmentsUnderMunicipality"
-  ).val();
-  const total_employees =
-    parseInt($("#muncipalityWizerdFormTotalEmployees").val()) || 0;
-  const it_employees =
-    parseInt($("#muncipalityWizerdFormNumberOfITEmployees").val()) || 0;
-  const outsourced_it = $('input[name="cyberVendors"]:checked').val();
-  const cloud_apps_in_use = $("#muncipalityWizerdFormCloudApplication").val();
-  const cloud_workloads_in_use = $(
-    "#muncipalityWizerdFormCloudWorkloads"
-  ).val();
-  const end_user_devices =
-    parseInt($("#muncipalityWizerdFormEndUserDevices").val()) || 0;
-  const servers = parseInt($("#muncipalityWizerdFormServers").val()) || 0;
-  const specialized_devices =
-    parseInt($("#muncipalityWizerdFormSpecializedDevices").val()) || 0;
-  const no_of_connecetd_sites =
-    parseInt($("#muncipalityWizerdFormNumberOfConnectedSites").val()) || 0;
-  const network_backup = $(
-    'input[name="backupInternetRedundancy"]:checked'
-  ).val();
+function createOrderBasedOnSelections() {
 
-  const is_super = $("#addUserDetailsSuperAccess").prop("checked");
-  const user_type = localStorage.getItem("_role");
-
-  // Current epoch time in **seconds**
+ 
+  let bundle_name = selectedBundleName
+  let bundle_ID = selectedBundleID
+  let services_list = selectedServices
+  let total_cost = selectedBundleAndServicesCount
   const created_at = Math.floor(Date.now() / 1000);
 
   const apiBody = JSON.stringify({
     auth_token: authToken,
-    municipality_name,
-    county,
-    population_size,
-    primary_contact_name,
-    primary_contact_email,
-    primary_contact_phone,
-    website_url,
-    key_priorities,
-    departments,
-    total_employees,
-    it_employees,
-    outsourced_it,
-    cloud_apps_in_use,
-    cloud_workloads_in_use,
-    end_user_devices,
-    servers,
-    specialized_devices,
-    no_of_connecetd_sites,
-    network_backup,
     created_at,
+    bundle_id: bundle_ID,
+    list_of_services: services_list,
   });
 
   // return 0
   $.ajax({
-    url: MAIN_API_PATH + setMunicipalityWizardSetAPI,
+    url: MAIN_API_PATH + createOrderAPI,
     method: POST,
     contentType: Content_Type,
     dataType: "json",
@@ -1275,16 +1114,11 @@ function setMuncipilitiesData() {
     statusCode: {
       200: function (data) {
         $("#cover-spin").hide(0);
-        $("#addUserDetailsModal").modal("hide");
 
         showNotificationError("bg-green", null, null, null, null, null, UPDATE);
 
-        teamMembersAPIResponse = [];
-        showDataTableLoader("profileTeamDataTable");
+        window.location.href ='/orders.html'
 
-        profileTeamDataTableInit.clear().draw();
-        let pageEntries = Number($("#datatableEntries1").val());
-        getProfileTeamTableData(pageEntries, 1);
       },
       204: function () {
         $("#cover-spin").hide(0);
@@ -1381,7 +1215,7 @@ function setMuncipilitiesData() {
             const dateString = String(pageName + data.unixtime);
             securityKeyEncrypted = encrypt.encrypt(dateString);
             SecurityKeyTime = false;
-            setMuncipilitiesData();
+            createOrderBasedOnSelections();
           },
           error: function (xhr, status, error) {
             $.getJSON(worldTimeAPI, function (data) {
@@ -1390,7 +1224,7 @@ function setMuncipilitiesData() {
               const dateString = String(pageName + data.unixtime);
               securityKeyEncrypted = encrypt.encrypt(dateString);
               SecurityKeyTime = false;
-              setMuncipilitiesData();
+              createOrderBasedOnSelections();
             });
           },
         });
