@@ -646,7 +646,7 @@ function getServicesList() {
 
   const apiBody = JSON.stringify({
     auth_token: authToken,
-    search: { list_ofservices: servicesListToSendForApi },
+    search: { list_of_services: servicesListToSendForApi },
   });
 
   // return 0
