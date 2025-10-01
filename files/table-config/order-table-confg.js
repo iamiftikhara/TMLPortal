@@ -34,13 +34,14 @@ const dataSourceIPconfig = {
   // "columns": null,
   "columns": [
 
-    { "name": "selectAllServicesList", "id": "selectAllServicesList", "columnNo": 1, "visible": true },
-    { "name": "Municipality", "id": "municipality", "columnNo": 2, "visible": true },
-    { "name": "Service", "id": "service", "columnNo": 3, "visible": true },
-    { "name": "Date", "id": "date", "columnNo": 4, "visible": true },
-    { "name": "Payment", "id": "payment", "columnNo": 5, "visible": true },
-    { "name": "Status", "id": "status", "columnNo": 6, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 7, "visible": true }
+    { "name": "Service", "id": "service", "columnNo": 1, "visible": true },
+    { "name": "Payment", "id": "payment", "columnNo": 2, "visible": true },
+    { "name": "Status", "id": "status", "columnNo": 3, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 4, "visible": true },
+    { "name": "Created At", "id": "created_at", "columnNo": 5, "visible": true },
+    { "name": "Updated At", "id": "updated_at", "columnNo": 6, "visible": true },
+
+
 
   ],
   //  "searchFields": null,
@@ -56,18 +57,11 @@ const dataSourceIPconfig = {
         "checked": true,
       },
       {
-        "label": "Municipality",
-        "id": "municipality",
-        "placeholder": "Enter Municipality",
+         "label": "Status",
+        "id": "status",
+        "placeholder": "Enter Status",
         "type": "text",
-        "checked": false,
-      },
-      {
-        "label": "Service",
-        "id": "service",
-        "placeholder": "Enter Service",
-        "type": "text",
-        "checked": false,
+        "checked": true,
       }
     ]
   },
@@ -79,22 +73,6 @@ const dataSourceIPconfig = {
       "id": "order_id",
       "placeholder": "Enter Order ID",
       "columnNo": 1,
-      "hidden": false // This field is shown
-    },
-    {
-      "type": "text",
-      "label": "Municipality",
-      "id": "municipality",
-      "placeholder": "Enter Municipality",
-      "columnNo": 2,
-      "hidden": false // This field is shown
-    },
-    {
-      "type": "text",
-      "label": "Service",
-      "id": "service",
-      "placeholder": "Enter Service",
-      "columnNo": 3,
       "hidden": false // This field is shown
     },
     {
@@ -118,14 +96,14 @@ const dataSourceIPconfig = {
 
   ],
   "tableHeader": [
-    { "name": `<input type="checkbox" name="select-all-services" id="selectAllServicesList"></input>`, "widthClass": "w-5" },
     { "name": "Order ID", "widthClass": "w-5" },
-    { "name": "Municipality", "widthClass": "w-5" },
     { "name": "Service", "widthClass": "w-5" },
-    { "name": "Date", "widthClass": "w-5" },
     { "name": "Payment", "widthClass": "w-5" },
     { "name": "Status", "widthClass": "w-5" },
-    { "name": "Actions", "widthClass": "w-5" }
+    { "name": "Actions", "widthClass": "w-5" },
+    { "name": "Created At", "widthClass": "w-5" },
+    { "name": "Updated At", "widthClass": "w-" },
+
   ],
 };
 

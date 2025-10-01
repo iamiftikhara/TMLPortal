@@ -31,22 +31,22 @@ let muncipalityWizerdFormCloudWorkloadsInit,
   muncipalityWizerdFormNumberOfConnectedSitesInit;
 
 
-  let filterSizeData;
-  let numberOfEmployeesData;
-  let numberOfITEmployeesData;
-  let muncipalityWizerdFormPopulationSizeData;
-  let muncipalityWizerdFormKeyPrioritiesUpTo3Data;
-  let muncipalityWizerdFormDepartmentsUnderMunicipalityData;
-  let muncipalityWizerdFormNumberOfEmployeesData;
-  let muncipalityWizerdFormMumberOfITEmployeesData;
-  let muncipalityWizerdFormCloudApplicationData;
-  let muncipalityWizerdFormEndUserDevicesData;
-  let muncipalityWizerdFormServersData;
-  let muncipalityWizerdFormSpecializedDevicesData;
-  let muncipalityWizerdFormCloudWorkloadsData;
-  let muncipalityWizerdFormNumberOfConnectedSitesData;
+let filterSizeData;
+let numberOfEmployeesData;
+let numberOfITEmployeesData;
+let muncipalityWizerdFormPopulationSizeData;
+let muncipalityWizerdFormKeyPrioritiesUpTo3Data;
+let muncipalityWizerdFormDepartmentsUnderMunicipalityData;
+let muncipalityWizerdFormNumberOfEmployeesData;
+let muncipalityWizerdFormMumberOfITEmployeesData;
+let muncipalityWizerdFormCloudApplicationData;
+let muncipalityWizerdFormEndUserDevicesData;
+let muncipalityWizerdFormServersData;
+let muncipalityWizerdFormSpecializedDevicesData;
+let muncipalityWizerdFormCloudWorkloadsData;
+let muncipalityWizerdFormNumberOfConnectedSitesData;
 
-  let muncipalityWizerdFormCompliancesInUseInit
+let muncipalityWizerdFormCompliancesInUseInit
 
 $(document).ready(function () {
   // Show main content and hide loader
@@ -269,8 +269,8 @@ $(document).ready(function () {
         dateTimeFlage = false;
       }
     },
-    onReady: function (selectedDates, dateStr, instance) {},
-    onChange: function (selectedDates, dateStr, instance) {},
+    onReady: function (selectedDates, dateStr, instance) { },
+    onChange: function (selectedDates, dateStr, instance) { },
     disable: [
       function (date) {
         // return true to disable
@@ -300,8 +300,8 @@ $(document).ready(function () {
         dateTimeEndFlage = false;
       }
     },
-    onReady: function (selectedDates, dateStr, instance) {},
-    onChange: function (selectedDates, dateStr, instance) {},
+    onReady: function (selectedDates, dateStr, instance) { },
+    onChange: function (selectedDates, dateStr, instance) { },
     disable: [
       function (date) {
         // return true to disable
@@ -316,6 +316,13 @@ $(document).ready(function () {
 
   updateFiltersSelectDataOptions();
   reIntiateWizerd();
+
+  // get cloud listing
+  getCludApplicationsData()
+
+  // get compliance listing
+  getCompliancesData()
+
 });
 
 // get span for change
@@ -348,8 +355,8 @@ function generateSpan(data, key, customClass = "", style = "") {
     // If the key is a simple value
     const displayValue =
       data[key] == "" ||
-      data[key] === null ||
-      (data[key] && data[key].length <= 0)
+        data[key] === null ||
+        (data[key] && data[key].length <= 0)
         ? "--"
         : `${data[key]}`;
     const title = displayValue;
@@ -763,7 +770,7 @@ $(document).on("click", "#closeWizerd", function () {
 // update select data options
 function updateFiltersSelectDataOptions() {
 
-  
+
   // municipality size population data
   filterSizeData = [
     { id: "<50000", title: "<50,000" },
@@ -835,12 +842,7 @@ function updateFiltersSelectDataOptions() {
     { id: "1001+", title: "1001+" },
   ];
 
-  muncipalityWizerdFormCloudApplicationData = [
-    { id: "microsoft365", title: "Microsoft 365" },
-    { id: "googleWorkspace", title: "Google Workspace" },
-    { id: "otherBusinessApplications", title: "Other business applications" },
-    { id: "none", title: "None / Not sure" },
-  ];
+
 
   muncipalityWizerdFormEndUserDevicesData = [
     { id: "1-50", title: "1-50" },
@@ -882,12 +884,6 @@ function updateFiltersSelectDataOptions() {
   ];
 
 
-  let muncipalityWizerdFormCompliancesInUseData = [
-    { id: "complianceWithRegulations", title: "Compliance with regulations" },
-    { id: "complianceWithIndustryStandards", title: "Compliance with industry standards" },
-    { id: "complianceWithLocalLaw", title: "Compliance with local law" },
-    { id: "none", title: "None / Not sure" },
-  ]
 
 
   populationSizeCompanyDetailsInit.addOption(filterSizeData);
@@ -921,9 +917,7 @@ function updateFiltersSelectDataOptions() {
   // muncipalityWizerdFormTotalITEmployeesInit.addOption(muncipalityWizerdFormMumberOfITEmployeesData);
   // muncipalityWizerdFormTotalITEmployeesInit.setValue('1-50')
 
-  muncipalityWizerdFormCloudApplicationInit.addOption(
-    muncipalityWizerdFormCloudApplicationData
-  );
+
   // muncipalityWizerdFormCloudApplicationInit.setValue('microsoft365')
 
   // muncipalityWizerdFormEndUserDevicesInit.addOption(muncipalityWizerdFormEndUserDevicesData);
@@ -940,9 +934,7 @@ function updateFiltersSelectDataOptions() {
   );
   // muncipalityWizerdFormCloudWorkloadsInit.setValue('mostlyCloudBased')
 
-  muncipalityWizerdFormCompliancesInUseInit.addOption(
-    muncipalityWizerdFormCompliancesInUseData
-  );
+
   // muncipalityWizerdFormCompliancesInUseInit.setValue('complianceWithRegulations')
 
   // muncipalityWizerdFormNumberOfConnectedSitesInit.addOption(muncipalityWizerdFormNumberOfConnectedSitesData);
@@ -1043,15 +1035,15 @@ function setMuncipilitiesData() {
     return found ? found.title : id; // fallback to id if no match
   });
 
-console.log(key_priorities); 
+  console.log(key_priorities);
 
-const selectedDepartments = $("#muncipalityWizerdFormDepartmentsUnderMunicipality").val() || [];
+  const selectedDepartments = $("#muncipalityWizerdFormDepartmentsUnderMunicipality").val() || [];
   // 2. Map each ID to its matching title
   const departments = selectedDepartments.map(id => {
     const found = muncipalityWizerdFormDepartmentsUnderMunicipalityData.find(item => item.id === id);
     return found ? found.title : id; // fallback to id if no match
   });
-  
+
   const total_employees =
     parseInt($("#muncipalityWizerdFormTotalEmployees").val()) || 0;
   const it_employees =
@@ -1071,7 +1063,7 @@ const selectedDepartments = $("#muncipalityWizerdFormDepartmentsUnderMunicipalit
     return found ? found.title : id; // fallback to id if no match
   });
 
- 
+
 
   const end_user_devices =
     parseInt($("#muncipalityWizerdFormEndUserDevices").val()) || 0;
@@ -1090,9 +1082,9 @@ const selectedDepartments = $("#muncipalityWizerdFormDepartmentsUnderMunicipalit
   // Current epoch time in **seconds**
   const created_at = Math.floor(Date.now() / 1000);
 
-let payload = {}
-let apiendpoint;
-  if(localStorage.getItem('municipality_id')){
+  let payload = {}
+  let apiendpoint;
+  if (localStorage.getItem('municipality_id')) {
 
     payload = {
       municipality_id: localStorage.getItem('municipality_id'),
@@ -1121,7 +1113,7 @@ let apiendpoint;
 
     apiendpoint = updateMunicipalityWizardSetAPI
 
-  }else{
+  } else {
 
     payload = {
       auth_token: authToken,
@@ -1502,15 +1494,12 @@ function renderMunicipalityCards(data) {
         <i class="bi bi-geo-alt me-1"></i> County
       </p>
       <p class="fw-bold ms-4">
-        ${
-          data.website_url
-            ? `<a href="${
-                data.website_url
-              }" target="_blank" class="text-decoration-none">${
-                data.county ?? "--"
-              }</a>`
-            : data.county ?? "--"
-        }
+        ${data.website_url
+      ? `<a href="${data.website_url
+      }" target="_blank" class="text-decoration-none">${data.county ?? "--"
+      }</a>`
+      : data.county ?? "--"
+    }
       </p>
     </div>
   </div>
@@ -1701,9 +1690,9 @@ function renderMunicipalityCards(data) {
           <span class="text-muted small" style="font-size:14px">Network</span>
         </div>
         <h3 class="fw-bold" style="font-size:30px;">
-        ${data.network_backup 
-          ? data.network_backup.charAt(0).toUpperCase() + data.network_backup.slice(1).toLowerCase() 
-          : "--"}
+        ${data.network_backup
+      ? data.network_backup.charAt(0).toUpperCase() + data.network_backup.slice(1).toLowerCase()
+      : "--"}
       </h3>
       </div>
     </div>
@@ -1718,9 +1707,9 @@ function renderMunicipalityCards(data) {
           <span class="text-muted small" style="font-size:14px">Cyber Vendors</span>
         </div>
         <h3 class="fw-bold" style="font-size:30px;">
-        ${data.outsourced_it 
-          ? data.outsourced_it.charAt(0).toUpperCase() + data.outsourced_it.slice(1).toLowerCase() 
-          : "--"}
+        ${data.outsourced_it
+      ? data.outsourced_it.charAt(0).toUpperCase() + data.outsourced_it.slice(1).toLowerCase()
+      : "--"}
       </h3>
       </div>
     </div>
@@ -1755,8 +1744,8 @@ const cardDiv = document.getElementById("showMuncipilatiyDetaislMainDiv").parent
 editBtnCard.addEventListener("click", () => {
   cardDiv.classList.add("d-none");
   wizardDiv.classList.remove("d-none");
-   $("#muncipalityInformationHeader").addClass("d-none");
-    // Fetch the data
+  $("#muncipalityInformationHeader").addClass("d-none");
+  // Fetch the data
   getMuncipilitiesDataForWizard();
 });
 
@@ -1764,7 +1753,7 @@ editBtnCard.addEventListener("click", () => {
 homeBtnCard.addEventListener("click", () => {
   wizardDiv.classList.add("d-none");
   cardDiv.classList.remove("d-none");
-    $("#muncipalityInformationHeader").removeClass("d-none");
+  $("#muncipalityInformationHeader").removeClass("d-none");
 });
 // ================= START: Fetch & Populate Municipality Wizard =================
 function getMuncipilitiesDataForWizard() {
@@ -1783,10 +1772,10 @@ function getMuncipilitiesDataForWizard() {
         const apiData = response.message;
 
 
-        if(apiData.municipality_id){
+        if (apiData.municipality_id) {
           localStorage.setItem('municipality_id', apiData.municipality_id);
         }
-        
+
 
         // ----------------- Populate Basic Info -----------------
         $("#municipalityWizerdFormName").val(apiData.municipality_name || "");
@@ -1832,29 +1821,29 @@ function getMuncipilitiesDataForWizard() {
         $("#municipalityHelpConnectedSites").text("Total connected sites");
 
         // ----------------- Radio Buttons -----------------
-        if(apiData.outsourced_it){
+        if (apiData.outsourced_it) {
           $(`input[name='cyberVendors'][value='${apiData.outsourced_it}']`).prop("checked", true);
         }
-        if(apiData.network_backup){
+        if (apiData.network_backup) {
           $(`input[name='backupInternetRedundancy'][value='${apiData.network_backup}']`).prop("checked", true);
         }
 
         // ----------------- Multi-select Fields (Tom Select) -----------------
-        if(apiData.key_priorities){
+        if (apiData.key_priorities) {
           // const keyPrioritiesSelect = new TomSelect("#muncipalityWizerdFormKeyPrioritiesUpTo3");
-           // keyPrioritiesSelect.setValue(apiData.key_priorities);
+          // keyPrioritiesSelect.setValue(apiData.key_priorities);
 
 
-           const idsToSelect = apiData.key_priorities.map(title => {
+          const idsToSelect = apiData.key_priorities.map(title => {
             const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(item => item.title === title);
             return found ? found.id : null;
           }).filter(Boolean); // remove nulls if any
 
           muncipalityWizerdFormKeyPrioritiesUpTo3Init.setValue(idsToSelect);
-         
+
         }
 
-        if(apiData.departments){
+        if (apiData.departments) {
           // const departmentsSelect = new TomSelect("#muncipalityWizerdFormDepartmentsUnderMunicipality");
           // departmentsSelect.setValue(apiData.departments);
 
@@ -1865,7 +1854,7 @@ function getMuncipilitiesDataForWizard() {
           muncipalityWizerdFormDepartmentsUnderMunicipalityInit.setValue(idsToSelect);
         }
 
-        if(apiData.cloud_apps_in_use){
+        if (apiData.cloud_apps_in_use) {
           // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
           // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
 
@@ -1877,7 +1866,7 @@ function getMuncipilitiesDataForWizard() {
           muncipalityWizerdFormCloudApplicationInit.setValue(idsToSelect);
         }
 
-        if(apiData.cloud_workloads_in_use){
+        if (apiData.cloud_workloads_in_use) {
           // const cloudWorkloadsSelect = new TomSelect("#muncipalityWizerdFormCloudWorkloads");
           // cloudWorkloadsSelect.setValue(apiData.cloud_workloads);
 
@@ -1955,3 +1944,304 @@ $(document).on("click", "#createOrderBtn", function () {
   window.location.href = "/create-order.html";
 });
 // ================= END: Create Order Button Click Event =================
+
+
+
+
+// get data of clouds
+function getCludApplicationsData() {
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+  });
+
+  // return 0
+  $.ajax({
+    url: MAIN_API_PATH + getMunicipalityWizardSetAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: "json",
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $("#cover-spin").hide(0);
+        //  const data = response.message;
+        const apiData = data.message;
+
+        muncipalityWizerdFormCloudApplicationData = [
+          { id: "microsoft365", title: "Microsoft 365" },
+          { id: "googleWorkspace", title: "Google Workspace" },
+          { id: "otherBusinessApplications", title: "Other business applications" },
+          { id: "none", title: "None / Not sure" },
+        ];
+
+        muncipalityWizerdFormCloudApplicationInit.addOption(
+          muncipalityWizerdFormCloudApplicationData
+        );
+
+      },
+      204: function () {
+        $("#cover-spin").hide();
+
+      },
+    },
+    error: function (xhr, status, error) {
+      $("#cover-spin").hide();
+      if (xhr.status === 400) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        );
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        );
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        );
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        );
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: " ",
+            text: sessionExpired408Error,
+            type: "info",
+            showCancelButton: false,
+            confirmButtonText: "Logout",
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear();
+              window.location.href = redirectToSignInPage408;
+            }
+          }
+        );
+      } else if (xhr.status === 410) {
+        $("#cover-spin").hide();
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: "json",
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(sitePublicKey);
+            const dateString = String(pageName + data.unixtime);
+            securityKeyEncrypted = encrypt.encrypt(dateString);
+            SecurityKeyTime = false;
+            getCludApplicationsData();
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const dateString = String(pageName + data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(dateString);
+              SecurityKeyTime = false;
+              getCludApplicationsData();
+            });
+          },
+        });
+      } else {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      }
+    },
+  });
+}
+// end data of clouds
+
+
+// get data of Compliances
+function getCompliancesData() {
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+  });
+
+  // return 0
+  $.ajax({
+    url: MAIN_API_PATH + getMunicipalityWizardSetAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: "json",
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $("#cover-spin").hide(0);
+        //  const data = response.message;
+        const apiData = data.message;
+
+
+        let muncipalityWizerdFormCompliancesInUseData = [
+          { id: "complianceWithRegulations", title: "Compliance with regulations" },
+          { id: "complianceWithIndustryStandards", title: "Compliance with industry standards" },
+          { id: "complianceWithLocalLaw", title: "Compliance with local law" },
+          { id: "none", title: "None / Not sure" },
+        ]
+
+        muncipalityWizerdFormCompliancesInUseInit.addOption(
+          muncipalityWizerdFormCompliancesInUseData
+        );
+
+
+
+      },
+      204: function () {
+        $("#cover-spin").hide();
+
+      }
+    },
+    error: function (xhr, status, error) {
+      $("#cover-spin").hide();
+      if (xhr.status === 400) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        );
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        );
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        );
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        );
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: " ",
+            text: sessionExpired408Error,
+            type: "info",
+            showCancelButton: false,
+            confirmButtonText: "Logout",
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear();
+              window.location.href = redirectToSignInPage408;
+            }
+          }
+        );
+      } else if (xhr.status === 410) {
+        $("#cover-spin").hide();
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: "json",
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(sitePublicKey);
+            const dateString = String(pageName + data.unixtime);
+            securityKeyEncrypted = encrypt.encrypt(dateString);
+            SecurityKeyTime = false;
+            getCompliancesData();
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const dateString = String(pageName + data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(dateString);
+              SecurityKeyTime = false;
+              getCompliancesData();
+            });
+          },
+        });
+      } else {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      }
+    },
+  });
+}
+// end data of Compliances
