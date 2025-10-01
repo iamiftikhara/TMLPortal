@@ -24,6 +24,7 @@ const storedBundle = localStorage.getItem("editBundle");
 const submitSelector = "button[form='enrollServicesForm'][type='submit']";
 
 $(document).ready(function () {
+  $("#cover-spin").show();
 
   if (storedBundle) {
     const bundle = JSON.parse(storedBundle);
@@ -60,49 +61,6 @@ $(document).ready(function () {
       $(submitSelector).prop("disabled", false);
     }
   });
-
-// $(function () {
-//   // pick the button by the form attribute
-//   const submitSelector = "button[form='enrollServicesForm'][type='submit']";
-
-//   // check edit mode
-//   const storedBundle = localStorage.getItem("editBundle");
-
-//   if (storedBundle) {
-//     alert("Editing existing bundle");
-
-//     // Edit Case → disable initially
-//     $(submitSelector).prop("disabled", true);
-
-//     // Enable on any change inside the form (delegated so it works for dynamic fields)
-//     $("#enrollServicesForm").on("input change", "input, textarea, select", function () {
-//       $(submitSelector).prop("disabled", false);
-//     });
-
-//     // Also enable when user clicks a service card (select/unselect)
-//     $(document).on("click", ".service-card", function () {
-//       // only enable if card is not disabled
-//       if (!$(this).hasClass("disabled-card")) {
-//         $(submitSelector).prop("disabled", false);
-//       }
-//     });
-
-//     // Also enable when the hidden selectedServiceIds changes programmatically
-//     $("#selectedServiceIds").on("change", function () {
-//       $(submitSelector).prop("disabled", false);
-//     });
-
-//     // IMPORTANT: when you update selectedServiceIds in your service-card click handler,
-//     // trigger change so the handler above runs:
-//     // $("#selectedServiceIds").val(selectedServices.join(",")).trigger("change");
-
-//   } else {
-//     // Create Case → always enabled
-//     $(submitSelector).prop("disabled", false);
-//   }
-// });
-
-// ------------ INIT ------------------
 
 // API URLs
 const API_SET_BUNDLE = "/tml/admin/set/bundle";
@@ -313,7 +271,7 @@ $(document).on("click", ".service-card", function () {
 );
 
 
-  console.log("Selected services:", selectedServices); // 👈 debug
+  // console.log("Selected services:", selectedServices); // 👈 debug
 
   // validation trigger
   $("#selectedServiceIds").valid();
@@ -336,8 +294,8 @@ $('#enrollServicesForm').validate({
     }
   },
   messages: {
-    enrollServicesFormTitle: "Title is required",
-    selectedServiceIds: "Please select at least one service"
+    enrollServicesFormTitle: "Title is required.",
+    selectedServiceIds: "Please select at least one service."
   },
   errorClass: 'error invalid-feedback',
   highlight: function (element) {
@@ -374,10 +332,9 @@ function handleSubmit() {
                   : []   // 👈 split string back into array
   };
 
-  console.log("Final Payload:", payload);
+  // console.log("Final Payload:", payload);
 
   if (!payload.list_of_services || payload.list_of_services.length === 0) {
-    alert("Please select at least one service");
     return;
   }
 
