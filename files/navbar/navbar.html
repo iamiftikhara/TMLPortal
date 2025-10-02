@@ -1,3 +1,15 @@
+<script>
+  if (localStorage.getItem('_ia') !== 'true') {
+    $('.nav-item-to-show-after-login').addClass('d-none');
+    $('#navbarContainerNavDropdown').addClass('justify-content-end');
+    $('.nav-item-to-show-before-login').removeClass('d-none');
+  }else{
+    $('.nav-item-to-show-after-login').removeClass('d-none');
+    $('#navbarContainerNavDropdown').removeClass('justify-content-end');
+    $('.nav-item-to-show-before-login').addClass('d-none');
+  }
+</script>
+
 <div class="container">
   <nav class="js-mega-menu navbar-nav-wrap hs-menu-initialized hs-menu-horizontal">
     <!-- Logo -->
@@ -25,33 +37,45 @@
     <div class="collapse navbar-collapse" id="navbarContainerNavDropdown">
       <ul class="navbar-nav">
 
-        <li class="nav-item">
+        <li class="nav-item nav-item-to-show-after-login">
           <a class="nav-link" href="index.html">
-            <img src="/files/images/navbar-icon/Discovery.svg" width="30" height="30" alt="Discovery Icon" style="margin-right: 10px;"> Discovery
+            <img src="/files/images/navbar-icon/Discovery.svg" width="30" height="30" alt="Discovery Icon"
+              style="margin-right: 10px;"> Discovery
           </a>
         </li>
 
-        <li class="nav-item d-none"> 
+        <li class="nav-item nav-item-to-show-after-login d-none">
           <a class="nav-link" href="quote.html">
-            <img src="/files/images/navbar-icon/Quote.svg" width="30" height="30" alt="Quote Icon" style="margin-right: 10px;"> Quote
+            <img src="/files/images/navbar-icon/Quote.svg" width="30" height="30" alt="Quote Icon"
+              style="margin-right: 10px;"> Quote
           </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item nav-item-to-show-after-login">
           <a class="nav-link" href="orders.html">
-            <img src="/files/images/navbar-icon/Orders.svg" width="30" height="30" alt="Orders Icon" style="margin-right: 10px;"> Orders
+            <img src="/files/images/navbar-icon/Orders.svg" width="30" height="30" alt="Orders Icon"
+              style="margin-right: 10px;"> Orders
           </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item nav-item-to-show-after-login">
           <a class="nav-link" href="resources.html">
-            <img src="/files/images/navbar-icon/Resources.svg" width="30" height="30" alt="Resources Icon" style="margin-right: 10px;"> Resources
+            <img src="/files/images/navbar-icon/Resources.svg" width="30" height="30" alt="Resources Icon"
+              style="margin-right: 10px;"> Resources
           </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item nav-item-to-show-after-login">
           <a class="nav-link" href="account.html">
-            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon" style="margin-right: 10px;"> Account
+            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
+              style="margin-right: 10px;"> Account
+          </a>
+        </li>
+
+        <li class="nav-item nav-item-to-show-before-login">
+          <a class="nav-link" href="/signin.html">
+            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
+              style="margin-right: 10px;"> Sign In
           </a>
         </li>
 
@@ -119,4 +143,4 @@
 <!-- End Style Switcher JS -->
 
 <!-- loading navbar.js file -->
- <script src="files/navbar/navbar.js"></script>
+<script src="files/navbar/navbar.js"></script>

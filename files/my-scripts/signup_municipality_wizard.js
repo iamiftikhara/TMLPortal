@@ -219,7 +219,7 @@ function singUpUserForMunicipality(wizardObj){
       last_name: lname,
       organization: org,
       role: 'user',
-      muncipality_information:wizardObj
+      munciple:wizardObj
     };
 
 

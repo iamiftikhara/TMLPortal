@@ -1,6 +1,6 @@
-// if (localStorage.getItem("_ia") !== "true") {
-//   window.location.href = "signin.html";
-// }
+if (localStorage.getItem("_ia") !== "true") {
+  window.location.href = "signin.html";
+}
 
 const tokenAuth = localStorage.getItem("_at");
 const decryptedByte = CryptoJS.AES.decrypt(tokenAuth, "My Secret Passphrase");
@@ -1165,6 +1165,7 @@ function setMuncipilitiesData() {
 
         window.location.reload();
       },
+
       204: function () {
         $("#cover-spin").hide(0);
         showNotificationError(
@@ -1313,7 +1314,7 @@ function getMuncipilitiesData() {
 
         $("#showMuncipilatiyDetaislLoader").addClass("d-none");
         $("#showMuncipilatiyDetaislErrorTextDiv").addClass("d-none");
-        $("#muncipalityInformationHeader").removeClass("d-none");
+        $("#muncipalityInformationHeader, #showMuncipilatiyDetaisl").removeClass("d-none");
         $("#showMuncipilatiyDetaislMainDiv")
           .html(renderMunicipalityCards(apiData))
           .removeClass("d-none");
