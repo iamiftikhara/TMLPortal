@@ -1554,13 +1554,12 @@ function getCreateBundleTableData(skip, page) {
               : `--`;
 
           // services count (click to open modal)
-          const servicesCount = `<a href="javascript:void(0)" 
-                            class="services-count" 
-                            data-service-ids='${JSON.stringify(
-            bundle.list_of_services
-          )}'>
-                            ${bundle.list_of_services.length}
-                         </a>`;
+          const servicesCount = bundle.list_of_services && bundle.list_of_services.length
+            ? `<a class="services-count" style="cursor: pointer;" 
+                  data-service-ids='${JSON.stringify(bundle.list_of_services)}'>
+                  ${bundle.list_of_services.length}
+              </a>`
+            : `--`;
 
           // availability toggle
           let availabilityToggle = `
@@ -1703,6 +1702,197 @@ $(document).on("click", ".services-count", function () {
   // yahan API call karke service list modal me show karo
   fetchServicesByIds(serviceIds);
 });
+
+// Render services in right sidebar
+function renderSidebarServices(services, preSelectedIds = []) {
+  const container = $("#strategyOffcanvasBody");
+  container.empty(); // clear old content
+
+  if (!services || services.length === 0) {
+    container.html(`<div class="text-center text-muted">No services available</div>`);
+    return;
+  }
+
+  services.forEach(service => {
+    const isSelected = preSelectedIds.includes(service.service_id);
+
+    const card = `
+      <div class="service-card card mb-3 shadow-sm
+          ${isSelected ? 'border-primary shadow-lg' : 'border'}" 
+          data-id="${service.service_id}" 
+          data-cost="${service.estimated_cost}">
+        
+        <div class="card-header fw-bold">${service.title}</div>
+        <div class="card-body">
+          <p class="card-text">${service.description || 'No description available'}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          Estimate Cost:
+          <span class="fw-bold text-primary">$${service.estimated_cost} ${service.cost_unit}</span>
+        </div>
+      </div>
+    `;
+    container.append(card);
+  });
+}
+
+function fetchServicesByIds(serviceIds) {
+  $("#cover-spin").show(0);
+  const apiBody = JSON.stringify({
+            auth_token: authToken,
+            // service_list_id: serviceIds,
+            "search": { list_of_services: serviceIds }
+          });
+          // return 0
+          $.ajax({
+            url: MAIN_API_PATH + 'tml/admin/services/view',
+            method: POST,
+            contentType: Content_Type,
+            dataType: "json",
+            data: apiBody,
+            statusCode: {
+              200: function (apiResponse) {
+                $("#cover-spin").hide(0);
+                  // Load API response (already in memory or via AJAX)
+              const serviceData = apiResponse.message; // replace with your actual API array
+
+              // Render only the clicked one OR all
+              const selectedService = serviceData.filter(s => s.service_id);
+              renderSidebarServices(selectedService);
+
+              // Show sidebar
+              const offcanvas = new bootstrap.Offcanvas("#strategyOffcanvas");
+              offcanvas.show();
+
+                // showNotificationError(
+                //   "bg-green",
+                //   null,
+                //   null,
+                //   null,
+                //   null,
+                //   null,
+                //   SAVED
+                // );
+
+                // teamMembersAPIResponse = [];
+                // showDataTableLoader("createBundleDataTable");
+                // createBundleDataTableInit.clear().draw();
+                // getCreateBundleTableData(10, 1);
+              },
+              204: function () {
+                $("#cover-spin").hide(0);
+              },
+            },
+            error: function (xhr, status, error) {
+              $("#cover-spin").hide();
+              if (xhr.status === 400) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  invalidRequest400Error
+                );
+              } else if (xhr.status === 401) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  unauthorizedRequest401Error
+                );
+              } else if (xhr.status === 404) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  notFound404Error
+                );
+              } else if (xhr.status === 409) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  alreadyExist409Error
+                );
+              } else if (xhr.status === 503) {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              } else if (xhr.status === 408) {
+                swal(
+                  {
+                    title: " ",
+                    text: sessionExpired408Error,
+                    type: "info",
+                    showCancelButton: false,
+                    confirmButtonText: "Logout",
+                  },
+                  function (isConfirm) {
+                    if (isConfirm) {
+                      localStorage.clear();
+                      window.location.href = redirectToSignInPage408;
+                    }
+                  }
+                );
+              } else if (xhr.status === 410) {
+                $("#cover-spin").hide();
+
+                $.ajax({
+                  url: MAIN_API_PATH + getGmtAPI,
+                  method: POST,
+                  contentType: Content_Type,
+                  dataType: "json",
+                  success: function (data, textStatus, xhr) {
+                    const encrypt = new JSEncrypt();
+                    encrypt.setPublicKey(sitePublicKey);
+                    const dateString = String(pageName + data.unixtime);
+                    securityKeyEncrypted = encrypt.encrypt(dateString);
+                    SecurityKeyTime = false;
+                    editPolicyAndSessions();
+                  },
+                  error: function (xhr, status, error) {
+                    $.getJSON(worldTimeAPI, function (data) {
+                      const encrypt = new JSEncrypt();
+                      encrypt.setPublicKey(sitePublicKey);
+                      const dateString = String(pageName + data.unixtime);
+                      securityKeyEncrypted = encrypt.encrypt(dateString);
+                      SecurityKeyTime = false;
+                      editPolicyAndSessions();
+                    });
+                  },
+                });
+              } else {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              }
+            }
+        }
+      );
+}
 
 // availability toggle click
 $(document).on("change", ".toggle-availability", function () {

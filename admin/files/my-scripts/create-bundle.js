@@ -24,6 +24,9 @@ const storedBundle = localStorage.getItem("editBundle");
 const submitSelector = "button[form='enrollServicesForm'][type='submit']";
 let originalBundle = null; // to hold initial values
 
+let isEdit = false;
+let editingBundleId = null;
+
 $(document).ready(function () {
   $("#cover-spin").show();
 
@@ -56,14 +59,16 @@ $(document).ready(function () {
     getServiceManagementTableData();
 });
 
-// Utility to compare arrays
 function areArraysEqual(arr1, arr2) {
   if (!arr1 || !arr2) return false;
   if (arr1.length !== arr2.length) return false;
-  return arr1.every(val => arr2.includes(val));
+
+  const norm1 = arr1.map(x => String(x));
+  const norm2 = arr2.map(x => String(x));
+
+  return norm1.every(val => norm2.includes(val));
 }
 
-// Enable/Disable Save Button depending on changes
 function enableDisableBundleButton() {
   if (!originalBundle) {
     $(submitSelector).prop("disabled", false);
@@ -72,15 +77,17 @@ function enableDisableBundleButton() {
 
   const currentTitle = $("#enrollServicesFormTitle").val();
   const currentDescription = $("#enrollServicesFormDescription").val();
-
-  // ✅ use the updated JS array instead of reading hidden input
   const currentServices = selectedServices;
 
-  if (
+  console.log("selectedServices", selectedServices);
+  console.log("originalBundle.services", originalBundle.services);
+
+  const isSame =
     currentTitle === originalBundle.title &&
     currentDescription === originalBundle.description &&
-    areArraysEqual(currentServices, originalBundle.services)
-  ) {
+    areArraysEqual(currentServices, originalBundle.services);
+
+  if (isSame) {
     $(submitSelector).prop("disabled", true).parent().css("cursor", "no-drop");
   } else {
     $(submitSelector).prop("disabled", false).parent().css("cursor", "pointer");
@@ -89,7 +96,7 @@ function enableDisableBundleButton() {
 
 // Trigger validation whenever inputs change
 $("#enrollServicesForm").on("input change", "input, textarea, select", function () {
-    if(isEdit == true) {
+    if (isEdit === true) {
       enableDisableBundleButton();
     }
 });
@@ -125,61 +132,25 @@ function getServiceManagementTableData() {
       },
       204: function () {
         $("#cover-spin").hide();
-        $("#serviceManagementDataTableErrorText").text(noDataFoundText204Case);
+        $("#pageErrorCard").removeClass("d-none");
+        $("#mainContent").addClass("d-none");
+        $("#pageErrorCardText").html(`No services found, <u class="text-primary cursor-pointer"><a href="service-managements.html">Click</a></u> to add a service.`);
       }
     },
      error: function (xhr, status, error) {
       $("#cover-spin").hide();
+       $("#pageErrorCard").removeClass("d-none");
+        $("#mainContent").addClass("d-none");
       if (xhr.status === 400) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          invalidRequest400Error
-        );
+        $("#pageErrorCardText").html(invalidRequest400Error);
       } else if (xhr.status === 401) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          unauthorizedRequest401Error
-        );
+         $("#pageErrorCardText").html(invalidRequest400Error);
       } else if (xhr.status === 404) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          notFound404Error
-        );
+        $("#pageErrorCardText").html(notFound404Error); 
       } else if (xhr.status === 409) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          alreadyExist409Error
-        );
+        $("#pageErrorCardText").html(alreadyExist409Error);
       } else if (xhr.status === 503) {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
+        $("#pageErrorCardText").html(serverError503Error);
       } else if (xhr.status === 408) {
         swal(
           {
@@ -224,15 +195,7 @@ function getServiceManagementTableData() {
           },
         });
       } else {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
+        $("#pageErrorCardText").html(serverError503Error);
       }
     },
   });
@@ -281,36 +244,41 @@ function updateTotalCost() {
   $("#totalCost").text(total);
 }
 
+if (isEdit && originalBundle && Array.isArray(originalBundle.services)) {
+  // Just visually select cards
+  $(".service-card").each(function () {
+    const id = $(this).data("id");
+    if (originalBundle.services.includes(id)) {
+      $(this).addClass("border-primary shadow-lg");
+    }
+  });
+}
+
 $(document).on("click", ".service-card", function () {
   if ($(this).hasClass("disabled-card")) return;
 
   const serviceId = $(this).data("id");
 
   if ($(this).hasClass("border-primary")) {
-    // 🔴 Unselect
+    // Unselect
     $(this).removeClass("border-primary shadow-lg");
-    selectedServices = selectedServices.filter(id => id !== serviceId);
   } else {
-    // 🟢 Select
+    // Select
     $(this).addClass("border-primary shadow-lg");
-    if (!selectedServices.includes(serviceId)) {
-      selectedServices.push(serviceId);
-    }
   }
 
-  // hidden field update (for form submission)
-  $("#selectedServiceIds").val(
-    selectedServices.length ? selectedServices.join(",") : ""
-  );
+  // Rebuild from DOM
+  selectedServices = $(".service-card.border-primary")
+    .map(function () {
+      return $(this).data("id");
+    })
+    .get();
 
-  // validation trigger
+  $("#selectedServiceIds").val(selectedServices.join(","));
   $("#selectedServiceIds").valid();
-
-  // update total cost
   updateTotalCost();
 
-  // Now run enable/disable logic
-  if(isEdit == true) {
+  if (isEdit === true) {
     enableDisableBundleButton();
   }
 });
@@ -352,8 +320,6 @@ $('#enrollServicesForm').validate({
 });
 
 // ------------ SUBMIT HANDLER ------------------
-let isEdit = false;
-let editingBundleId = null;
 
 function handleSubmit() {
       const created_at = Math.floor(Date.now() / 1000);

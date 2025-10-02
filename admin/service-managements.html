@@ -408,6 +408,30 @@
   </div>
 </div>
 
+<!-- Offcanvas Panel -->
+<div
+  class="offcanvas offcanvas-end wide-offcanvas"
+  tabindex="-1"
+  id="strategyOffcanvas"
+  aria-labelledby="strategyOffcanvasLabel"
+>
+  <div class="offcanvas-header">
+    <h4 id="strategyOffcanvasLabel"> Services</h4>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <!-- API Data Will Inject Here -->
+    <div id="strategyOffcanvasBody">
+      <div class="text-center text-muted">Click an item to load details</div>
+    </div>
+  </div>
+</div>
+
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
@@ -462,12 +486,8 @@
 
   <!-- page js -->
   <script src="files/my-scripts/service-management.js"></script>
-  <script src="files/table-config/index-table-confg.js"></script>
+  <script src="files/table-config/bundle-table-confg.js"></script>
   <script src="files/table-config/services-managment-table-confg.js"></script>
-   <!-- <script src="files/table-config/upload-table-confg.js"></script> -->
-
-
-
 
   <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
   <!-- script -->
