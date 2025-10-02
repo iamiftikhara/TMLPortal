@@ -33,6 +33,9 @@
   <!-- SweetAlert CSS    -->
   <link href="/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
+  <!-- Recaptcha Script -->
+  <script src='files/my-scripts/recaptcha.js'></script>
+
   <!-- Security Key Encryption -->
   <script src="/files/https-files/jsencrypt.min.js"></script>
   <script src="/files/https-files/crypto-js.js"></script>
@@ -410,9 +413,9 @@
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
                         <label for="municipalityWizerdFormContactFirstName" class="form-label">First Name:<span
-                        class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
+                            class="text-danger">*</span></label>
+                        <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                          data-bs-placement="right" data-bs-html="true" title="
                         <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
                         <ul>
                         <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
@@ -430,9 +433,9 @@
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
                         <label for="municipalityWizerdFormContactLastName" class="form-label">Last Name:<span
-                        class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
+                            class="text-danger">*</span></label>
+                        <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                          data-bs-placement="right" data-bs-html="true" title="
                         <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
                         <ul>
                         <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
@@ -618,23 +621,25 @@
                   </div>
                 </div>
 
-                <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn"
-                  data-hs-step-form-prev-options='{
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn"
+                    data-hs-step-form-prev-options='{
                                   "targetSelector": "#municipalityWizerdFormBasics"
                                 }'>
-                  <i class="bi-chevron-left small"></i> Previous step
-                </button>
-                <!-- Footer -->
-                <div class="d-flex align-items-center justify-content-end">
+                    <i class="bi-chevron-left small"></i> Previous step
+                  </button>
+                  <!-- Footer -->
+                  <div class="d-flex align-items-center justify-content-end">
 
 
-                  <div class="">
-                    <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-primary formNextButton"
-                      data-hs-step-form-next-options='{
+                    <div class="">
+                      <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-primary formNextButton"
+                        data-hs-step-form-next-options='{
                                 "targetSelector": "#municipalityWizerdTechnologyEnvironment"
                               }'>
-                      Next <i class="bi-chevron-right small"></i>
-                    </button>
+                        Next <i class="bi-chevron-right small"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <!-- End Footer -->
@@ -875,23 +880,25 @@
                   </div>
                 </div>
 
-                <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2" data-hs-step-form-prev-options='{
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2"
+                    data-hs-step-form-prev-options='{
                       "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
                     }'>
-                  <i class="bi-chevron-left small"></i> Previous step
-                </button>
-                <!-- Footer -->
-                <div class="d-flex align-items-center justify-content-end">
+                    <i class="bi-chevron-left small"></i> Previous step
+                  </button>
+                  <!-- Footer -->
+                  <div class="d-flex align-items-center justify-content-end">
 
-                  <div class="">
-                    <button type="button" id="" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
+                    <div class="">
+                      <button type="button" id="" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
                                 "targetSelector": "#municipalityWizardSignUpForm"
                               }'>
-                      Next <i class="bi-chevron-right small"></i>
-                    </button>
+                        Next <i class="bi-chevron-right small"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
-
                 <!-- End Footer -->
               </div>
               <!-- end Technology Environment -->
@@ -902,24 +909,23 @@
               <div id="municipalityWizardSignUpForm" style="display: none;">
 
 
-                <form class="js-validate needs-validation" novalidate id="signUpForm">
-                  <!-- <div class="text-center">
+                <!-- <div class="text-center">
                 <div class="mb-2">
                   <img class="zi-2" src="./assets/images/logo.png" alt="Image Description" style="width: 12rem;">
                 </div>
               </div> -->
-                  <div class="mb-2 d-flex justify-content-between singinFormLogoDiv" id="singinFormLogoDiv"></div>
-                  <!-- Input classes for future use -->
-                  <!-- shadow-none transparent-input border-0 border-bottom -->
-                  <!-- First & last name -->
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- Form -->
-                      <div class="mb-2">
-                        <label class="form-label" for="signupFirstName">First name <span
-                            class="text-danger">*</span></label>
-                        <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                          data-bs-placement="right" data-bs-html="true" title="
+                <div class="mb-2 d-flex justify-content-between singinFormLogoDiv" id="singinFormLogoDiv"></div>
+                <!-- Input classes for future use -->
+                <!-- shadow-none transparent-input border-0 border-bottom -->
+                <!-- First & last name -->
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- Form -->
+                    <div class="mb-2">
+                      <label class="form-label" for="signupFirstName">First name <span
+                          class="text-danger">*</span></label>
+                      <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-html="true" title="
                         <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
                         <ul>
                         <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
@@ -928,47 +934,49 @@
                         <li>Only digits are not allowed.</li>
                         <li>Whitespaces are allowed.</li>
                         </ul>"></i>
-                        <input type="text" class="form-control form-control-lg ps-1" name="signupFirstName"
-                          id="signupFirstName" placeholder="Charlie" minlength="3" maxlength="50" aria-label="Charlie"
-                          required autocomplete="off">
-                      </div>
-                      <!-- End Form -->
+                      <input type="text" class="form-control form-control-lg ps-1" name="signupFirstName"
+                        id="signupFirstName" placeholder="Charlie" minlength="3" maxlength="50" aria-label="Charlie"
+                        required autocomplete="off">
                     </div>
-                    <div class="col-sm-6">
-                      <!-- Form -->
-                      <div class="mb-2">
-                        <label class="form-label" for="signupLastName">Last name <span
-                            class="text-danger">*</span></label>
-                        <i class="bi-question-circle text-body ms-1" id="LastNameToolTip" data-bs-toggle="tooltip"
-                          data-bs-placement="right" data-bs-html="true" title="
+                    <!-- End Form -->
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- Form -->
+                    <div class="mb-2">
+                      <label class="form-label" for="signupLastName">Last name <span
+                          class="text-danger">*</span></label>
+                      <i class="bi-question-circle text-body ms-1" id="LastNameToolTip" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-html="true" title="
                         <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
                         <li>Maximum length should be 50 characters.</li>
                         <li>Minimum length should be 3 characters.</li>
                         <li>Only digits are not allowed.</li>
                         <li>Whitespaces are allowed.</li></ul>"></i>
-                        <input type="text" id="signupLastName" name="signupLastName"
-                          class="form-control form-control-lg ps-1" minlength="3" maxlength="50" placeholder="Boone"
-                          aria-label="Boone" required autocomplete="off">
-                      </div>
-                      <!-- End Form -->
+                      <input type="text" id="signupLastName" name="signupLastName"
+                        class="form-control form-control-lg ps-1" minlength="3" maxlength="50" placeholder="Boone"
+                        aria-label="Boone" required autocomplete="off">
                     </div>
+                    <!-- End Form -->
                   </div>
-                  <!-- User name -->
-                  <div class="mb-2 d-none">
-                    <label class="form-label" for="signupUserName">Username <span class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
+                </div>
+                <!-- User name -->
+                <div class="mb-2 d-none">
+                  <label class="form-label" for="signupUserName">Username <span class="text-danger">*</span></label>
+                  <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-html="true" title="
                     <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: (.), (-), ( _ ).</li>
                     <li>Maximum length should be 50 characters.</li>
                     <li>Minimum length should be 3 characters.</li>
                     <li>Whitespaces are not allowed.</li></ul>"></i>
-                    <input type="text" class="form-control form-control-lg  ps-1" name="signupUserName"
-                      id="signupUserName" tabindex="1" placeholder="Charlie" minlength="3" maxlength="50"
-                      aria-label="Name *" required autocomplete="off">
-                  </div>
+                  <input type="text" class="form-control form-control-lg  ps-1" name="signupUserName"
+                    id="signupUserName" tabindex="1" placeholder="Charlie" minlength="3" maxlength="50"
+                    aria-label="Name *" required autocomplete="off">
+                </div>
+
+                <div class="row">
 
                   <!-- User email -->
-                  <div class="mb-2">
+                  <div class="mb-2 col-sm-6">
                     <label class="form-label" for="signupUserEmail">Email <span class="text-danger">*</span></label>
                     <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
                       data-bs-placement="right" data-bs-html="true" title="
@@ -1000,7 +1008,7 @@
                   </div>
                   <!-- end size -->
                   <!-- Orgnization Name -->
-                  <div class="mb-3">
+                  <div class="mb-3 col-sm-6">
                     <label class="form-label" for="signupUserOrgnization">Municipality name <span
                         class="text-danger">*</span></label>
                     <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
@@ -1014,90 +1022,93 @@
                       id="signupUserOrgnization" tabindex="1" minlength="3" maxlength="50"
                       placeholder="Enter municipality name" required autocomplete="off">
                   </div>
-                  <!-- User password -->
-                  <div class="row mb-3">
-                    <div class="col-sm-6">
-                      <label class="form-label" for="signupUserPassword">Password <span
-                          class="text-danger">*</span></label>
-                      <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-html="true" title="
+                </div>
+                <!-- User password -->
+                <div class="row mb-3">
+                  <div class="col-sm-6">
+                    <label class="form-label" for="signupUserPassword">Password <span
+                        class="text-danger">*</span></label>
+                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                      data-bs-placement="right" data-bs-html="true" title="
                         <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
                         <ul>
                         <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
                         </ul>"></i>
-                      <!-- passowerd eye -->
-                      <a id="changePassTarget"
-                        class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
-                        href="javascript:;">
-                        <i id="changePassIcon" class="bi-eye"></i>
-                      </a>
-                      <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
-                        name="signupUserPassword" id="signupUserPassword" placeholder="Enter a strong password"
-                        aria-label="Password *" required minlength="8" maxlength="50" data-hs-toggle-password-options='{
+                    <!-- passowerd eye -->
+                    <a id="changePassTarget"
+                      class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
+                      href="javascript:;">
+                      <i id="changePassIcon" class="bi-eye"></i>
+                    </a>
+                    <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                      name="signupUserPassword" id="signupUserPassword" placeholder="Enter a strong password"
+                      aria-label="Password *" required minlength="8" maxlength="50" data-hs-toggle-password-options='{
                       "target": "#changePassTarget",
                       "defaultClass": "bi-eye-slash",
                       "showClass": "bi-eye",
                       "classChangeTarget": "#changePassIcon"
                     }' autocomplete="off">
-                    </div>
-                    <!-- Repeat password -->
-                    <div class="col-sm-6">
-                      <label class="form-label" for="signupUserRepeatPassword">Confirm password <span
-                          class="text-danger">*</span></label>
-                      <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-html="true"
-                        title="
+                  </div>
+                  <!-- Repeat password -->
+                  <div class="col-sm-6">
+                    <label class="form-label" for="signupUserRepeatPassword">Confirm password <span
+                        class="text-danger">*</span></label>
+                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                      data-bs-placement="right" data-bs-html="true"
+                      title="
                     <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
-                      <!-- passowerd eye -->
-                      <a id="changeRepeatPassTarget"
-                        class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
-                        href="javascript:;">
-                        <i id="changeRepeatPassIcon" class="bi-eye"></i>
-                      </a>
-                      <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
-                        name="signupUserRepeatPassword" id="signupUserRepeatPassword" placeholder="Confirm password"
-                        aria-label="Confirm Password " maxlength="50" required data-hs-toggle-password-options='{
+                    <!-- passowerd eye -->
+                    <a id="changeRepeatPassTarget"
+                      class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
+                      href="javascript:;">
+                      <i id="changeRepeatPassIcon" class="bi-eye"></i>
+                    </a>
+                    <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                      name="signupUserRepeatPassword" id="signupUserRepeatPassword" placeholder="Confirm password"
+                      aria-label="Confirm Password " maxlength="50" required data-hs-toggle-password-options='{
                       "target": "#changeRepeatPassTarget",
                       "defaultClass": "bi-eye-slash",
                       "showClass": "bi-eye",
                       "classChangeTarget": "#changeRepeatPassIcon"
                     }' autocomplete="off">
-                    </div>
                   </div>
-                  <!-- Terms and Conditons -->
-                  <div class="mb-2">
-                    <p>By signing up, you agree to our <a target="_blank" class="text-decoration-underline"
-                        href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/terms-of-service.pdf">Terms</a> and <a
-                        class="text-decoration-underline"
-                        href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/privacy-policy.pdf"
-                        target="_blank">Privacy
-                        policy</a>.</p>
+                </div>
+                <!-- Terms and Conditons -->
+                <div class="mb-2">
+                  <p>By signing up, you agree to our <a target="_blank" class="text-decoration-underline"
+                      href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/terms-of-service.pdf">Terms</a> and <a
+                      class="text-decoration-underline"
+                      href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/privacy-policy.pdf"
+                      target="_blank">Privacy
+                      policy</a>.</p>
+                </div>
+                <div class="mb-2" id="recaptchaDisable">
+                  <div class="g-recaptcha" data-sitekey="6LdUMv4ZAAAAAO3FZVUyZ4KfQw7XsNjl2CUIldYL"></div>
+                  <div class="text-danger">
+                    <span id="captchaerror"></span>
                   </div>
-                  <div class="mb-2" id="recaptchaDisable">
-                    <div class="g-recaptcha" data-sitekey="6LdUMv4ZAAAAAO3FZVUyZ4KfQw7XsNjl2CUIldYL"></div>
-                    <div class="text-danger">
-                      <span id="captchaerror"></span>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg" id="signupBtn">Sign up</button>
-                  </div>
-                </form>
+                </div>
+                <div class="d-grid d-none">
+                  <button type="submit" class="btn btn-primary btn-lg" id="signupBtn">Sign up</button>
+                </div>
 
-                <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2" data-hs-step-form-prev-options='{
+                <div class="d-flex justify-content-between">
+
+                  <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2"
+                    data-hs-step-form-prev-options='{
                       "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
                     }'>
-                  <i class="bi-chevron-left small"></i> Previous step
-                </button>
-                <!-- Footer -->
-                <div class="d-sm-flex align-items-center justify-content-end">
-                  <button type="button" class="btn btn-white me-2" id="closeWizerd" data-dismiss="modal"
-                    aria-label="Close">Cancel</button>
+                    <i class="bi-chevron-left small"></i> Previous step
+                  </button>
+                  <!-- Footer -->
+                  <div class="d-sm-flex align-items-center justify-content-end">
+                    <button type="button" class="btn btn-white me-2" id="closeWizerd" data-dismiss="modal"
+                      aria-label="Close">Cancel</button>
 
-                  <div class="d-flex justify-content-end ">
-                    <button id="validationFormFinishBtn" type="submit" class="btn btn-primary me-2">Save
-                      changes</button>
+                    <div class="d-flex justify-content-end ">
+                      <button id="validationFormFinishBtn" type="submit" class="btn btn-primary me-2">Sign up</button>
 
+                    </div>
                   </div>
                 </div>
                 <!-- End Footer -->
@@ -1152,9 +1163,12 @@
   <script src="/assets/vendor/datatables.net-buttons/js/buttons.colVis.min.js"></script>
   <!-- Date Picker -->
   <script src="/assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
-
+  <!-- JS Implementing Plugins -->
+  <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
   <!-- Datatable Initlization -->
   <script src="/files/my-scripts/datatabel_initlization.js"></script>
+  <!-- Password Hashing SHA -->
+  <script src="/files/https-files/jsSHA-202-sha.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
     integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
   <!-- <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script> -->
@@ -1181,6 +1195,17 @@
 
 
   <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
+
+  <script>
+      (function () {
+        window.onload = function () {
+          // INITIALIZATION OF TOGGLE PASSWORD
+          // =======================================================
+          new HSTogglePassword('.js-toggle-password');
+        }
+      })()
+  </script>
+
   <!-- script -->
   <script>
 

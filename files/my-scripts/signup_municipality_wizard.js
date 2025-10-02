@@ -26,77 +26,77 @@ $(document).ready(function () {
 
 
 
-  $('#signUpForm').validate({
-    debug: true,
-    rules: {
-      signupFirstName: {
-        atLeastOneCharacter: true,
-        SomeSpecialCharactersAllowed: true,
-        minlength: 3,
-        onlyDigitsNotAllowed: true
+  // $('#signUpForm').validate({
+  //   debug: true,
+  //   rules: {
+  //     signupFirstName: {
+  //       atLeastOneCharacter: true,
+  //       SomeSpecialCharactersAllowed: true,
+  //       minlength: 3,
+  //       onlyDigitsNotAllowed: true
 
-      },
-      signupLastName: {
-        atLeastOneCharacter: true,
-        SomeSpecialCharactersAllowed: true,
-        minlength: 3,
-        onlyDigitsNotAllowed: true
+  //     },
+  //     signupLastName: {
+  //       atLeastOneCharacter: true,
+  //       SomeSpecialCharactersAllowed: true,
+  //       minlength: 3,
+  //       onlyDigitsNotAllowed: true
 
-      },
-      signupUserName: {
-        onlyDigitsNotAllowed: true,
-        atLeastOneCharacter: true,
-        SpecialCharactersAllowedWithNotSpace: true
+  //     },
+  //     signupUserName: {
+  //       onlyDigitsNotAllowed: true,
+  //       atLeastOneCharacter: true,
+  //       SpecialCharactersAllowedWithNotSpace: true
 
 
-      },
-      signupUserEmail: {
-        required: true,
-        email: true
-      },
-      signupUserPassword: {
-        strongPassword: true
-      },
-      signupUserRepeatPassword: {
-        equalTo: '#signupUserPassword'
-      },
-      signupUserOrgnization: {
-        atLeastOneCharacter: true,
-        SomeSpecialCharactersAllowed: true,
-        onlyDigitsNotAllowed: true
-      },
-      signupUserRole: {
-        required: true
-      }
+  //     },
+  //     signupUserEmail: {
+  //       required: true,
+  //       email: true
+  //     },
+  //     signupUserPassword: {
+  //       strongPassword: true
+  //     },
+  //     signupUserRepeatPassword: {
+  //       equalTo: '#signupUserPassword'
+  //     },
+  //     signupUserOrgnization: {
+  //       atLeastOneCharacter: true,
+  //       SomeSpecialCharactersAllowed: true,
+  //       onlyDigitsNotAllowed: true
+  //     },
+  //     signupUserRole: {
+  //       required: true
+  //     }
 
-    },
-    messages: {
-      // signupUserName: {
-      //   chractesDotHypenUnderscore: "Permitted special characters: '-', '_', '.'"
-      // }
-    },
-    errorClass: 'error invalid-feedback',
-    validClass: 'success',
-    errorElement: 'span',
-    highlight: function (element, errorClass, validClass) {
-      $(element)
-        .parents('div.control-group')
-        .addClass(errorClass)
-        .removeClass(validClass)
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element)
-        .parents('.error')
-        .removeClass(errorClass)
-        .addClass(validClass)
-    },
-    // the errorPlacement has to take the table layout into account
-    errorPlacement: function (error, element) {
-      if (element.is('#signupUserRole')) { error.appendTo(element.parent().parent()) } else {
-        error.appendTo(element.parent())
-      }
-    }
-  })
+  //   },
+  //   messages: {
+  //     // signupUserName: {
+  //     //   chractesDotHypenUnderscore: "Permitted special characters: '-', '_', '.'"
+  //     // }
+  //   },
+  //   errorClass: 'error invalid-feedback',
+  //   validClass: 'success',
+  //   errorElement: 'span',
+  //   highlight: function (element, errorClass, validClass) {
+  //     $(element)
+  //       .parents('div.control-group')
+  //       .addClass(errorClass)
+  //       .removeClass(validClass)
+  //   },
+  //   unhighlight: function (element, errorClass, validClass) {
+  //     $(element)
+  //       .parents('.error')
+  //       .removeClass(errorClass)
+  //       .addClass(validClass)
+  //   },
+  //   // the errorPlacement has to take the table layout into account
+  //   errorPlacement: function (error, element) {
+  //     if (element.is('#signupUserRole')) { error.appendTo(element.parent().parent()) } else {
+  //       error.appendTo(element.parent())
+  //     }
+  //   }
+  // })
 
 
 
@@ -170,21 +170,12 @@ $(document).ready(function () {
 })
 
 
-// Sign Up Form Submission
-$(document).ready(function () {
-  // Initialize the validation on the form
-  $('#signUpForm').validate(); // Ensure your form has this ID
-
- 
-});
 
 
 function singUpUserForMunicipality(wizardObj){
 
     // Validate the form
-    if (!$('#signUpForm').valid()) { // Use .valid() instead of .form()
-      return; // If validation fails, stop further execution
-    }
+  
 
     // Get form values
     const fname = $('#signupFirstName').val();
@@ -216,9 +207,9 @@ function singUpUserForMunicipality(wizardObj){
     }
 
     // Disable the button to prevent multiple submissions
-    $('#signupBtn').text('Signing Up...');
-    $('#signupBtn').attr('disabled', true);
-    $('#signupBtn').css('cursor', 'not-allowed');
+    $('#validationFormFinishBtn').text('Signing Up...');
+    $('#validationFormFinishBtn').attr('disabled', true);
+    $('#validationFormFinishBtn').css('cursor', 'not-allowed');
 
     let signupPayload = {
       // username: uname,
@@ -227,7 +218,8 @@ function singUpUserForMunicipality(wizardObj){
       first_name: fname,
       last_name: lname,
       organization: org,
-      role: 'user'
+      role: 'user',
+      muncipality_information:wizardObj
     };
 
 
@@ -268,9 +260,9 @@ function singUpUserForMunicipality(wizardObj){
       error: function (xhr, textStatus, errorThrown) {
         console.error("Signup error:", textStatus, errorThrown);
         $('#captchaerror').html(""); // Display a user-friendly error message
-        $('#signupBtn').text('Sign Up')
-        $('#signupBtn').attr('disabled', false)
-        $('#signupBtn').css('cursor', 'pointer')
+        $('#validationFormFinishBtn').text('Sign Up')
+        $('#validationFormFinishBtn').attr('disabled', false)
+        $('#validationFormFinishBtn').css('cursor', 'pointer')
         $('#captchaerror').html("");
         // 401 Organization already exists
         // 404 organization key not found
@@ -342,8 +334,8 @@ function singUpUserForMunicipality(wizardObj){
 
     // Function to reset button state after submission
     function resetButtonState() {
-      $('#signupBtn').text('Sign Up');
-      $('#signupBtn').attr('disabled', false);
-      $('#signupBtn').css('cursor', 'pointer');
+      $('#validationFormFinishBtn').text('Sign Up');
+      $('#validationFormFinishBtn').attr('disabled', false);
+      $('#validationFormFinishBtn').css('cursor', 'pointer');
     }
 }

@@ -33,6 +33,8 @@ const singinCodeConfirmation = 'tml/confirmation'
 
 // get complince and cloudapps
 const getCytexModuleAssetsAPI= 'cytex/module/assets'
+const getCytexFramWorksListAPI= 'cytex/frameworks/list'
+
 
 
 const logoutUserSessionAPI = "tml/logout";
