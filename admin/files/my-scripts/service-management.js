@@ -334,7 +334,7 @@ function getServiceManagementTableData(skip, page) {
     ? `<div class="form-check form-switch">
          <input class="form-check-input availability-toggle"
                 type="checkbox"
-                data-id="${item.bundle_id}"
+                data-id="${item.service_id}"
                 ${item.availability ? "checked" : ""}>
        </div>`
     : "--";
@@ -464,44 +464,80 @@ function exportServiceManagementDataTableData() {
 }
 // Availability Toogle
 $(document).on("change", ".availability-toggle", function () {
-    var checkbox = $(this);
-    var bundleId = checkbox.data("id");
-    var previousState = !checkbox.prop("checked"); // previous state
+  var checkbox = $(this);
+  var previousState = !checkbox.prop("checked"); // previous state
 
-    swal({
-        title: "Are you sure?",
-        text: "Do you want to change availability?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "Cancel",
-        closeOnConfirm: false,
-        closeOnCancel: true
-    },
-    function(isConfirm) {
-        if (isConfirm) {
-            // User clicked Yes -> API call
-            $.ajax({
-                url: "/updateAvailability", // replace with your API
-                method: "POST",
-                data: {
-                    bundle_id: bundleId,
-                    availability: checkbox.prop("checked")
-                },
-                success: function(response) {
-                    swal("Updated!", "Availability has been updated.", "success");
-                },
-                error: function() {
-                    swal("Error!", "Something went wrong.", "error");
-                    checkbox.prop("checked", previousState); // revert on error
-                }
-            });
-        } else {
-            // User clicked Cancel -> revert toggle
-            checkbox.prop("checked", previousState);
-        }
+  var serviceId = checkbox.data("id");
+  var url = "";
+  let payload;
+  let tableType = ""; // to decide later which datatable to reload
+
+  if (serviceId.startsWith("svc_")) {
+    // For svc_
+    url = "/tml/admin/service/available/false";
+    tableType = "service";
+    payload = JSON.stringify({
+      auth_token: authToken,
+      service_id: serviceId,
+      availability: checkbox.prop("checked"),
     });
+  } else if (serviceId.startsWith("bdl_")) {
+    // For bdl_
+    url = "/tml/admin/bundle/available/false";
+    tableType = "bundle";
+    payload = JSON.stringify({
+      auth_token: authToken,
+      bundle_id: serviceId,
+      availability: checkbox.prop("checked"),
+    });
+  }
+
+  swal(
+    {
+      title: "Are you sure?",
+      text: "Do you want to change availability?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Confirm",
+      cancelButtonText: "Cancel",
+    },
+    function (isConfirm) {
+      if (isConfirm) {
+        // User clicked Yes -> API call
+        $.ajax({
+          url: MAIN_API_PATH + url,
+          method: "POST",
+          data: payload,
+          contentType: "application/json",
+          dataType: "json",
+          success: function (response) {
+            showNotificationError("bg-green", null, null, null, null, null, UPDATE);
+            $("#cover-spin").show();
+
+            // Loader + DataTable refresh according to type
+            if (tableType === "service") {
+              showDataTableLoader("serviceManagementDataTable");
+              serviceManagementDataTableInit.clear().draw();
+              getServiceManagementTableData(10, 1);
+            } else if (tableType === "bundle") {
+              showDataTableLoader("createBundleDataTable");
+              createBundleDataTableInit.clear().draw();
+              getCreateBundleTableData(10, 1);
+            }
+          },
+          error: function () {
+            swal("Error!", "Something went wrong.", "error");
+            checkbox.prop("checked", previousState); // revert on error
+          },
+        });
+      } else {
+        // User clicked Cancel -> revert toggle
+        checkbox.prop("checked", previousState);
+      }
+    }
+  );
 });
+
 
 // End Availability
 
@@ -1493,7 +1529,7 @@ function getCreateBundleTableData(skip, page) {
         // Response data (IPs)
         response = data.message;
         ordersDataReceived = response.message;
-        localStorage.setItem("createBundleDataTableTotal", data.length);
+        localStorage.setItem("createBundleDataTableTotal", data.count);
         // If No IPs found
 
         // loop through response to add data in datatable
@@ -1543,10 +1579,8 @@ function getCreateBundleTableData(skip, page) {
              data-bundle='${JSON.stringify(bundle)}'>
        Edit
       </button>
-      <button class="btn btn-sm btn-outline-danger delete-bundle"
-              data-bundle-id="${bundle.bundle_id}">
-        Delete
-      </button>
+    <button class="btn btn-sm btn-outline-danger delete-bundle" data-bundle-id="${bundle.bundle_id}">Delete</button>
+
     </div>
   `;
 
@@ -1695,21 +1729,197 @@ $(document).on("click", ".edit-bundle", function () {
 $(document).on("click", ".delete-bundle", function () {
   let bundleId = $(this).data("bundle-id");
 
-  if (confirm("Are you sure you want to delete this bundle?")) {
-    fetch(`/api/bundles/${bundleId}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Bundle deleted successfully!");
-          getCreateBundleTableData(); // datatable reload
-        } else {
-          alert("Error deleting bundle!");
+  swal(
+    {
+      title: "Deleting Record",
+      text: "Are you sure you want to delete?",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Confirm",
+      cancelButtonText: "Cancel",
+    },
+    function (isConfirm) {
+      // let bundleId = this.dataset.bundleId;
+      if (isConfirm) {
+          $("#cover-spin").show();
+
+          const apiBody = JSON.stringify({
+            auth_token: authToken,
+            bundle_id: bundleId,
+          });
+          // return 0
+          $.ajax({
+            url: MAIN_API_PATH + 'tml/admin/delete/bundle',
+            method: POST,
+            contentType: Content_Type,
+            dataType: "json",
+            data: apiBody,
+            statusCode: {
+              200: function (data) {
+                $("#cover-spin").hide(0);
+
+                showNotificationError(
+                  "bg-green",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  DELETE
+                );
+
+                teamMembersAPIResponse = [];
+                showDataTableLoader("createBundleDataTable");
+                createBundleDataTableInit.clear().draw();
+                getCreateBundleTableData(10, 1);
+              },
+              204: function () {
+                $("#cover-spin").hide(0);
+              },
+            },
+            error: function (xhr, status, error) {
+              $("#cover-spin").hide();
+              if (xhr.status === 400) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  invalidRequest400Error
+                );
+              } else if (xhr.status === 401) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  unauthorizedRequest401Error
+                );
+              } else if (xhr.status === 404) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  notFound404Error
+                );
+              } else if (xhr.status === 409) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  alreadyExist409Error
+                );
+              } else if (xhr.status === 503) {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              } else if (xhr.status === 408) {
+                swal(
+                  {
+                    title: " ",
+                    text: sessionExpired408Error,
+                    type: "info",
+                    showCancelButton: false,
+                    confirmButtonText: "Logout",
+                  },
+                  function (isConfirm) {
+                    if (isConfirm) {
+                      localStorage.clear();
+                      window.location.href = redirectToSignInPage408;
+                    }
+                  }
+                );
+              } else if (xhr.status === 410) {
+                $("#cover-spin").hide();
+
+                $.ajax({
+                  url: MAIN_API_PATH + getGmtAPI,
+                  method: POST,
+                  contentType: Content_Type,
+                  dataType: "json",
+                  success: function (data, textStatus, xhr) {
+                    const encrypt = new JSEncrypt();
+                    encrypt.setPublicKey(sitePublicKey);
+                    const dateString = String(pageName + data.unixtime);
+                    securityKeyEncrypted = encrypt.encrypt(dateString);
+                    SecurityKeyTime = false;
+                    editPolicyAndSessions();
+                  },
+                  error: function (xhr, status, error) {
+                    $.getJSON(worldTimeAPI, function (data) {
+                      const encrypt = new JSEncrypt();
+                      encrypt.setPublicKey(sitePublicKey);
+                      const dateString = String(pageName + data.unixtime);
+                      securityKeyEncrypted = encrypt.encrypt(dateString);
+                      SecurityKeyTime = false;
+                      editPolicyAndSessions();
+                    });
+                  },
+                });
+              } else {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              }
+            }
         }
-      });
-  }
-});
+      );
+      }
+    });
+  });
+// $(document).on("click", ".delete-bundle", function () {
+//   let bundleId = $(this).data("bundle-id");
+//  swal(
+//     {
+//       title: "Are you sure?",
+//       text: "Do you want to delete this bundle?",
+//       type: "warning",
+//       showCancelButton: true,
+//       confirmButtonText: 'Confirm',
+//       cancelButtonText: 'Cancel'
+//     },
+//     function (isConfirm) {
+//       if (isConfirm) {
+
+//     fetch( MAIN_API_PATH + 'tml/admin/delete/bundle', {
+//       method: "DELETE",
+//     })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         if (data.success) {
+//           // alert("Bundle deleted successfully!");
+//           showNotificationError("bg-green", null, null, null, null, null, UPDATE);
+//           createBundleDataTableInit.clear().draw();
+//           getCreateBundleTableData(10, 1);
+//         } else {
+//           alert("Error deleting bundle!");
+//         }
+//       });
+//   }
+// });
+// });
 // function to export data from datatable
 function exportCreateBundleDataTableData() {
   console.log("exportcreateBundleDataTableData called");
