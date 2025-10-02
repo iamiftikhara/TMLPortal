@@ -736,11 +736,7 @@ function setMuncipilitiesData() {
 
 
 
-  const selectedCloudWorkLoads = $("#muncipalityWizerdFormCloudWorkloads").val();
-  const cloud_workloads_in_use = selectedCloudWorkLoads.map(id => {
-    const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.id === id);
-    return found ? found.title : id; // fallback to id if no match
-  });
+  
 
 
 
@@ -768,14 +764,22 @@ function setMuncipilitiesData() {
   const selectedCloudApps = $("#muncipalityWizerdFormCloudApplication").val();
   const cloud_apps_in_use = selectedCloudApps.map(id => {
     const found = muncipalityWizerdFormCloudApplicationData.find(item => item.id === id);
-    return found ? found.title : id; // fallback to id if no match
+    return found ? found.id : id; // fallback to id if no match
+  });
+
+  const selectedCloudWorkLoads = $("#muncipalityWizerdFormCloudWorkloads").val();
+  const cloud_workloads_in_use = selectedCloudWorkLoads.map(id => {
+    const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.id === id);
+    return found ? found.id : id; // fallback to id if no match
   });
 
   const selectedCompliancesInUse = $("#muncipalityWizerdFormCompliancesInUse").val();
   const compliances_in_use = selectedCompliancesInUse.map(id => {
     const found = muncipalityWizerdFormCompliancesInUse.find(item => item.id === id);
-    return found ? found.title : id; // fallback to id if no match
+    return found ? found.id : id; // fallback to id if no match
   });
+
+
 
   // 
 
@@ -1213,7 +1217,7 @@ function getCompliancesData() {
         function formatFrameworks(data) {
           return data.map(item => ({
             title: item.framework,
-            id: item.value
+            id: item.c_of
           }));
         }
 
