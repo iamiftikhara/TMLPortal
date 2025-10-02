@@ -22,6 +22,7 @@ let enrollServicesSerachObj = {};
 let checkedServicesToEnrollList = [];
 const storedBundle = localStorage.getItem("editBundle");
 const submitSelector = "button[form='enrollServicesForm'][type='submit']";
+let originalBundle = null; // to hold initial values
 
 $(document).ready(function () {
   $("#cover-spin").show();
@@ -33,6 +34,13 @@ $(document).ready(function () {
     // Mark as edit
     isEdit = true;
     editingBundleId = bundle.bundle_id;
+
+     // Store original values for comparison
+    originalBundle = {
+      title: bundle.title,
+      description: bundle.description,
+      services: bundle.list_of_services || []
+    };
 
     // Fill fields
     $("#enrollServicesFormTitle").val(bundle.title);
@@ -46,21 +54,46 @@ $(document).ready(function () {
     $(submitSelector).prop("disabled", false);
   }
     getServiceManagementTableData();
-
 });
 
-// Enable on any change inside the form (delegated so it works for dynamic fields)
-  $("#enrollServicesForm").on("input change", "input, textarea, select", function () {
-    $(submitSelector).prop("disabled", false);
-  });
+// Utility to compare arrays
+function areArraysEqual(arr1, arr2) {
+  if (!arr1 || !arr2) return false;
+  if (arr1.length !== arr2.length) return false;
+  return arr1.every(val => arr2.includes(val));
+}
 
-  // Also enable when user clicks a service card (select/unselect)
-  $(document).on("click", ".service-card", function () {
-    // only enable if card is not disabled
-    if (!$(this).hasClass("disabled-card")) {
-      $(submitSelector).prop("disabled", false);
+// Enable/Disable Save Button depending on changes
+function enableDisableBundleButton() {
+  if (!originalBundle) {
+    $(submitSelector).prop("disabled", false);
+    return;
+  }
+
+  const currentTitle = $("#enrollServicesFormTitle").val();
+  const currentDescription = $("#enrollServicesFormDescription").val();
+
+  // ✅ use the updated JS array instead of reading hidden input
+  const currentServices = selectedServices;
+
+  if (
+    currentTitle === originalBundle.title &&
+    currentDescription === originalBundle.description &&
+    areArraysEqual(currentServices, originalBundle.services)
+  ) {
+    $(submitSelector).prop("disabled", true).parent().css("cursor", "no-drop");
+  } else {
+    $(submitSelector).prop("disabled", false).parent().css("cursor", "pointer");
+  }
+}
+
+// Trigger validation whenever inputs change
+$("#enrollServicesForm").on("input change", "input, textarea, select", function () {
+    if(isEdit == true) {
+      enableDisableBundleButton();
     }
-  });
+});
+
 
 // API URLs
 const API_SET_BUNDLE = "/tml/admin/set/bundle";
@@ -265,19 +298,21 @@ $(document).on("click", ".service-card", function () {
     }
   }
 
-  // hidden field update
- $("#selectedServiceIds").val(
-  selectedServices.length ? selectedServices.join(",") : ""
-);
-
-
-  // console.log("Selected services:", selectedServices); // 👈 debug
+  // hidden field update (for form submission)
+  $("#selectedServiceIds").val(
+    selectedServices.length ? selectedServices.join(",") : ""
+  );
 
   // validation trigger
   $("#selectedServiceIds").valid();
 
   // update total cost
   updateTotalCost();
+
+  // Now run enable/disable logic
+  if(isEdit == true) {
+    enableDisableBundleButton();
+  }
 });
 
 // ------------ VALIDATION ------------------

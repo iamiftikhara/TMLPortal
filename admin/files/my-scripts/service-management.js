@@ -262,6 +262,11 @@ function searchObjectCreation(search) {
   searchOject = search;
 }
 
+function openCreateBundleModal() {
+  localStorage.removeItem("editBundle");
+  window.location.href = "create-bundle.html";
+}
+
 // Main API Call function for datatable
 function getServiceManagementTableData(skip, page) {
   let data = [
