@@ -31,6 +31,10 @@ const signinUDAPI = 'signin/ud'
 const singinCodeConfirmation = 'tml/confirmation'
 
 
+// get complince and cloudapps
+const getCytexModuleAssetsAPI= 'cytex/module/assets'
+
+
 const logoutUserSessionAPI = "tml/logout";
 
 // Forgot password

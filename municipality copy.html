@@ -309,19 +309,6 @@
                 </a>
               </li>
               <!-- end third step -->
-
-              <!-- start fourth step -->
-              <li class="step-item">
-                <a class="step-content-wrapper" href="javascript:;" data-hs-step-form-next-options='{
-                                        "targetSelector": "#municipalityWizardSignUpForm"
-                                      }'>
-                  <span class="step-icon step-icon-soft-dark">4</span>
-                  <div class="step-content">
-                    <span class="step-title">Sign Up</span>
-                  </div>
-                </a>
-              </li>
-              <!-- end fourth step -->
             </ul>
             <!-- End Step -->
 
@@ -342,7 +329,7 @@
                         <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:</label>
                         <input type="text" class="form-control" id="municipalityWizerdFormName" maxlength="25"
                           name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example"
-                          required>
+                          required disabled>
                       </div>
                       <!-- End Form -->
 
@@ -409,45 +396,21 @@
 
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
-                        <label for="municipalityWizerdFormContactFirstName" class="form-label">First Name:<span
-                        class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
-                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
-                        <ul>
-                        <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
-                        <li>Maximum length should be 50 characters.</li>
-                        <li>Minimum length should be 3 characters.</li>
-                        <li>Only digits are not allowed.</li>
-                        <li>Whitespaces are allowed.</li>
-                        </ul>"></i>
-                        <input type="text" class="form-control" id="municipalityWizerdFormContactFirstName"
-                          name="municipalityWizerdFormContactFirstName" placeholder="Enter your name"
+                        <label for="municipalityWizerdFormContactName" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="municipalityWizerdFormContactName"
+                          name="municipalityWizerdFormContactName" placeholder="Enter your name"
                           aria-label="Enter your name" required maxlength="25">
                       </div>
                       <!-- End Form -->
 
                       <!-- Form -->
-                      <div class="col-12 col-md-6 pe-4">
-                        <label for="municipalityWizerdFormContactLastName" class="form-label">Last Name:<span
-                        class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
-                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
-                        <ul>
-                        <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
-                        <li>Maximum length should be 50 characters.</li>
-                        <li>Minimum length should be 3 characters.</li>
-                        <li>Only digits are not allowed.</li>
-                        <li>Whitespaces are allowed.</li>
-                        </ul>"></i>
-                        <input type="text" class="form-control" id="municipalityWizerdFormContactLastName"
-                          name="municipalityWizerdFormContactLastName" placeholder="Enter your name"
-                          aria-label="Enter your name" required maxlength="25">
+                      <div class="col-12 col-md-6 ps-4">
+                        <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
+                          name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com"
+                          required>
                       </div>
                       <!-- End Form -->
-
-
 
                     </div>
 
@@ -456,15 +419,6 @@
 
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
-                        <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
-                          name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com"
-                          required>
-                      </div>
-                      <!-- End Form -->
-
-                      <!-- Form -->
-                      <div class="col-12 col-md-6 ps-4">
                         <label for="muncipalityWizerdFormPhone" class="form-label">Phone:</label>
                         <input type="text" class="form-control" id="muncipalityWizerdFormPhone"
                           name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000"
@@ -733,16 +687,15 @@
 
                       <!-- start size -->
                       <div class="col-12 col-md-6 ps-4" id="">
-                        <label class=" form-label" for="muncipalityWizerdFormCompliancesInUse">Compliances in
-                          use:</label>
+                        <label class=" form-label" for="muncipalityWizerdFormCompliancesInUse">Compliances in use:</label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                               "searchInDropdown": false,
                               "hideSearch": true,
                               "placeholder": "Select"
-                              }' id="muncipalityWizerdFormCompliancesInUse"
-                            name="muncipalityWizerdFormCompliancesInUse" required>
+                              }' id="muncipalityWizerdFormCompliancesInUse" name="muncipalityWizerdFormCompliancesInUse"
+                            required>
                             <option class="p-2" value="">Select</option>
                           </select>
                         </div>
@@ -881,215 +834,6 @@
                   <i class="bi-chevron-left small"></i> Previous step
                 </button>
                 <!-- Footer -->
-                <div class="d-flex align-items-center justify-content-end">
-
-                  <div class="">
-                    <button type="button" id="" class="btn btn-primary formNextButton" data-hs-step-form-next-options='{
-                                "targetSelector": "#municipalityWizardSignUpForm"
-                              }'>
-                      Next <i class="bi-chevron-right small"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- End Footer -->
-              </div>
-              <!-- end Technology Environment -->
-
-
-
-              <!-- start Sign UP -->
-              <div id="municipalityWizardSignUpForm" style="display: none;">
-
-
-                <form class="js-validate needs-validation" novalidate id="signUpForm">
-                  <!-- <div class="text-center">
-                <div class="mb-2">
-                  <img class="zi-2" src="./assets/images/logo.png" alt="Image Description" style="width: 12rem;">
-                </div>
-              </div> -->
-                  <div class="mb-2 d-flex justify-content-between singinFormLogoDiv" id="singinFormLogoDiv"></div>
-                  <!-- Input classes for future use -->
-                  <!-- shadow-none transparent-input border-0 border-bottom -->
-                  <!-- First & last name -->
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- Form -->
-                      <div class="mb-2">
-                        <label class="form-label" for="signupFirstName">First name <span
-                            class="text-danger">*</span></label>
-                        <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                          data-bs-placement="right" data-bs-html="true" title="
-                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
-                        <ul>
-                        <li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
-                        <li>Maximum length should be 50 characters.</li>
-                        <li>Minimum length should be 3 characters.</li>
-                        <li>Only digits are not allowed.</li>
-                        <li>Whitespaces are allowed.</li>
-                        </ul>"></i>
-                        <input type="text" class="form-control form-control-lg ps-1" name="signupFirstName"
-                          id="signupFirstName" placeholder="Charlie" minlength="3" maxlength="50" aria-label="Charlie"
-                          required autocomplete="off">
-                      </div>
-                      <!-- End Form -->
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- Form -->
-                      <div class="mb-2">
-                        <label class="form-label" for="signupLastName">Last name <span
-                            class="text-danger">*</span></label>
-                        <i class="bi-question-circle text-body ms-1" id="LastNameToolTip" data-bs-toggle="tooltip"
-                          data-bs-placement="right" data-bs-html="true" title="
-                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
-                        <li>Maximum length should be 50 characters.</li>
-                        <li>Minimum length should be 3 characters.</li>
-                        <li>Only digits are not allowed.</li>
-                        <li>Whitespaces are allowed.</li></ul>"></i>
-                        <input type="text" id="signupLastName" name="signupLastName"
-                          class="form-control form-control-lg ps-1" minlength="3" maxlength="50" placeholder="Boone"
-                          aria-label="Boone" required autocomplete="off">
-                      </div>
-                      <!-- End Form -->
-                    </div>
-                  </div>
-                  <!-- User name -->
-                  <div class="mb-2 d-none">
-                    <label class="form-label" for="signupUserName">Username <span class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
-                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: (.), (-), ( _ ).</li>
-                    <li>Maximum length should be 50 characters.</li>
-                    <li>Minimum length should be 3 characters.</li>
-                    <li>Whitespaces are not allowed.</li></ul>"></i>
-                    <input type="text" class="form-control form-control-lg  ps-1" name="signupUserName"
-                      id="signupUserName" tabindex="1" placeholder="Charlie" minlength="3" maxlength="50"
-                      aria-label="Name *" required autocomplete="off">
-                  </div>
-
-                  <!-- User email -->
-                  <div class="mb-2">
-                    <label class="form-label" for="signupUserEmail">Email <span class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
-                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
-                    <ul>
-                    <li>Email format: user@domain.com.</li>
-                    <li>We are ofcourse supporting all extensions <br> (.org, .com, .io etc).</li>
-                    </ul>"></i>
-                    <input type="email" class="form-control form-control-lg  ps-1" maxlength="50" name="signupUserEmail"
-                      id="signupUserEmail" tabindex="1" placeholder="user@domain.com" aria-label="usere@domain.com"
-                      required autocomplete="off">
-                  </div>
-                  <!-- start size -->
-                  <div class="mb-3 d-none" id="">
-                    <label class=" form-label" for="signupUserRole">Role:</label>
-                    <!-- Select -->
-                    <div class="tom-select-custom" style="cursor: pointer;">
-                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
-                              "searchInDropdown": false,
-                          "hideSearch": true,
-                          "placeholder": "Select"
-                          }' id="signupUserRole" name="signupUserRole">
-                        <option class="p-2" value="">Select</option>
-                        <option class="p-2" value="Admin">Admin</option>
-                        <option class="p-2" value="User">User</option>
-                      </select>
-                    </div>
-                    <!-- End Select -->
-                  </div>
-                  <!-- end size -->
-                  <!-- Orgnization Name -->
-                  <div class="mb-3">
-                    <label class="form-label" for="signupUserOrgnization">Municipality name <span
-                        class="text-danger">*</span></label>
-                    <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                      data-bs-placement="right" data-bs-html="true" title="
-                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Permitted special characters: ( - ), ( _ ), ( . ), ( ' ).</li>
-                    <li>Maximum length should be 50 characters.</li>
-                    <li>Minimum length should be 3 characters.</li>
-                    <li>Only digits are not allowed.</li>
-                    <li>Whitespaces are allowed.</li></ul>"></i>
-                    <input type="text" class="form-control form-control-lg  ps-1" name="signupUserOrgnization"
-                      id="signupUserOrgnization" tabindex="1" minlength="3" maxlength="50"
-                      placeholder="Enter municipality name" required autocomplete="off">
-                  </div>
-                  <!-- User password -->
-                  <div class="row mb-3">
-                    <div class="col-sm-6">
-                      <label class="form-label" for="signupUserPassword">Password <span
-                          class="text-danger">*</span></label>
-                      <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-html="true" title="
-                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
-                        <ul>
-                        <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
-                        </ul>"></i>
-                      <!-- passowerd eye -->
-                      <a id="changePassTarget"
-                        class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
-                        href="javascript:;">
-                        <i id="changePassIcon" class="bi-eye"></i>
-                      </a>
-                      <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
-                        name="signupUserPassword" id="signupUserPassword" placeholder="Enter a strong password"
-                        aria-label="Password *" required minlength="8" maxlength="50" data-hs-toggle-password-options='{
-                      "target": "#changePassTarget",
-                      "defaultClass": "bi-eye-slash",
-                      "showClass": "bi-eye",
-                      "classChangeTarget": "#changePassIcon"
-                    }' autocomplete="off">
-                    </div>
-                    <!-- Repeat password -->
-                    <div class="col-sm-6">
-                      <label class="form-label" for="signupUserRepeatPassword">Confirm password <span
-                          class="text-danger">*</span></label>
-                      <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-html="true"
-                        title="
-                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
-                      <!-- passowerd eye -->
-                      <a id="changeRepeatPassTarget"
-                        class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
-                        href="javascript:;">
-                        <i id="changeRepeatPassIcon" class="bi-eye"></i>
-                      </a>
-                      <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
-                        name="signupUserRepeatPassword" id="signupUserRepeatPassword" placeholder="Confirm password"
-                        aria-label="Confirm Password " maxlength="50" required data-hs-toggle-password-options='{
-                      "target": "#changeRepeatPassTarget",
-                      "defaultClass": "bi-eye-slash",
-                      "showClass": "bi-eye",
-                      "classChangeTarget": "#changeRepeatPassIcon"
-                    }' autocomplete="off">
-                    </div>
-                  </div>
-                  <!-- Terms and Conditons -->
-                  <div class="mb-2">
-                    <p>By signing up, you agree to our <a target="_blank" class="text-decoration-underline"
-                        href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/terms-of-service.pdf">Terms</a> and <a
-                        class="text-decoration-underline"
-                        href="https://cytex.nyc3.digitaloceanspaces.com/web_docs/privacy-policy.pdf"
-                        target="_blank">Privacy
-                        policy</a>.</p>
-                  </div>
-                  <div class="mb-2" id="recaptchaDisable">
-                    <div class="g-recaptcha" data-sitekey="6LdUMv4ZAAAAAO3FZVUyZ4KfQw7XsNjl2CUIldYL"></div>
-                    <div class="text-danger">
-                      <span id="captchaerror"></span>
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg" id="signupBtn">Sign up</button>
-                  </div>
-                </form>
-
-                <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2" data-hs-step-form-prev-options='{
-                      "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
-                    }'>
-                  <i class="bi-chevron-left small"></i> Previous step
-                </button>
-                <!-- Footer -->
                 <div class="d-sm-flex align-items-center justify-content-end">
                   <button type="button" class="btn btn-white me-2" id="closeWizerd" data-dismiss="modal"
                     aria-label="Close">Cancel</button>
@@ -1102,7 +846,7 @@
                 </div>
                 <!-- End Footer -->
               </div>
-              <!-- end Sign UP -->
+              <!-- end Technology Environment -->
 
             </div>
             <!-- End Content Step Form -->
@@ -1112,15 +856,372 @@
         </div>
       </div>
 
+      <div id="showMuncipilatiyDetaisl" class="mb-4 d-none">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center d-none"
+            id="muncipalityInformationHeader">
+            <h4 class="card-header-title mb-2 mb-sm-0 d-flex ">Information</h4>
+            <button class="btn btn-sm btn-outline-danger" id="editWizardBtn">
+              <i class="bi bi-pencil"></i> Edit
+            </button>
+          </div>
+          <div class="card-body">
 
 
 
 
-    </div>
+            <!-- Start Loader -->
+            <div class=" d-none" id="showMuncipilatiyDetaislLoader">
+              <div class="d-flex justify-content-center p-5">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+            <!-- End Loader -->
+
+            <!-- Start Error Div -->
+            <div class="text-center d-none" id="showMuncipilatiyDetaislErrorTextDiv">
+              <img class="mb-4" src="files/images/logo/logo.png" alt="Image Description"
+                style="width: 10rem; opacity:0.3">
+              <p class="mb-0" id="showMuncipilatiyDetaislErrorText">Error</p>
+            </div>
+            <!-- End Error Div -->
+
+            <!-- Start Main Data Div -->
+
+            <div id="showMuncipilatiyDetaislMainDiv" class="d-none"></div>
+
+            <!-- End Main Data Div -->
+
+
+          </div>
+        </div>
 
 
 
-    <!-- End Content -->
+        <!-- ***************************** End Muncipility Details *********************************** -->
+
+
+        <div id="mainContentInnerDataToShow" class="d-none">
+
+
+
+
+
+          <!-- start data table -->
+          <div id="ordersDataTableContainer" class="mt-4 d-none"></div>
+          <!-- end data table -->
+
+          <!-- start details div -->
+
+          <div id="orderDetailsContainer" class="d-none mt-4">
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-header-title">Order Details</h3>
+              </div>
+
+              <div class="card-body">
+
+                <div class="col-md-6 mb-4 mb-md-0">
+                  <h5>Order ID: <span class="fw-normal" id="orderDetailsOrderId"></span></h5>
+                  <h4>Service: <span class="fw-normal" id="orderDetailsService"></span></h4>
+                  <h5>Date: <span class="fw-normal" id="orderDetailsOrderDate"></span></h5>
+                  <h5>Payment Status: <span class="fw-normal" id="orderDetailsOrderStatus"></span></h5>
+                </div>
+
+
+
+              </div>
+            </div>
+
+
+
+            <!-- start order payment with card -->
+            <div class="card mt-4">
+              <div class="card-header">
+                <h3 class="card-header-title">Order Payment</h3>
+              </div>
+
+              <div class="card-body">
+
+                <!-- start credit card selection -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
+                  <div class="col-12 col-md-6 pe-0 pe-md-3">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                          <i class="bi-credit-card"></i>
+                        </div>
+                        <input type="text" class="form-control ps-3" id="paymentMethodCard"
+                          placeholder="Pay with Card (Stripe)" aria-label="Pay with Card (Stripe)"
+                          aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+
+                  <div class="col-12 col-md-6 pe-0 ps-md-3">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <div class="input-group-append input-group-text" id="inputGroupLightEmailOptionalAddOn">
+                          <i class="bi-paypal"></i>
+                        </div>
+                        <input type="text" class="form-control ps-3" id="paymentMethodPaypal"
+                          placeholder="Pay with PayPal" aria-label="Pay with PayPal"
+                          aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- end credit card selection -->
+
+                <!-- start card holder details -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-column">
+                  <div class="col-12 col-md-12 pe-0">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <input type="text" class="form-control" id="cardHolderName" placeholder="Card Holder Name"
+                          aria-label="Card Holder Name" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+
+                  <div class="col-12 col-md-12 pe-0">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 2345 XXXX"
+                          aria-label="1234 5678 2345 XXXX" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+
+                  <div class="col-12 col-md-12 pe-0">
+                    <!-- Input Group -->
+                    <div class="mb-4">
+                      <div class="input-group input-group-merge ">
+                        <input type="text" class="form-control" id="otpInput" placeholder="Enter OTP"
+                          aria-label="Enter OTP" aria-describedby="inputGroupLightEmailOptionalAddOn">
+                      </div>
+                    </div>
+                    <!-- End Input Group -->
+                  </div>
+                </div>
+                <!-- end card holder details -->
+
+                <!-- start credit card expiry date -->
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-column flex-md-row">
+                  <div class="col-12 col-md-6 pe-0 pe-md-3">
+                    <!-- Flatpickr -->
+                    <label class="input-label">Issue date</label>
+                    <input style="cursor: pointer !important;" type="text" id="issueDateOfCard" name="issueDateOfCard"
+                      required class="form-control flatpickr-custom w-25 bg-white ps-1 cursor-pointer"
+                      placeholder="Select date" data-hs-flatpickr-options='{
+                                                "dateFormat": "Y-m-d"
+                                                }'>
+                    <!-- End Flatpickr -->
+                  </div>
+
+                  <div class="col-12 col-md-6 pe-0 ps-md-3">
+                    <!-- Flatpickr -->
+                    <label class="input-label">Due date</label>
+                    <input style="cursor: pointer !important;" disabled type="text" id="dueDateOfCard"
+                      name="dueDateOfCard" required class="form-control flatpickr-custom w-25 ps-1 cursor-pointer"
+                      placeholder="Select date" data-hs-flatpickr-options='{
+                                            "dateFormat": "Y-m-d"
+                                            }'>
+                    <!-- End Flatpickr -->
+                  </div>
+                </div>
+                <!-- end credit card expiry date -->
+
+
+              </div>
+
+              <!-- end details div -->
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ***************************** End Muncipility Details *********************************** -->
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="companyDetailsFormModal" tabindex="-1" role="dialog"
+        aria-labelledby="companyDetailsFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="companyDetailsFormModalLabel">Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- create inputs and other types according to this
+             Name of Municipality
+              Population size
+              Associated County (if any)
+              Point of Contact (Email, Phone)
+              County Website/URL
+              Municipality Objectives / Key Priorities
+              List of Departments under their purview
+              Total number of employees
+              Number of IT employees -->
+              <form>
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="muncipalityNameCompanyDetails" class="form-label">Name of Municipality:</label>
+                  <input type="text" class="form-control" id="muncipalityNameCompanyDetails"
+                    name="muncipalityNameCompanyDetails" placeholder="City of Example" aria-label="City of Example">
+                </div>
+                <!-- End Form -->
+
+                <!-- start size -->
+                <div class="col-sm-12  mb-4" id="populationSizeDiv">
+                  <label class=" form-label" for="populationSizeCompanyDetails">Population Size:</label>
+                  <!-- Select -->
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="populationSizeCompanyDetails" name="populationSizeCompanyDetails">
+                      <option class="p-2" value="">Select</option>
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+                <!-- end size -->
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="associatedCountyProfileCompanyDetails" class="form-label">Associated County (if
+                    any):</label>
+                  <input type="text" class="form-control" id="associatedCountyProfileCompanyDetails"
+                    name="associatedCountyProfileCompanyDetails" placeholder="Example County"
+                    aria-label="Example County">
+                </div>
+                <!-- End Form -->
+
+
+                <div class="d-flex">
+                  <!-- Form -->
+                  <div class="mb-4 col-6 pe-2">
+                    <label for="emailCompanyDetails" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="emailCompanyDetails" name="emailCompanyDetails"
+                      placeholder="john@example.com" aria-label="john@example.com">
+                  </div>
+                  <!-- End Form -->
+
+
+                  <!-- Form -->
+                  <div class="mb-4 col-6 ps-2">
+                    <label for="phoneCompanyDetails" class="form-label">Phone:</label>
+                    <input type="text" class="form-control" id="phoneCompanyDetails" name="phoneCompanyDetails"
+                      placeholder="+1 (123) 456 0000" aria-label="+1 (123) 456 0000">
+                  </div>
+                  <!-- End Form -->
+                </div>
+
+
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="countryWebsiteURLCompanyDetails" class="form-label">County Website/URL:</label>
+                  <input type="text" class="form-control" id="countryWebsiteURLCompanyDetails"
+                    name="countryWebsiteURLCompanyDetails" placeholder="https://www.example.com"
+                    aria-label="https://www.example.com">
+                </div>
+                <!-- End Form -->
+
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="municipalityObjectivesCompanyDetails" class="form-label">Municipality Objectives
+                    / Key
+                    Priorities:</label>
+                  <input type="text" class="form-control" id="municipalityObjectivesCompanyDetails"
+                    name="municipalityObjectivesCompanyDetails" placeholder="obj 1, obj 2, obj 3,..."
+                    aria-label="obj 1, obj 2, obj 3,...">
+                </div>
+                <!-- End Form -->
+
+
+                <!-- Form -->
+                <div class="mb-4">
+                  <label for="listOfDepartmentsUnderCompanyDetails" class="form-label">List of Departments
+                    under their
+                    purview:</label>
+                  <input type="text" class="form-control" id="listOfDepartmentsUnderCompanyDetails"
+                    name="listOfDepartmentsUnderCompanyDetails" placeholder="dept 1, dept 2, dept 3,..."
+                    aria-label="dept 1, dept 2, dept 3,...">
+                </div>
+                <!-- End Form -->
+
+
+                <div class="col-12  mb-4">
+                  <label class=" form-label" for="numberOfEmployeesSelect">Number of Employees</label>
+                  <!-- Select -->
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                                          "searchInDropdown": false,
+                                      "hideSearch": true,
+                                      "placeholder": "Select"
+                                      }' id="numberOfEmployeesSelect" name="numberOfEmployeesSelect">
+                      <option class="p-2" value="">Select</option>
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+
+
+                <div class="col-12  mb-4">
+                  <label class=" form-label" for="numberOfITEmployeesSelect">Number of IT Employees</label>
+                  <!-- Select -->
+                  <div class="tom-select-custom" style="cursor: pointer;">
+                    <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                                          "searchInDropdown": false,
+                                      "hideSearch": true,
+                                      "placeholder": "Select"
+                                      }' id="numberOfITEmployeesSelect" name="numberOfITEmployeesSelect">
+                      <option class="p-2" value="">Select</option>
+                    </select>
+                  </div>
+                  <!-- End Select -->
+                </div>
+
+
+
+
+              </form>
+
+
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- End Content -->
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
@@ -1155,8 +1256,7 @@
 
   <!-- Datatable Initlization -->
   <script src="/files/my-scripts/datatabel_initlization.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
-    integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+
   <!-- <script src="/assets/vendor/tom-select/dist/js/tom-select.complete.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"
     integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb"
@@ -1176,8 +1276,7 @@
 
   <!-- page js -->
   <script src="/files/my-scripts/municipality.js"></script>
-  <script src="/files/my-scripts/signup_municipality_wizard.js"></script>
-
+  <script src="/files/table-config/index-table-confg.js"></script>
 
 
   <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
