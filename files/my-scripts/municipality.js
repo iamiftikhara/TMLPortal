@@ -30,7 +30,7 @@ let muncipalityWizerdFormCloudApplicationInit,
 let muncipalityWizerdFormCloudWorkloadsInit,
   muncipalityWizerdFormNumberOfConnectedSitesInit;
 
-
+// municipality WizerdForm veriables
 let filterSizeData;
 let numberOfEmployeesData;
 let numberOfITEmployeesData;
