@@ -998,9 +998,7 @@ function attachServiceManagementActions() {
   });
 }
 
-$(
-  "#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, #serviceManagementDetailsModal textarea"
-).on("input change", function () {
+$("#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, #serviceManagementDetailsModal textarea").on("input change", function () {
   const original = $("#serviceManagementDetailsModal").data("original-values");
   const serviceId = $("#serviceManagementDetailsModal").data("service-id");
 
