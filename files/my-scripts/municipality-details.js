@@ -1793,7 +1793,10 @@ function getMuncipilitiesDataForWizard() {
         $("#municipalityHelpWebsite").text("Provide the official website URL");
 
         // ----------------- Populate Contact Info -----------------
-        $("#municipalityWizerdFormContactName").val(apiData.primary_contact_name || "");
+        $("#municipalityWizerdFormContactFirstName").val(apiData.primary_contact_first_name || "");
+        $("#municipalityHelpContactName").text("Enter the name of the primary contact");
+
+        $("#municipalityWizerdFormContactLastName").val(apiData.primary_contact_last_name || "");
         $("#municipalityHelpContactName").text("Enter the name of the primary contact");
 
         $("#muncipalityWizerdFormEmail").val(apiData.primary_contact_email || "");
