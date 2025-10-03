@@ -46,7 +46,8 @@ $(document).ready(function () {
       }
     },
     messages: {
-      securityOldPassword: "Old password is required",
+      securityOldPassword: 
+      { required : "Old password is required", },
       securityNewPassword: {
         required: "New password is required"
       },

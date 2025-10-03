@@ -310,13 +310,13 @@
                     <h3 class="card-header-title">Change Password</h3>
                   </div>
                   <div class="card-body">
-                    <form>
+                    <form id="changePasswordForm">
                       <div class="row">
                               <!-- Form -->
                       <div class="mb-3 col-4">
                         <label for="securityOldPassword" class="form-label">Old Password:</label>
                         <input type="password" class="form-control " id="securityOldPassword"
-                          placeholder="Enter old password" name="securityOldPassword">
+                          placeholder="Enter old password" name="securityOldPassword" required>
                       </div>
                       <!-- End Form -->
 
@@ -324,7 +324,7 @@
                       <div class="mb-3 col-4">
                         <label for="securityNewPassword" class="form-label">New Password:</label>
                         <input type="password" class="form-control " id="securityNewPassword"
-                          placeholder="Enter new password" name="securityNewPassword">
+                          placeholder="Enter new password" name="securityNewPassword" required>
                       </div>
                       <!-- End Form -->
 
@@ -332,7 +332,7 @@
                       <div class="mb-3 col-4">
                         <label for="securityConfirmNewPassword" class="form-label">Confirm New Password:</label>
                         <input type="password" class="form-control " id="securityConfirmNewPassword"
-                          placeholder="Confirm new password">
+                          placeholder="Confirm new password" required name="securityConfirmNewPassword">
                       </div>
                       <!-- End Form -->
                       </div>
