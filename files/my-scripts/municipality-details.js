@@ -320,6 +320,9 @@ $(document).ready(function () {
   // get cloud listing
   getCludApplicationsData()
 
+  // get cloud workloads
+  getCludAppWorkLoadsData()
+
   // get compliance listing
   getCompliancesData()
 
@@ -1828,8 +1831,14 @@ function getMuncipilitiesDataForWizard() {
         if (apiData.outsourced_it) {
           $(`input[name='cyberVendors'][value='${apiData.outsourced_it}']`).prop("checked", true);
         }
+
         if (apiData.network_backup) {
           $(`input[name='backupInternetRedundancy'][value='${apiData.network_backup}']`).prop("checked", true);
+        }
+
+        // pishing
+         if (apiData.phishing) {
+          $(`input[name='usingPhishingDetectionTools'][value='${apiData.phishing}']`).prop("checked", true);
         }
 
         // ----------------- Multi-select Fields (Tom Select) -----------------
@@ -1862,24 +1871,42 @@ function getMuncipilitiesDataForWizard() {
           // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
           // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
 
-          const idsToSelect = apiData.cloud_apps_in_use.map(title => {
-            const found = muncipalityWizerdFormCloudApplicationData.find(item => item.title === title);
+          const idsToSelect = apiData.cloud_apps_in_use.map(id => {
+            const found = muncipalityWizerdFormCloudApplicationData.find(item => item.id === id);
             return found ? found.id : null;
           }).filter(Boolean); // remove nulls if any
 
           muncipalityWizerdFormCloudApplicationInit.setValue(idsToSelect);
         }
 
+
+
+
         if (apiData.cloud_workloads_in_use) {
           // const cloudWorkloadsSelect = new TomSelect("#muncipalityWizerdFormCloudWorkloads");
           // cloudWorkloadsSelect.setValue(apiData.cloud_workloads);
 
-          const idsToSelect = apiData.cloud_workloads_in_use.map(title => {
-            const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.title === title);
+          const idsToSelect = apiData.cloud_workloads_in_use.map(id => {
+            const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.id === id);
             return found ? found.id : null;
           }).filter(Boolean); // remove nulls if any
           muncipalityWizerdFormCloudWorkloadsInit.setValue(idsToSelect);
         }
+
+
+
+         if (apiData.compliance) {
+          // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
+          // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
+
+          const idsToSelect = apiData.compliance.map(id => {
+            const found = muncipalityWizerdFormCompliancesInUse.find(item => item.id === id);
+            return found ? found.id : null;
+          }).filter(Boolean); // remove nulls if any
+
+          muncipalityWizerdFormCompliancesInUseInit.setValue(idsToSelect);
+        }
+
 
       },
       400: function () {
@@ -1952,15 +1979,16 @@ $(document).on("click", "#createOrderBtn", function () {
 
 
 
+
 // get data of clouds
 function getCludApplicationsData() {
   const apiBody = JSON.stringify({
-    auth_token: authToken,
+    asset_type: 'Cloud storage',
   });
 
   // return 0
   $.ajax({
-    url: MAIN_API_PATH + getMunicipalityWizardSetAPI,
+    url: MAIN_API_PATH + getCytexModuleAssetsAPI,
     method: POST,
     contentType: Content_Type,
     dataType: "json",
@@ -1971,12 +1999,13 @@ function getCludApplicationsData() {
         //  const data = response.message;
         const apiData = data.message;
 
-        muncipalityWizerdFormCloudApplicationData = [
-          { id: "microsoft365", title: "Microsoft 365" },
-          { id: "googleWorkspace", title: "Google Workspace" },
-          { id: "otherBusinessApplications", title: "Other business applications" },
-          { id: "none", title: "None / Not sure" },
-        ];
+
+        let formattedArray = Object.entries(apiData).map(([key, value]) => ({
+          id: key,
+          title: value
+        }));
+
+        muncipalityWizerdFormCloudApplicationData = formattedArray
 
         muncipalityWizerdFormCloudApplicationInit.addOption(
           muncipalityWizerdFormCloudApplicationData
@@ -1985,6 +2014,158 @@ function getCludApplicationsData() {
       },
       204: function () {
         $("#cover-spin").hide();
+
+
+      },
+    },
+    error: function (xhr, status, error) {
+      $("#cover-spin").hide();
+      if (xhr.status === 400) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        );
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        );
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        );
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          "bg-orange",
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        );
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: " ",
+            text: sessionExpired408Error,
+            type: "info",
+            showCancelButton: false,
+            confirmButtonText: "Logout",
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear();
+              window.location.href = redirectToSignInPage408;
+            }
+          }
+        );
+      } else if (xhr.status === 410) {
+        $("#cover-spin").hide();
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: "json",
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt();
+            encrypt.setPublicKey(sitePublicKey);
+            const dateString = String(pageName + data.unixtime);
+            securityKeyEncrypted = encrypt.encrypt(dateString);
+            SecurityKeyTime = false;
+            getCludApplicationsData();
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt();
+              encrypt.setPublicKey(sitePublicKey);
+              const dateString = String(pageName + data.unixtime);
+              securityKeyEncrypted = encrypt.encrypt(dateString);
+              SecurityKeyTime = false;
+              getCludApplicationsData();
+            });
+          },
+        });
+      } else {
+        showNotificationError(
+          "bg-red",
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        );
+      }
+    },
+  });
+}
+// end data of clouds
+
+
+// get data of clouds
+function getCludAppWorkLoadsData() {
+  const apiBody = JSON.stringify({
+    asset_type: 'Compliance'
+  });
+
+  // return 0
+  $.ajax({
+    url: MAIN_API_PATH + getCytexModuleAssetsAPI,
+    method: POST,
+    contentType: Content_Type,
+    dataType: "json",
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $("#cover-spin").hide(0);
+        //  const data = response.message;
+        const apiData = data.message;
+
+
+
+        let formattedArray = Object.entries(apiData).map(([key, value]) => ({
+          id: key,
+          title: value
+        }));
+
+        muncipalityWizerdFormCloudWorkloadsData = formattedArray
+
+        muncipalityWizerdFormCloudWorkloadsInit.addOption(
+          muncipalityWizerdFormCloudWorkloadsData
+        );
+
+      },
+      204: function () {
+        $("#cover-spin").hide();
+
 
       },
     },
@@ -2103,12 +2284,12 @@ function getCludApplicationsData() {
 // get data of Compliances
 function getCompliancesData() {
   const apiBody = JSON.stringify({
-    auth_token: authToken,
+    // asset_type: 'Compliance'
   });
 
   // return 0
   $.ajax({
-    url: MAIN_API_PATH + getMunicipalityWizardSetAPI,
+    url: MAIN_API_PATH + getCytexFramWorksListAPI,
     method: POST,
     contentType: Content_Type,
     dataType: "json",
@@ -2120,22 +2301,35 @@ function getCompliancesData() {
         const apiData = data.message;
 
 
-        let muncipalityWizerdFormCompliancesInUseData = [
-          { id: "complianceWithRegulations", title: "Compliance with regulations" },
-          { id: "complianceWithIndustryStandards", title: "Compliance with industry standards" },
-          { id: "complianceWithLocalLaw", title: "Compliance with local law" },
-          { id: "none", title: "None / Not sure" },
-        ]
+
+        // let formattedArray = Object.entries(apiData).map(([key, value]) => ({
+        //   id: key,
+        //   title: value
+        // }));
+
+        function formatFrameworks(data) {
+          return data.map(item => ({
+            title: item.framework,
+            id: item.c_of
+          }));
+        }
+
+        let formattedArray = formatFrameworks(apiData);
+
+        muncipalityWizerdFormCompliancesInUse = formattedArray
+
+
+
 
         muncipalityWizerdFormCompliancesInUseInit.addOption(
-          muncipalityWizerdFormCompliancesInUseData
+          muncipalityWizerdFormCompliancesInUse
         );
-
 
 
       },
       204: function () {
         $("#cover-spin").hide();
+
 
       }
     },
