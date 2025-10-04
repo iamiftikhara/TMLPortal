@@ -434,14 +434,15 @@ $(document).on("click", "#clickToOpenWizerd", function () {
 });
 
 $(document).on("click", "#closeWizerd", function () {
-  $("#pageErrorCard, #mainContentInnerWizerdFormToShow").addClass("d-none");
-  $("#mainContentInnerDataToShow, #showMuncipilatiyDetaisl").removeClass(
-    "d-none"
-  );
-  $("html, body").animate(
-    { scrollTop: $("#mainContentInnerWizerdFormToShow").offset().top },
-    600 // duration in ms (600ms = smooth speed)
-  );
+  window.location.href = "index.html"
+  // $("#pageErrorCard, #mainContentInnerWizerdFormToShow").addClass("d-none");
+  // $("#mainContentInnerDataToShow, #showMuncipilatiyDetaisl").removeClass(
+  //   "d-none"
+  // );
+  // $("html, body").animate(
+  //   { scrollTop: $("#mainContentInnerWizerdFormToShow").offset().top },
+  //   600 // duration in ms (600ms = smooth speed)
+  // );
 });
 
 // update select data options
@@ -624,7 +625,7 @@ selectElDepartment.addEventListener("change", function () {
   if (selectedValues.includes("other")) {
     if (!$("#other_textarea_wrapper_department").length) {
       const textareaHtml = `
-        <div id="other_textarea_wrapper_department" class="mt-2">
+        <div id="other_textarea_wrapper_department" class="mt-3">
           <label for="other_textarea" class="form-label">Please specify:</label>
           <textarea id="other_textarea_depart" class="form-control" rows="3" placeholder="Enter details..."></textarea>
         </div>`;
