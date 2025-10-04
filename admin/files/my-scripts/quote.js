@@ -37,6 +37,82 @@ $(document).ready(function () {
 
 });
 
+// --------------------------
+// ✅ Start Summary JSON Data
+// --------------------------
+const stats = {
+  total: 10,
+  pending: 5,
+  negotiation: 3,
+  finalized: 1,
+  halted: 1
+};
+
+// --------------------------
+// ✅ Card Configuration (excluding total)
+// --------------------------
+const cardConfig = {
+  pending:      { label: 'Pending Orders',      icon: 'bi-hourglass-split', color: 'warning' },
+  negotiation:  { label: 'Orders in Process',  icon: 'bi-chat-dots', color: 'info'  },
+  finalized:    { label: 'Finalized Orders',    icon: 'bi-check2-circle', color: 'success' },
+  halted:       { label: 'Halted Orders',       icon: 'bi-x-circle', color: 'danger' }
+};
+
+const total = stats.total ?? 0;
+
+// --------------------------
+// ✅ Target container elements
+// --------------------------
+const $row = document.getElementById('summaryCardsRow');
+const $totalSummary = document.getElementById('totalSummary');
+
+// --------------------------
+// ✅ Create cards dynamically
+// --------------------------
+Object.keys(cardConfig).forEach((key) => {
+  const cfg = cardConfig[key];
+  const value = stats[key] ?? 0;
+
+  const col = document.createElement('div');
+  col.className = 'col-12 col-sm-6 col-md-4 col-lg-3 mb-3'; // Added margin bottom for spacing
+
+  col.innerHTML = `
+    <div class="card shadow-sm border-0 h-100 position-relative">
+      <div class="card-body d-flex flex-column justify-content-between">
+        
+        <!-- Start Help Text (Top) -->
+
+        <!-- Label + Icon -->
+        <div class="d-flex align-items-center mb-2">
+          <i class="bi ${cfg.icon} fs-3 text-${cfg.color} me-2"></i>
+          <span class="text-muted small" style="font-size:14px">${cfg.label}</span>
+        </div>
+
+        <!-- Value / Total -->
+        <h3 class="fw-bold text-center mb-0" style="font-size:30px;">
+          ${value}
+          <span style="font-size:12px; color:#b0b0b0;">out of ${total}</span>
+        </h3>
+
+    
+
+      </div>
+
+      <!-- Ellipsis bottom-right -->
+      <a href="orders.html" class="position-absolute bottom-0 end-0 p-2 text-muted" style="font-size:18px; text-decoration:none;">
+        <i class="bi bi-three-dots"></i>
+      </a>
+    </div>
+  `;
+
+  $row.appendChild(col);
+});
+
+// --------------------------
+// ✅ END: Total summary card at the bottom
+// --------------------------
+
+
 
 // municipality size data
 let filterSizeData = [

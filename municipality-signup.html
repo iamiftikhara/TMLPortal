@@ -256,12 +256,12 @@
       <!-- ***************************** Start Muncipility Details *********************************** -->
 
       <div id="mainContentInnerWizerdFormToShow" class=" card col-10 " style='justify-self: center'>
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Municipality Wizard</h5>
-          <button class="btn btn-outline-secondary" id="wizardHomeBtn">
+        <!-- <div class="card-header d-flex justify-content-between align-items-center"> -->
+          <!-- <h5 class="mb-0">Municipality Wizard</h5> -->
+          <!-- <button class="btn btn-outline-secondary" id="wizardHomeBtn">
             <i class="bi bi-house"></i> Go Back
-          </button>
-        </div>
+          </button> -->
+        <!-- </div> -->
         <div class="card-body">
           <!-- Step Form -->
           <form class="js-step-form-validate js-validate" data-hs-step-form-options='{
@@ -431,7 +431,7 @@
                       <!-- End Form -->
 
                       <!-- Form -->
-                      <div class="col-12 col-md-6 pe-4">
+                      <div class="col-12 col-md-6 ps-4">
                         <label for="municipalityWizerdFormContactLastName" class="form-label">Last Name:<span
                             class="text-danger">*</span></label>
                         <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
@@ -511,7 +511,7 @@
                       <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for
                           the Next
-                          12–24 Months (choose up to 3):</label>
+                          12-24 Months:</label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -522,6 +522,7 @@
                             name="muncipalityWizerdFormKeyPrioritiesUpTo3" required>
                             <option class="p-2" value="">Select</option>
                           </select>
+                            <div class="ts-wrapper"></div>
                         </div>
                         <!-- End Select -->
                       </div>
@@ -542,6 +543,7 @@
                             name="muncipalityWizerdFormDepartmentsUnderMunicipality" required>
                             <option class="p-2" value="">Select</option>
                           </select>
+                          <div class="ts-wrapper-depart"></div>
                         </div>
                         <!-- End Select -->
                       </div>

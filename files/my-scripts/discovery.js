@@ -12,7 +12,7 @@ $(document).ready(function () {
     municipalityComplianceSelectInit = initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue('municipalityComplianceSelect', false);
 
 
-
+$('#cover-spin').hide()
 
     updateFiltersSelectDataOptions()
 
