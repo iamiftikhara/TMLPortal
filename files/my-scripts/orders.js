@@ -243,7 +243,7 @@ function getOrdersTableData(skip, page) {
           let service = generateSpan(response[i], 'list_of_services', '', '');
           let payment = generateSpan(response[i], 'payment', '', '');
           let status = generateSpan(response[i], 'status', '', '');
-
+          let bundle_name = generateSpan(response[i], 'bundle_name', '', ''); 
           if (response[i].status === 'Pending Kickoff') {
             status = `
               <div class='d-flex flex-column'>
@@ -275,6 +275,7 @@ function getOrdersTableData(skip, page) {
           ordersDataTableInit.row
             .add([
               `<td><span>${order_id}</span></td>`,
+              `<td><span>${bundle_name}</span></td>`,
               `<td><span>${service}</span></td>`,
               `<td><span>${payment}</span></td>`,
               `<td><span>${status}</span></td>`,
