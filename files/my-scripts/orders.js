@@ -240,6 +240,7 @@ function getOrdersTableData(skip, page) {
 
         for (let i = 0; i < response.length; i++) {
           let order_id = generateSpan(response[i], 'order_id', '', '');
+          let bundle_name = generateSpan(response[i], 'bundle_name', '', '');
           let service = generateSpan(response[i], 'list_of_services', '', '');
           let payment = generateSpan(response[i], 'payment', '', '');
           let status = generateSpan(response[i], 'status', '', '');
@@ -275,6 +276,7 @@ function getOrdersTableData(skip, page) {
           ordersDataTableInit.row
             .add([
               `<td><span>${order_id}</span></td>`,
+              `<td><span>${bundle_name}</span></td>`,
               `<td><span>${service}</span></td>`,
               `<td><span>${payment}</span></td>`,
               `<td><span>${status}</span></td>`,
@@ -631,7 +633,6 @@ let servicesListToSendForApi = [];
 function showServicesDetails(orderId) {
 
   let order = ordersDataReceived.find(o => o.order_id === orderId);
-  console.log(orderId, order)
   servicesListToSendForApi = order.list_of_services;
   getServicesList()
 }
@@ -641,7 +642,7 @@ function showServicesDetails(orderId) {
 
 function getServicesList() {
 
-
+  $('#cover-spin').show()
 
 
   const apiBody = JSON.stringify({
@@ -660,8 +661,14 @@ function getServicesList() {
       200: function (data) {
         $("#cover-spin").hide(0);
 
+        const serviceData = data.message; // replace with your actual API array
+        // Render only the clicked one OR all
+        const selectedService = serviceData.filter(s => s.service_id);
+        renderSidebarServices(selectedService);
 
-        console.log(data)
+        // Show sidebar
+        const offcanvas = new bootstrap.Offcanvas("#strategyOffcanvas");
+        offcanvas.show();
 
 
       },
@@ -810,6 +817,40 @@ function showOrderDetails(orderId) {
     600 // duration in ms (600ms = smooth speed)
   );
 
+}
+
+
+// Render services in right sidebar
+function renderSidebarServices(services, preSelectedIds = []) {
+  const container = $("#strategyOffcanvasBody");
+  container.empty(); // clear old content
+
+  if (!services || services.length === 0) {
+    container.html(`<div class="text-center text-muted">No services available</div>`);
+    return;
+  }
+
+  services.forEach(service => {
+    const isSelected = preSelectedIds.includes(service.service_id);
+
+    const card = `
+      <div class="service-card card mb-3 shadow-sm
+          ${isSelected ? 'border-primary shadow-lg' : 'border'}" 
+          data-id="${service.service_id}" 
+          data-cost="${service.estimated_cost}">
+        
+        <div class="card-header fw-bold">${service.title}</div>
+        <div class="card-body">
+          <p class="card-text">${service.description || 'No description available'}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          Estimate Cost:
+          <span class="fw-bold text-primary">$${service.estimated_cost} ${service.cost_unit}</span>
+        </div>
+      </div>
+    `;
+    container.append(card);
+  });
 }
 
 

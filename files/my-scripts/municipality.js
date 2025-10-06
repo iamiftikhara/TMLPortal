@@ -773,7 +773,7 @@ function setMuncipilitiesData() {
   // 2. Map each ID to its matching title
   const key_priorities = selectedKeys.map(id => {
     const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(item => item.id === id);
-    return found ? found.title : id; // fallback to id if no match
+    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
   });
 
   console.log(key_priorities);
@@ -784,7 +784,7 @@ console.log(key_priorities_others,departments_others);
   // 2. Map each ID to its matching title
   const departments = selectedDepartments.map(id => {
     const found = muncipalityWizerdFormDepartmentsUnderMunicipalityData.find(item => item.id === id);
-    return found ? found.title : id; // fallback to id if no match
+    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
   });
 
   const total_employees =
@@ -824,19 +824,19 @@ console.log(key_priorities_others,departments_others);
   const selectedCloudApps = $("#muncipalityWizerdFormCloudApplication").val();
   const cloud_apps_in_use = selectedCloudApps.map(id => {
     const found = muncipalityWizerdFormCloudApplicationData.find(item => item.id === id);
-    return found ? found.id : id; // fallback to id if no match
+    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
   });
 
   const selectedCloudWorkLoads = $("#muncipalityWizerdFormCloudWorkloads").val();
   const cloud_workloads_in_use = selectedCloudWorkLoads.map(id => {
     const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.id === id);
-    return found ? found.id : id; // fallback to id if no match
+    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
   });
 
   const selectedCompliancesInUse = $("#muncipalityWizerdFormCompliancesInUse").val();
   const compliances_in_use = selectedCompliancesInUse.map(id => {
     const found = muncipalityWizerdFormCompliancesInUse.find(item => item.id === id);
-    return found ? found.id : id; // fallback to id if no match
+    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
   });
 
 

@@ -33,13 +33,13 @@ const dataSourceIPconfig = {
                               </div>`,
   // "columns": null,
   "columns": [
-
-    { "name": "Service", "id": "service", "columnNo": 1, "visible": true },
-    { "name": "Payment", "id": "payment", "columnNo": 2, "visible": true },
-    { "name": "Status", "id": "status", "columnNo": 3, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 4, "visible": true },
-    { "name": "Created At", "id": "created_at", "columnNo": 5, "visible": true },
-    { "name": "Updated At", "id": "updated_at", "columnNo": 6, "visible": true },
+    { "name": "Bundle Name", "id": "bundle_name", "columnNo": 1, "visible": true },
+    { "name": "Services", "id": "services", "columnNo": 2, "visible": true },
+    { "name": "Payment", "id": "payment", "columnNo": 3, "visible": true },
+    { "name": "Status", "id": "status", "columnNo": 4, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 5, "visible": true },
+    { "name": "Created At", "id": "created_at", "columnNo": 6, "visible": true },
+    { "name": "Updated At", "id": "updated_at", "columnNo": 7, "visible": true },
 
 
 
@@ -97,13 +97,13 @@ const dataSourceIPconfig = {
   ],
   "tableHeader": [
     { "name": "Order ID", "widthClass": "w-5" },
-    { "name": "Service", "widthClass": "w-5" },
+    { "name": "Bundle Name", "widthClass": "w-5" },
+    { "name": "Services", "widthClass": "w-5" },
     { "name": "Payment", "widthClass": "w-5" },
     { "name": "Status", "widthClass": "w-5" },
-    { "name": "Actions", "widthClass": "w-5" },
     { "name": "Created At", "widthClass": "w-5" },
-    { "name": "Updated At", "widthClass": "w-" },
-
+    { "name": "Updated At", "widthClass": "w-5" },
+    { "name": "Actions", "widthClass": "w-" },
   ],
 };
 

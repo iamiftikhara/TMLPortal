@@ -1100,6 +1100,7 @@ function createOrderBasedOnSelections() {
   const apiBody = JSON.stringify({
     auth_token: authToken,
     created_at,
+    bundle_name,
     bundle_id: bundle_ID,
     list_of_services: services_list,
   });
