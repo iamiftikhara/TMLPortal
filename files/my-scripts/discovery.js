@@ -79,8 +79,8 @@ function populateServiceCardsToUI(dataArray) {
                     <p class="mt-2 mb-0">Targets: small, medium, large</p>
                   </div>
                   <div class="col-3 d-flex justify-content-center align-items-center">
-                    <button type="button" class="btn btn-primary btn-lg px-4">Get Estimate</button>
-                    <button type="button" class="btn btn-primary btn-lg px-4 ms-4 ">Details</button>
+                    <button type="button" class="btn btn-outline-primary btn-lg px-4">Get Estimate</button>
+                    <button type="button" class="btn btn-outline-primary btn-lg px-4 ms-4 ">Details</button>
                   </div>
                 </div>
               </div>
@@ -116,8 +116,8 @@ function populateServiceCardsToUI(dataArray) {
           <p class="mt-2 mb-0">Targets: ${service.targets}</p>
         </div>
         <div class="col-3 d-flex justify-content-center align-items-center">
-          <button type="button" class="btn btn-primary btn-lg px-4" data-id="${service.id}">Get Estimate</button>
-          <button type="button" class="btn btn-primary btn-lg px-4 ms-4" data-id="${service.id}">Details</button>
+          <button type="button" class="btn btn-outline-primary btn-lg px-4" data-id="${service.id}">Get Estimate</button>
+          <button type="button" class="btn btn-outline-primary btn-lg px-4 ms-4" data-id="${service.id}">Details</button>
         </div>
       </div>
     </div>

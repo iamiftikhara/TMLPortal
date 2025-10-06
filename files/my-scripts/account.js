@@ -778,13 +778,13 @@ function getProfileTeamTableData(skip, page) {
           let actions
           if (login_user_email == response[i].email) {
             actions = `
-            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].composit_id}">Edit</button>
-            <button class="btn btn-sm btn-danger " disabled data-member-id="${response[i].composit_id}">Remove</button>
+            <button class="btn btn-sm btn-outline-primary edit-member" data-member-id="${response[i].composit_id}">Edit</button>
+            <button class="btn btn-sm btn-outline-danger " disabled data-member-id="${response[i].composit_id}">Remove</button>
           `
           } else {
             actions = `
-            <button class="btn btn-sm btn-primary edit-member" data-member-id="${response[i].composit_id}">Edit</button>
-            <button class="btn btn-sm btn-danger remove-member" data-member-id="${response[i].composit_id}">Remove</button>
+            <button class="btn btn-sm btn-outline-primary edit-member" data-member-id="${response[i].composit_id}">Edit</button>
+            <button class="btn btn-sm btn-outline-danger remove-member" data-member-id="${response[i].composit_id}">Remove</button>
           `
           }
 

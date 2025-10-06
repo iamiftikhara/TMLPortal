@@ -248,7 +248,7 @@ function getOrdersTableData(skip, page) {
             status = `
               <div class='d-flex flex-column'>
                 ${status}
-                <button class="btn btn-sm btn-danger view-order-details p-1 ms-2 px-4" 
+                <button class="btn btn-sm btn-outline-danger view-order-details p-1 ms-2 px-4" 
                   style='font-size: 10px; width: fit-content' 
                   data-order-id="${response[i].order_id}">
                   Pay Now
@@ -257,8 +257,8 @@ function getOrdersTableData(skip, page) {
           }
 
           let actions = `
-            <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
-            <button class="btn btn-sm btn-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
+            <button class="btn btn-sm btn-outline-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
+            <button class="btn btn-sm btn-outline-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
           `;
 
           const myDate_created = new Date(response[i].created_at * 1000)

@@ -53,8 +53,8 @@ function populateServiceCardsToUI(dataArray) {
               <p class='fs-3'>${data.description}</p>
             </div>
             <div class="col-12 d-flex justify-content-center align-items-center mt-2">
-              <button type="button" class="btn btn-primary btn-sm px-4 w-75" data-id="${data.id}">View</button>
-              <button type="button" class="btn btn-secondary btn-sm px-4 ms-4 w-75" data-id="${data.id}">Download</button>
+              <button type="button" class="btn btn-outline-primary btn-sm px-4 w-75" data-id="${data.id}">View</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm px-4 ms-4 w-75" data-id="${data.id}">Download</button>
             </div>
           </div>
         </div>

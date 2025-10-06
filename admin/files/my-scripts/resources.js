@@ -2145,8 +2145,8 @@ function exportCreateBundleDataTableData() {
 //           defaultCheckbox = `<input title="Click to enroll service"   style="margin: 0 10px 0 0; cursor: pointer;text-align:center;" type="checkbox" class="selectSrviceToEnrollCheckBox" name="selectSrviceToEnrollCheckBox" value="${service_id}" >`;
 
 //           let actions = `
-//           <button class="btn btn-sm btn-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
-//           <button class="btn btn-sm btn-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
+//           <button class="btn btn-sm btn-outline-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
+//           <button class="btn btn-sm btn-outline-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
 //         `;
 
 //           enrollServicesDataTableInit.row
