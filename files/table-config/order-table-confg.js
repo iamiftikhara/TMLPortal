@@ -57,6 +57,13 @@ const dataSourceIPconfig = {
         "checked": true,
       },
       {
+        "label": "Order Name",
+        "id": "order_name",
+        "placeholder": "Enter Order Name",
+        "type": "text",
+        "checked": true,
+      },
+      {
          "label": "Status",
         "id": "status",
         "placeholder": "Enter Status",
@@ -72,6 +79,14 @@ const dataSourceIPconfig = {
       "label": "Order ID",
       "id": "order_id",
       "placeholder": "Enter Order ID",
+      "columnNo": 0,
+      "hidden": false // This field is shown
+    },
+     {
+      "type": "text",
+      "label": "Order Name",
+      "id": "order_name",
+      "placeholder": "Enter Order Name",
       "columnNo": 1,
       "hidden": false // This field is shown
     },
@@ -80,7 +95,7 @@ const dataSourceIPconfig = {
       "label": "Payment",
       "id": "payment",
       "placeholder": "Enter Payment",
-      "columnNo": 4,
+      "columnNo": 3,
       "hidden": false // This field is shown
     },
     {
@@ -88,7 +103,7 @@ const dataSourceIPconfig = {
       "label": "Status",
       "id": "status",
       "placeholder": "Enter Status",
-      "columnNo": 5,
+      "columnNo": 4,
       "hidden": false // This field is shown
     }
 

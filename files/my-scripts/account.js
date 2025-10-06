@@ -788,15 +788,22 @@ function getProfileTeamTableData(skip, page) {
           `
           }
 
+          let isSuper
+          if (response[i].is_super == true) {
+            isSuper = `<span class="badge bg-success">Super User</span>`
+          } else if (response[i].is_super == false) {
+            isSuper = `<span class="badge bg-secondary">User</span>`
+          } else {
+            isSuper = `--`
+          }
 
           profileTeamDataTableInit.row
             .add([
               `<td ><span >${fname}</span></td>`,
               `<td ><span >${lname}</span></td>`,
               `<td ><span >${email}</span></td>`,
-              `<td ><span >${role}</span></td>`,
+              `<td ><span >${isSuper}</span></td>`,
               `<td ><span >${actions}</span></td>`,
-
             ])
             .draw()
           datatablePagination('profileTeamDataTable', 1, 'profileTeamDataTableTotal', getProfileTeamTableData)
@@ -1106,6 +1113,20 @@ function editMemberFromTeam(memberId) {
   currentEditUserDataInUse = userDetails
   $('#editUserDetailsModalFirstName').val(userDetails.first_name);
   $('#editUserDetailsModalLastName').val(userDetails.last_name);
+
+  console.log("userDetails.last_name", userDetails.email);
+  console.log("login_user_email", login_user_email);
+
+  if (login_user_email == userDetails.email) {
+  // alert('Call 1');
+  $("#adminInput").addClass('d-none'); // hide
+  } else {
+    // alert('Call 2');
+    $("#adminInput").removeClass('d-none'); // show
+  }
+
+
+  
 
   const is_super = userDetails.is_super
   isSuperChecked = is_super
