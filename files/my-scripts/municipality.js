@@ -174,7 +174,7 @@ $(document).ready(function () {
         validUrl: true,
       },
       muncipalityWizerdFormKeyPrioritiesUpTo3: {
-        minSelectedOptions: 3,
+        minSelectedOptions: 1,
         required: true,
       },
       cyberVendors: {
@@ -248,7 +248,7 @@ $(document).ready(function () {
         required: "Please select an item.",
       },
       muncipalityWizerdFormKeyPrioritiesUpTo3: {
-        minlength: "Please choose at least 3 priorities.",
+        minlength: "Please choose at least 1 priorities.",
       },
 
       addNewAccountSelectType: {
@@ -434,14 +434,15 @@ $(document).on("click", "#clickToOpenWizerd", function () {
 });
 
 $(document).on("click", "#closeWizerd", function () {
-  $("#pageErrorCard, #mainContentInnerWizerdFormToShow").addClass("d-none");
-  $("#mainContentInnerDataToShow, #showMuncipilatiyDetaisl").removeClass(
-    "d-none"
-  );
-  $("html, body").animate(
-    { scrollTop: $("#mainContentInnerWizerdFormToShow").offset().top },
-    600 // duration in ms (600ms = smooth speed)
-  );
+  window.location.href = "index.html"
+  // $("#pageErrorCard, #mainContentInnerWizerdFormToShow").addClass("d-none");
+  // $("#mainContentInnerDataToShow, #showMuncipilatiyDetaisl").removeClass(
+  //   "d-none"
+  // );
+  // $("html, body").animate(
+  //   { scrollTop: $("#mainContentInnerWizerdFormToShow").offset().top },
+  //   600 // duration in ms (600ms = smooth speed)
+  // );
 });
 
 // update select data options
@@ -554,18 +555,6 @@ function updateFiltersSelectDataOptions() {
     { id: "21+", title: "21+" },
   ];
 
-
-
-
-  // populationSizeCompanyDetailsInit.addOption(filterSizeData);
-  // populationSizeCompanyDetailsInit.setValue("<50000");
-
-  // NumberOfEmployeesSelectInit.addOption(numberOfEmployeesData);
-  // NumberOfEmployeesSelectInit.setValue("51-200");
-
-  // NumberOfITEmployeesSelectInit.addOption(numberOfITEmployeesData);
-  // NumberOfITEmployeesSelectInit.setValue("1-50");
-
   // wizerd form population data
   muncipalityWizerdFormPopulationSizeInit.addOption(
     muncipalityWizerdFormPopulationSizeData
@@ -575,11 +564,80 @@ function updateFiltersSelectDataOptions() {
   muncipalityWizerdFormKeyPrioritiesUpTo3Init.addOption(
     muncipalityWizerdFormKeyPrioritiesUpTo3Data
   );
+// ✅ Listen to TomSelect internal change (checkbox toggle)
+const selectEl = document.getElementById("muncipalityWizerdFormKeyPrioritiesUpTo3");
+
+selectEl.addEventListener("change", function () {
+  const selectedValues = muncipalityWizerdFormKeyPrioritiesUpTo3Init.getValue();
+  console.log("selectedValues", selectedValues);
+
+  // ✅ If "Other" selected → show textarea
+  if (selectedValues.includes("other")) {
+    if (!$("#other_textarea_wrapper").length) {
+      const textareaHtml = `
+        <div id="other_textarea_wrapper" class="mt-n4">
+          <label for="other_textarea" class="form-label">Please specify:</label>
+          <textarea id="other_textarea" class="form-control" rows="3" placeholder="Enter details..."></textarea>
+        </div>`;
+      $("#muncipalityWizerdFormKeyPrioritiesUpTo3")
+        .closest(".tom-select-custom")   // ✅ Correct wrapper
+        .after(textareaHtml);
+    }
+  } else {
+    // ❌ If "Other" deselected → remove textarea
+    $("#other_textarea_wrapper").remove();
+  }
+});
+
+// // ✅ If "Other" pre-selected (e.g. from saved answers)
+// function handlePreselectedOtherOption() {
+//   const selectedValues = muncipalityWizerdFormKeyPrioritiesUpTo3Init.getValue();
+//   if (selectedValues.includes("other")) {
+//     if (!$("#other_textarea_wrapper").length) {
+//       const textareaHtml = `
+//         <div id="other_textarea_wrapper" class="mt-2">
+//           <label for="other_textarea" class="form-label fw-bold">Please specify:</label>
+//           <textarea id="other_textarea" class="form-control" rows="3" placeholder="Enter details..."></textarea>
+//         </div>`;
+//       $("#muncipalityWizerdFormKeyPrioritiesUpTo3")
+//         .closest(".tom-select-custom")   // ✅ Correct wrapper
+//         .after(textareaHtml);
+//     }
+//   }
+// }
+
+// handlePreselectedOtherOption();
+
   // muncipalityWizerdFormKeyPrioritiesUpTo3Init.setValue('improveCybersecurity')
 
   muncipalityWizerdFormDepartmentsUnderMunicipalityInit.addOption(
     muncipalityWizerdFormDepartmentsUnderMunicipalityData
   );
+
+  // ✅ Listen to TomSelect internal change (checkbox toggle)
+const selectElDepartment = document.getElementById("muncipalityWizerdFormDepartmentsUnderMunicipality");
+
+selectElDepartment.addEventListener("change", function () {
+  const selectedValues = muncipalityWizerdFormDepartmentsUnderMunicipalityInit.getValue();
+  console.log("selectedValues", selectedValues);
+
+  // ✅ If "Other" selected → show textarea
+  if (selectedValues.includes("other")) {
+    if (!$("#other_textarea_wrapper_department").length) {
+      const textareaHtml = `
+        <div id="other_textarea_wrapper_department" class="mt-3">
+          <label for="other_textarea" class="form-label">Please specify:</label>
+          <textarea id="other_textarea_depart" class="form-control" rows="3" placeholder="Enter details..."></textarea>
+        </div>`;
+      $("#muncipalityWizerdFormDepartmentsUnderMunicipality")
+        .closest(".tom-select-custom")   // ✅ Correct wrapper
+        .after(textareaHtml);
+    }
+  } else {
+    // ❌ If "Other" deselected → remove textarea
+    $("#other_textarea_wrapper_department").remove();
+  }
+});
   // muncipalityWizerdFormDepartmentsUnderMunicipalityInit.setValue('policeFireEMS')
 
   // muncipalityWizerdFormTotalEmployeesInit.addOption(muncipalityWizerdFormNumberOfEmployeesData);
@@ -662,7 +720,7 @@ $(".formNextButton").on("click", function (e) {
   $('#signupUserOrgnization').val(municipality_name);
 
   $("#muncipalityWizerdForm").validate().form();
-  if (selectedOptions > 3 || (selectedOptions === 3 && isChecked === true)) {
+  if (selectedOptions > 1 || (selectedOptions === 1 && isChecked === true)) {
     setTheNextButtonTarget(
       "firstStepAccountTypeNextButton",
       "municipalityWizerdTechnologyEnvironment"
@@ -719,7 +777,9 @@ function setMuncipilitiesData() {
   });
 
   console.log(key_priorities);
-
+  const key_priorities_others =  $("#other_textarea").val() 
+    const departments_others =  $("#other_textarea_depart").val() 
+console.log(key_priorities_others,departments_others);
   const selectedDepartments = $("#muncipalityWizerdFormDepartmentsUnderMunicipality").val() || [];
   // 2. Map each ID to its matching title
   const departments = selectedDepartments.map(id => {
@@ -797,6 +857,8 @@ function setMuncipilitiesData() {
     primary_contact_phone,
     website_url,
     key_priorities,
+    key_priorities_others,
+    departments_others,
     departments,
     total_employees,
     it_employees,
@@ -816,8 +878,8 @@ function setMuncipilitiesData() {
 
 
   singUpUserForMunicipality(munciplity_Details_get_from_wizard)
-  // console.log("payload", payload);
-  // return
+  // console.log("payload", munciplity_Details_get_from_wizard);
+  // return 0
 
 
 }

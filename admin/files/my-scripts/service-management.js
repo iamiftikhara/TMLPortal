@@ -347,7 +347,7 @@ function getServiceManagementTableData(skip, page) {
 
           // Action buttons
           const actions = `
-    <button class="btn btn-sm btn-outline-primary edit-service" data-service-id="${service_id}">Edit</button>
+    <button class="btn btn-sm btn-outline-primary edit-service" data-service-id="${service_id}" onclick="addServiceManagementBtn('Edit')">Edit</button>
     <button class="btn btn-sm btn-outline-danger delete-service" data-service-id="${service_id}">Delete</button>
   `;
 
@@ -618,6 +618,15 @@ $("#serviceManagementSubmit").on("click", function (e) {
   }
 });
 
+function addServiceManagementBtn(action) {
+  if (action === "Add") {
+    $("#serviceManagementFormModalLabel").text("Add Service");
+  } else {
+    $("#serviceManagementFormModalLabel").text("Edit Service");
+  }
+}
+
+
 function setMuncipilitiesData() {
   // Current epoch time in **seconds**
   const created_at = Math.floor(Date.now() / 1000);
@@ -786,7 +795,7 @@ function setMuncipilitiesData() {
     },
   });
 }
-
+let originalValues
 // ********************** end set/Edit municpilities detsils *********************************
 // ********************** Start Edit municpilities Value *********************************
 function attachServiceManagementActions() {
@@ -807,7 +816,7 @@ function attachServiceManagementActions() {
       // $("#availability").prop("checked", serviceData.availability);
 
       // Store original values for comparison
-      const originalValues = {
+      originalValues = {
         title: serviceData.title,
         description: serviceData.description,
         estimated_cost: serviceData.estimated_cost,
@@ -999,16 +1008,16 @@ function attachServiceManagementActions() {
 }
 
 $("#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, #serviceManagementDetailsModal textarea").on("input change", function () {
-  const original = $("#serviceManagementDetailsModal").data("original-values");
+  const originalValues = $("#serviceManagementDetailsModal").data("original-values");
   const serviceId = $("#serviceManagementDetailsModal").data("service-id");
 
-  // If no serviceId, it's add mode → enable button
+  // If no serviceId, it's add mode → always enable button
   if (!serviceId) {
-    $("#serviceManagementSubmit").prop("disabled", false);
+    $("#serviceManagementSubmit").prop("disabled", false).parent().css("cursor", "pointer");
     return;
   }
 
-  // Compare current values with original
+  // Get current form values
   const currentValues = {
     title: $("#title").val(),
     description: $("#description").val(),
@@ -1018,12 +1027,20 @@ $("#serviceManagementDetailsModal input, #serviceManagementDetailsModal select, 
     availability: $("#availability").prop("checked"),
   };
 
-  const changed = Object.keys(currentValues).some(
-    (key) => currentValues[key] !== original[key]
-  );
+  console.log("Original:", originalValues);
+  console.log("Current:", currentValues);
 
-  // Enable submit only if some value changed
-  $("#serviceManagementSubmit").prop("disabled", !changed);
+  // Compare
+  const isSame = originalValues.title === currentValues.title &&
+    originalValues.description === currentValues.description &&
+    Number(originalValues.estimated_cost) === Number(currentValues.estimated_cost) &&
+    originalValues.cost_type === currentValues.cost_type
+
+  if (isSame) {
+    $("#serviceManagementSubmit").prop("disabled", true).parent().css("cursor", "no-drop");
+  } else {
+    $("#serviceManagementSubmit").prop("disabled", false).parent().css("cursor", "pointer");
+  }
 });
 
 // ********************** end Edit municpilities Value *********************************

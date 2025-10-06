@@ -2,9 +2,7 @@ const options = JSON.stringify({
   dom: 'Bfrtip',
   columnDefs: [
     {
-      // targets: [0, 1],
-      targets: [0, 5],
-      orderable: false,
+      targets: [0, 1],
       // orderable: true
     }
   ],
@@ -34,14 +32,12 @@ const dataSourceIPconfig = {
   // "columns": null,
   "columns": [
 
-    { "name": "Service", "id": "service", "columnNo": 1, "visible": true },
-    { "name": "Payment", "id": "payment", "columnNo": 2, "visible": true },
-    { "name": "Status", "id": "status", "columnNo": 3, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 4, "visible": true },
-    { "name": "Created At", "id": "created_at", "columnNo": 5, "visible": true },
-    { "name": "Updated At", "id": "updated_at", "columnNo": 6, "visible": true },
-
-
+    { "name": "Municipality", "id": "municipality", "columnNo": 1, "visible": true },
+    { "name": "Service", "id": "service", "columnNo": 2, "visible": true },
+    { "name": "Date", "id": "date", "columnNo": 3, "visible": true },
+    { "name": "Payment", "id": "payment", "columnNo": 4, "visible": true },
+    { "name": "Status", "id": "status", "columnNo": 5, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 6, "visible": true }
 
   ],
   //  "searchFields": null,
@@ -57,11 +53,18 @@ const dataSourceIPconfig = {
         "checked": true,
       },
       {
-         "label": "Status",
-        "id": "status",
-        "placeholder": "Enter Status",
+        "label": "Municipality",
+        "id": "municipality",
+        "placeholder": "Enter Municipality",
         "type": "text",
-        "checked": true,
+        "checked": false,
+      },
+      {
+        "label": "Service",
+        "id": "service",
+        "placeholder": "Enter Service",
+        "type": "text",
+        "checked": false,
       }
     ]
   },
@@ -72,7 +75,23 @@ const dataSourceIPconfig = {
       "label": "Order ID",
       "id": "order_id",
       "placeholder": "Enter Order ID",
+      "columnNo": 0,
+      "hidden": false // This field is shown
+    },
+    {
+      "type": "text",
+      "label": "Municipality",
+      "id": "municipality",
+      "placeholder": "Enter Municipality",
       "columnNo": 1,
+      "hidden": false // This field is shown
+    },
+    {
+      "type": "text",
+      "label": "Service",
+      "id": "service",
+      "placeholder": "Enter Service",
+      "columnNo": 2,
       "hidden": false // This field is shown
     },
     {
@@ -97,13 +116,12 @@ const dataSourceIPconfig = {
   ],
   "tableHeader": [
     { "name": "Order ID", "widthClass": "w-5" },
+    { "name": "Municipality", "widthClass": "w-5" },
     { "name": "Service", "widthClass": "w-5" },
+    { "name": "Date", "widthClass": "w-5" },
     { "name": "Payment", "widthClass": "w-5" },
     { "name": "Status", "widthClass": "w-5" },
-    { "name": "Actions", "widthClass": "w-5" },
-    { "name": "Created At", "widthClass": "w-5" },
-    { "name": "Updated At", "widthClass": "w-" },
-
+    { "name": "Actions", "widthClass": "w-5" }
   ],
 };
 

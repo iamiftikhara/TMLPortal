@@ -24,12 +24,15 @@ const dataSourceIPconfig = {
   "tableMainApiCallFunc": getServiceManagementTableData, // Main API Call function name for datatable
   "tableIndexNo": 1, // Table number (Required)
   "tablePagination": true,
-  "tableHeaderHTMLContent": ` <div class="d-flex">
-                                <button type="button" class="btn btn-outline-primary read_only" data-bs-toggle="modal"
-                                    data-bs-target="#serviceManagementDetailsModal">
-                                    Add Service
-                                </button>
-                              </div>`,
+  "tableHeaderHTMLContent": `<div class="d-flex">
+                              <button type="button" 
+                                      class="btn btn-outline-primary read_only" 
+                                      data-bs-toggle="modal" 
+                                      data-bs-target="#serviceManagementDetailsModal" 
+                                      onclick="addServiceManagementBtn('Add')">
+                                  Add Service
+                              </button>
+                            </div>`,
   // "columns": null,
   "columns": [
 

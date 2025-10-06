@@ -27,7 +27,7 @@ $(document).ready(function () {
 
   
 
-
+$('#cover-spin').hide()
 
   updateFiltersSelectDataOptions()
 
