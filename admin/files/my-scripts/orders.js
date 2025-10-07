@@ -14,7 +14,10 @@ let dateTimeEndFlage = true
 // Checkbox array
 let temproryArray = []
 const mainArray = [];
-let deletedObjectArr = []
+let deletedObjectArr = [];
+
+let editOrderDetailsModalOrderStatusInit;
+let editOrderDetailsID = '';
 
 $(document).ready(function () {
 
@@ -27,6 +30,11 @@ $(document).ready(function () {
   ordersDataTableInit = createTableComponent(dataSourceIPconfig, options)
 
 
+  editOrderDetailsModalOrderStatusInit =
+    initializeTomSelectWithOutSearchAndAtLeastHaveSingleValue(
+      "editOrderDetailsModalOrderStatus",
+      false
+    );
 
 
 
@@ -100,8 +108,10 @@ $(document).ready(function () {
   })
 
 
+  updateFiltersSelectDataOptions();
+  getOrdersTableData(10, 1);
+  // enableDisabledButtonUpdateOrderStatus()
 
-  getOrdersTableData(10, 1)
 
 });
 
@@ -240,6 +250,7 @@ function getOrdersTableData(skip, page) {
 
         for (let i = 0; i < response.length; i++) {
           let order_id = generateSpan(response[i], 'order_id', '', '');
+          let bundle_name = generateSpan(response[i], 'bundle_name', '', '');
           let service = generateSpan(response[i], 'list_of_services', '', '');
           let payment = generateSpan(response[i], 'payment', '', '');
           let status = generateSpan(response[i], 'status', '', '');
@@ -257,8 +268,9 @@ function getOrdersTableData(skip, page) {
           }
 
           let actions = `
-            <button class="btn btn-sm btn-outline-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
-            <button class="btn btn-sm btn-outline-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
+            <button class="btn btn-sm btn-outline-primary edit-order" data-order-id="${response[i].order_id}">Edit</button>
+            <button class="btn btn-sm btn-outline-primary view-order-details d-none" data-order-id="${response[i].order_id}">View Details</button>
+            <button class="btn btn-sm btn-outline-secondary download-invoice d-none" data-order-id="${response[i].order_id}">Download Invoice</button>
           `;
 
           const myDate_created = new Date(response[i].created_at * 1000)
@@ -275,6 +287,7 @@ function getOrdersTableData(skip, page) {
           ordersDataTableInit.row
             .add([
               `<td><span>${order_id}</span></td>`,
+              `<td><span>${bundle_name}</span></td>`,
               `<td><span>${service}</span></td>`,
               `<td><span>${payment}</span></td>`,
               `<td><span>${status}</span></td>`,
@@ -286,7 +299,7 @@ function getOrdersTableData(skip, page) {
 
           datatablePagination('ordersDataTable', 1, 'ordersDataTableTotal', getOrdersTableData);
 
-          // Attach button events
+          // View Details button events
           let viewOrderDetailsButtons = document.querySelectorAll('.view-order-details');
           viewOrderDetailsButtons.forEach(button => {
             button.addEventListener('click', function () {
@@ -294,6 +307,17 @@ function getOrdersTableData(skip, page) {
               showOrderDetails(orderId);
             });
           });
+
+          // View Details button events
+          let editOrderButtons = document.querySelectorAll('.edit-order');
+          editOrderButtons.forEach(button => {
+            button.addEventListener('click', function () {
+              let orderId = this.getAttribute('data-order-id');
+              editOrderOnAdminSide(orderId);
+            });
+          });
+
+
         }
       },
       204: function () {
@@ -641,6 +665,7 @@ function showServicesDetails(orderId) {
 
 function getServicesList() {
 
+  $('#cover-spin').show()
 
 
 
@@ -661,7 +686,14 @@ function getServicesList() {
         $("#cover-spin").hide(0);
 
 
-        console.log(data)
+        const serviceData = data.message; // replace with your actual API array
+        // Render only the clicked one OR all
+        const selectedService = serviceData.filter(s => s.service_id);
+        renderSidebarServices(selectedService);
+
+        // Show sidebar
+        const offcanvas = new bootstrap.Offcanvas("#strategyOffcanvas");
+        offcanvas.show();
 
 
       },
@@ -674,7 +706,7 @@ function getServicesList() {
           null,
           null,
           null,
-          alreadyExist409Error
+          noDataFoundText204Case
         );
       },
     },
@@ -813,8 +845,264 @@ function showOrderDetails(orderId) {
 }
 
 
+
+function editOrderOnAdminSide(orderId) {
+  editOrderDetailsID = orderId;
+  let order = ordersDataReceived.find(o => o.order_id === orderId);
+  let orderStatusValue = order.status;
+
+  if (orderStatusValue === 'Order placed') {
+    editOrderDetailsModalOrderStatusInit.setValue('in_progress');
+  } else {
+    editOrderDetailsModalOrderStatusInit.setValue(orderStatusValue);
+  }
+
+  $('#editOrderDetailsModalOrderStatus').on('change', function () {
+    enableDisabledButtonUpdateOrderStatus()
+  })
+   $('#editOrderDetailsModalSaveButton').attr('disabled', true);
+    $('#editOrderDetailsModalSaveButton').parent().addClass('cursor-no-drop');
+
+  $('#editOrderDetailsModal').modal('show');
+
+}
+
+
+// update select data options
+function updateFiltersSelectDataOptions() {
+
+  let editOrderDetailsModalOrderStatusData = [
+    { id: "pending", title: "Pending" },
+    { id: "in_progress", title: "In Progress" },
+    { id: "finalized", title: "Finalized" },
+    { id: "on_hold", title: "On Hold" },
+    { id: "cancelled", title: "Cancelled" },
+  ];
+
+
+  // wizerd form population data
+  editOrderDetailsModalOrderStatusInit.addOption(
+    editOrderDetailsModalOrderStatusData
+  );
+
+}
+
+
+// Render services in right sidebar
+function renderSidebarServices(services, preSelectedIds = []) {
+  const container = $("#strategyOffcanvasBody");
+  container.empty(); // clear old content
+
+  if (!services || services.length === 0) {
+    container.html(`<div class="text-center text-muted">No services available</div>`);
+    return;
+  }
+
+  services.forEach(service => {
+    const isSelected = preSelectedIds.includes(service.service_id);
+
+    const card = `
+      <div class="service-card card mb-3 shadow-sm
+          ${isSelected ? 'border-primary shadow-lg' : 'border'}" 
+          data-id="${service.service_id}" 
+          data-cost="${service.estimated_cost}">
+        
+        <div class="card-header fw-bold">${service.title}</div>
+        <div class="card-body">
+          <p class="card-text">${service.description || 'No description available'}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          Estimate Cost:
+          <span class="fw-bold text-primary">$${service.estimated_cost} ${service.cost_unit}</span>
+        </div>
+      </div>
+    `;
+    container.append(card);
+  });
+}
+
+
+$('#editOrderDetailsModalSaveButton').on('click', function () {
+  updateOrderStatus()
+});
+
+
+// update the order status
+function updateOrderStatus() {
+  $('#cover-spin').show()
+  const newStatus = $('#editOrderDetailsModalOrderStatus').val();
+  let orderId = editOrderDetailsID
+
+
+  const apiBody = JSON.stringify({
+    auth_token: authToken,
+    order_id: orderId,
+    status: newStatus,
+  })
+  // return 0 
+  $.ajax({
+    url: MAIN_API_PATH + tmlUpdateProfile,
+    method: POST,
+    contentType: Content_Type,
+    dataType: 'json',
+    data: apiBody,
+    statusCode: {
+      200: function (data) {
+        $('#cover-spin').hide(0)
+        showNotificationError(
+          'bg-green',
+          null,
+          null,
+          null,
+          null,
+          null,
+          UPDATE
+        )
+        $('#editOrderDetailsModal').modal('hide')
+        showDataTableLoader('ordersDataTable')
+        ordersDataTableInit.clear().draw()
+        let pageEntries = Number($('#datatableEntries1').val())
+        getOrdersTableData(pageEntries, 1)
+
+      },
+      204: function () {
+        $('#cover-spin').hide(0)
+        showNotificationError('bg-orange', null, null, null, null, null, alreadyExist409Error);
+      }
+    },
+    error: function (xhr, status, error) {
+      $('#cover-spin').hide()
+      if (xhr.status === 400) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          invalidRequest400Error
+        )
+      } else if (xhr.status === 401) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          unauthorizedRequest401Error
+        )
+      } else if (xhr.status === 404) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          notFound404Error
+        )
+      } else if (xhr.status === 409) {
+        showNotificationError(
+          'bg-orange',
+          null,
+          null,
+          null,
+          null,
+          null,
+          alreadyExist409Error
+        )
+      } else if (xhr.status === 503) {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      } else if (xhr.status === 408) {
+        swal(
+          {
+            title: ' ',
+            text: sessionExpired408Error,
+            type: 'info',
+            showCancelButton: false,
+            confirmButtonText: 'Logout'
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              localStorage.clear()
+              window.location.href = redirectToSignInPage408
+            }
+          }
+        )
+      } else if (xhr.status === 410) {
+        $('#cover-spin').hide()
+
+        $.ajax({
+          url: MAIN_API_PATH + getGmtAPI,
+          method: POST,
+          contentType: Content_Type,
+          dataType: 'json',
+          success: function (data, textStatus, xhr) {
+            const encrypt = new JSEncrypt()
+            encrypt.setPublicKey(sitePublicKey)
+            const dateString = String(pageName + data.unixtime)
+            securityKeyEncrypted = encrypt.encrypt(dateString)
+            SecurityKeyTime = false
+            createTheUsers()
+          },
+          error: function (xhr, status, error) {
+            $.getJSON(worldTimeAPI, function (data) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              createTheUsers()
+            })
+          }
+        })
+      } else {
+        showNotificationError(
+          'bg-red',
+          null,
+          null,
+          null,
+          null,
+          null,
+          serverError503Error
+        )
+      }
+    }
+  })
+
+}
+
 // ================= Create Order Button Click Event =================
 $(document).on("click", "#createOrderBtn", function () {
   window.location.href = "create-order.html";
 });
 // ================= END: Create Order Button Click Event =================
+
+
+
+
+
+
+function enableDisabledButtonUpdateOrderStatus() {
+
+  let currentOrder = ordersDataReceived.find(order => order.order_id === editOrderDetailsID)
+
+  let currentOrderStatus = currentOrder.status
+  let orderStatusValue = $('#editOrderDetailsModalOrderStatus').val();
+  if (currentOrderStatus === orderStatusValue) {
+    $('#editOrderDetailsModalSaveButton').prop('disabled', true);
+    $('#editOrderDetailsModalSaveButton').parent().addClass('cursor-no-drop');
+  } else {
+    $('#editOrderDetailsModalSaveButton').prop('disabled', false);
+    $('#editOrderDetailsModalSaveButton').parent().removeClass('cursor-no-drop');
+  }
+}

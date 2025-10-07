@@ -344,7 +344,85 @@
 
 
           </div>
-          <!-- End Content -->
+        </div>
+      </div>
+
+
+    </div>
+    <!-- End Content -->
+
+
+
+    <!-- start Offcanvas Panel -->
+    <div class="offcanvas offcanvas-end wide-offcanvas" tabindex="-1" id="strategyOffcanvas"
+      aria-labelledby="strategyOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h4 id="strategyOffcanvasLabel"> Services</h4>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- API Data Will Inject Here -->
+        <div id="strategyOffcanvasBody">
+          <div class="text-center text-muted">Click an item to load details</div>
+        </div>
+      </div>
+    </div>
+    <!-- end Offcanvas Panel -->
+
+
+
+    <!-- edit user Modal -->
+    <div class="modal fade" id="editOrderDetailsModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editOrderDetailsModalLabel">Update Order Status</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editOrderDetailsModalForm">
+
+
+
+
+              <!-- start size -->
+              <div class="col-12" id="populationSizeDiv">
+                <label class=" form-label" for="editOrderDetailsModalOrderStatus">Order Status:</label>
+                <!-- Select -->
+                <div class="tom-select-custom" style="cursor: pointer;">
+                  <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+                              "searchInDropdown": false,
+                          "hideSearch": true,
+                          "placeholder": "Select"
+                          }' id="editOrderDetailsModalOrderStatus" name="editOrderDetailsModalOrderStatus" required>
+                    <option class="p-2" value="">Select</option>
+                  </select>
+                </div>
+                <!-- End Select -->
+              </div>
+              <!-- end size -->
+
+
+
+            </form>
+
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-white" data-bs-dismiss="modal">Close</button>
+            <div>
+              <button type="button" class="btn btn-outline-primary" id="editOrderDetailsModalSaveButton">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End edit user Modal -->
+
+
+
+
   </main>
   <!-- ========== END MAIN CONTENT ========== -->
 
