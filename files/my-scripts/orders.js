@@ -680,7 +680,7 @@ function getServicesList() {
           null,
           null,
           null,
-          alreadyExist409Error
+          noDataFoundText204Case
         );
       },
     },

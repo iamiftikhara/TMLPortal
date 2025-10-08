@@ -18,6 +18,7 @@ const options = JSON.stringify({
 
 
 
+
 const dataSourceIPconfig = {
   "tableHTMLIdToAppend": "ordersDataTableContainer", //append to html DOM Id (Required)
   "tableName": "My Orders",
@@ -26,20 +27,20 @@ const dataSourceIPconfig = {
   "tableMainApiCallFunc": getOrdersTableData, // Main API Call function name for datatable
   "tableIndexNo": 1, // Table number (Required)
   "tablePagination": true,
-  "tableHeaderHTMLContent": ` <div class="d-flex">
+  "tableHeaderHTMLContent": ` <div class="d-none flex">
                                 <button type="button" class="btn btn-outline-primary btn-sm read_only" id="createOrderBtn">
                                     Create Order
                                 </button>
                               </div>`,
   // "columns": null,
   "columns": [
-
-    { "name": "Service", "id": "service", "columnNo": 1, "visible": true },
-    { "name": "Payment", "id": "payment", "columnNo": 2, "visible": true },
-    { "name": "Status", "id": "status", "columnNo": 3, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 4, "visible": true },
-    { "name": "Created At", "id": "created_at", "columnNo": 5, "visible": true },
-    { "name": "Updated At", "id": "updated_at", "columnNo": 6, "visible": true },
+    { "name": "Bundle Name", "id": "bundle_name", "columnNo": 1, "visible": true },
+    { "name": "Services", "id": "services", "columnNo": 2, "visible": true },
+    { "name": "Payment", "id": "payment", "columnNo": 3, "visible": true },
+    { "name": "Status", "id": "status", "columnNo": 4, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 5, "visible": true },
+    { "name": "Created At", "id": "created_at", "columnNo": 6, "visible": true },
+    { "name": "Updated At", "id": "updated_at", "columnNo": 7, "visible": true },
 
 
 
@@ -53,6 +54,13 @@ const dataSourceIPconfig = {
         "label": "Order ID",
         "id": "order_id",
         "placeholder": "Enter Order ID",
+        "type": "text",
+        "checked": true,
+      },
+      {
+        "label": "Order Name",
+        "id": "order_name",
+        "placeholder": "Enter Order Name",
         "type": "text",
         "checked": true,
       },
@@ -72,6 +80,14 @@ const dataSourceIPconfig = {
       "label": "Order ID",
       "id": "order_id",
       "placeholder": "Enter Order ID",
+      "columnNo": 0,
+      "hidden": false // This field is shown
+    },
+     {
+      "type": "text",
+      "label": "Order Name",
+      "id": "order_name",
+      "placeholder": "Enter Order Name",
       "columnNo": 1,
       "hidden": false // This field is shown
     },
@@ -80,7 +96,7 @@ const dataSourceIPconfig = {
       "label": "Payment",
       "id": "payment",
       "placeholder": "Enter Payment",
-      "columnNo": 4,
+      "columnNo": 3,
       "hidden": false // This field is shown
     },
     {
@@ -88,7 +104,7 @@ const dataSourceIPconfig = {
       "label": "Status",
       "id": "status",
       "placeholder": "Enter Status",
-      "columnNo": 5,
+      "columnNo": 4,
       "hidden": false // This field is shown
     }
 
@@ -97,14 +113,15 @@ const dataSourceIPconfig = {
   ],
   "tableHeader": [
     { "name": "Order ID", "widthClass": "w-5" },
-    { "name": "Service", "widthClass": "w-5" },
+    { "name": "Bundle Name", "widthClass": "w-5" },
+    { "name": "Services", "widthClass": "w-5" },
     { "name": "Payment", "widthClass": "w-5" },
     { "name": "Status", "widthClass": "w-5" },
-    { "name": "Actions", "widthClass": "w-5" },
     { "name": "Created At", "widthClass": "w-5" },
-    { "name": "Updated At", "widthClass": "w-" },
-
+    { "name": "Updated At", "widthClass": "w-5" },
+    { "name": "Actions", "widthClass": "w-" },
   ],
 };
+
 
 
