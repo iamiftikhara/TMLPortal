@@ -586,7 +586,7 @@ function getaddFilesTableData(skip, page) {
         font-size: 0.8rem;
     ">${doc.type}</span>`,
 
-              sourceDisplay,
+             `<u class="text-primary">${sourceDisplay}</u>`,
               createdDate,
               `<td><span>${availability}</span></td>`,
               `<span>${actions}</span>`,

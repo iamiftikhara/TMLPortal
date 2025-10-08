@@ -1607,7 +1607,7 @@ function getCreateBundleTableData(skip, page) {
             .add([
               bundle.title,
               description,
-              servicesCount,
+               `<u class="text-primary">${servicesCount}</u>`,
               availabilityToggle,
               createdDate,
               actions,

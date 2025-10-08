@@ -38,9 +38,10 @@ const dataSourceIPconfig = {
     { "name": "Services", "id": "services", "columnNo": 2, "visible": true },
     { "name": "Payment", "id": "payment", "columnNo": 3, "visible": true },
     { "name": "Status", "id": "status", "columnNo": 4, "visible": true },
-    { "name": "Actions", "id": "actions", "columnNo": 5, "visible": true },
-    { "name": "Created At", "id": "created_at", "columnNo": 6, "visible": true },
-    { "name": "Updated At", "id": "updated_at", "columnNo": 7, "visible": true },
+    { "name": "Created At", "id": "created_at", "columnNo": 5, "visible": true },
+    { "name": "Updated At", "id": "updated_at", "columnNo": 6, "visible": true },
+    { "name": "Actions", "id": "actions", "columnNo": 7, "visible": true },
+
 
 
 
@@ -58,18 +59,18 @@ const dataSourceIPconfig = {
         "checked": true,
       },
       {
-        "label": "Order Name",
+        "label": "Bundle Name",
         "id": "order_name",
-        "placeholder": "Enter Order Name",
+        "placeholder": "Enter Bundle Name",
         "type": "text",
-        "checked": true,
+        "checked": false,
       },
       {
          "label": "Status",
         "id": "status",
         "placeholder": "Enter Status",
         "type": "text",
-        "checked": true,
+        "checked": false,
       }
     ]
   },
@@ -85,9 +86,9 @@ const dataSourceIPconfig = {
     },
      {
       "type": "text",
-      "label": "Order Name",
+      "label": "Bundle Name",
       "id": "order_name",
-      "placeholder": "Enter Order Name",
+      "placeholder": "Enter Bundle Name",
       "columnNo": 1,
       "hidden": false // This field is shown
     },

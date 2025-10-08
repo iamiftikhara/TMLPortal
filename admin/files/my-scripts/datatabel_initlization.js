@@ -340,7 +340,7 @@ function createSearchAndFilter(config) {
                       ${config.searchFields.fields.length % 2 !== 0 ? '</div>' : ''}
                 </div>
                 <div class="d-grid">
-                  <button class="${config.tableId}CloseSearchColumn btn btn-primary" type="button" role="button" id="${config.tableId}ApplySearchColumns">Apply</button>
+                  <button class="${config.tableId}CloseSearchColumn btn btn-outline-primary" type="button" role="button" id="${config.tableId}ApplySearchColumns">Apply</button>
                 </div>
               </form>
             </div>
@@ -568,9 +568,9 @@ function appendSearchCollapse(config, headerMainDiv) {
                         <div class="row d-flex justify-content-end mt-0 mb-3">
                             <div class="d-grid gap-2 d-flex flex-row-reverse">
                                 <button type="button" id="${config.tableId}DynamicSearchBtn"
-                                    class="btn btn-primary btn-sm" disabled>Search</button>
+                                    class="btn btn-outline-primary btn-sm" disabled>Search</button>
                                 <button type="button" id="${config.tableId}CloseSearchCollapse"
-                                    class="forgot-password-close-modal btn btn-secondary btn-sm">Cancel</button>
+                                    class="forgot-password-close-modal btn btn-outline-secondary btn-sm">Cancel</button>
                             </div>
                         </div>
                 </div>

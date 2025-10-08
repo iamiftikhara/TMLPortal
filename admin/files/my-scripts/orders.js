@@ -867,6 +867,10 @@ function editOrderOnAdminSide(orderId) {
 
 }
 
+  $('#editOrderDetailsModalOrderStatus').on('change', function () {
+    enableDisabledButtonUpdateOrderStatus()
+  })
+
 
 // update select data options
 function updateFiltersSelectDataOptions() {
@@ -1097,7 +1101,20 @@ function enableDisabledButtonUpdateOrderStatus() {
   let currentOrder = ordersDataReceived.find(order => order.order_id === editOrderDetailsID)
 
   let currentOrderStatus = currentOrder.status
+  console.log("currentOrderStatus", currentOrderStatus);
+
+
+    console.log("currentOrderStatus", currentOrderStatus);
+    
+  
   let orderStatusValue = $('#editOrderDetailsModalOrderStatus').val();
+  
+    if (orderStatusValue === 'in_progress') {
+      orderStatusValue  = 'Order placed'
+    } 
+  console.log("orderStatusValue", orderStatusValue);
+
+
   if (currentOrderStatus === orderStatusValue) {
     $('#editOrderDetailsModalSaveButton').prop('disabled', true);
     $('#editOrderDetailsModalSaveButton').parent().addClass('cursor-no-drop');
