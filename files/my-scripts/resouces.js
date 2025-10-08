@@ -14,7 +14,7 @@ $(document).ready(function () {
   $('#mainContentInnerDataToShow').removeClass('d-none')
 
 
-  getResourcesData(10,1);
+  getResourcesData(10, 1);
 
 });
 
@@ -23,7 +23,7 @@ $(document).ready(function () {
 // Main API Call function for datatable
 function getResourcesData(skip, page) {
 
-  
+
   let requirePayloadData
   if ((Object.keys(searchOject).length > 0)) {
     requirePayloadData = JSON.stringify({
@@ -52,31 +52,35 @@ function getResourcesData(skip, page) {
     data: requirePayloadData,
     statusCode: {
       200: function (res) {
-       
+
         $('#cover-spin').hide()
+        $('#resourcesCardErrorDiv').addClass('d-none')
+
         // call the function to populate service cards to UI
         populateServiceCardsToUI(res.message)
       },
       204: function () {
         $('#cover-spin').hide()
-        
-        $('#ordersDataTableErrorText').text(noDataFoundText204Case)
+
+        $('#resourcesCardErrorDiv').removeClass('d-none')
+        $('#resourcesCardErrorText').text(noDataFoundText204Case)
       }
     },
     error: function (xhr, status, error) {
       $('#cover-spin').hide()
-     
+
+      $('#resourcesCardErrorDiv').removeClass('d-none')
 
       if (xhr.status === 400) {
-        $('#ordersDataTableErrorText').text(invalidRequest400Error)
+        $('#resourcesCardErrorText').text(invalidRequest400Error)
       } else if (xhr.status === 401) {
-        $('#ordersDataTableErrorText').text(unauthorizedRequest401Error)
+        $('#resourcesCardErrorText').text(unauthorizedRequest401Error)
       } else if (xhr.status === 404) {
         // $('#cover-spin').hide(0);
-        $('#ordersDataTableErrorText').text(notFound404Error)
+        $('#resourcesCardErrorText').text(notFound404Error)
       } else if (xhr.status === 503) {
         // $('#cover-spin').hide(0);
-        $('#ordersDataTableErrorText').text(serverError503Error)
+        $('#resourcesCardErrorText').text(serverError503Error)
       } else if (xhr.status === 408) {
         swal(
           {
@@ -120,7 +124,7 @@ function getResourcesData(skip, page) {
         })
       } else {
         // $('#cover-spin').hide(0);
-        $('#ordersDataTableErrorText').text(serverError503Error)
+        $('#resourcesCardErrorText').text(serverError503Error)
       }
     }
   })
@@ -151,9 +155,9 @@ function populateServiceCardsToUI(dataArray) {
     card.innerHTML = `
       <div class="card h-100 d-flex flex-column">
         <div class="card-header 
-          ${data.type === 'file' ? 'bg-primary bg-opacity-25 text-primary' : 
-            data.type === 'url' ? 'bg-success bg-opacity-25 text-success' : 
-            'bg-danger bg-opacity-25 text-danger'}">
+          ${data.type === 'file' ? 'bg-primary bg-opacity-25 text-primary' :
+        data.type === 'url' ? 'bg-success bg-opacity-25 text-success' :
+          'bg-danger bg-opacity-25 text-danger'}">
           <h5 class="mb-0">${escapeHtml(data.title || 'Untitled')}</h5>
         </div>
 
@@ -166,35 +170,34 @@ function populateServiceCardsToUI(dataArray) {
             <small class="text-dark mt-2">
               Updated: ${new Date(Number(data.updated_at) * 1000).toLocaleDateString()}
             </small>
-            ${
-              data.type === 'file'
-                ? `<button type="button" class="btn btn-outline-primary btn-sm px-4"
+            ${data.type === 'file'
+        ? `<button type="button" class="btn btn-outline-primary btn-sm px-4"
                     data-id="${data.document_id}"
                     data-source="${encodeURIComponent(data.source)}"
                     data-title="${encodeURIComponent(data.title)}"
                     onclick="downloadDocument(decodeURIComponent(this.dataset.source), decodeURIComponent(this.dataset.title))">
                     Download</button>`
-              : data.type === 'url'
-                ? `<button type="button" class="btn btn-outline-success btn-sm px-4"
+        : data.type === 'url'
+          ? `<button type="button" class="btn btn-outline-success btn-sm px-4"
                     data-id="${data.document_id}"
                     data-source="${encodeURIComponent(data.source)}"
                     onclick="openUrlInNewTab(decodeURIComponent(this.dataset.source))">
                     Open Link</button>`
-                : `<button type="button" class="btn btn-outline-danger btn-sm px-4"
+          : `<button type="button" class="btn btn-outline-danger btn-sm px-4"
                     data-id="${data.document_id}"
                     data-title="${encodeURIComponent(data.title)}"
                     data-source="${encodeURIComponent(data.source)}"
                     onclick="showInCanvas(decodeURIComponent(this.dataset.title), decodeURIComponent(this.dataset.source))">
                     View</button>`
-            }
+      }
           </div>
         </div>
       </div>
     `;
 
-  
 
-  
+
+
     cardHolderDiv.appendChild(card);
     // Append card to container
     container.appendChild(cardHolderDiv);
@@ -207,8 +210,8 @@ function downloadDocument(fileUrl, document_Name) {
 
 
   const payload = JSON.stringify({
-      download_file: fileUrl,
-      
+    download_file: fileUrl,
+
   });
 
   const options = {
@@ -264,7 +267,7 @@ function downloadDocument(fileUrl, document_Name) {
               const DateString = String(data.unixtime);
               securityKeyEncrypted = encrypt.encrypt(pageName + DateString);
               SecurityKeyTime = false;
-              downloadUploadedFile(fileUrl,document_Name);
+              downloadUploadedFile(fileUrl, document_Name);
             },
             error: function () {
               $.getJSON(worldTimeAPI, function (data) {
@@ -300,7 +303,7 @@ function downloadDocument(fileUrl, document_Name) {
 
 
 
-function  showInCanvas(title, content) {
+function showInCanvas(title, content) {
   document.getElementById('textOffcanvasLabel').textContent = title;
   document.getElementById('textOffcanvasBody').textContent = content || '(no text)';
   const offcanvas = new bootstrap.Offcanvas('#textOffcanvas');
@@ -315,6 +318,6 @@ function openUrlInNewTab(url) {
 
 function escapeHtml(str = '') {
   return str.replace(/[&<>"']/g, m => ({
-    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
   }[m]));
 }
