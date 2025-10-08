@@ -32,8 +32,15 @@ body.stop-scrolling {
   display: none;
   z-index: 99999; }
   .sa-confirm-button-container button.confirm{
-    background-color: #6c1212 !important;
-  }
+    background-color: transparent !important; color:  #6c1212; border: 1px solid #6c1212; }
+
+  
+.sa-confirm-button-container button.confirm:hover {
+  background-color: #6c1212 !important;
+  color: #dfdfdf !important;
+  border-color: #6c1212 !important;
+}
+  
   @media all and (max-width: 540px) {
     .sweet-alert {
       width: auto;
@@ -194,11 +201,11 @@ body.stop-scrolling {
     .sweet-alert button:active {
       background-color: #677788; }
     .sweet-alert button.cancel {
-      background-color: #677788; }
+      background-color: transparent; color:  #6c757d; border: 1px solid #c4c4c4; }
       .sweet-alert button.cancel:hover {
-        background-color: #677788; }
+        background-color: #677788; color: #fff; }
       .sweet-alert button.cancel:active {
-        background-color: #677788; }
+        background-color: #5a6268; color: #fff; }
       .sweet-alert button.cancel:focus {
         box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important; }
     .sweet-alert button[disabled] {
