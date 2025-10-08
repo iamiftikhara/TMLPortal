@@ -115,8 +115,6 @@ $(document).ready(function () {
       null
     );
 
-  // First Data Table Initialization
-  ordersDataTableInit = createTableComponent(dataSourceIPconfig, options);
 
   //  validation rules define
   $("#muncipalityWizerdForm").validate({
@@ -313,9 +311,7 @@ $(document).ready(function () {
     ],
   });
 
-  // getMuncipilityDetails()
-
-  getOrdersTableData(10, 1);
+  getMuncipilitiesData();
 
   updateFiltersSelectDataOptions();
   reIntiateWizerd();
@@ -449,357 +445,11 @@ function generateSpan(data, key, customClass = "", style = "") {
   return spanContent;
 }
 
-// Main API Call function for datatable
-// function getMuncipilityDetails() {
-
-//   let data = [
-//     {
-//       order_id: 'ORD12345',
-//       municipality: 'Springfield',
-//       service: 'Cloud Hosting',
-//       date: '2024-01-15',
-//       payment: 'Paid',
-//       status: 'In Provisioning',
-//     },
-//     {
-//       order_id: 'ORDdf5',
-//       municipality: 'Springfield',
-//       service: 'Cloud Hosting',
-//       date: '2024-01-13',
-//       payment: 'Pending',
-//       status: 'Pending Kickoff',
-//     },
-
-//   ]
-
-//   let requirePayloadData
-//   requirePayloadData = JSON.stringify({
-//     auth_token: authToken,
-//   })
-
-//   // Ajax call
-//   $.ajax({
-//     url: MAIN_API_PATH + getOrdersAPI,
-//     method: POST,
-//     contentType: Content_Type,
-//     dataType: 'json',
-//     data: requirePayloadData,
-//     statusCode: {
-//       200: function (data) {
-//         // Hide page laoder Spiner
-//         $('#cover-spin').hide()
-
-//       },
-//       204: function () {
-//         $('#cover-spin').hide()
-//         $('#showMuncipilatiyDetaislLoader, #showMuncipilatiyDetaislMainDiv').addClass('d-none')
-//         $('#showMuncipilatiyDetaislErrorTextDiv').removeClass('d-none')
-//         $('#showMuncipilatiyDetaislErrorText').html(`
-//           <h1 class="mb-1">Welcome!</h1>
-//           <p class="mb-0">We're glad to have you here. <span class='text-decoration-underline cursor-pointer text-primary' id='clickToOpenWizerd'>Click</span> here to add details.</p>
-//           `)
-
-//         $('#ordersDataTableContainer > .card').addClass('disabled-div')
-//         $('#ordersDataTableContainer')
-//           .attr('title', 'Municipality details are required.')
-//           .css('cursor', 'no-drop');
-
-//         let org_name = localStorage.getItem('_org_n')
-//         $('#municipalityWizerdFormName').val(org_name)
-//         $('#municipalityWizerdFormName').attr('disabled', true).css({ 'cursor': 'no-drop' })
-
-//       }
-//     },
-//     error: function (xhr, status, error) {
-//       $('#cover-spin').hide()
-
-//       if (xhr.status === 400) {
-//         $('#showMuncipilatiyDetaislErrorText').text(invalidRequest400Error)
-//       } else if (xhr.status === 401) {
-//         $('#showMuncipilatiyDetaislErrorText').text(unauthorizedRequest401Error)
-//       } else if (xhr.status === 404) {
-//         // $('#cover-spin').hide(0);
-//         $('#showMuncipilatiyDetaislErrorText').text(notFound404Error)
-//       } else if (xhr.status === 503) {
-//         // $('#cover-spin').hide(0);
-//         $('#showMuncipilatiyDetaislErrorText').text(serverError503Error)
-//       } else if (xhr.status === 408) {
-//         swal(
-//           {
-//             title: ' ',
-//             text: sessionExpired408Error,
-//             type: 'info',
-//             showCancelButton: false,
-//             confirmButtonText: 'Logout'
-//           },
-//           function (isConfirm) {
-//             if (isConfirm) {
-//               localStorage.clear()
-//               window.location.href = redirectToSignInPage408
-//             }
-//           }
-//         )
-//       } else if (xhr.status === 410) {
-//         $.ajax({
-//           url: MAIN_API_PATH + getGmtAPI,
-//           method: POST,
-//           contentType: Content_Type,
-//           dataType: 'json',
-//           success: function (data, textStatus, xhr) {
-//             const encrypt = new JSEncrypt()
-//             encrypt.setPublicKey(sitePublicKey)
-//             const currentDateString = String(data.unixtime)
-//             securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
-//             SecurityKeyTime = false
-//             getMuncipilityDetails()
-//           },
-//           error: function (xhr, status, error) {
-//             $.getJSON(worldTimeAPI, function (data) {
-//               const encrypt = new JSEncrypt()
-//               encrypt.setPublicKey(sitePublicKey)
-//               const currentDateString = String(data.unixtime)
-//               securityKeyEncrypted = encrypt.encrypt(pageName + currentDateString)
-//               SecurityKeyTime = false
-//               getMuncipilityDetails()
-//             })
-//           }
-//         })
-//       } else {
-//         // $('#cover-spin').hide(0);
-//         $('#showMuncipilatiyDetaislErrorText').text(serverError503Error)
-//       }
-//     }
-//   })
-
-// }
 
 function searchObjectCreation(search) {
   searchOject = search;
 }
 
-// Main API Call function for datatable
-function getOrdersTableData(skip, page) {
-  let data = [
-    {
-      order_id: "ORD12345",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-15",
-      payment: "Paid",
-      status: "In Provisioning",
-    },
-    {
-      order_id: "ORDdf5",
-      municipality: "Springfield",
-      service: "Cloud Hosting",
-      date: "2024-01-13",
-      payment: "Pending",
-      status: "Pending Kickoff",
-    },
-  ];
-
-  let requirePayloadData;
-  if (Object.keys(searchOject).length > 0) {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-      search: searchOject,
-    });
-  } else {
-    requirePayloadData = JSON.stringify({
-      auth_token: authToken,
-      skip: Number(skip),
-      page,
-    });
-  }
-
-  // Ajax call
-  $.ajax({
-    url: MAIN_API_PATH + getOrdersAPI,
-    method: POST,
-    contentType: Content_Type,
-    dataType: "json",
-    data: requirePayloadData,
-    statusCode: {
-      200: function (data) {
-        // Hide page laoder Spiner
-        $("#cover-spin").hide();
-
-        hideDataTableLoader200("ordersDataTable");
-
-        // Dummy orders data
-        // const data = [
-        //   {
-        //     order_id: "ORD-1001",
-        //     municipality: "Lahore",
-        //     service: "Water Connection",
-        //     date: "2025-09-29",
-        //     payment: "PKR 5,000",
-        //     status: "Pending Kickoff"
-        //   },
-        //   {
-        //     order_id: "ORD-1002",
-        //     municipality: "Karachi",
-        //     service: "Electricity",
-        //     date: "2025-09-25",
-        //     payment: "PKR 3,200",
-        //     status: "Completed"
-        //   },
-        //   {
-        //     order_id: "ORD-1003",
-        //     municipality: "Islamabad",
-        //     service: "Gas Connection",
-        //     date: "2025-09-20",
-        //     payment: "PKR 7,800",
-        //     status: "In Progress"
-        //   },
-        //   {
-        //     order_id: "ORD-1004",
-        //     municipality: "Multan",
-        //     service: "Internet Setup",
-        //     date: "2025-09-15",
-        //     payment: "PKR 2,500",
-        //     status: "Cancelled"
-        //   }
-        // ];
-
-        // Response data (IPs)
-        response = data;
-        ordersDataReceived = response;
-        localStorage.setItem("ordersDataTableTotal", data.length);
-        // If No IPs found
-
-        // loop through response to add data in datatable
-        for (let i = 0; i < response.length; i++) {
-          let order_id = generateSpan(response[i], "order_id", "", "");
-          let municipality = generateSpan(response[i], "municipality", "", "");
-          let service = generateSpan(response[i], "service", "", "");
-          let date = generateSpan(response[i], "date", "", "");
-          let payment = generateSpan(response[i], "payment", "", "");
-          let status = generateSpan(response[i], "status", "", "");
-          if (response[i].status === "Pending Kickoff") {
-            status = `<div class='d-flex flex-column'>
-      ${status}
-      <button class="btn btn-sm btn-outline-danger view-order-details p-1 ms-2 px-4" style='font-size: 10px; width: fit-content' data-order-id="${response[i].order_id}">Pay Now</button>
-      </div>      
-      `;
-          }
-
-          let actions = `
-      <button class="btn btn-sm btn-outline-primary view-order-details" data-order-id="${response[i].order_id}">View Details</button>
-      <button class="btn btn-sm btn-outline-secondary download-invoice" data-order-id="${response[i].order_id}">Download Invoice</button>
-    `;
-
-          ordersDataTableInit.row
-            .add([
-              `<td ><span >#${order_id}</span></td>`,
-              `<td ><span >${municipality}</span></td>`,
-              `<td ><span >${service}</span></td>`,
-              `<td ><span >${date}</span></td>`,
-              `<td ><span >${payment}</span></td>`,
-              `<td ><span >${status}</span></td>`,
-              `<td ><span >${actions}</span></td>`,
-            ])
-            .draw();
-          datatablePagination(
-            "ordersDataTable",
-            1,
-            "ordersDataTableTotal",
-            getOrdersTableData
-          );
-
-          let viewOrderDetailsButtons = document.querySelectorAll(
-            ".view-order-details"
-          );
-          viewOrderDetailsButtons.forEach((button) => {
-            button.addEventListener("click", function () {
-              let orderId = this.getAttribute("data-order-id");
-              // Redirect to order details page
-              showOrderDetails(orderId);
-            });
-          });
-        }
-      },
-      204: function () {
-        $("#cover-spin").hide();
-        hideDataTableLoaderError("ordersDataTable");
-        if (Object.keys(searchOject).length > 0) {
-          $("#ordersDataTableErrorDiv").addClass("d-none");
-          $(
-            "#ordersDataTable, #ordersDataTableDatatableMainHeading"
-          ).removeClass("d-none");
-        }
-        ordersDataTableInit.clear().draw();
-        $("#ordersDataTableErrorText").text(noDataFoundText204Case);
-      },
-    },
-    error: function (xhr, status, error) {
-      $("#cover-spin").hide();
-      hideDataTableLoaderError("ordersDataTable");
-
-      if (xhr.status === 400) {
-        $("#ordersDataTableErrorText").text(invalidRequest400Error);
-      } else if (xhr.status === 401) {
-        $("#ordersDataTableErrorText").text(unauthorizedRequest401Error);
-      } else if (xhr.status === 404) {
-        // $('#cover-spin').hide(0);
-        $("#ordersDataTableErrorText").text(notFound404Error);
-      } else if (xhr.status === 503) {
-        // $('#cover-spin').hide(0);
-        $("#ordersDataTableErrorText").text(serverError503Error);
-      } else if (xhr.status === 408) {
-        swal(
-          {
-            title: " ",
-            text: sessionExpired408Error,
-            type: "info",
-            showCancelButton: false,
-            confirmButtonText: "Logout",
-          },
-          function (isConfirm) {
-            if (isConfirm) {
-              localStorage.clear();
-              window.location.href = redirectToSignInPage408;
-            }
-          }
-        );
-      } else if (xhr.status === 410) {
-        $.ajax({
-          url: MAIN_API_PATH + getGmtAPI,
-          method: POST,
-          contentType: Content_Type,
-          dataType: "json",
-          success: function (data, textStatus, xhr) {
-            const encrypt = new JSEncrypt();
-            encrypt.setPublicKey(sitePublicKey);
-            const currentDateString = String(data.unixtime);
-            securityKeyEncrypted = encrypt.encrypt(
-              pageName + currentDateString
-            );
-            SecurityKeyTime = false;
-            getOrdersTableData(skip, page, search);
-          },
-          error: function (xhr, status, error) {
-            $.getJSON(worldTimeAPI, function (data) {
-              const encrypt = new JSEncrypt();
-              encrypt.setPublicKey(sitePublicKey);
-              const currentDateString = String(data.unixtime);
-              securityKeyEncrypted = encrypt.encrypt(
-                pageName + currentDateString
-              );
-              SecurityKeyTime = false;
-              getOrdersTableData(skip, page, search);
-            });
-          },
-        });
-      } else {
-        // $('#cover-spin').hide(0);
-        $("#ordersDataTableErrorText").text(serverError503Error);
-      }
-    },
-  });
-}
 
 // function to export data from datatable
 function exportOrdersDataTableData() {
@@ -1160,7 +810,7 @@ function setMuncipilitiesData() {
   // 2. Map each ID to its matching title
   const key_priorities = selectedKeys.map(id => {
     const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(item => item.id === id);
-    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
+    return found ? { id: found.id, title: found.title } : { id: id, title: id }; // fallback to id if no match
   });
 
   console.log(key_priorities);
@@ -1172,7 +822,7 @@ function setMuncipilitiesData() {
   // 2. Map each ID to its matching title
   const departments = selectedDepartments.map(id => {
     const found = muncipalityWizerdFormDepartmentsUnderMunicipalityData.find(item => item.id === id);
-    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
+    return found ? { id: found.id, title: found.title } : { id: id, title: id }; // fallback to id if no match
   });
 
   const total_employees =
@@ -1208,19 +858,19 @@ function setMuncipilitiesData() {
   const selectedCloudApps = $("#muncipalityWizerdFormCloudApplication").val();
   const cloud_apps_in_use = selectedCloudApps.map(id => {
     const found = muncipalityWizerdFormCloudApplicationData.find(item => item.id === id);
-    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
+    return found ? { id: found.id, title: found.title } : { id: id, title: id }; // fallback to id if no match
   });
 
   const selectedCloudWorkLoads = $("#muncipalityWizerdFormCloudWorkloads").val();
   const cloud_workloads_in_use = selectedCloudWorkLoads.map(id => {
     const found = muncipalityWizerdFormCloudWorkloadsData.find(item => item.id === id);
-    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
+    return found ? { id: found.id, title: found.title } : { id: id, title: id }; // fallback to id if no match
   });
 
   const selectedCompliancesInUse = $("#muncipalityWizerdFormCompliancesInUse").val();
   const compliances_in_use = selectedCompliancesInUse.map(id => {
     const found = muncipalityWizerdFormCompliancesInUse.find(item => item.id === id);
-    return found ? {id: found.id, title: found.title} : {id: id, title: id}; // fallback to id if no match
+    return found ? { id: found.id, title: found.title } : { id: id, title: id }; // fallback to id if no match
   });
 
 
@@ -1449,7 +1099,6 @@ function setMuncipilitiesData() {
 
 // ********************** start get municpilities detsils *********************************
 
-getMuncipilitiesData();
 function getMuncipilitiesData() {
   const apiBody = JSON.stringify({
     auth_token: authToken,
@@ -1470,7 +1119,7 @@ function getMuncipilitiesData() {
         muncipalityWizerdDataReceivedFromAPI = apiData
         $("#showMuncipilatiyDetaislLoader").addClass("d-none");
         $("#showMuncipilatiyDetaislErrorTextDiv").addClass("d-none");
-        $("#muncipalityInformationHeader, #showMuncipilatiyDetaisl").removeClass("d-none");
+        $("#muncipalityInformationHeader, #showMuncipilatiyDetaisl, #summaryCardsRow").removeClass("d-none");
         $("#showMuncipilatiyDetaislMainDiv")
           .html(renderMunicipalityCards(apiData))
           .removeClass("d-none");
@@ -1478,7 +1127,7 @@ function getMuncipilitiesData() {
       204: function () {
         $("#cover-spin").hide();
         $(
-          "#showMuncipilatiyDetaislLoader, #showMuncipilatiyDetaislMainDiv"
+          "#showMuncipilatiyDetaislLoader, #showMuncipilatiyDetaislMainDiv, #summaryCardsRow"
         ).addClass("d-none");
         $("#showMuncipilatiyDetaislErrorTextDiv").removeClass("d-none");
         $("#showMuncipilatiyDetaislErrorText").html(`
@@ -1500,56 +1149,20 @@ function getMuncipilitiesData() {
     },
     error: function (xhr, status, error) {
       $("#cover-spin").hide();
+      $(
+        "#showMuncipilatiyDetaislLoader, #showMuncipilatiyDetaislMainDiv, #summaryCardsRow"
+      ).addClass("d-none");
+      $("#showMuncipilatiyDetaislErrorTextDiv").removeClass("d-none");
       if (xhr.status === 400) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          invalidRequest400Error
-        );
+        $("#showMuncipilatiyDetaislErrorText").text(invalidRequest400Error);
       } else if (xhr.status === 401) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          unauthorizedRequest401Error
-        );
+        $("#showMuncipilatiyDetaislErrorText").text(unauthorizedRequest401Error);
       } else if (xhr.status === 404) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          notFound404Error
-        );
+        $("#showMuncipilatiyDetaislErrorText").text(notFound404Error);
       } else if (xhr.status === 409) {
-        showNotificationError(
-          "bg-orange",
-          null,
-          null,
-          null,
-          null,
-          null,
-          alreadyExist409Error
-        );
+        $("#showMuncipilatiyDetaislErrorText").text(alreadyExist409Error);
       } else if (xhr.status === 503) {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
+        $("#showMuncipilatiyDetaislErrorText").text(serverError503Error);
       } else if (xhr.status === 408) {
         swal(
           {
@@ -1594,15 +1207,7 @@ function getMuncipilitiesData() {
           },
         });
       } else {
-        showNotificationError(
-          "bg-red",
-          null,
-          null,
-          null,
-          null,
-          null,
-          serverError503Error
-        );
+        $("#showMuncipilatiyDetaislErrorText").text(serverError503Error);
       }
     },
   });
@@ -1959,156 +1564,156 @@ function getMuncipilitiesDataForWizard() {
 
 
 
-        const apiData = muncipalityWizerdDataReceivedFromAPI;
+  const apiData = muncipalityWizerdDataReceivedFromAPI;
 
 
-        if (apiData.municipality_id) {
-          localStorage.setItem('municipality_id', apiData.municipality_id);
-        }
+  if (apiData.municipality_id) {
+    localStorage.setItem('municipality_id', apiData.municipality_id);
+  }
 
 
-        // ----------------- Populate Basic Info -----------------
-        $("#municipalityWizerdFormName").val(apiData.municipality_name || "");
-        $("#municipalityHelpName").text("Enter the official name of the municipality");
+  // ----------------- Populate Basic Info -----------------
+  $("#municipalityWizerdFormName").val(apiData.municipality_name || "");
+  $("#municipalityHelpName").text("Enter the official name of the municipality");
 
-        muncipalityWizerdFormPopulationSizeInit.setValue(apiData.population_size || "");
-        // $("#muncipalityWizerdFormPopulationSize").val(apiData.population_size || "");
-        $("#municipalityHelpPopulation").text("Enter the total population size");
+  muncipalityWizerdFormPopulationSizeInit.setValue(apiData.population_size || "");
+  // $("#muncipalityWizerdFormPopulationSize").val(apiData.population_size || "");
+  $("#municipalityHelpPopulation").text("Enter the total population size");
 
-        $("#municipalityWizerdFormAssociatedCounty").val(apiData.county || "");
-        $("#municipalityHelpCounty").text("Select the county this municipality belongs to");
+  $("#municipalityWizerdFormAssociatedCounty").val(apiData.county || "");
+  $("#municipalityHelpCounty").text("Select the county this municipality belongs to");
 
-        $("#muncipalityWizerdFormCountryWebsiteURL").val(apiData.website_url || "");
-        $("#municipalityHelpWebsite").text("Provide the official website URL");
+  $("#muncipalityWizerdFormCountryWebsiteURL").val(apiData.website_url || "");
+  $("#municipalityHelpWebsite").text("Provide the official website URL");
 
-        // ----------------- Populate Contact Info -----------------
-        $("#municipalityWizerdFormContactFirstName").val(apiData.primary_contact_first_name || "");
-        $("#municipalityHelpContactName").text("Enter the name of the primary contact");
+  // ----------------- Populate Contact Info -----------------
+  $("#municipalityWizerdFormContactFirstName").val(apiData.primary_contact_first_name || "");
+  $("#municipalityHelpContactName").text("Enter the name of the primary contact");
 
-        $("#municipalityWizerdFormContactLastName").val(apiData.primary_contact_last_name || "");
-        $("#municipalityHelpContactName").text("Enter the name of the primary contact");
+  $("#municipalityWizerdFormContactLastName").val(apiData.primary_contact_last_name || "");
+  $("#municipalityHelpContactName").text("Enter the name of the primary contact");
 
-        $("#muncipalityWizerdFormEmail").val(apiData.primary_contact_email || "");
-        $("#municipalityHelpEmail").text("Enter the contact email address");
+  $("#muncipalityWizerdFormEmail").val(apiData.primary_contact_email || "");
+  $("#municipalityHelpEmail").text("Enter the contact email address");
 
-        $("#muncipalityWizerdFormPhone").val(apiData.primary_contact_phone || "");
-        $("#municipalityHelpPhone").text("Enter the primary contact phone number");
+  $("#muncipalityWizerdFormPhone").val(apiData.primary_contact_phone || "");
+  $("#municipalityHelpPhone").text("Enter the primary contact phone number");
 
-        // ----------------- Populate Stats -----------------
-        $("#muncipalityWizerdFormTotalEmployees").val(apiData.total_employees || "");
-        $("#municipalityHelpTotalEmployees").text("Total number of employees in municipality");
+  // ----------------- Populate Stats -----------------
+  $("#muncipalityWizerdFormTotalEmployees").val(apiData.total_employees || "");
+  $("#municipalityHelpTotalEmployees").text("Total number of employees in municipality");
 
-        $("#muncipalityWizerdFormNumberOfITEmployees").val(apiData.it_employees || "");
-        $("#municipalityHelpITEmployees").text("Total number of IT employees");
+  $("#muncipalityWizerdFormNumberOfITEmployees").val(apiData.it_employees || "");
+  $("#municipalityHelpITEmployees").text("Total number of IT employees");
 
-        $("#muncipalityWizerdFormEndUserDevices").val(apiData.end_user_devices || "");
-        $("#municipalityHelpEndUserDevices").text("Number of end-user devices");
+  $("#muncipalityWizerdFormEndUserDevices").val(apiData.end_user_devices || "");
+  $("#municipalityHelpEndUserDevices").text("Number of end-user devices");
 
-        $("#muncipalityWizerdFormServers").val(apiData.servers || "");
-        $("#municipalityHelpServers").text("Number of servers deployed");
+  $("#muncipalityWizerdFormServers").val(apiData.servers || "");
+  $("#municipalityHelpServers").text("Number of servers deployed");
 
-        $("#muncipalityWizerdFormSpecializedDevices").val(apiData.specialized_devices || "");
-        $("#municipalityHelpSpecializedDevices").text("Specialized devices in use");
+  $("#muncipalityWizerdFormSpecializedDevices").val(apiData.specialized_devices || "");
+  $("#municipalityHelpSpecializedDevices").text("Specialized devices in use");
 
-        $("#muncipalityWizerdFormNumberOfConnectedSites").val(apiData.no_of_connecetd_sites || "");
-        $("#municipalityHelpConnectedSites").text("Total connected sites");
+  $("#muncipalityWizerdFormNumberOfConnectedSites").val(apiData.no_of_connecetd_sites || "");
+  $("#municipalityHelpConnectedSites").text("Total connected sites");
 
-        // ----------------- Radio Buttons -----------------
-        if (apiData.outsourced_it) {
-          $(`input[name='cyberVendors'][value='${apiData.outsourced_it}']`).prop("checked", true);
-        }
+  // ----------------- Radio Buttons -----------------
+  if (apiData.outsourced_it) {
+    $(`input[name='cyberVendors'][value='${apiData.outsourced_it}']`).prop("checked", true);
+  }
 
-        if (apiData.network_backup) {
-          $(`input[name='backupInternetRedundancy'][value='${apiData.network_backup}']`).prop("checked", true);
-        }
+  if (apiData.network_backup) {
+    $(`input[name='backupInternetRedundancy'][value='${apiData.network_backup}']`).prop("checked", true);
+  }
 
-        // pishing
-        if (apiData.phishing) {
-          $(`input[name='usingPhishingDetectionTools'][value='${apiData.phishing}']`).prop("checked", true);
-        }
+  // pishing
+  if (apiData.phishing) {
+    $(`input[name='usingPhishingDetectionTools'][value='${apiData.phishing}']`).prop("checked", true);
+  }
 
-        // ----------------- Multi-select Fields (Tom Select) -----------------
-        if (apiData.key_priorities) {
-          // const keyPrioritiesSelect = new TomSelect("#muncipalityWizerdFormKeyPrioritiesUpTo3");
-          // keyPrioritiesSelect.setValue(apiData.key_priorities);
-
-
-          // [
-          //     {
-          //         "id": "impoveComplianceRegulatoryPosture",
-          //         "title": "Improve compliance/regulatory posture"
-          //     },
-          //     {
-          //         "id": "expandDigitalServicesForCitizens",
-          //         "title": "Expand digital services for citizens"
-          //     },
-          //     {
-          //         "id": "upgradeITSystem",
-          //         "title": "Upgrade IT systems"
-          //     }
-          // ]]
+  // ----------------- Multi-select Fields (Tom Select) -----------------
+  if (apiData.key_priorities) {
+    // const keyPrioritiesSelect = new TomSelect("#muncipalityWizerdFormKeyPrioritiesUpTo3");
+    // keyPrioritiesSelect.setValue(apiData.key_priorities);
 
 
-          const idsToSelect = apiData.key_priorities.map(item => {
-            const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(opt => opt.id === item.id);
-            return found ? found.id : null;
-          }).filter(Boolean); // remove nulls if any
-
-          muncipalityWizerdFormKeyPrioritiesUpTo3Init.setValue(idsToSelect);
-
-
-        }
-
-        if (apiData.departments) {
-          // const departmentsSelect = new TomSelect("#muncipalityWizerdFormDepartmentsUnderMunicipality");
-          // departmentsSelect.setValue(apiData.departments);
-
-          const idsToSelect = apiData.departments.map(item => {
-            const found = muncipalityWizerdFormDepartmentsUnderMunicipalityData.find(opt => opt.title === item.title);
-            return found ? found.id : null;
-          }).filter(Boolean); // remove nulls if any
-          muncipalityWizerdFormDepartmentsUnderMunicipalityInit.setValue(idsToSelect);
-        }
-
-        if (apiData.cloud_apps_in_use) {
-          // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
-          // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
-
-          const idsToSelect = apiData.cloud_apps_in_use.map(item => {
-            const found = muncipalityWizerdFormCloudApplicationData.find(opt => opt.id === item.id);
-            return found ? found.id : null;
-          }).filter(Boolean); // remove nulls if any
-
-          muncipalityWizerdFormCloudApplicationInit.setValue(idsToSelect);
-        }
+    // [
+    //     {
+    //         "id": "impoveComplianceRegulatoryPosture",
+    //         "title": "Improve compliance/regulatory posture"
+    //     },
+    //     {
+    //         "id": "expandDigitalServicesForCitizens",
+    //         "title": "Expand digital services for citizens"
+    //     },
+    //     {
+    //         "id": "upgradeITSystem",
+    //         "title": "Upgrade IT systems"
+    //     }
+    // ]]
 
 
+    const idsToSelect = apiData.key_priorities.map(item => {
+      const found = muncipalityWizerdFormKeyPrioritiesUpTo3Data.find(opt => opt.id === item.id);
+      return found ? found.id : null;
+    }).filter(Boolean); // remove nulls if any
+
+    muncipalityWizerdFormKeyPrioritiesUpTo3Init.setValue(idsToSelect);
 
 
-        if (apiData.cloud_workloads_in_use) {
-          // const cloudWorkloadsSelect = new TomSelect("#muncipalityWizerdFormCloudWorkloads");
-          // cloudWorkloadsSelect.setValue(apiData.cloud_workloads);
+  }
 
-          const idsToSelect = apiData.cloud_workloads_in_use.map(item => {
-            const found = muncipalityWizerdFormCloudWorkloadsData.find(opt => opt.id === item.id);
-            return found ? found.id : null;
-          }).filter(Boolean); // remove nulls if any
-          muncipalityWizerdFormCloudWorkloadsInit.setValue(idsToSelect);
-        }
+  if (apiData.departments) {
+    // const departmentsSelect = new TomSelect("#muncipalityWizerdFormDepartmentsUnderMunicipality");
+    // departmentsSelect.setValue(apiData.departments);
+
+    const idsToSelect = apiData.departments.map(item => {
+      const found = muncipalityWizerdFormDepartmentsUnderMunicipalityData.find(opt => opt.title === item.title);
+      return found ? found.id : null;
+    }).filter(Boolean); // remove nulls if any
+    muncipalityWizerdFormDepartmentsUnderMunicipalityInit.setValue(idsToSelect);
+  }
+
+  if (apiData.cloud_apps_in_use) {
+    // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
+    // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
+
+    const idsToSelect = apiData.cloud_apps_in_use.map(item => {
+      const found = muncipalityWizerdFormCloudApplicationData.find(opt => opt.id === item.id);
+      return found ? found.id : null;
+    }).filter(Boolean); // remove nulls if any
+
+    muncipalityWizerdFormCloudApplicationInit.setValue(idsToSelect);
+  }
 
 
 
-        if (apiData.compliance) {
-          // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
-          // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
 
-          const idsToSelect = apiData.compliance.map(item => {
-            const found = muncipalityWizerdFormCompliancesInUse.find(opt => opt.id === item.id);
-            return found ? found.id : null;
-          }).filter(Boolean); // remove nulls if any
+  if (apiData.cloud_workloads_in_use) {
+    // const cloudWorkloadsSelect = new TomSelect("#muncipalityWizerdFormCloudWorkloads");
+    // cloudWorkloadsSelect.setValue(apiData.cloud_workloads);
 
-          muncipalityWizerdFormCompliancesInUseInit.setValue(idsToSelect);
-        }
+    const idsToSelect = apiData.cloud_workloads_in_use.map(item => {
+      const found = muncipalityWizerdFormCloudWorkloadsData.find(opt => opt.id === item.id);
+      return found ? found.id : null;
+    }).filter(Boolean); // remove nulls if any
+    muncipalityWizerdFormCloudWorkloadsInit.setValue(idsToSelect);
+  }
+
+
+
+  if (apiData.compliance) {
+    // const cloudAppsSelect = new TomSelect("#muncipalityWizerdFormCloudApplication");
+    // cloudAppsSelect.setValue(apiData.cloud_apps_in_use);
+
+    const idsToSelect = apiData.compliance.map(item => {
+      const found = muncipalityWizerdFormCompliancesInUse.find(opt => opt.id === item.id);
+      return found ? found.id : null;
+    }).filter(Boolean); // remove nulls if any
+
+    muncipalityWizerdFormCompliancesInUseInit.setValue(idsToSelect);
+  }
 }
 // ================= END: Fetch & Populate Municipality Wizard =================
 
@@ -2446,7 +2051,7 @@ function getCludAppWorkLoadsData() {
             const dateString = String(pageName + data.unixtime);
             securityKeyEncrypted = encrypt.encrypt(dateString);
             SecurityKeyTime = false;
-            getCludApplicationsData();
+            getCludAppWorkLoadsData();
           },
           error: function (xhr, status, error) {
             $.getJSON(worldTimeAPI, function (data) {
@@ -2455,7 +2060,7 @@ function getCludAppWorkLoadsData() {
               const dateString = String(pageName + data.unixtime);
               securityKeyEncrypted = encrypt.encrypt(dateString);
               SecurityKeyTime = false;
-              getCludApplicationsData();
+              getCludAppWorkLoadsData();
             });
           },
         });

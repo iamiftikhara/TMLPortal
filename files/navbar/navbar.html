@@ -3,7 +3,7 @@
     $('.nav-item-to-show-after-login').addClass('d-none');
     $('#navbarContainerNavDropdown').addClass('justify-content-end');
     $('.nav-item-to-show-before-login').removeClass('d-none');
-  }else{
+  } else {
     $('.nav-item-to-show-after-login').removeClass('d-none');
     $('#navbarContainerNavDropdown').removeClass('justify-content-end');
     $('.nav-item-to-show-before-login').addClass('d-none');
@@ -33,47 +33,69 @@
     </button>
     <!-- End Toggler -->
 
- <div class="collapse navbar-collapse" id="navbarContainerNavDropdown">
-  
-  <!-- Left group: slightly right -->
-  <ul class="navbar-nav mx-auto" style="margin-left: 60px;"> <!-- adjust px as needed -->
-    <li class="nav-item nav-item-to-show-after-login">
-      <a class="nav-link" href="/municipality-details.html">
-        <img src="/files/images/navbar-icon/Discovery.svg" width="30" height="30" alt="Discovery Icon" style="margin-right: 10px;"> Dashboard
-      </a>
-    </li>
-    <li class="nav-item nav-item-to-show-after-login">
-      <a class="nav-link" href="orders.html">
-        <img src="/files/images/navbar-icon/Orders.svg" width="30" height="30" alt="Orders Icon" style="margin-right: 10px;"> Orders
-      </a>
-    </li>
-    <li class="nav-item nav-item-to-show-after-login">
-      <a class="nav-link" href="resources.html">
-        <img src="/files/images/navbar-icon/Resources.svg" width="30" height="30" alt="Resources Icon" style="margin-right: 10px;"> Resources
-      </a>
-    </li>
-    <li class="nav-item nav-item-to-show-after-login">
-      <a class="nav-link" href="account.html">
-        <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon" style="margin-right: 10px;"> Account
-      </a>
-    </li>
-  </ul>
+    <div class="collapse navbar-collapse" id="navbarContainerNavDropdown">
 
-  <!-- Right group: always at end -->
-  <ul class="navbar-nav ms-auto">
-    <li class="nav-item nav-item-to-show-before-login">
-      <a class="nav-link" href="/signin.html">
-        <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Sign In Icon" style="margin-right: 10px;"> Sign In
-      </a>
-    </li>
-    <li class="nav-item nav-item-to-show-after-login">
-      <a class="nav-link" href="/signin.html">
-        <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon" style="margin-right: 10px;"> Logout
-      </a>
-    </li>
-  </ul>
+      <!-- Left group: slightly right -->
+      <ul class="navbar-nav mx-auto" style="margin-left: 60px;"> <!-- adjust px as needed -->
+        <li class="nav-item nav-item-to-show-after-login">
+          <a class="nav-link" href="/municipality-details.html">
+            <img src="/files/images/navbar-icon/Discovery.svg" width="30" height="30" alt="Discovery Icon"
+              style="margin-right: 10px;"> Dashboard
+          </a>
+        </li>
+        <li class="nav-item nav-item-to-show-after-login">
+          <a class="nav-link" href="orders.html">
+            <img src="/files/images/navbar-icon/Orders.svg" width="30" height="30" alt="Orders Icon"
+              style="margin-right: 10px;"> Orders
+          </a>
+        </li>
+        <li class="nav-item nav-item-to-show-after-login">
+          <a class="nav-link" href="resources.html">
+            <img src="/files/images/navbar-icon/Resources.svg" width="30" height="30" alt="Resources Icon"
+              style="margin-right: 10px;"> Resources
+          </a>
+        </li>
+        <li class="nav-item nav-item-to-show-after-login">
+          <div class="avatar avatar-soft-primary avatar-circle" id="navSubmenuPagesAccountDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar-initials" id="accountIntialsToShow">B</span>
+          </div>
+          <div class="dropdown">
+            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless"
+              aria-labelledby="navSubmenuPagesAccountDropdown1" style="margin-top: 0rem">
+              <a href="account.html" class="dropdown-item">
+                <span>Account </span>
+              </a>
+              <a onclick="signOut()" class="dropdown-item cursor-pointer">
+                <span>Logout </span>
+              </a>
+            </div>
+          </div>
 
-</div>
+          <a class="nav-link d-none" href="account.html">
+            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
+              style="margin-right: 10px;"> Account
+          </a>
+        </li>
+      </ul>
+
+      <!-- Right group: always at end -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item nav-item-to-show-before-login">
+          <a class="nav-link" href="/signin.html">
+            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Sign In Icon"
+              style="margin-right: 10px;"> Sign In
+          </a>
+        </li>
+        <li class="nav-item nav-item-to-show-after-login d-none">
+          <a class="nav-link d-none" href="/signin.html">
+            <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon"
+              style="margin-right: 10px;"> Logout
+          </a>
+        </li>
+      </ul>
+
+    </div>
 
   </nav>
 </div>
@@ -81,6 +103,13 @@
 <!-- JS Plugins Init. -->
 <script>
   (function () {
+
+    let firstName = localStorage.getItem('_uf')
+    let lastName = localStorage.getItem('_ul')
+
+    // Set the account initials to show
+    document.getElementById('accountIntialsToShow').textContent = firstName.charAt(0) + lastName.charAt(0)
+
     // INITIALIZATION OF BOOTSTRAP DROPDOWN
     // =======================================================
     HSBsDropdown.init()
