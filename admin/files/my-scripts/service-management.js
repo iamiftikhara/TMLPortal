@@ -405,10 +405,8 @@ function getServiceManagementTableData(skip, page) {
           unauthorizedRequest401Error
         );
       } else if (xhr.status === 404) {
-        // $('#cover-spin').hide(0);
         $("#serviceManagementDataTableErrorText").text(notFound404Error);
       } else if (xhr.status === 503) {
-        // $('#cover-spin').hide(0);
         $("#serviceManagementDataTableErrorText").text(serverError503Error);
       } else if (xhr.status === 408) {
         swal(
@@ -571,7 +569,6 @@ $("#serviceManagementSubmit").on("click", function (e) {
 
   // Check if editing (service-id exists)
   const serviceId = $("#serviceManagementDetailsModal").data("service-id");
-
   if (serviceId) {
     const title = $("#title").val();
     const description = $("#description").val();
@@ -605,7 +602,7 @@ $("#serviceManagementSubmit").on("click", function (e) {
         showNotificationError("bg-green", null, null, null, null, null, UPDATE);
 
         teamMembersAPIResponse = [];
-        showDataTableLoader("profileTeamDataTable");
+        showDataTableLoader("serviceManagementDataTable");
 
         serviceManagementDataTableInit.clear().draw();
         let pageEntries = Number($("#datatableEntries1").val());
@@ -650,8 +647,6 @@ function setMuncipilitiesData() {
     created_at,
   });
 
-  console.log("Modal form payload:", payload);
-
   // return 0
   $.ajax({
     url: MAIN_API_PATH + TMLAdminServiceAdd,
@@ -663,12 +658,9 @@ function setMuncipilitiesData() {
       200: function (data) {
         $("#cover-spin").hide(0);
         $("#serviceManagementDetailsModal").modal("hide");
-
-        showNotificationError("bg-green", null, null, null, null, null, UPDATE);
-
+        showNotificationError("bg-green", null, null, null, null, null, SAVED);
         teamMembersAPIResponse = [];
-        showDataTableLoader("profileTeamDataTable");
-
+        showDataTableLoader("serviceManagementDataTable");
         serviceManagementDataTableInit.clear().draw();
         let pageEntries = Number($("#datatableEntries1").val());
         getServiceManagementTableData(pageEntries, 1);
@@ -883,7 +875,7 @@ function attachServiceManagementActions() {
                 );
 
                 teamMembersAPIResponse = [];
-                showDataTableLoader("profileTeamDataTable");
+                showDataTableLoader("serviceManagementDataTable");
 
                 serviceManagementDataTableInit.clear().draw();
                 let pageEntries = Number($("#datatableEntries1").val());

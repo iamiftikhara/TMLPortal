@@ -47,8 +47,10 @@ $(document).ready(function () {
           const type = $("#fileType").val();
           return type === "url" || type === "text";
         },
-        validUrl: function () {
-          return $("#fileType").val() === "url";
+        validUrl: {
+          depends: function () {
+            return $("#editFileType").val() === "url";
+          },
         },
       },
     },
@@ -100,18 +102,31 @@ $(document).ready(function () {
       },
       // For file: only required when type === "file"
       editFileInput: {
+        // required: function () {
+        //   return $("#editFileType").val() === "file";
+        // },
         required: function () {
-          return $("#editFileType").val() === "file";
+          const type = $("#editFileType").val();
+          const hasFilePreview =
+            $("#editFileNamePreview").text().trim() !== "" &&
+            !$("#editFileNamePreview").text().includes("No file uploaded yet");
+
+          // Require file input only if type is 'file' and no preview file exists
+          return type === "file" && !hasFilePreview;
         },
+
       },
       // For source: only required when type === "url" or "text"
       editFileSource: {
         required: function () {
           const type = $("#editFileType").val();
+          console.log("type", type);
           return type === "url" || type === "text";
         },
-        validUrl: function () {
-          return $("#editFileType").val() === "url";
+        validUrl: {
+          depends: function () {
+            return $("#editFileType").val() === "url";
+          },
         },
       },
     },
@@ -199,12 +214,116 @@ $(document).on("click", ".delete-document", function () {
             $("#cover-spin").show();
             addFilesDataTableInit.clear().draw();
             getaddFilesTableData(10, 1);
-            // swal("Updated!", "Availability has been updated.", "success");
+            showNotificationError("bg-green", null, null, null, null, null, DELETE);
           },
-          error: function () {
-            swal("Error!", "Something went wrong.", "error");
-            checkbox.prop("checked", previousState); // revert on error
-          },
+            error: function (xhr, status, error) {
+              checkbox.prop("checked", previousState); // revert on error
+              $("#cover-spin").hide();
+              if (xhr.status === 400) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  invalidRequest400Error
+                );
+              } else if (xhr.status === 401) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  unauthorizedRequest401Error
+                );
+              } else if (xhr.status === 404) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  notFound404Error
+                );
+              } else if (xhr.status === 409) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  alreadyExist409Error
+                );
+              } else if (xhr.status === 503) {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              } else if (xhr.status === 408) {
+                swal(
+                  {
+                    title: " ",
+                    text: sessionExpired408Error,
+                    type: "info",
+                    showCancelButton: false,
+                    confirmButtonText: "Logout",
+                  },
+                  function (isConfirm) {
+                    if (isConfirm) {
+                      localStorage.clear();
+                      window.location.href = redirectToSignInPage408;
+                    }
+                  }
+                );
+              } else if (xhr.status === 410) {
+                $("#cover-spin").hide();
+
+                $.ajax({
+                  url: MAIN_API_PATH + getGmtAPI,
+                  method: POST,
+                  contentType: Content_Type,
+                  dataType: "json",
+                  success: function (data, textStatus, xhr) {
+                    const encrypt = new JSEncrypt();
+                    encrypt.setPublicKey(sitePublicKey);
+                    const dateString = String(pageName + data.unixtime);
+                    securityKeyEncrypted = encrypt.encrypt(dateString);
+                    SecurityKeyTime = false;
+                    setMuncipilitiesData();
+                  },
+                  error: function (xhr, status, error) {
+                    $.getJSON(worldTimeAPI, function (data) {
+                      const encrypt = new JSEncrypt();
+                      encrypt.setPublicKey(sitePublicKey);
+                      const dateString = String(pageName + data.unixtime);
+                      securityKeyEncrypted = encrypt.encrypt(dateString);
+                      SecurityKeyTime = false;
+                      setMuncipilitiesData();
+                    });
+                  },
+                });
+              } else {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              }
+            },
         });
       } else {
         // User clicked Cancel -> revert toggle
@@ -261,9 +380,115 @@ $(document).on("change", ".availability-toggle", function () {
             addFilesDataTableInit.clear().draw();
             getaddFilesTableData(10, 1);
           },
-          error: function () {
-            swal("Error!", "Something went wrong.", "error");
-            checkbox.prop("checked", previousState); // revert on error
+            error: function (xhr, status, error) {
+              $("#cover-spin").hide();
+              addFilesDataTableInit.clear().draw();
+              getaddFilesTableData(10, 1);
+              checkbox.prop("checked", previousState); // revert on error
+              if (xhr.status === 400) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  invalidRequest400Error
+                );
+              } else if (xhr.status === 401) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  unauthorizedRequest401Error
+                );
+              } else if (xhr.status === 404) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  notFound404Error
+                );
+              } else if (xhr.status === 409) {
+                showNotificationError(
+                  "bg-orange",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  alreadyExist409Error
+                );
+              } else if (xhr.status === 503) {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              } else if (xhr.status === 408) {
+                swal(
+                  {
+                    title: " ",
+                    text: sessionExpired408Error,
+                    type: "info",
+                    showCancelButton: false,
+                    confirmButtonText: "Logout",
+                  },
+                  function (isConfirm) {
+                    if (isConfirm) {
+                      localStorage.clear();
+                      window.location.href = redirectToSignInPage408;
+                    }
+                  }
+                );
+              } else if (xhr.status === 410) {
+                $("#cover-spin").hide();
+
+                $.ajax({
+                  url: MAIN_API_PATH + getGmtAPI,
+                  method: POST,
+                  contentType: Content_Type,
+                  dataType: "json",
+                  success: function (data, textStatus, xhr) {
+                    const encrypt = new JSEncrypt();
+                    encrypt.setPublicKey(sitePublicKey);
+                    const dateString = String(pageName + data.unixtime);
+                    securityKeyEncrypted = encrypt.encrypt(dateString);
+                    SecurityKeyTime = false;
+                    setMuncipilitiesData();
+                  },
+                  error: function (xhr, status, error) {
+                    $.getJSON(worldTimeAPI, function (data) {
+                      const encrypt = new JSEncrypt();
+                      encrypt.setPublicKey(sitePublicKey);
+                      const dateString = String(pageName + data.unixtime);
+                      securityKeyEncrypted = encrypt.encrypt(dateString);
+                      SecurityKeyTime = false;
+                      setMuncipilitiesData();
+                    });
+                  },
+                });
+              } else {
+                showNotificationError(
+                  "bg-red",
+                  null,
+                  null,
+                  null,
+                  null,
+                  null,
+                  serverError503Error
+                );
+              }
           },
         });
       } else {
@@ -380,10 +605,116 @@ $("#updateFileBtn").on("click", function () {
         $("#editFileForm")[0].reset(); // reset form
         updateEditFields(); // reset field visibility
       },
-      error: function (err) {
-        console.error("Update error:", err);
-        alert("Error updating file!");
-      },
+ 
+        error: function (xhr, status, error) {
+          $("#cover-spin").hide();
+          addFilesDataTableInit.clear().draw();
+          getaddFilesTableData(10, 1);
+          if (xhr.status === 400) {
+            showNotificationError(
+              "bg-orange",
+              null,
+              null,
+              null,
+              null,
+              null,
+              invalidRequest400Error
+            );
+          } else if (xhr.status === 401) {
+            showNotificationError(
+              "bg-orange",
+              null,
+              null,
+              null,
+              null,
+              null,
+              unauthorizedRequest401Error
+            );
+          } else if (xhr.status === 404) {
+            showNotificationError(
+              "bg-orange",
+              null,
+              null,
+              null,
+              null,
+              null,
+              notFound404Error
+            );
+          } else if (xhr.status === 409) {
+            showNotificationError(
+              "bg-orange",
+              null,
+              null,
+              null,
+              null,
+              null,
+              alreadyExist409Error
+            );
+          } else if (xhr.status === 503) {
+            showNotificationError(
+              "bg-red",
+              null,
+              null,
+              null,
+              null,
+              null,
+              serverError503Error
+            );
+          } else if (xhr.status === 408) {
+            swal(
+              {
+                title: " ",
+                text: sessionExpired408Error,
+                type: "info",
+                showCancelButton: false,
+                confirmButtonText: "Logout",
+              },
+              function (isConfirm) {
+                if (isConfirm) {
+                  localStorage.clear();
+                  window.location.href = redirectToSignInPage408;
+                }
+              }
+            );
+          } else if (xhr.status === 410) {
+            $("#cover-spin").hide();
+
+            $.ajax({
+              url: MAIN_API_PATH + getGmtAPI,
+              method: POST,
+              contentType: Content_Type,
+              dataType: "json",
+              success: function (data, textStatus, xhr) {
+                const encrypt = new JSEncrypt();
+                encrypt.setPublicKey(sitePublicKey);
+                const dateString = String(pageName + data.unixtime);
+                securityKeyEncrypted = encrypt.encrypt(dateString);
+                SecurityKeyTime = false;
+                setMuncipilitiesData();
+              },
+              error: function (xhr, status, error) {
+                $.getJSON(worldTimeAPI, function (data) {
+                  const encrypt = new JSEncrypt();
+                  encrypt.setPublicKey(sitePublicKey);
+                  const dateString = String(pageName + data.unixtime);
+                  securityKeyEncrypted = encrypt.encrypt(dateString);
+                  SecurityKeyTime = false;
+                  setMuncipilitiesData();
+                });
+              },
+            });
+          } else {
+            showNotificationError(
+              "bg-red",
+              null,
+              null,
+              null,
+              null,
+              null,
+              serverError503Error
+            );
+          }
+        },
     });
   }
 });
@@ -707,7 +1038,7 @@ function attachEditResourcesActions() {
       $("#editFileTitle").val(serviceData.title);
       $("#editFileDescription").val(serviceData.description);
 
-      // ✅ Use Tom Select to set value
+      // Use Tom Select to set value
       if (editFileTypeInit) {
         editFileTypeInit.setValue(serviceData.type, true);
       }
@@ -720,7 +1051,7 @@ function attachEditResourcesActions() {
         // Can't set file directly, show preview label
         $("#editFileInput").val(""); // reset
         if (serviceData.source) {
-          $("#editFileNamePreview").text("Current file: " + serviceData.source);
+          $("#editFileNamePreview").text(serviceData.source);
         } else {
           $("#editFileNamePreview").text("No file uploaded yet");
         }
@@ -737,7 +1068,7 @@ function attachEditResourcesActions() {
         // Show existing file name in preview text (not in input)
         if (serviceData.source) {
           const fileName = serviceData.source.split("/").pop(); // get only the filename from path/URL
-          $("#editFileNamePreview").text("Current file: " + fileName);
+          $("#editFileNamePreview").text(fileName);
         } else {
           $("#editFileNamePreview").text("No file uploaded yet");
         }
@@ -810,7 +1141,7 @@ $("#editFileInput").on("change", function () {
     $("#editFileModal").removeData("selected-file");
   }
 
-  enableDisableUpdateFileBtn(); // 👈 check after file change
+  enableDisableUpdateFileBtn(); // check after file change
 });
 
 // Attach change/input listeners for all inputs in the modal
@@ -825,6 +1156,19 @@ function enableDisableUpdateFileBtn() {
   const serviceId = $("#editFileModal").data("service-id");
   const fileInput = document.getElementById("editFileInput");
 
+  const serviceData = ordersDataReceived.find(
+    (s) => s.document_id === serviceId
+  );
+
+   // Save originals
+  const originalValues = {
+    title: serviceData.title,
+    description: serviceData.description,
+    type: serviceData.type,
+    source: serviceData.source,
+    availability: serviceData.availability,
+  };
+
   if (!original) return; // Prevent running before modal opens
 
   // Gather current values
@@ -836,15 +1180,11 @@ function enableDisableUpdateFileBtn() {
     // availability: $("#editAvailability").prop("checked"),
   };
 
-  // Compare current vs. original
-  const changed =
-    Object.keys(currentValues).some(
-      (key) => currentValues[key] !== original[key]
-    ) ||
-    (fileInput && fileInput.files.length > 0);
+  console.log("currentValues.type", currentValues.source);
+  console.log("originalValues.2423523", originalValues.source);
 
   // Enable if changed, disable otherwise
-  if (changed) {
+  if (currentValues.title !== originalValues.title || currentValues.description !== originalValues.description || currentValues.type !== originalValues.type) {
     $("#updateFileBtn").prop("disabled", false);
     $("#updateFileBtn").css("cursor", "pointer");
   } else {
@@ -852,3 +1192,12 @@ function enableDisableUpdateFileBtn() {
     $("#updateFileBtn").css("cursor", "no-drop");
   }
 }
+
+// Reset modal inputs when it is closed
+$("#addFileModal").on("hidden.bs.modal", function () {
+  $(".error").html('');
+});
+
+$("#editFileModal").on("hidden.bs.modal", function () {
+  $(".error").html('');
+});
