@@ -27,7 +27,7 @@
   <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
   <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
   <link href="files/css/style.css" rel="stylesheet">
- 
+
   <!-- Security Key Encryption -->
   <script src="/files/https-files/jsencrypt.min.js"></script>
   <script src="/files/https-files/crypto-js.js"></script>
@@ -232,29 +232,38 @@
         <div class="d-flex">
           <!-- Navbar -->
           <div id="profileNavbar" class="p-0 pe-5" style="max-width: 15rem;">
-            <div class="card h-100 nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh; background-color: white;">
+            <div class="card h-100 nav-bar-nav nav nav-segment  py-3 px-2"
+              style="height: 83vh; background-color: white;">
               <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab"
                 data-bs-toggle="pill" data-bs-target="#profileTab" role="tab" aria-controls="profileTab"
-                aria-selected="true"><img src="files/images/sidebar-icon/Profile.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Profile</a>
+                aria-selected="true"><img src="files/images/sidebar-icon/Profile.svg" width="30" height="30"
+                  alt="Profile Icon" style="margin-right: 10px;">Profile</a>
               <hr class="horizontal-line">
               <a class="nav-link profileTabClick" data-toggle="pill" href="#securityTab" data-bs-toggle="pill"
-                data-bs-target="#securityTab" role="tab" aria-controls="securityTab" aria-selected="false"><img src="files/images/sidebar-icon/Security.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Security</a>
+                data-bs-target="#securityTab" role="tab" aria-controls="securityTab" aria-selected="false"><img
+                  src="files/images/sidebar-icon/Security.svg" width="30" height="30" alt="Profile Icon"
+                  style="margin-right: 10px;">Security</a>
               <!-- <hr class="horizontal-line"> -->
               <a class="nav-link profileTabClick d-none" data-toggle="pill" href="#billingTab" data-bs-toggle="pill"
-                data-bs-target="#billingTab" role="tab" aria-controls="billingTab" aria-selected="false"><img src="files/images/sidebar-icon/Bill.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Billing</a>
+                data-bs-target="#billingTab" role="tab" aria-controls="billingTab" aria-selected="false"><img
+                  src="files/images/sidebar-icon/Bill.svg" width="30" height="30" alt="Profile Icon"
+                  style="margin-right: 10px;">Billing</a>
               <!-- <hr class="horizontal-line"> -->
-              <a class="nav-link profileTabClick d-none" data-toggle="pill" href="#notificationTab" data-bs-toggle="pill"
-                data-bs-target="#notificationTab" role="tab" aria-controls="notificationTab"
-                aria-selected="false"><img src="files/images/sidebar-icon/Notification.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Notification</a>
+              <a class="nav-link profileTabClick d-none" data-toggle="pill" href="#notificationTab"
+                data-bs-toggle="pill" data-bs-target="#notificationTab" role="tab" aria-controls="notificationTab"
+                aria-selected="false"><img src="files/images/sidebar-icon/Notification.svg" width="30" height="30"
+                  alt="Profile Icon" style="margin-right: 10px;">Notification</a>
               <hr class="horizontal-line">
               <a class="nav-link profileTabClick" id="teamTabClick" data-toggle="pill" href="#teamTab"
                 data-bs-toggle="pill" - data-bs-target="#teamTab" role="tab" aria-controls="teamTab"
-                aria-selected="false"><img src="files/images/sidebar-icon/Teams.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Team</a>
+                aria-selected="false"><img src="files/images/sidebar-icon/Teams.svg" width="30" height="30"
+                  alt="Profile Icon" style="margin-right: 10px;">Team</a>
               <hr class="horizontal-line">
 
               <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()"
                 onclick="logoutUser()">
-                <span>Log Out</span> <span class="ms-8"><img src="files/images/sidebar-icon/Logout.svg" width="40" height="30" alt="Profile Icon" style="margin-right: 10px;"></span>
+                <span>Log Out</span> <span class="ms-8"><img src="files/images/sidebar-icon/Logout.svg" width="40"
+                    height="30" alt="Profile Icon" style="margin-right: 10px;"></span>
               </a>
             </div>
           </div>
@@ -274,28 +283,28 @@
                         <div class="row">
                           <div class="col-lg-6 col-sm-12">
                             <!-- Form -->
-                              <div class="mb-3">
-                                <label for="primaryContactNameProfile" class="form-label">First name:</label>
-                                <input type="text" class="form-control " id="editFirstName" name="editFirstName"
-                                  placeholder="John" aria-label="John Doe" required>
-                              </div>
+                            <div class="mb-3">
+                              <label for="primaryContactNameProfile" class="form-label">First name:</label>
+                              <input type="text" class="form-control " id="editFirstName" name="editFirstName"
+                                placeholder="John" aria-label="John Doe" required>
+                            </div>
                             <!-- End Form -->
                           </div>
-                             <div class="col-lg-6 col-sm-12">
+                          <div class="col-lg-6 col-sm-12">
                             <!-- Form -->
-                              <div class="mb-3">
-                                <label for="editLastName" class="form-label">Last Name:</label>
-                                <input type="text" class="form-control " id="editLastName" name="editLastName"
-                                  placeholder="Doe" required>
-                              </div>
+                            <div class="mb-3">
+                              <label for="editLastName" class="form-label">Last Name:</label>
+                              <input type="text" class="form-control " id="editLastName" name="editLastName"
+                                placeholder="Doe" required>
+                            </div>
                             <!-- End Form -->
                           </div>
                         </div>
 
-                      
+
                       </div>
                     </form>
-                  
+
                   </div>
                   <div class="card-footer text-end">
                     <button type="button" class="btn btn-outline-primary" id="saveProfileBtn" disabled>Submit</button>
@@ -312,31 +321,96 @@
                   <div class="card-body">
                     <form id="changePasswordForm" novalidate class="js-validate needs-validation  mt-2">
                       <div class="row">
-                              <!-- Form -->
-                      <div class="mb-3 col-4">
-                        <label for="securityOldPassword" class="form-label">Old Password:</label>
-                        <input type="password" class="form-control " id="securityOldPassword"
-                          placeholder="Enter old password" name="securityOldPassword">
-                      </div>
-                      <!-- End Form -->
+                        <!-- Form -->
+                        <div class="mb-3 col-4">
 
-                       <!-- Form -->
-                      <div class="mb-3 col-4">
-                        <label for="securityNewPassword" class="form-label">New Password:</label>
-                        <input type="password" class="form-control " id="securityNewPassword"
-                          placeholder="Enter new password" name="securityNewPassword">
-                      </div>
-                      <!-- End Form -->
+                            <label class="form-label" for="securityOldPassword">Old Password: <span
+                              class="text-danger">*</span></label>
+                          <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-html="true"
+                            title="
+                            <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the Old password.</li></ul>"></i>
+                          <!-- passowerd eye -->
+                          <a id="changeRepeatPassTarget"
+                            class="input-group-text password-eye border-0 position-absolute me-3 bg-transparent mt-1"
+                            href="javascript:;" style="left: 29%;">
+                            <i id="changeOldPassIcon" class="bi-eye"></i>
+                          </a>
+                          <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                            name="securityOldPassword" id="securityOldPassword"
+                            placeholder="Enter old password" aria-label="Enter old password " maxlength="50" required
+                            data-hs-toggle-password-options='{
+                            "target": "#changeRepeatPassTarget",
+                            "defaultClass": "bi-eye-slash",
+                            "showClass": "bi-eye",
+                            "classChangeTarget": "#changeOldPassIcon"
+                          }' autocomplete="off">
 
-                       <!-- Form -->
-                      <div class="mb-3 col-4">
-                        <label for="securityConfirmNewPassword" class="form-label">Confirm New Password:</label>
-                        <input type="password" class="form-control " id="securityConfirmNewPassword"
-                          name="securityConfirmNewPassword" placeholder="Confirm new password">
+
+                        </div>
+                        <!-- End Form -->
+
+                        <!-- Form -->
+                        <div class="mb-3 col-4">
+
+                          <label class="form-label" for="securityNewPassword">New Password: <span
+                              class="text-danger">*</span></label>
+                          <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-html="true" title="
+                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
+                        <ul>
+                        <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
+                        </ul>"></i>
+                          <!-- passowerd eye -->
+                          <a id="changePassTarget"
+                            class="input-group-text password-eye border-0 position-absolute me-3 bg-transparent mt-1"
+                            href="javascript:;" style="right: 33%;">
+                            <i id="changeSecurityPassIcon" class="bi-eye"></i>
+                          </a>
+                          <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                            name="securityNewPassword" id="securityNewPassword" placeholder="Enter a strong password"
+                            aria-label="Password *" required minlength="8" maxlength="50"
+                            data-hs-toggle-password-options='{
+                            "target": "#changePassTarget",
+                            "defaultClass": "bi-eye-slash",
+                            "showClass": "bi-eye",
+                            "classChangeTarget": "#changeSecurityPassIcon"
+                          }' autocomplete="off">
+
+
+                        </div>
+                        <!-- End Form -->
+
+                        <!-- Form -->
+                        <div class="mb-3 col-4">
+
+                          <label class="form-label" for="securityConfirmNewPassword">Confirm password <span
+                              class="text-danger">*</span></label>
+                          <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-html="true"
+                            title="
+                            <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
+                          <!-- passowerd eye -->
+                          <a id="changeRepeatPassTarget"
+                            class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
+                            href="javascript:;">
+                            <i id="changeSecurityRepeatPassIcon" class="bi-eye"></i>
+                          </a>
+                          <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                            name="securityConfirmNewPassword" id="securityConfirmNewPassword"
+                            placeholder="Confirm password" aria-label="Confirm Password " maxlength="50" required
+                            data-hs-toggle-password-options='{
+                            "target": "#changeRepeatPassTarget",
+                            "defaultClass": "bi-eye-slash",
+                            "showClass": "bi-eye",
+                            "classChangeTarget": "#changeSecurityRepeatPassIcon"
+                          }' autocomplete="off">
+
+
+                        </div>
+                        <!-- End Form -->
                       </div>
-                      <!-- End Form -->
-                      </div>
-                
+
 
                       <!-- Checkbox -->
                       <div class="form-check mb-3 d-none">
@@ -347,9 +421,9 @@
                       <!-- End Checkbox -->
 
                     </form>
-                    
+
                   </div>
-                    <div class="card-footer text-end">
+                  <div class="card-footer text-end">
                     <button type="button" class="btn btn-outline-primary" id="saveSecuritySettingBtn">Submit </button>
                   </div>
                 </div>
@@ -396,7 +470,8 @@
 
                   </form>
                   <div>
-                    <button type="button" class="btn btn-outline-primary" id="saveBillingInfoBtn">Save Billing Info</button>
+                    <button type="button" class="btn btn-outline-primary" id="saveBillingInfoBtn">Save Billing
+                      Info</button>
                   </div>
 
                   <hr class="horizontal-line-billing">
@@ -406,15 +481,15 @@
 
                   <!-- Form -->
                   <div class="mb-3">
-                    <input type="text" class="form-control " id="invoice001Paid"
-                      placeholder="Invoice #001 - Paid" aria-label="Invoice #001 - Paid">
+                    <input type="text" class="form-control " id="invoice001Paid" placeholder="Invoice #001 - Paid"
+                      aria-label="Invoice #001 - Paid">
                   </div>
                   <!-- End Form -->
 
                   <!-- Form -->
                   <div class="mb-3">
-                    <input type="text" class="form-control " id="invoice002Pending"
-                      placeholder="Invoice #002 - Pending" aria-label="Invoice #002 - Pending">
+                    <input type="text" class="form-control " id="invoice002Pending" placeholder="Invoice #002 - Pending"
+                      aria-label="Invoice #002 - Pending">
                   </div>
                   <!-- End Form -->
 
@@ -449,7 +524,8 @@
 
                   </form>
                   <div>
-                    <button type="button" class="btn btn-outline-primary" id="saveNotificationSettingBtn">Save Notification
+                    <button type="button" class="btn btn-outline-primary" id="saveNotificationSettingBtn">Save
+                      Notification
                       Setting</button>
                   </div>
 
@@ -488,7 +564,7 @@
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 pe-2">
                   <label for="addUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalFirstName"
                     name="addUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
                 </div>
@@ -497,7 +573,7 @@
                 <!-- Form -->
                 <div class="mb-4">
                   <label for="addUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalLastName"
                     name="addUserDetailsModalLastName" placeholder="Wick" aria-label="Wick">
                 </div>
@@ -507,7 +583,7 @@
               <!-- Form -->
               <div class="mb-4">
                 <label for="addUserDetailsModalEmail" class="form-label">Email: <span class="text-danger">
-                            *</span></label>
+                    *</span></label>
                 <input type="email" class="form-control" id="addUserDetailsModalEmail" name="addUserDetailsModalEmail"
                   placeholder="Wick" aria-label="Wick">
               </div>
@@ -518,20 +594,60 @@
 
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 pe-2">
-                  <label for="addUserDetailsModalPassword" class="form-label">Password: <span class="text-danger">
-                            *</span></label>
-                  <input type="password" class="form-control" id="addUserDetailsModalPassword"
-                    name="addUserDetailsModalPassword" placeholder="********" aria-label="Wick">
+                  <label class="form-label" for="addUserDetailsModalPassword">Password: <span
+                      class="text-danger">*</span></label>
+                  <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-html="true" title="
+                        <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
+                        <ul>
+                        <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
+                        </ul>"></i>
+                  <!-- passowerd eye -->
+                  <a id="changePassTarget"
+                    class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
+                    href="javascript:;">
+                    <i id="changePassIcon" class="bi-eye"></i>
+                  </a>
+                  <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                    name="addUserDetailsModalPassword" id="addUserDetailsModalPassword"
+                    placeholder="Enter a strong password" aria-label="Password *" required minlength="8" maxlength="50"
+                    data-hs-toggle-password-options='{
+                      "target": "#changePassTarget",
+                      "defaultClass": "bi-eye-slash",
+                      "showClass": "bi-eye",
+                      "classChangeTarget": "#changePassIcon"
+                    }' autocomplete="off">
+
+
                 </div>
                 <!-- End Form -->
 
 
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 ps-2">
-                  <label for="addUserDetailsModalConfirmPassword" class="form-label">Confirm Password: <span class="text-danger">
-                            *</span></label>
-                  <input type="password" class="form-control" id="addUserDetailsModalConfirmPassword"
-                    name="addUserDetailsModalConfirmPassword" placeholder="********" aria-label="Wick">
+
+                  <label class="form-label" for="addUserDetailsModalConfirmPassword">Confirm password: <span
+                      class="text-danger">*</span></label>
+                  <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
+                    data-bs-placement="right" data-bs-html="true"
+                    title="
+                    <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
+                  <!-- passowerd eye -->
+                  <a id="changeRepeatPassTarget"
+                    class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
+                    href="javascript:;">
+                    <i id="changeRepeatPassIcon" class="bi-eye"></i>
+                  </a>
+                  <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
+                    name="addUserDetailsModalConfirmPassword" id="addUserDetailsModalConfirmPassword"
+                    placeholder="Confirm password" aria-label="Confirm Password " maxlength="50" required
+                    data-hs-toggle-password-options='{
+                      "target": "#changeRepeatPassTarget",
+                      "defaultClass": "bi-eye-slash",
+                      "showClass": "bi-eye",
+                      "classChangeTarget": "#changeRepeatPassIcon"
+                    }' autocomplete="off">
+
                 </div>
                 <!-- End Form -->
 
@@ -582,7 +698,7 @@
                 <!-- Form -->
                 <div class="pe-2">
                   <label for="editUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalFirstName"
                     name="editUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
                 </div>
@@ -591,7 +707,7 @@
                 <!-- Form -->
                 <div class="">
                   <label for="editUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalLastName"
                     name="editUserDetailsModalLastName" placeholder="Wick" aria-label="Wick" required>
                 </div>

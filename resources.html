@@ -206,6 +206,15 @@
             <h3 class="card-header-title mb-2 mb-sm-0">Resources</h3>
           </div>
           <div class="card-body">
+            <!-- Card Error -->
+
+            <div class=" justify-content-center align-items-center" id="resourcesCardErrorDiv">
+              <div class="text-center p-1">
+                <img class="error-message-logo mb-1" src="files/images/logo/logo.png" alt="Image Description"
+                  style="width: 10rem; opacity:0.3">
+                <p class="mb-0" id="resourcesCardErrorText">Error</p>
+              </div>
+            </div>
             <!-- start service catalog search -->
             <div class="row mt-4 d-none" id="serviceCatalogRow">
               <!-- start search -->
@@ -244,16 +253,16 @@
             </div>
 
 
-             <!-- Offcanvas for text documents -->
-              <div class="offcanvas offcanvas-end" tabindex="-1" id="textOffcanvas" aria-labelledby="textOffcanvasLabel">
-                <div class="offcanvas-header">
-                  <h5 id="textOffcanvasLabel" class="mb-0"></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body" id="textOffcanvasBody">
-                  <!-- Text content will appear here -->
-                </div>
+            <!-- Offcanvas for text documents -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="textOffcanvas" aria-labelledby="textOffcanvasLabel">
+              <div class="offcanvas-header">
+                <h5 id="textOffcanvasLabel" class="mb-0"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
+              <div class="offcanvas-body" id="textOffcanvasBody">
+                <!-- Text content will appear here -->
+              </div>
+            </div>
 
           </div>
         </div>

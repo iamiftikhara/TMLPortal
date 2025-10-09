@@ -44,18 +44,18 @@
       display: flex;
       align-items: center;
     }
-    
+
     .landing-image {
       max-width: 100%;
       height: auto;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
-    
+
     .landing-content {
       padding-left: 3rem;
     }
-    
+
     .landing-title {
       font-size: 3.5rem;
       font-weight: 600;
@@ -63,14 +63,14 @@
       margin-bottom: 1.5rem;
       line-height: 1.2;
     }
-    
+
     .landing-subtitle {
       font-size: 1.25rem;
       color: #6c757d;
       margin-bottom: 2rem;
       line-height: 1.6;
     }
-    
+
     .btn-start {
       background: linear-gradient(135deg, #377dff 0%, #2c6dd5 100%);
       border: none;
@@ -82,29 +82,29 @@
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(55, 125, 255, 0.3);
     }
-    
+
     .btn-start:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(55, 125, 255, 0.4);
       color: white;
     }
-    
+
     .btn-start:focus {
       box-shadow: 0 0 0 0.2rem rgba(55, 125, 255, 0.25);
       color: white;
     }
-    
+
     @media (max-width: 768px) {
       .landing-content {
         padding-left: 0;
         text-align: center;
         margin-top: 2rem;
       }
-      
+
       .landing-title {
         font-size: 2.5rem;
       }
-      
+
       .landing-subtitle {
         font-size: 1.1rem;
       }
@@ -112,27 +112,27 @@
   </style>
 
   <script>
-    window.hs_config = { 
-      "autopath": "@@autopath", 
-      "deleteLine": "hs-builder:delete", 
-      "deleteLine:build": "hs-builder:build-delete", 
-      "deleteLine:dist": "hs-builder:dist-delete", 
-      "previewMode": false, 
-      "startPath": "/landing.html", 
-      "themeAppearance": { 
-        "layoutSkin": "default", 
-        "sidebarSkin": "default", 
-        "styles": { 
-          "colors": { 
-            "primary": "#377dff", 
-            "transparent": "transparent", 
-            "white": "#fff", 
-            "dark": "132144", 
-            "gray": { "100": "#f9fafc", "900": "#1e2022" } 
-          }, 
-          "font": "Inter" 
-        } 
-      } 
+    window.hs_config = {
+      "autopath": "@@autopath",
+      "deleteLine": "hs-builder:delete",
+      "deleteLine:build": "hs-builder:build-delete",
+      "deleteLine:dist": "hs-builder:dist-delete",
+      "previewMode": false,
+      "startPath": "/landing.html",
+      "themeAppearance": {
+        "layoutSkin": "default",
+        "sidebarSkin": "default",
+        "styles": {
+          "colors": {
+            "primary": "#377dff",
+            "transparent": "transparent",
+            "white": "#fff",
+            "dark": "132144",
+            "gray": { "100": "#f9fafc", "900": "#1e2022" }
+          },
+          "font": "Inter"
+        }
+      }
     }
   </script>
 </head>
@@ -158,36 +158,40 @@
           <!-- Image Column -->
           <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
             <div class="text-center">
-              <svg class="landing-image" width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+              <svg class="landing-image" width="500" height="400" viewBox="0 0 500 400"
+                xmlns="http://www.w3.org/2000/svg">
                 <!-- Background -->
-                <rect width="500" height="400" fill="#f8f9fa" rx="15"/>
-                
+                <rect width="500" height="400" fill="#f8f9fa" rx="15" />
+
                 <!-- Main illustration -->
-                <circle cx="250" cy="150" r="80" fill="#377dff" opacity="0.1"/>
-                <circle cx="250" cy="150" r="60" fill="#377dff" opacity="0.2"/>
-                <circle cx="250" cy="150" r="40" fill="#377dff" opacity="0.3"/>
-                
+                <circle cx="250" cy="150" r="80" fill="#377dff" opacity="0.1" />
+                <circle cx="250" cy="150" r="60" fill="#377dff" opacity="0.2" />
+                <circle cx="250" cy="150" r="40" fill="#377dff" opacity="0.3" />
+
                 <!-- Central icon -->
-                <rect x="220" y="120" width="60" height="60" fill="#377dff" rx="10"/>
-                <path d="M235 140 L245 150 L265 130" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                
+                <rect x="220" y="120" width="60" height="60" fill="#377dff" rx="10" />
+                <path d="M235 140 L245 150 L265 130" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"
+                  stroke-linejoin="round" />
+
                 <!-- Floating elements -->
-                <circle cx="150" cy="100" r="15" fill="#28a745" opacity="0.8"/>
-                <rect x="340" y="80" width="30" height="30" fill="#ffc107" rx="5" opacity="0.8"/>
-                <circle cx="380" cy="200" r="12" fill="#dc3545" opacity="0.8"/>
-                <rect x="80" y="180" width="25" height="25" fill="#6f42c1" rx="5" opacity="0.8"/>
-                
+                <circle cx="150" cy="100" r="15" fill="#28a745" opacity="0.8" />
+                <rect x="340" y="80" width="30" height="30" fill="#ffc107" rx="5" opacity="0.8" />
+                <circle cx="380" cy="200" r="12" fill="#dc3545" opacity="0.8" />
+                <rect x="80" y="180" width="25" height="25" fill="#6f42c1" rx="5" opacity="0.8" />
+
                 <!-- Bottom decorative elements -->
-                <rect x="50" y="320" width="400" height="4" fill="#377dff" opacity="0.2" rx="2"/>
-                <rect x="100" y="340" width="300" height="2" fill="#377dff" opacity="0.3" rx="1"/>
-                
+                <rect x="50" y="320" width="400" height="4" fill="#377dff" opacity="0.2" rx="2" />
+                <rect x="100" y="340" width="300" height="2" fill="#377dff" opacity="0.3" rx="1" />
+
                 <!-- Text elements -->
-                <text x="250" y="280" text-anchor="middle" fill="#6c757d" font-family="Inter, sans-serif" font-size="16" font-weight="600">Welcome to Cytex</text>
-                <text x="250" y="300" text-anchor="middle" fill="#6c757d" font-family="Inter, sans-serif" font-size="12">Your Digital Transformation Partner</text>
+                <text x="250" y="280" text-anchor="middle" fill="#6c757d" font-family="Inter, sans-serif" font-size="16"
+                  font-weight="600">Welcome to Cytex</text>
+                <text x="250" y="300" text-anchor="middle" fill="#6c757d" font-family="Inter, sans-serif"
+                  font-size="12">Your Digital Transformation Partner</text>
               </svg>
             </div>
           </div>
-          
+
           <!-- Content Column -->
           <div class="col-lg-6 col-md-6">
             <div class="landing-content">
@@ -196,8 +200,9 @@
                 <span style="color: #377dff;">Digital Future</span>
               </h1>
               <p class="landing-subtitle">
-                Discover innovative solutions that streamline your operations, enhance productivity, and drive growth. 
-                Join thousands of organizations already transforming their digital landscape with our cutting-edge platform.
+                Discover innovative solutions that streamline your operations, enhance productivity, and drive growth.
+                Join thousands of organizations already transforming their digital landscape with our cutting-edge
+                platform.
               </p>
               <div class="d-flex flex-column flex-sm-row gap-3">
                 <button class="btn btn-start text-white" onclick="handleGetStarted()">
@@ -246,18 +251,19 @@
 
   <!-- Custom JavaScript -->
   <script>
-    // Initialize theme
-    (function() {
-      window.onload = function () {
-        $('#cover-spin').hide();
-        // INITIALIZATION OF MEGA MENU
-        new HSMegaMenu('.js-mega-menu', {
-          desktop: {
-            position: 'left'
-          }
-        })
-      }
-    })()
+      // Initialize theme
+      (function () {
+        window.onload = function () {
+          localStorage.clear();
+          $('#cover-spin').hide();
+          // INITIALIZATION OF MEGA MENU
+          new HSMegaMenu('.js-mega-menu', {
+            desktop: {
+              position: 'left'
+            }
+          })
+        }
+      })()
 
     // Handle Get Started button click
     function handleGetStarted() {
@@ -272,18 +278,18 @@
     }
 
     // Add smooth scrolling and animations
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Fade in animation
       document.body.style.opacity = '1';
-      
+
       // Add hover effects to buttons
       const buttons = document.querySelectorAll('.btn');
       buttons.forEach(button => {
-        button.addEventListener('mouseenter', function() {
+        button.addEventListener('mouseenter', function () {
           this.style.transform = 'translateY(-2px)';
         });
-        
-        button.addEventListener('mouseleave', function() {
+
+        button.addEventListener('mouseleave', function () {
           if (!this.classList.contains('btn-start')) {
             this.style.transform = 'translateY(0)';
           }

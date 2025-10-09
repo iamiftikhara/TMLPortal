@@ -28,13 +28,13 @@ $(document).ready(function () {
     $('#editUserDetailsSuperAccess').parent().attr('title', 'You are not supper user.')
   }
 
-    // Init validation
+  // Init validation
   $("#changePasswordForm").validate({
     debug: true,
     rules: {
       securityOldPassword: {
         required: true,
-        strongPassword:true
+        strongPassword: true
       },
       securityNewPassword: {
         required: true,
@@ -46,8 +46,8 @@ $(document).ready(function () {
       }
     },
     messages: {
-      securityOldPassword: 
-      { required : "Old password is required", },
+      securityOldPassword:
+        { required: "Old password is required", },
       securityNewPassword: {
         required: "New password is required"
       },
@@ -56,16 +56,16 @@ $(document).ready(function () {
         equalTo: "Passwords do not match"
       }
     },
-    errorPlacement: function(error, element) {
+    errorPlacement: function (error, element) {
       error.appendTo(element.parent());
     },
     errorClass: "error invalid-feedback",
     validClass: "success",
     errorElement: "span",
-    highlight: function(element, errorClass, validClass) {
+    highlight: function (element, errorClass, validClass) {
       $(element).addClass("is-invalid").removeClass("is-valid");
     },
-    unhighlight: function(element, errorClass, validClass) {
+    unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass("is-invalid").addClass("is-valid");
     }
   });
@@ -80,7 +80,7 @@ $(document).ready(function () {
     $('#firstActiveProfile').addClass('active')
   }, 2000);
 
-    //  validation rules define
+  //  validation rules define
   $('#addUserDetailsModalForm').validate({
     debug: true,
     rules: {
@@ -176,7 +176,7 @@ $(document).ready(function () {
       }
     }
   })
-     //  validation rules define
+  //  validation rules define
   $('#editProfile').validate({
     debug: true,
     rules: {
@@ -187,7 +187,7 @@ $(document).ready(function () {
         onlyDigitsNotAllowed: true,
       },
       editLastName: {
-       atLeastOneCharacter: true,
+        atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
         minlength: 1,
         onlyDigitsNotAllowed: true,
@@ -218,7 +218,7 @@ $(document).ready(function () {
       }
     }
   })
- // Get values from localStorage
+  // Get values from localStorage
   const firstName = localStorage.getItem("_uf");
   const lastName = localStorage.getItem("_ul");
 
@@ -241,28 +241,28 @@ $('#saveSecuritySettingBtn').on('click', function (e) {
 
 
 // ================= START: Sidebar Role-Based Visibility =================
-  const userRole = localStorage.getItem("_role"); // assume role is stored as "admin", "user", etc.
+const userRole = localStorage.getItem("_role"); // assume role is stored as "admin", "user", etc.
 
-  if (userRole === "admin") {
-    // Select the links
-    const billingTab = document.querySelector('a[href="#billingTab"]');
-    const notificationTab = document.querySelector('a[href="#notificationTab"]');
-    const teamTab = document.querySelector('a[href="#teamTab"]');
+if (userRole === "admin") {
+  // Select the links
+  const billingTab = document.querySelector('a[href="#billingTab"]');
+  const notificationTab = document.querySelector('a[href="#notificationTab"]');
+  const teamTab = document.querySelector('a[href="#teamTab"]');
 
-    // Hide them
-    if (billingTab) billingTab.style.display = "none";
-    if (notificationTab) notificationTab.style.display = "none";
-    if (teamTab) teamTab.style.display = "none";
+  // Hide them
+  if (billingTab) billingTab.style.display = "none";
+  if (notificationTab) notificationTab.style.display = "none";
+  if (teamTab) teamTab.style.display = "none";
 
-    // Optionally hide the <hr> after each hidden link for clean look
-    const hrElements = document.querySelectorAll(".horizontal-line");
-    hrElements.forEach(hr => {
-      const nextLink = hr.nextElementSibling;
-      if (nextLink && nextLink.style.display === "none") {
-        hr.style.display = "none";
-      }
-    });
-  }
+  // Optionally hide the <hr> after each hidden link for clean look
+  const hrElements = document.querySelectorAll(".horizontal-line");
+  hrElements.forEach(hr => {
+    const nextLink = hr.nextElementSibling;
+    if (nextLink && nextLink.style.display === "none") {
+      hr.style.display = "none";
+    }
+  });
+}
 // ================= END: Sidebar Role-Based Visibility =================
 // ******************** Start Add User ************************
 
@@ -281,11 +281,11 @@ $("#editProfile input, #editProfile select, #editProfile textarea").on("input ch
 
 
 $('#saveProfileBtn').on('click', function () {
-  if($('#editProfile').validate().form()) {
+  if ($('#editProfile').validate().form()) {
     $('#cover-spin').show()
     editProfile()
   }
-  
+
 })
 
 
@@ -294,8 +294,8 @@ function editProfile() {
   const first_name = $('#editFirstName').val();
   const last_name = $('#editLastName').val();
 
-// console.log("typeof $.notify", typeof $.notify); // should not be undefined
-// console.log("typeof showNotificationError", typeof showNotificationError);
+  // console.log("typeof $.notify", typeof $.notify); // should not be undefined
+  // console.log("typeof showNotificationError", typeof showNotificationError);
 
 
   const apiBody = JSON.stringify({
@@ -314,8 +314,8 @@ function editProfile() {
       200: function (data) {
         $('#cover-spin').hide(0)
         $('#addUserDetailsModal').modal('hide')
-  localStorage.setItem("_uf",first_name);
-   localStorage.setItem("_ul",last_name);
+        localStorage.setItem("_uf", first_name);
+        localStorage.setItem("_ul", last_name);
         showNotificationError(
           'bg-green',
           null,
@@ -925,11 +925,11 @@ function exportProfileTeamDataTableData() {
 
 
 $('#addUserDetailsSaveButton').on('click', function () {
-  if($('#addUserDetailsModalForm').validate().form()) {
+  if ($('#addUserDetailsModalForm').validate().form()) {
     $('#cover-spin').show()
     createTheUsers()
   }
-  
+
 })
 
 
@@ -940,8 +940,8 @@ function createTheUsers() {
   const email = $('#addUserDetailsModalEmail').val();
   const password = $('#addUserDetailsModalPassword').val();
 
-// console.log("typeof $.notify", typeof $.notify); // should not be undefined
-// console.log("typeof showNotificationError", typeof showNotificationError);
+  // console.log("typeof $.notify", typeof $.notify); // should not be undefined
+  // console.log("typeof showNotificationError", typeof showNotificationError);
 
   const is_super = $('#addUserDetailsSuperAccess').prop('checked');;
   const user_type = localStorage.getItem('_role')
@@ -1118,15 +1118,15 @@ function editMemberFromTeam(memberId) {
   console.log("login_user_email", login_user_email);
 
   if (login_user_email == userDetails.email) {
-  // alert('Call 1');
-  $("#adminInput").addClass('d-none'); // hide
+    // alert('Call 1');
+    $("#adminInput").addClass('d-none'); // hide
   } else {
     // alert('Call 2');
     $("#adminInput").removeClass('d-none'); // show
   }
 
 
-  
+
 
   const is_super = userDetails.is_super
   isSuperChecked = is_super
@@ -1155,7 +1155,7 @@ function editMemberFromTeam(memberId) {
 
 
 $('#editUserDetailsSaveButton').on('click', function () {
-  if($('#addUserDetailsModalForm').validate().form()) {
+  if ($('#addUserDetailsModalForm').validate().form()) {
     $('#cover-spin').show()
     updatedTheUsersDetails()
   }
@@ -1508,124 +1508,10 @@ function logoutUser(SessionId) {
     $('#cover-spin').show()
 
     setTimeout(() => {
+      localStorage.clear();
       window.location.href = '/signin.html';
     }, 1500);
 
-
-    // const requireData =
-    //   JSON.stringify({
-    //     time: Number(SessionId),
-    //     auth_token: authToken,
-    //   })
-    // $.ajax({
-    //   url: MAIN_API_PATH + logoutUserSessionAPI,
-    //   method: POST,
-    //   contentType: Content_Type,
-    //   dataType: 'json',
-    //   data: requireData,
-    //   success: function (data, textStatus, xhr) {
-    //     $('#cover-spin').hide()
-    //     $('#create_td').DataTable().clear().draw()
-    //     showNotificationError('bg-green', null, null, null, null, null, DELETE)
-    //     profileSessionDatatable.clear().draw()
-    //     const entriesPerPageChanged = Number($('#datatableEntries1').val())
-    //     getAllSessionDetail(entriesPerPageChanged, 1)
-    //   },
-    //   error: function (xhr, status, error) {
-    //     $('#cover-spin').hide(0)
-    //     if (xhr.status === 400) {
-    //       showNotificationError(
-    //         'bg-orange',
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         invalidRequest400Error
-
-    //       )
-    //     } else if (xhr.status === 401) {
-    //       showNotificationError(
-    //         'bg-orange',
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         unauthorizedRequest401Error
-    //       )
-    //     } else if (xhr.status === 404) {
-    //       showNotificationError(
-    //         'bg-red',
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         notFound404Error
-    //       )
-    //     } else if (xhr.status === 503) {
-    //       showNotificationError(
-    //         'bg-red',
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         serverError503Error
-    //       )
-    //     } else if (xhr.status === 408) {
-    //       swal({
-    //         title: ' ',
-    //         text: sessionExpired408Error,
-    //         type: 'info',
-    //         showCancelButton: false,
-    //         confirmButtonText: 'Logout'
-    //       }, function (isConfirm) {
-    //         if (isConfirm) {
-    //           localStorage.clear()
-    //           window.location.href = redirectToSignInPage408
-    //         }
-    //       })
-    //     } else if (xhr.status === 410) {
-    //       $.ajax({
-    //         url: MAIN_API_PATH + getGmtAPI,
-    //         method: POST,
-    //         contentType: Content_Type,
-    //         dataType: 'json',
-    //         success: function (data, textStatus, xhr) {
-    //           const encrypt = new JSEncrypt()
-    //           encrypt.setPublicKey(sitePublicKey)
-    //           const dateString = String(data.unixtime)
-    //           securityKeyEncrypted = encrypt.encrypt(dateString)
-    //           SecurityKeyTime = false
-    //           deleteSession()
-    //         },
-    //         error: function (xhr, status, error) {
-    //           $.getJSON(worldTimeAPI,
-    //             function (data) {
-    //               const encrypt = new JSEncrypt()
-    //               encrypt.setPublicKey(sitePublicKey)
-    //               const dateString = String(data.unixtime)
-    //               securityKeyEncrypted = encrypt.encrypt(dateString)
-    //               SecurityKeyTime = false
-    //               deleteSession()
-    //             })
-    //         }
-    //       })
-    //     } else {
-    //       showNotificationError(
-    //         'bg-red',
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         null,
-    //         serverError503Error
-    //       )
-    //     }
-    //   }
-    // })
   })
 
 }

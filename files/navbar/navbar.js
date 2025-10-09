@@ -18,23 +18,47 @@ function applyActiveClass() {
 
     navLinks.each(function () {
         const link = $(this);
-    
+
         // Get href and currentPath, remove leading slash if present
         const linkHref = link.attr('href').replace(/^\//, '');
         const normalizedPath = currentPath.replace(/^\//, '');
-    
+
         // console.log('link', linkHref, normalizedPath);
-    
+
         if (linkHref === normalizedPath) {
             link.addClass('active');
         } else {
             link.removeClass('active');
         }
     });
-    
+
 
 }
 
 
 // call function on page load
 applyActiveClass()
+
+
+
+function signOut(SessionId) {
+    // Delete User
+
+    swal({
+        title: 'Logout Session',
+        text: 'Are you sure you want to logout?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel'
+    }, function () {
+        $('#cover-spin').show()
+
+        setTimeout(() => {
+            localStorage.clear();
+            window.location.href = '/signin.html';
+        }, 1500);
+
+    })
+
+}
