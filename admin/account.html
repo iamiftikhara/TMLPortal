@@ -27,7 +27,7 @@
   <link rel="preload" href="/assets/css/theme-dark.min.css" data-hs-appearance="dark" as="style">
   <link rel="stylesheet" href="/assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
   <link href="files/css/style.css" rel="stylesheet">
- 
+
   <!-- Security Key Encryption -->
   <script src="/files/https-files/jsencrypt.min.js"></script>
   <script src="/files/https-files/crypto-js.js"></script>
@@ -226,248 +226,293 @@
       </div>
 
 
-      <div id="mainContentInnerDataToShow" class="d-none">
+      <div id="mainContentInnerDataToShow" class="row d-none">
 
-
-        <div class="d-flex">
+        <!-- <div class="d-flex"> -->
+        <div class="col-sm-12 col-sx-12 col-md-2 col-lg-2 mb-2" id="profileNavbar">
           <!-- Navbar -->
-          <div id="profileNavbar" class="p-0 pe-5" style="max-width: 15rem;">
-            <div class="card h-100 nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh; background-color: white;">
-              <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab"
-                data-bs-toggle="pill" data-bs-target="#profileTab" role="tab" aria-controls="profileTab"
-                aria-selected="true"><img src="files/images/sidebar-icon/Profile.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Profile</a>
-              <hr class="horizontal-line">
-              <a class="nav-link profileTabClick" data-toggle="pill" href="#securityTab" data-bs-toggle="pill"
-                data-bs-target="#securityTab" role="tab" aria-controls="securityTab" aria-selected="false"><img src="files/images/sidebar-icon/Security.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Security</a>
-              <!-- <hr class="horizontal-line"> -->
-              <a class="nav-link profileTabClick d-none" data-toggle="pill" href="#billingTab" data-bs-toggle="pill"
-                data-bs-target="#billingTab" role="tab" aria-controls="billingTab" aria-selected="false"><img src="files/images/sidebar-icon/Bill.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Billing</a>
-              <!-- <hr class="horizontal-line"> -->
-              <a class="nav-link profileTabClick d-none" data-toggle="pill" href="#notificationTab" data-bs-toggle="pill"
-                data-bs-target="#notificationTab" role="tab" aria-controls="notificationTab"
-                aria-selected="false"><img src="files/images/sidebar-icon/Notification.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Notification</a>
-              <hr class="horizontal-line">
-              <a class="nav-link profileTabClick" id="teamTabClick" data-toggle="pill" href="#teamTab"
-                data-bs-toggle="pill" - data-bs-target="#teamTab" role="tab" aria-controls="teamTab"
-                aria-selected="false"><img src="files/images/sidebar-icon/Teams.svg" width="30" height="30" alt="Profile Icon" style="margin-right: 10px;">Team</a>
-              <hr class="horizontal-line">
+          <!-- <div  class="p-0 pe-5" style="max-width: 15rem;"> -->
+          <div class="card h-100 nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh; background-color: white;">
+            <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab" data-bs-toggle="pill"
+              data-bs-target="#profileTab" role="tab" aria-controls="profileTab" aria-selected="true"><img
+                src="files/images/sidebar-icon/Profile.svg" width="30" height="30" alt="Profile Icon"
+                style="margin-right: 10px;">Profile</a>
+            <hr class="horizontal-line">
+            <a class="nav-link profileTabClick" data-toggle="pill" href="#securityTab" data-bs-toggle="pill"
+              data-bs-target="#securityTab" role="tab" aria-controls="securityTab" aria-selected="false"><img
+                src="files/images/sidebar-icon/Security.svg" width="30" height="30" alt="Profile Icon"
+                style="margin-right: 10px;">Security</a>
+            <!-- <hr class="horizontal-line"> -->
+            <a class="nav-link profileTabClick d-none" data-toggle="pill" href="#billingTab" data-bs-toggle="pill"
+              data-bs-target="#billingTab" role="tab" aria-controls="billingTab" aria-selected="false"><img
+                src="files/images/sidebar-icon/Bill.svg" width="30" height="30" alt="Profile Icon"
+                style="margin-right: 10px;">Billing</a>
+            <!-- <hr class="horizontal-line"> -->
+            <a class="nav-link profileTabClick d-none" data-toggle="pill" href="#notificationTab" data-bs-toggle="pill"
+              data-bs-target="#notificationTab" role="tab" aria-controls="notificationTab" aria-selected="false"><img
+                src="files/images/sidebar-icon/Notification.svg" width="30" height="30" alt="Profile Icon"
+                style="margin-right: 10px;">Notification</a>
+            <hr class="horizontal-line">
+            <a class="nav-link profileTabClick" id="teamTabClick" data-toggle="pill" href="#teamTab"
+              data-bs-toggle="pill" - data-bs-target="#teamTab" role="tab" aria-controls="teamTab"
+              aria-selected="false"><img src="files/images/sidebar-icon/Teams.svg" width="30" height="30"
+                alt="Profile Icon" style="margin-right: 10px;">Team</a>
+            <hr class="horizontal-line">
 
-              <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()"
-                onclick="logoutUser()">
-                <span>Log Out</span> <span class="ms-8"><img src="files/images/sidebar-icon/Logout.svg" width="40" height="30" alt="Profile Icon" style="margin-right: 10px;"></span>
-              </a>
-            </div>
+            <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()"
+              onclick="logoutUser()">
+              <span>Log Out</span> <span class="ms-8"><img src="files/images/sidebar-icon/Logout.svg" width="40"
+                  height="30" alt="Profile Icon" style="margin-right: 10px;"></span>
+            </a>
           </div>
-          <!-- End Navbar -->
+          <!-- </div> -->
+        </div>
+        <!-- End Navbar -->
 
-          <!-- Tab Content -->
-          <div class="col">
-            <div class="tab-content">
-              <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Profile Information</h3>
-                  </div>
-                  <div class="card-body">
-                    <form id="editProfile">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-lg-6 col-sm-12">
-                            <!-- Form -->
-                              <div class="mb-3">
-                                <label for="primaryContactNameProfile" class="form-label">First name:</label>
-                                <input type="text" class="form-control " id="editFirstName" name="editFirstName"
-                                  placeholder="John" aria-label="John Doe" required>
-                              </div>
-                            <!-- End Form -->
-                          </div>
-                             <div class="col-lg-6 col-sm-12">
-                            <!-- Form -->
-                              <div class="mb-3">
-                                <label for="editLastName" class="form-label">Last Name:</label>
-                                <input type="text" class="form-control " id="editLastName" name="editLastName"
-                                  placeholder="Doe" required>
-                              </div>
-                            <!-- End Form -->
-                          </div>
-                        </div>
-
-                      
-                      </div>
-                    </form>
-                  
-                  </div>
-                  <div class="card-footer text-end">
-                    <button type="button" class="btn btn-outline-primary" id="saveProfileBtn">Submit</button>
-                  </div>
+        <!-- Tab Content -->
+        <div class="col-sm-12 col-sx-12 col-md-10 col-lg-10">
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-header-title">Profile Information</h3>
                 </div>
-              </div>
-
-
-              <div class="tab-pane fade" id="securityTab" role="tabpanel">
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-header-title">Change Password</h3>
-                  </div>
-                  <div class="card-body">
-                    <form id="changePasswordForm">
+                <div class="card-body">
+                  <form id="editProfile">
+                    <div class="container">
                       <div class="row">
-                              <!-- Form -->
-                      <div class="mb-3 col-4">
-                        <label for="securityOldPassword" class="form-label">Old Password:</label>
-                        <input type="password" class="form-control " id="securityOldPassword"
-                          placeholder="Enter old password" name="securityOldPassword" required>
+                        <div class="col-lg-6 col-sm-12">
+                          <!-- Form -->
+                          <div class="mb-3">
+                            <label for="primaryContactNameProfile" class="form-label">First name:</label>
+                            <input type="text" class="form-control " id="editFirstName" name="editFirstName"
+                              placeholder="John" aria-label="John Doe" required>
+                          </div>
+                          <!-- End Form -->
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                          <!-- Form -->
+                          <div class="mb-3">
+                            <label for="editLastName" class="form-label">Last Name:</label>
+                            <input type="text" class="form-control " id="editLastName" name="editLastName"
+                              placeholder="Doe" required>
+                          </div>
+                          <!-- End Form -->
+                        </div>
                       </div>
-                      <!-- End Form -->
 
-                       <!-- Form -->
-                      <div class="mb-3 col-4">
-                        <label for="securityNewPassword" class="form-label">New Password:</label>
-                        <input type="password" class="form-control " id="securityNewPassword"
-                          placeholder="Enter new password" name="securityNewPassword" required>
-                      </div>
-                      <!-- End Form -->
 
-                       <!-- Form -->
-                      <div class="mb-3 col-4">
-                        <label for="securityConfirmNewPassword" class="form-label">Confirm New Password:</label>
-                        <input type="password" class="form-control " id="securityConfirmNewPassword"
-                          placeholder="Confirm new password" required name="securityConfirmNewPassword">
-                      </div>
-                      <!-- End Form -->
-                      </div>
-                
+                    </div>
+                  </form>
 
-                      <!-- Checkbox -->
-                      <div class="form-check mb-3 d-none">
-                        <input type="checkbox" id="mfaEnableCheckBox" class="form-check-input">
-                        <label class="form-check-label" for="mfaEnableCheckBox">Enable Multi-Factor Authentication
-                          (MFA)</label>
-                      </div>
-                      <!-- End Checkbox -->
-
-                    </form>
-                    
-                  </div>
-                    <div class="card-footer text-end">
-                    <button type="button" class="btn btn-outline-primary" id="saveSecuritySettingBtn">Submit </button>
-                  </div>
+                </div>
+                <div class="card-footer text-end">
+                  <button type="button" class="btn btn-outline-primary" id="saveProfileBtn">Submit</button>
                 </div>
               </div>
-
-              <div class="tab-pane fade" id="billingTab" role="tabpanel">
-                <div class="card p-3">
-                  <form>
+            </div>
 
 
-                    <!-- start size -->
-                    <div class="col-sm-12  mb-4" id="savePaymentsMethodsSelectDiv">
-                      <label class=" form-label" for="savePaymentsMethodsSelect">Save Payment Methods</label>
-                      <!-- Select -->
-                      <div class="tom-select-custom" style="cursor: pointer;">
-                        <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
+            <div class="tab-pane fade" id="securityTab" role="tabpanel">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-header-title">Change Password</h3>
+                </div>
+                <div class="card-body">
+                  <form id="changePasswordForm">
+                    <div class="row">
+                      <!-- Form -->
+                      <!-- Old Password -->
+                      <div class="mb-3 col-4 position-relative">
+                        <label for="securityOldPassword" class="form-label">Old Password:</label>
+                        <a id="securityOldPasswordTarget"
+                          class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-2 pt-1"
+                          href="javascript:;">
+                          <i id="securityOldPasswordIcon" class="bi-eye-slash"></i>
+                        </a>
+                        <input type="password" class="js-toggle-password form-control form-control-lg ps-1"
+                          name="securityOldPassword" id="securityOldPassword" placeholder="Enter old password"
+                          minlength="8" maxlength="25" required data-hs-toggle-password-options='{
+                            "target": "#securityOldPasswordTarget",
+                            "defaultClass": "bi-eye-slash",
+                            "showClass": "bi-eye",
+                            "classChangeTarget": "#securityOldPasswordIcon"
+                          }'>
+
+                      </div>
+
+                      <!-- New Password -->
+                      <div class="mb-3 col-4 position-relative">
+                        <label for="securityNewPassword" class="form-label">New Password:</label>
+                        <a id="securityNewPasswordTarget"
+                          class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-2 pt-1"
+                          href="javascript:;">
+                          <i id="securityNewPasswordIcon" class="bi-eye-slash"></i>
+                        </a>
+                        <input type="password" class="js-toggle-password form-control form-control-lg ps-1"
+                          name="securityNewPassword" id="securityNewPassword" placeholder="Enter new password"
+                          minlength="8" maxlength="25" required data-hs-toggle-password-options='{
+                          "target": "#securityNewPasswordTarget",
+                          "defaultClass": "bi-eye-slash",
+                          "showClass": "bi-eye",
+                          "classChangeTarget": "#securityNewPasswordIcon"
+                        }'>
+
+                      </div>
+
+                      <!-- Confirm Password -->
+                      <div class="mb-3 col-4 position-relative">
+                        <label for="securityConfirmNewPassword" class="form-label">Confirm New Password:</label>
+                        <a id="securityConfirmNewPasswordTarget"
+                          class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-2 pt-1"
+                          href="javascript:;">
+                          <i id="securityConfirmNewPasswordIcon" class="bi-eye-slash"></i>
+                        </a>
+                        <input type="password" class="js-toggle-password form-control form-control-lg ps-1"
+                          name="securityConfirmNewPassword" id="securityConfirmNewPassword"
+                          placeholder="Confirm new password" minlength="8" maxlength="25" required
+                          data-hs-toggle-password-options='{
+                          "target": "#securityConfirmNewPasswordTarget",
+                          "defaultClass": "bi-eye-slash",
+                          "showClass": "bi-eye",
+                          "classChangeTarget": "#securityConfirmNewPasswordIcon"
+                        }'>
+                      </div>
+                    </div>
+
+
+                    <!-- Checkbox -->
+                    <div class="form-check mb-3 d-none">
+                      <input type="checkbox" id="mfaEnableCheckBox" class="form-check-input">
+                      <label class="form-check-label" for="mfaEnableCheckBox">Enable Multi-Factor Authentication
+                        (MFA)</label>
+                    </div>
+                    <!-- End Checkbox -->
+
+                  </form>
+
+                </div>
+                <div class="card-footer text-end">
+                  <button type="button" class="btn btn-outline-primary" id="saveSecuritySettingBtn">Submit </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="billingTab" role="tabpanel">
+              <div class="card p-3">
+                <form>
+
+
+                  <!-- start size -->
+                  <div class="col-sm-12  mb-4" id="savePaymentsMethodsSelectDiv">
+                    <label class=" form-label" for="savePaymentsMethodsSelect">Save Payment Methods</label>
+                    <!-- Select -->
+                    <div class="tom-select-custom" style="cursor: pointer;">
+                      <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
                                 "searchInDropdown": false,
                             "hideSearch": true,
                             "placeholder": "Select"
                             }' id="savePaymentsMethodsSelect" name="savePaymentsMethodsSelect">
-                          <option class="p-2" value="">Select</option>
-                        </select>
-                      </div>
-                      <!-- End Select -->
+                        <option class="p-2" value="">Select</option>
+                      </select>
                     </div>
-                    <!-- end size -->
-
-                    <!-- Form -->
-                    <div class="mb-3">
-                      <label for="billingAddressProfile" class="form-label">Billing Address:</label>
-
-                      <input type="text" class="form-control " id="billingAddressProfile"
-                        placeholder="123 Main Street, City" aria-label="123 Main Street, City">
-                    </div>
-                    <!-- End Form -->
-
-                    <!-- Form -->
-                    <div class="mb-3">
-                      <label for="billingAddressProfile2" class="form-label">Billing Address:</label>
-                      <input type="text" class="form-control " id="billingAddressProfile2"
-                        placeholder="123 Main Street, City" aria-label="123 Main Street, City">
-                    </div>
-                    <!-- End Form -->
-
-                  </form>
-                  <div>
-                    <button type="button" class="btn btn-outline-primary" id="saveBillingInfoBtn">Save Billing Info</button>
+                    <!-- End Select -->
                   </div>
-
-                  <hr class="horizontal-line-billing">
-
-
-                  <h3 class="">Invoice History</h3>
+                  <!-- end size -->
 
                   <!-- Form -->
                   <div class="mb-3">
-                    <input type="text" class="form-control " id="invoice001Paid"
-                      placeholder="Invoice #001 - Paid" aria-label="Invoice #001 - Paid">
+                    <label for="billingAddressProfile" class="form-label">Billing Address:</label>
+
+                    <input type="text" class="form-control " id="billingAddressProfile"
+                      placeholder="123 Main Street, City" aria-label="123 Main Street, City">
                   </div>
                   <!-- End Form -->
 
                   <!-- Form -->
                   <div class="mb-3">
-                    <input type="text" class="form-control " id="invoice002Pending"
-                      placeholder="Invoice #002 - Pending" aria-label="Invoice #002 - Pending">
+                    <label for="billingAddressProfile2" class="form-label">Billing Address:</label>
+                    <input type="text" class="form-control " id="billingAddressProfile2"
+                      placeholder="123 Main Street, City" aria-label="123 Main Street, City">
                   </div>
                   <!-- End Form -->
 
+                </form>
+                <div>
+                  <button type="button" class="btn btn-outline-primary" id="saveBillingInfoBtn">Save Billing
+                    Info</button>
                 </div>
-              </div>
 
-              <div class="tab-pane fade" id="notificationTab" role="tabpanel">
-                <div class="card p-3">
-                  <form>
+                <hr class="horizontal-line-billing">
 
-                    <!-- Checkbox -->
-                    <div class="form-check mb-3">
-                      <input type="checkbox" id="emailNotificationsCheckBox" class="form-check-input border-dark">
-                      <label class="form-check-label" for="emailNotificationsCheckBox">Email notifications for quotes
-                        and orders</label>
-                    </div>
-                    <!-- End Checkbox -->
 
-                    <!-- Checkbox -->
-                    <div class="form-check mb-3">
-                      <input type="checkbox" id="smsNotificationsCheckBox" class="form-check-input border-dark">
-                      <label class="form-check-label" for="smsNotificationsCheckBox">SMS notifications</label>
-                    </div>
-                    <!-- End Checkbox -->
+                <h3 class="">Invoice History</h3>
 
-                    <!-- Checkbox -->
-                    <div class="form-check mb-3">
-                      <input type="checkbox" id="weeklySummaryCheckBox" class="form-check-input border-dark">
-                      <label class="form-check-label" for="weeklySummaryCheckBox">Weekly summary</label>
-                    </div>
-                    <!-- End Checkbox -->
-
-                  </form>
-                  <div>
-                    <button type="button" class="btn btn-outline-primary" id="saveNotificationSettingBtn">Save Notification
-                      Setting</button>
-                  </div>
-
+                <!-- Form -->
+                <div class="mb-3">
+                  <input type="text" class="form-control " id="invoice001Paid" placeholder="Invoice #001 - Paid"
+                    aria-label="Invoice #001 - Paid">
                 </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="mb-3">
+                  <input type="text" class="form-control " id="invoice002Pending" placeholder="Invoice #002 - Pending"
+                    aria-label="Invoice #002 - Pending">
+                </div>
+                <!-- End Form -->
+
               </div>
-
-              <div class="tab-pane fade" id="teamTab" role="tabpanel">
-                <!-- start data table -->
-                <div id="profileTeamTableContainer"></div>
-                <!-- end data table -->
-              </div>
-
-
             </div>
+
+            <div class="tab-pane fade" id="notificationTab" role="tabpanel">
+              <div class="card p-3">
+                <form>
+
+                  <!-- Checkbox -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" id="emailNotificationsCheckBox" class="form-check-input border-dark">
+                    <label class="form-check-label" for="emailNotificationsCheckBox">Email notifications for quotes
+                      and orders</label>
+                  </div>
+                  <!-- End Checkbox -->
+
+                  <!-- Checkbox -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" id="smsNotificationsCheckBox" class="form-check-input border-dark">
+                    <label class="form-check-label" for="smsNotificationsCheckBox">SMS notifications</label>
+                  </div>
+                  <!-- End Checkbox -->
+
+                  <!-- Checkbox -->
+                  <div class="form-check mb-3">
+                    <input type="checkbox" id="weeklySummaryCheckBox" class="form-check-input border-dark">
+                    <label class="form-check-label" for="weeklySummaryCheckBox">Weekly summary</label>
+                  </div>
+                  <!-- End Checkbox -->
+
+                </form>
+                <div>
+                  <button type="button" class="btn btn-outline-primary" id="saveNotificationSettingBtn">Save
+                    Notification
+                    Setting</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="teamTab" role="tabpanel">
+              <!-- start data table -->
+              <div id="profileTeamTableContainer"></div>
+              <!-- end data table -->
+            </div>
+
+
           </div>
         </div>
-
       </div>
+
+      <!-- </div> -->
 
     </div>
     <!-- End Content -->
@@ -488,7 +533,7 @@
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 pe-2">
                   <label for="addUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalFirstName"
                     name="addUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
                 </div>
@@ -497,7 +542,7 @@
                 <!-- Form -->
                 <div class="mb-4">
                   <label for="addUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalLastName"
                     name="addUserDetailsModalLastName" placeholder="Wick" aria-label="Wick">
                 </div>
@@ -507,7 +552,7 @@
               <!-- Form -->
               <div class="mb-4">
                 <label for="addUserDetailsModalEmail" class="form-label">Email: <span class="text-danger">
-                            *</span></label>
+                    *</span></label>
                 <input type="email" class="form-control" id="addUserDetailsModalEmail" name="addUserDetailsModalEmail"
                   placeholder="Wick" aria-label="Wick">
               </div>
@@ -519,7 +564,7 @@
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 pe-2">
                   <label for="addUserDetailsModalPassword" class="form-label">Password: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="password" class="form-control" id="addUserDetailsModalPassword"
                     name="addUserDetailsModalPassword" placeholder="********" aria-label="Wick">
                 </div>
@@ -528,8 +573,9 @@
 
                 <!-- Form -->
                 <div class="mb-4 col-12 col-md-6 ps-2">
-                  <label for="addUserDetailsModalConfirmPassword" class="form-label">Confirm Password: <span class="text-danger">
-                            *</span></label>
+                  <label for="addUserDetailsModalConfirmPassword" class="form-label">Confirm Password: <span
+                      class="text-danger">
+                      *</span></label>
                   <input type="password" class="form-control" id="addUserDetailsModalConfirmPassword"
                     name="addUserDetailsModalConfirmPassword" placeholder="********" aria-label="Wick">
                 </div>
@@ -582,7 +628,7 @@
                 <!-- Form -->
                 <div class="mb-4 pe-2">
                   <label for="editUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalFirstName"
                     name="editUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
                 </div>
@@ -591,7 +637,7 @@
                 <!-- Form -->
                 <div class="mb-4">
                   <label for="editUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
-                            *</span></label>
+                      *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalLastName"
                     name="editUserDetailsModalLastName" placeholder="Wick" aria-label="Wick" required>
                 </div>
@@ -669,6 +715,8 @@
   <script src="/files/plugins/node-waves/waves.js"></script>
   <!-- constant js -->
   <script src="/files/my-scripts/constants.js"></script>
+  <!-- JS Implementing Plugins -->
+  <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
   <!-- valedition constant -->
   <script src="/files/my-scripts/validation_constants.js"></script>
   <!-- Datatable Initlization -->
@@ -680,8 +728,19 @@
   <script src="/files/my-scripts/account.js"></script>
   <script src="/files/table-config/profile-table-confg.js"></script>
 
-
-
+  <script>
+      (function () {
+        window.onload = function () {
+          // INITIALIZATION OF TOGGLE PASSWORD
+          // =======================================================
+          new HSTogglePassword('.js-toggle-password');
+          // Redirect User to Index.html if user signed in already
+          if (localStorage.getItem('_ia') == 'true') {
+            // window.location.href = 'index.html';
+          }
+        };
+      })()
+  </script>
 
 
 </body>
