@@ -229,10 +229,10 @@
       <div id="mainContentInnerDataToShow" class="row d-none">
 
         <!-- <div class="d-flex"> -->
-        <div class="col-sm-12 col-sx-12 col-md-2 col-lg-2 mb-2" id="profileNavbar">
+        <div class="col-sm-12 col-sx-12 col-md-2 col-lg-2" id="profileNavbar">
           <!-- Navbar -->
           <!-- <div  class="p-0 pe-5" style="max-width: 15rem;"> -->
-          <div class="card h-100 nav-bar-nav nav nav-segment  py-3 px-2" style="height: 83vh; background-color: white;">
+          <div class="card h-100 nav-bar-nav nav nav-segment w-100 py-3 px-2" style="height: 83vh; background-color: white;">
             <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab" data-bs-toggle="pill"
               data-bs-target="#profileTab" role="tab" aria-controls="profileTab" aria-selected="true"><img
                 src="files/images/sidebar-icon/Profile.svg" width="30" height="30" alt="Profile Icon"
@@ -261,7 +261,7 @@
 
             <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()"
               onclick="logoutUser()">
-              <span>Log Out</span> <span class="ms-8"><img src="files/images/sidebar-icon/Logout.svg" width="40"
+              <span>Log Out</span> <span><img src="files/images/sidebar-icon/Logout.svg" width="40"
                   height="30" alt="Profile Icon" style="margin-right: 10px;"></span>
             </a>
           </div>
@@ -370,7 +370,7 @@
                         </a>
                         <input type="password" class="js-toggle-password form-control form-control-lg ps-1"
                           name="securityConfirmNewPassword" id="securityConfirmNewPassword"
-                          placeholder="Confirm new password" minlength="8" maxlength="25" required
+                          placeholder="Enter confirm new password" minlength="8" maxlength="25" required
                           data-hs-toggle-password-options='{
                           "target": "#securityConfirmNewPasswordTarget",
                           "defaultClass": "bi-eye-slash",
@@ -565,8 +565,22 @@
                 <div class="mb-4 col-12 col-md-6 pe-2">
                   <label for="addUserDetailsModalPassword" class="form-label">Password: <span class="text-danger">
                       *</span></label>
-                  <input type="password" class="form-control" id="addUserDetailsModalPassword"
-                    name="addUserDetailsModalPassword" placeholder="********" aria-label="Wick">
+                  <!-- <input type="password" class="form-control" id="addUserDetailsModalPassword"
+                    name="addUserDetailsModalPassword" placeholder="********" aria-label="Wick"> -->
+                    <a id="addUserDetailsModalPasswordTarget"
+                          class="input-group-text password-eye border-0 position-absolute end-50 me-2 bg-transparent mt-1"
+                          href="javascript:;">
+                          <i id="addUserDetailsModalPasswordIcon" class="bi-eye-slash"></i>
+                        </a>
+                        <input type="password" class="js-toggle-password form-control form-control-lg ps-1"
+                          name="addUserDetailsModalPassword" id="addUserDetailsModalPassword"
+                          placeholder="Enter password" minlength="8" maxlength="25" required
+                          data-hs-toggle-password-options='{
+                          "target": "#addUserDetailsModalPasswordTarget",
+                          "defaultClass": "bi-eye-slash",
+                          "showClass": "bi-eye",
+                          "classChangeTarget": "#addUserDetailsModalPasswordIcon"
+                        }'>
                 </div>
                 <!-- End Form -->
 
@@ -576,8 +590,22 @@
                   <label for="addUserDetailsModalConfirmPassword" class="form-label">Confirm Password: <span
                       class="text-danger">
                       *</span></label>
-                  <input type="password" class="form-control" id="addUserDetailsModalConfirmPassword"
-                    name="addUserDetailsModalConfirmPassword" placeholder="********" aria-label="Wick">
+                       <a id="addUserDetailsModalConfirmPasswordTarget"
+                          class="input-group-text password-eye border-0 position-absolute end-0 me-5 bg-transparent mt-1"
+                          href="javascript:;">
+                          <i id="addUserDetailsModalConfirmPasswordIcon" class="bi-eye-slash"></i>
+                        </a>
+                        <input type="password" class="js-toggle-password form-control form-control-lg ps-1"
+                          name="addUserDetailsModalConfirmPassword" id="addUserDetailsModalConfirmPassword"
+                          placeholder="Confirm new password" minlength="8" maxlength="25" required
+                          data-hs-toggle-password-options='{
+                          "target": "#addUserDetailsModalConfirmPasswordTarget",
+                          "defaultClass": "bi-eye-slash",
+                          "showClass": "bi-eye",
+                          "classChangeTarget": "#addUserDetailsModalConfirmPasswordIcon"
+                        }'>
+                  <!-- <input type="password" class="form-control" id="addUserDetailsModalConfirmPassword"
+                    name="addUserDetailsModalConfirmPassword" placeholder="********" aria-label="Wick"> -->
                 </div>
                 <!-- End Form -->
 

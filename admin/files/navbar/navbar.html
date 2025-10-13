@@ -2,7 +2,7 @@
   <nav class="js-mega-menu navbar-nav-wrap hs-menu-initialized hs-menu-horizontal">
     <!-- Logo -->
 
-    <a class="navbar-brand" href="index.html" aria-label="Front">
+    <a class="navbar-brand" href="quotes-review.html" aria-label="Front">
       <img class="navbar-brand-logo" src="files/images/logo/logo.png" alt="Logo" data-hs-theme-appearance="default">
       <img class="navbar-brand-logo" src="files/images/logo/logo.png" alt="Logo" data-hs-theme-appearance="dark">
     </a>
@@ -50,20 +50,43 @@
         <img src="/files/images/navbar-icon/Orders.svg" width="30" height="30" alt="Orders Icon" style="margin-right: 10px;"> Analytics
       </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="account.html">
         <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon" style="margin-right: 10px;"> Account
       </a>
-    </li>
+    </li> -->
   </ul>
 
   <!-- Right group: Logout -->
+
   <ul class="navbar-nav ms-auto">
-    <li class="nav-item nav-item-to-show-after-login">
+       <li class="nav-item nav-item-to-show-after-login">
+      <div class="avatar avatar-soft-primary avatar-circle mt-2" id="navSubmenuPagesAccountDropdown"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="avatar-initials" id="accountIntialsToShow">B</span>
+      </div>
+      <div class="dropdown">
+        <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless"
+          aria-labelledby="navSubmenuPagesAccountDropdown1" style="margin-top: 0rem">
+          <a href="account.html" class="dropdown-item">
+            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon" style="margin-right: 10px;"><span>Account </span>
+          </a>
+          <a onclick="signOut()" class="dropdown-item cursor-pointer">
+            <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon" style="margin-right: 10px;"><span>Logout </span>
+          </a>
+        </div>
+      </div>
+
+      <a class="nav-link d-none" href="account.html">
+        <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
+          style="margin-right: 10px;"> Account
+      </a>
+    </li>
+    <!-- <li class="nav-item nav-item-to-show-after-login">
       <a class="nav-link" href="/signin.html">
         <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon" style="margin-right: 10px;"> Logout
       </a>
-    </li>
+    </li> -->
   </ul>
 
 </div>
@@ -116,6 +139,14 @@
         })
       })
 
+    let firstName = localStorage.getItem('_uf')
+    let lastName = localStorage.getItem('_ul')
+
+
+          // Set the account initials to show
+    document.getElementById('accountIntialsToShow').textContent = firstName.charAt(0) + lastName.charAt(0)
+
+
       // Call the setActiveStyle on load page
       setActiveStyle()
 
@@ -124,6 +155,29 @@
         setActiveStyle()
       })
     })()
+
+    function signOut(SessionId) {
+    // Delete User
+
+      swal({
+          title: 'Logout Session',
+          text: 'Are you sure you want to logout?',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel'
+      }, function () {
+          $('#cover-spin').show()
+
+          setTimeout(() => {
+              localStorage.clear();
+              window.location.href = '/signin.html';
+          }, 1500);
+
+      })
+
+    }
+
 </script>
 <!-- End Style Switcher JS -->
 

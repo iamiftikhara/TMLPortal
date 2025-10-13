@@ -231,8 +231,8 @@
 
         <div class="d-flex">
           <!-- Navbar -->
-          <div id="profileNavbar" class="p-0 pe-5" style="max-width: 15rem;">
-            <div class="card h-100 nav-bar-nav nav nav-segment  py-3 px-2"
+          <div  class="col-sm-12 col-sx-12 col-md-2 col-lg-2 px-2" id="profileNavbar">
+            <div class="card h-100 nav-bar-nav nav nav-segment w-100 py-3 px-2"
               style="height: 83vh; background-color: white;">
               <a class="nav-link profileTabClick active" id="firstActiveProfile" href="#profileTab"
                 data-bs-toggle="pill" data-bs-target="#profileTab" role="tab" aria-controls="profileTab"
@@ -262,7 +262,7 @@
 
               <a class="text-secondary ms-3 d-flex justify-content-between mt-auto" href="javascript:void()"
                 onclick="logoutUser()">
-                <span>Log Out</span> <span class="ms-8"><img src="files/images/sidebar-icon/Logout.svg" width="40"
+                <span>Log Out</span> <span><img src="files/images/sidebar-icon/Logout.svg" width="40"
                     height="30" alt="Profile Icon" style="margin-right: 10px;"></span>
               </a>
             </div>
@@ -270,7 +270,7 @@
           <!-- End Navbar -->
 
           <!-- Tab Content -->
-          <div class="col">
+          <div class="col-sm-12 col-sx-12 col-md-10 col-lg-10 px-3">
             <div class="tab-content">
               <div class="tab-pane fade show active" id="profileTab" role="tabpanel">
                 <div class="card">
@@ -331,19 +331,19 @@
                             title="
                             <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the Old password.</li></ul>"></i>
                           <!-- passowerd eye -->
-                          <a id="changeRepeatPassTarget"
+                          <a id="securityOldPasswordTarget"
                             class="input-group-text password-eye border-0 position-absolute me-3 bg-transparent mt-1"
-                            href="javascript:;" style="left: 29%;">
-                            <i id="changeOldPassIcon" class="bi-eye"></i>
+                            href="javascript:;" style="left: 28%;">
+                            <i id="securityOldPasswordIcon" class="bi-eye"></i>
                           </a>
                           <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                             name="securityOldPassword" id="securityOldPassword"
                             placeholder="Enter old password" aria-label="Enter old password " maxlength="50" required
                             data-hs-toggle-password-options='{
-                            "target": "#changeRepeatPassTarget",
+                            "target": "#securityOldPasswordTarget",
                             "defaultClass": "bi-eye-slash",
                             "showClass": "bi-eye",
-                            "classChangeTarget": "#changeOldPassIcon"
+                            "classChangeTarget": "#securityOldPasswordIcon"
                           }' autocomplete="off">
 
 
@@ -362,19 +362,19 @@
                         <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
                         </ul>"></i>
                           <!-- passowerd eye -->
-                          <a id="changePassTarget"
+                          <a id="securityNewPasswordTarget"
                             class="input-group-text password-eye border-0 position-absolute me-3 bg-transparent mt-1"
                             href="javascript:;" style="right: 33%;">
-                            <i id="changeSecurityPassIcon" class="bi-eye"></i>
+                            <i id="securityNewPasswordIcon" class="bi-eye"></i>
                           </a>
                           <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                             name="securityNewPassword" id="securityNewPassword" placeholder="Enter a strong password"
                             aria-label="Password *" required minlength="8" maxlength="50"
                             data-hs-toggle-password-options='{
-                            "target": "#changePassTarget",
+                            "target": "#securityNewPasswordTarget",
                             "defaultClass": "bi-eye-slash",
                             "showClass": "bi-eye",
-                            "classChangeTarget": "#changeSecurityPassIcon"
+                            "classChangeTarget": "#securityNewPasswordIcon"
                           }' autocomplete="off">
 
 
@@ -391,19 +391,19 @@
                             title="
                             <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
                           <!-- passowerd eye -->
-                          <a id="changeRepeatPassTarget"
+                          <a id="securityConfirmNewPasswordTarget"
                             class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
                             href="javascript:;">
-                            <i id="changeSecurityRepeatPassIcon" class="bi-eye"></i>
+                            <i id="changeSecurityRepeatPassIconIcon" class="bi-eye"></i>
                           </a>
                           <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                             name="securityConfirmNewPassword" id="securityConfirmNewPassword"
                             placeholder="Confirm password" aria-label="Confirm Password " maxlength="50" required
                             data-hs-toggle-password-options='{
-                            "target": "#changeRepeatPassTarget",
+                            "target": "#securityConfirmNewPasswordTarget",
                             "defaultClass": "bi-eye-slash",
                             "showClass": "bi-eye",
-                            "classChangeTarget": "#changeSecurityRepeatPassIcon"
+                            "classChangeTarget": "#changeSecurityRepeatPassIconIcon"
                           }' autocomplete="off">
 
 
@@ -603,19 +603,19 @@
                         <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
                         </ul>"></i>
                   <!-- passowerd eye -->
-                  <a id="changePassTarget"
-                    class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
+                  <a id="addUserDetailsModalPasswordTarget"
+                    class="input-group-text password-eye border-0 position-absolute end-50 me-2 bg-transparent mt-1"
                     href="javascript:;">
-                    <i id="changePassIcon" class="bi-eye"></i>
+                    <i id="addUserDetailsModalPasswordIcon" class="bi-eye"></i>
                   </a>
                   <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                     name="addUserDetailsModalPassword" id="addUserDetailsModalPassword"
                     placeholder="Enter a strong password" aria-label="Password *" required minlength="8" maxlength="50"
                     data-hs-toggle-password-options='{
-                      "target": "#changePassTarget",
+                      "target": "#addUserDetailsModalPasswordTarget",
                       "defaultClass": "bi-eye-slash",
                       "showClass": "bi-eye",
-                      "classChangeTarget": "#changePassIcon"
+                      "classChangeTarget": "#addUserDetailsModalPasswordIcon"
                     }' autocomplete="off">
 
 
@@ -633,19 +633,19 @@
                     title="
                     <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
                   <!-- passowerd eye -->
-                  <a id="changeRepeatPassTarget"
-                    class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
+                  <a id="addUserDetailsModalConfirmPasswordTarget"
+                    class="input-group-text password-eye border-0 position-absolute end-0 me-5 bg-transparent mt-1"
                     href="javascript:;">
-                    <i id="changeRepeatPassIcon" class="bi-eye"></i>
+                    <i id="addUserDetailsModalConfirmPasswordIcon" class="bi-eye"></i>
                   </a>
                   <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                     name="addUserDetailsModalConfirmPassword" id="addUserDetailsModalConfirmPassword"
                     placeholder="Confirm password" aria-label="Confirm Password " maxlength="50" required
                     data-hs-toggle-password-options='{
-                      "target": "#changeRepeatPassTarget",
+                      "target": "#addUserDetailsModalConfirmPasswordTarget",
                       "defaultClass": "bi-eye-slash",
                       "showClass": "bi-eye",
-                      "classChangeTarget": "#changeRepeatPassIcon"
+                      "classChangeTarget": "#addUserDetailsModalConfirmPasswordIcon"
                     }' autocomplete="off">
 
                 </div>
@@ -783,6 +783,8 @@
   <script src="/assets/plugins/sweetalert/sweetalert.min.js"></script>
   <!-- Waves js -->
   <script src="/files/plugins/node-waves/waves.js"></script>
+  <!-- JS Implementing Plugins -->
+  <script src="./assets/vendor/hs-toggle-password/dist/js/hs-toggle-password.js"></script>
   <!-- constant js -->
   <script src="/files/my-scripts/constants.js"></script>
   <!-- valedition constant -->
@@ -796,7 +798,19 @@
   <script src="/files/my-scripts/account.js"></script>
   <script src="/files/table-config/profile-table-confg.js"></script>
 
-
+  <script>
+      (function () {
+        window.onload = function () {
+          // INITIALIZATION OF TOGGLE PASSWORD
+          // =======================================================
+          new HSTogglePassword('.js-toggle-password');
+          // Redirect User to Index.html if user signed in already
+          if (localStorage.getItem('_ia') == 'true') {
+            // window.location.href = 'index.html';
+          }
+        };
+      })()
+  </script>
 
 
 
