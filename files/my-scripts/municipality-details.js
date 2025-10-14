@@ -498,6 +498,8 @@ $(document).on("click", "#closeWizerd", function () {
     { scrollTop: $("#mainContentInnerWizerdFormToShow").offset().top },
     600 // duration in ms (600ms = smooth speed)
   );
+
+  window.location.href = 'municipality-details.html'
 });
 
 // update select data options

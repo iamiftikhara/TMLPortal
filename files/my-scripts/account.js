@@ -768,10 +768,26 @@ function getProfileTeamTableData(skip, page) {
         for (let i = 0; i < response.length; i++) {
 
 
-          let fname = generateSpan(response[i], 'first_name', '', '')
-          let lname = generateSpan(response[i], 'last_name', '', '')
+          // let fname = generateSpan(response[i], 'first_name', '', '')
+          // let lname = generateSpan(response[i], 'last_name', '', '')
 
-          let email = generateSpan(response[i], 'email', '', '')
+          // let email = generateSpan(response[i], 'email', '', '')
+          let fname = `<span style="display: inline-block; width: 12rem; cursor: pointer; word-break: break-word; white-space: normal;"
+            title="${response[i].first_name || '--'}">
+            ${response[i].first_name || '--'}
+          </span>`;
+
+          let lname = `<span style="display: inline-block; width: 12rem; cursor: pointer; word-break: break-word; white-space: normal;"
+              title="${response[i].last_name || '--'}">
+              ${response[i].last_name || '--'}
+            </span>`;
+
+          let email = `<span style="display: inline-block; width: 14rem; cursor: pointer; word-break: break-word; white-space: normal;"
+              title="${response[i].email || '--'}">
+              ${response[i].email || '--'}
+            </span>`;
+
+
           let role = generateSpan(response[i], 'role', '', '')
 
 

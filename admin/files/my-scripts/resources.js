@@ -202,6 +202,9 @@ $(document).on("click", ".delete-document", function () {
           availability: checkbox.prop("checked"),
         });
 
+        $("#cover-spin").show();
+
+
         // User clicked Yes -> API call
         $.ajax({
           url: MAIN_API_PATH + "tml/admin/documents/delete", // replace with your API
@@ -211,7 +214,6 @@ $(document).on("click", ".delete-document", function () {
           dataType: "json", // expect JSON response
           success: function (response) {
             showDataTableLoader("addFilesDataTable");
-            $("#cover-spin").show();
             addFilesDataTableInit.clear().draw();
             getaddFilesTableData(10, 1);
             showNotificationError("bg-green", null, null, null, null, null, DELETE);
@@ -299,7 +301,7 @@ $(document).on("click", ".delete-document", function () {
                     const dateString = String(pageName + data.unixtime);
                     securityKeyEncrypted = encrypt.encrypt(dateString);
                     SecurityKeyTime = false;
-                    setMuncipilitiesData();
+                    getaddFilesTableData (1, 10);
                   },
                   error: function (xhr, status, error) {
                     $.getJSON(worldTimeAPI, function (data) {
@@ -308,7 +310,7 @@ $(document).on("click", ".delete-document", function () {
                       const dateString = String(pageName + data.unixtime);
                       securityKeyEncrypted = encrypt.encrypt(dateString);
                       SecurityKeyTime = false;
-                      setMuncipilitiesData();
+                      getaddFilesTableData (1, 10);
                     });
                   },
                 });
@@ -465,7 +467,7 @@ $(document).on("change", ".availability-toggle", function () {
                     const dateString = String(pageName + data.unixtime);
                     securityKeyEncrypted = encrypt.encrypt(dateString);
                     SecurityKeyTime = false;
-                    setMuncipilitiesData();
+                    getaddFilesTableData (1, 10);
                   },
                   error: function (xhr, status, error) {
                     $.getJSON(worldTimeAPI, function (data) {
@@ -474,7 +476,7 @@ $(document).on("change", ".availability-toggle", function () {
                       const dateString = String(pageName + data.unixtime);
                       securityKeyEncrypted = encrypt.encrypt(dateString);
                       SecurityKeyTime = false;
-                      setMuncipilitiesData();
+                      getaddFilesTableData (1, 10);
                     });
                   },
                 });
@@ -690,7 +692,7 @@ $("#updateFileBtn").on("click", function () {
                 const dateString = String(pageName + data.unixtime);
                 securityKeyEncrypted = encrypt.encrypt(dateString);
                 SecurityKeyTime = false;
-                setMuncipilitiesData();
+                getaddFilesTableData (1, 10);
               },
               error: function (xhr, status, error) {
                 $.getJSON(worldTimeAPI, function (data) {
@@ -699,7 +701,7 @@ $("#updateFileBtn").on("click", function () {
                   const dateString = String(pageName + data.unixtime);
                   securityKeyEncrypted = encrypt.encrypt(dateString);
                   SecurityKeyTime = false;
-                  setMuncipilitiesData();
+                  getaddFilesTableData (1, 10);
                 });
               },
             });
@@ -758,6 +760,9 @@ $("#submitFileBtn").on("click", function () {
       formData.append("source", source);
     }
 
+    $("#cover-spin").show();
+
+
     // AJAX request
     $.ajax({
       url: MAIN_API_PATH + adminDocumentsAdd, // replace with your API
@@ -773,18 +778,120 @@ $("#submitFileBtn").on("click", function () {
         var modal = bootstrap.Modal.getInstance(modalEl);
         modal.hide(); // close modal
         showDataTableLoader("addFilesDataTable");
-        $("#cover-spin").show();
         addFilesDataTableInit.clear().draw();
         getaddFilesTableData(10, 1);
         $("#addFileForm")[0].reset(); // reset form
         updateFields(); // reset fields visibility
       },
-      error: function (err) {
-        console.error("Upload error:", err);
-        alert("Error uploading file!");
-      },
-    });
-  }
+      error: function (xhr, status, error) {
+        $('#cover-spin').hide()
+        if (xhr.status === 400) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            invalidRequest400Error
+          )
+        } else if (xhr.status === 401) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            unauthorizedRequest401Error
+          )
+        } else if (xhr.status === 404) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            notFound404Error
+          )
+        } else if (xhr.status === 409) {
+          showNotificationError(
+            'bg-orange',
+            null,
+            null,
+            null,
+            null,
+            null,
+            alreadyExist409Error
+          )
+        } else if (xhr.status === 503) {
+          showNotificationError(
+            'bg-red',
+            null,
+            null,
+            null,
+            null,
+            null,
+            serverError503Error
+          )
+        } else if (xhr.status === 408) {
+          swal(
+            {
+              title: ' ',
+              text: sessionExpired408Error,
+              type: 'info',
+              showCancelButton: false,
+              confirmButtonText: 'Logout'
+            },
+            function (isConfirm) {
+              if (isConfirm) {
+                localStorage.clear()
+                window.location.href = redirectToSignInPage408
+              }
+            }
+          )
+        } else if (xhr.status === 410) {
+          $('#cover-spin').hide()
+
+          $.ajax({
+            url: MAIN_API_PATH + getGmtAPI,
+            method: POST,
+            contentType: Content_Type,
+            dataType: 'json',
+            success: function (data, textStatus, xhr) {
+              const encrypt = new JSEncrypt()
+              encrypt.setPublicKey(sitePublicKey)
+              const dateString = String(pageName + data.unixtime)
+              securityKeyEncrypted = encrypt.encrypt(dateString)
+              SecurityKeyTime = false
+              createTheUsers()
+            },
+            error: function (xhr, status, error) {
+              $.getJSON(worldTimeAPI, function (data) {
+                const encrypt = new JSEncrypt()
+                encrypt.setPublicKey(sitePublicKey)
+                const dateString = String(pageName + data.unixtime)
+                securityKeyEncrypted = encrypt.encrypt(dateString)
+                SecurityKeyTime = false
+                createTheUsers()
+              })
+            }
+          })
+        } else {
+          showNotificationError(
+            'bg-red',
+            null,
+            null,
+            null,
+            null,
+            null,
+            serverError503Error
+          )
+        }
+      }
+      });
+    }
 });
 
 // start create Bundle Data Table Initialization
@@ -889,9 +996,23 @@ function getaddFilesTableData(skip, page) {
             </div>`
               : "--";
 
+              let docTitle;
+              if (doc.title && doc.title.length > 0) {
+                docTitle = `
+                  <span style="display: inline-block; width: 10rem; cursor: pointer; word-break: break-word; white-space: normal;" 
+                    title="${doc.title}">
+                    ${doc.title}
+                  </span>`;
+              } else {
+                docTitle = `
+                  <span style="display: inline-block; width: 5rem; cursor: pointer; word-break: break-word; white-space: normal;">
+                    --
+                  </span>`;
+              }
+
           addFilesDataTableInit.row
             .add([
-              doc.title,
+              docTitle,
               `<span class="truncate-text" title="${
                 doc.description || "--"
               }" style="
@@ -1135,6 +1256,9 @@ $("#editFileInput").on("change", function () {
     console.log("Selected file:", file.name, file.size, file.type);
     $("#editFileNamePreview").text("Selected: " + file.name);
     $("#editFileModal").data("selected-file", file);
+
+    $("#updateFileBtn").prop("disabled", false);
+    $("#updateFileBtn").css("cursor", "pointer");
   } else {
     console.log("No file selected");
     $("#editFileNamePreview").text("No file selected");
@@ -1169,6 +1293,9 @@ function enableDisableUpdateFileBtn() {
     availability: serviceData.availability,
   };
 
+  console.log("fileInput", fileInput);
+  console.log("source", source);
+  
   if (!original) return; // Prevent running before modal opens
 
   // Gather current values

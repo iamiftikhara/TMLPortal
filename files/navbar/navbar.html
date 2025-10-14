@@ -10,7 +10,7 @@
   }
 </script>
 
-<div class="container">
+<div class="container-fluid">
   <nav class="js-mega-menu navbar-nav-wrap hs-menu-initialized hs-menu-horizontal">
     <!-- Logo -->
 
@@ -55,7 +55,19 @@
               style="margin-right: 10px;"> Resources
           </a>
         </li>
-        <li class="nav-item nav-item-to-show-after-login">
+        <li class="nav-item d-block d-md-none" >
+          <a class="nav-link" href="account.html">
+            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
+              style="margin-right: 10px;"> Account
+          </a>
+        </li>
+        <li class="nav-item d-block d-md-none">
+          <a class="nav-link cursor-pointer" onclick="signOut()">
+            <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon"
+              style="margin-right: 10px;"> Logout
+          </a>
+        </li>
+        <!-- <li class="nav-item nav-item-to-show-after-login">
           <div class="avatar avatar-soft-primary avatar-circle" id="navSubmenuPagesAccountDropdown"
             data-bs-toggle="dropdown" aria-expanded="false">
             <span class="avatar-initials" id="accountIntialsToShow">B</span>
@@ -76,11 +88,11 @@
             <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
               style="margin-right: 10px;"> Account
           </a>
-        </li>
+        </li> -->
       </ul>
 
-      <!-- Right group: always at end -->
-      <ul class="navbar-nav ms-auto">
+       <!-- Right group: always at end -->
+      <ul class="navbar-nav ms-auto float-end">
         <li class="nav-item nav-item-to-show-before-login">
           <a class="nav-link" href="/signin.html">
             <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Sign In Icon"
@@ -92,6 +104,29 @@
             <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon"
               style="margin-right: 10px;"> Logout
           </a>
+        </li>
+      </ul>
+
+        <ul class="navbar-nav ms-auto p-0 d-none d-md-block">
+        <!-- Desktop View (Avatar + Dropdown) -->
+        <li class="nav-item nav-item-to-show-after-login mt-1 pt-1">
+          <div class="avatar avatar-soft-primary avatar-circle border border-primary" id="navSubmenuPagesAccountDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="avatar-initials" id="accountIntialsToShow">B</span>
+          </div>
+          <div class="dropdown">
+            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless"
+              aria-labelledby="navSubmenuPagesAccountDropdown1" style="margin-top: 0rem">
+              <a href="account.html" class="dropdown-item">
+                <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
+                  style="margin-right: 10px;"><span>Account </span>
+              </a>
+              <a onclick="signOut()" class="dropdown-item cursor-pointer">
+                <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon"
+                  style="margin-right: 10px;"><span>Logout </span>
+              </a>
+            </div>
+          </div>
         </li>
       </ul>
 

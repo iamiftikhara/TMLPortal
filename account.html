@@ -286,7 +286,7 @@
                             <div class="mb-3">
                               <label for="primaryContactNameProfile" class="form-label">First name:</label>
                               <input type="text" class="form-control " id="editFirstName" name="editFirstName"
-                                placeholder="John" aria-label="John Doe" required>
+                                placeholder="John" aria-label="John Doe" maxlength="50" required>
                             </div>
                             <!-- End Form -->
                           </div>
@@ -294,7 +294,7 @@
                             <!-- Form -->
                             <div class="mb-3">
                               <label for="editLastName" class="form-label">Last Name:</label>
-                              <input type="text" class="form-control " id="editLastName" name="editLastName"
+                              <input type="text" class="form-control " id="editLastName" maxlength="50" name="editLastName"
                                 placeholder="Doe" required>
                             </div>
                             <!-- End Form -->
@@ -338,7 +338,7 @@
                           </a>
                           <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                             name="securityOldPassword" id="securityOldPassword"
-                            placeholder="Enter old password" aria-label="Enter old password " maxlength="50" required
+                            placeholder="Enter old password" aria-label="Enter old password " maxlength="50" minlength="8" required
                             data-hs-toggle-password-options='{
                             "target": "#securityOldPasswordTarget",
                             "defaultClass": "bi-eye-slash",
@@ -398,7 +398,7 @@
                           </a>
                           <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                             name="securityConfirmNewPassword" id="securityConfirmNewPassword"
-                            placeholder="Confirm password" aria-label="Confirm Password " maxlength="50" required
+                            placeholder="Confirm password" aria-label="Confirm Password " maxlength="50" minlength="8" required
                             data-hs-toggle-password-options='{
                             "target": "#securityConfirmNewPasswordTarget",
                             "defaultClass": "bi-eye-slash",
@@ -566,7 +566,7 @@
                   <label for="addUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
                       *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalFirstName"
-                    name="addUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
+                    name="addUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" maxlength="50" required>
                 </div>
                 <!-- End Form -->
 
@@ -575,7 +575,7 @@
                   <label for="addUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
                       *</span></label>
                   <input type="text" class="form-control" id="addUserDetailsModalLastName"
-                    name="addUserDetailsModalLastName" placeholder="Wick" aria-label="Wick">
+                    name="addUserDetailsModalLastName" placeholder="Wick" maxlength="50" aria-label="Wick">
                 </div>
                 <!-- End Form -->
               </div>
@@ -585,7 +585,7 @@
                 <label for="addUserDetailsModalEmail" class="form-label">Email: <span class="text-danger">
                     *</span></label>
                 <input type="email" class="form-control" id="addUserDetailsModalEmail" name="addUserDetailsModalEmail"
-                  placeholder="Wick" aria-label="Wick">
+                  placeholder="user@domain.com" aria-label="user@domain.com" maxlength="50">
               </div>
               <!-- End Form -->
 
@@ -700,7 +700,7 @@
                   <label for="editUserDetailsModalFirstName" class="form-label">First Name: <span class="text-danger">
                       *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalFirstName"
-                    name="editUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required>
+                    name="editUserDetailsModalFirstName" placeholder="Jhon" aria-label="Jhon" required maxlength="50">
                 </div>
                 <!-- End Form -->
 
@@ -709,7 +709,7 @@
                   <label for="editUserDetailsModalLastName" class="form-label">Last Name: <span class="text-danger">
                       *</span></label>
                   <input type="text" class="form-control" id="editUserDetailsModalLastName"
-                    name="editUserDetailsModalLastName" placeholder="Wick" aria-label="Wick" required>
+                    name="editUserDetailsModalLastName" placeholder="Wick" aria-label="Wick" required maxlength="50">
                 </div>
                 <!-- End Form -->
               </div>

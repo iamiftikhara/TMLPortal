@@ -587,17 +587,17 @@
                   </div>
                 </div>
 
+
+                <!-- Footer -->
+                <div class="d-flex align-items-center justify-content-between">
+
                 <button type="button" class="btn btn-ghost-secondary me-2" id="secondStepAccountNamePreviousBtn"
                   data-hs-step-form-prev-options='{
                                   "targetSelector": "#municipalityWizerdFormBasics"
                                 }'>
                   <i class="bi-chevron-left small"></i> Previous step
                 </button>
-                <!-- Footer -->
-                <div class="d-flex align-items-center justify-content-end">
-
-
-                  <div class="">
+                  <div class="d-flex align-items-center justify-content-end">
                     <button type="button" id="firstStepAccountTypeNextButton" class="btn btn-outline-primary formNextButton"
                       data-hs-step-form-next-options='{
                                 "targetSelector": "#municipalityWizerdTechnologyEnvironment"
@@ -844,17 +844,19 @@
                   </div>
                 </div>
 
-                <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2" data-hs-step-form-prev-options='{
-                      "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
-                    }'>
-                  <i class="bi-chevron-left small"></i> Previous step
-                </button>
+
                 <!-- Footer -->
-                <div class="d-sm-flex align-items-center justify-content-end">
+                <div class="d-sm-flex align-items-center justify-content-between">
+                  <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2" data-hs-step-form-prev-options='{
+                        "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
+                      }'>
+                    <i class="bi-chevron-left small"></i> Previous step
+                  </button>
+                  <!-- <div class="d-sm-flex align-items-center justify-content-end"> -->
+                  <div class="d-flex justify-content-end ">
                   <button type="button" class="btn btn-outline-white me-2" id="closeWizerd" data-dismiss="modal"
                     aria-label="Close">Cancel</button>
 
-                  <div class="d-flex justify-content-end ">
                     <button id="validationFormFinishBtn" type="submit" class="btn btn-outline-primary me-2">Save
                       changes</button>
 

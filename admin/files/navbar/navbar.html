@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <nav class="js-mega-menu navbar-nav-wrap hs-menu-initialized hs-menu-horizontal">
     <!-- Logo -->
 
@@ -24,7 +24,7 @@
  <div class="collapse navbar-collapse" id="navbarContainerNavDropdown">
 
   <!-- Left group: slightly right -->
-  <ul class="navbar-nav" style="margin-left: 40px;"> <!-- adjust 40px as needed -->
+  <ul class="navbar-nav ms-auto" style="margin-left: 40px;"> <!-- adjust 40px as needed -->
     <li class="nav-item">
       <a class="nav-link" href="quotes-review.html"> 
         <img src="/files/images/navbar-icon/Discovery.svg" width="30" height="30" alt="Discovery Icon" style="margin-right: 10px;"> Dashboard
@@ -50,44 +50,44 @@
         <img src="/files/images/navbar-icon/Orders.svg" width="30" height="30" alt="Orders Icon" style="margin-right: 10px;"> Analytics
       </a>
     </li>
-    <!-- <li class="nav-item">
+    <li class="nav-item d-block d-md-none" >
       <a class="nav-link" href="account.html">
-        <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon" style="margin-right: 10px;"> Account
-      </a>
-    </li> -->
-  </ul>
-
-  <!-- Right group: Logout -->
-
-  <ul class="navbar-nav ms-auto">
-       <li class="nav-item nav-item-to-show-after-login">
-      <div class="avatar avatar-soft-primary avatar-circle mt-2" id="navSubmenuPagesAccountDropdown"
-        data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="avatar-initials" id="accountIntialsToShow">B</span>
-      </div>
-      <div class="dropdown">
-        <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless"
-          aria-labelledby="navSubmenuPagesAccountDropdown1" style="margin-top: 0rem">
-          <a href="account.html" class="dropdown-item">
-            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon" style="margin-right: 10px;"><span>Account </span>
-          </a>
-          <a onclick="signOut()" class="dropdown-item cursor-pointer">
-            <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon" style="margin-right: 10px;"><span>Logout </span>
-          </a>
-        </div>
-      </div>
-
-      <a class="nav-link d-none" href="account.html">
         <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
           style="margin-right: 10px;"> Account
       </a>
     </li>
-    <!-- <li class="nav-item nav-item-to-show-after-login">
-      <a class="nav-link" href="/signin.html">
-        <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon" style="margin-right: 10px;"> Logout
+    <li class="nav-item d-block d-md-none">
+      <a class="nav-link cursor-pointer" onclick="signOut()">
+        <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon"
+          style="margin-right: 10px;"> Logout
       </a>
-    </li> -->
+    </li>
   </ul>
+
+  <!-- Right group: Logout -->
+
+  <ul class="navbar-nav ms-auto p-0">
+  <!-- Desktop View (Avatar + Dropdown) -->
+  <li class="nav-item nav-item-to-show-after-login mt-1 pt-1 d-none d-md-block">
+    <div class="avatar avatar-soft-primary avatar-circle border border-primary" id="navSubmenuPagesAccountDropdown"
+      data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="avatar-initials" id="accountIntialsToShow">B</span>
+    </div>
+    <div class="dropdown">
+      <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless"
+        aria-labelledby="navSubmenuPagesAccountDropdown1" style="margin-top: 0rem">
+        <a href="account.html" class="dropdown-item">
+          <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Account Icon"
+            style="margin-right: 10px;"><span>Account </span>
+        </a>
+        <a onclick="signOut()" class="dropdown-item cursor-pointer">
+          <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon"
+            style="margin-right: 10px;"><span>Logout </span>
+        </a>
+      </div>
+    </div>
+  </li>
+</ul>
 
 </div>
 
