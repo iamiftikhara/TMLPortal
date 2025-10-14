@@ -1584,16 +1584,27 @@ function getCreateBundleTableData(skip, page) {
           ).toLocaleDateString();
 
           // actions (edit + delete)
-          const actions = `
-    <div class="d-flex align-items-center gap-2">
-      <button class="btn btn-sm btn-outline-primary edit-bundle"
-             data-bundle='${JSON.stringify(bundle)}'>
-       Edit
-      </button>
-    <button class="btn btn-sm btn-outline-danger delete-bundle" data-bundle-id="${bundle.bundle_id}">Delete</button>
+          let actions
+          if (bundle.is_custom_bundle === true) {
+            actions = `
+              <div class="d-flex align-items-center gap-2">
+                <div  title="Custom bundle cannot be edited." style="cursor: not-allowed"><button class="btn btn-sm btn-outline-primary" disabled>Edit</button></div>
+                <div title="Custom bundle cannot be deleted." style="cursor: not-allowed"><button class="btn btn-sm btn-outline-danger" disabled >Delete</button></div>
+              </div>
+            `;
+          } else {
+             actions = `
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-sm btn-outline-primary edit-bundle"
+                      data-bundle='${JSON.stringify(bundle)}'>
+                Edit
+                </button>
+              <button class="btn btn-sm btn-outline-danger delete-bundle" data-bundle-id="${bundle.bundle_id}">Delete</button>
 
-    </div>
-  `;
+              </div>
+            `;
+
+          }
 
           createBundleDataTableInit.row
             .add([
