@@ -342,7 +342,7 @@
                     <div class="d-flex mb-4">
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
-                        <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:</label>
+                        <label for="municipalityWizerdFormName" class="form-label">Name of Municipality:<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="municipalityWizerdFormName" maxlength="25"
                           name="municipalityWizerdFormName" placeholder="City of Example" aria-label="City of Example"
                           required>
@@ -352,7 +352,7 @@
                       <!-- start size -->
                       <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormPopulationSize">Population
-                          Size:</label>
+                          Size:<span class="text-danger"> *</span></label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -376,7 +376,7 @@
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
                         <label for="municipalityWizerdFormAssociatedCounty" class="form-label">Associated County (if
-                          any):</label>
+                          any):<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="municipalityWizerdFormAssociatedCounty"
                           name="municipalityWizerdFormAssociatedCounty" placeholder="Example County" maxlength="25"
                           aria-label="Example County" required>
@@ -387,7 +387,7 @@
                       <!-- Form -->
                       <div class="col-12 col-md-6 ps-4">
                         <label for="muncipalityWizerdFormCountryWebsiteURL" class="form-label">County
-                          Website/URL:</label>
+                          Website/URL:<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="muncipalityWizerdFormCountryWebsiteURL"
                           name="muncipalityWizerdFormCountryWebsiteURL" placeholder="https://www.example.com"
                           aria-label="https://www.example.com" required>
@@ -413,7 +413,7 @@
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
                         <label for="municipalityWizerdFormContactFirstName" class="form-label">First Name:<span
-                            class="text-danger">*</span></label>
+                            class="text-danger"> *</span></label>
                         <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
                           data-bs-placement="right" data-bs-html="true" title="
                         <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
@@ -433,7 +433,7 @@
                       <!-- Form -->
                       <div class="col-12 col-md-6 ps-4">
                         <label for="municipalityWizerdFormContactLastName" class="form-label">Last Name:<span
-                            class="text-danger">*</span></label>
+                            class="text-danger"> *</span></label>
                         <i class="bi-question-circle text-body ms-1" id="firstNameToolTip" data-bs-toggle="tooltip"
                           data-bs-placement="right" data-bs-html="true" title="
                         <p class='pt-2'><b>Ensure that these requirements are met:</b></p>
@@ -459,7 +459,8 @@
 
                       <!-- Form -->
                       <div class="col-12 col-md-6 pe-4">
-                        <label for="muncipalityWizerdFormEmail" class="form-label">Email:</label>
+                        <label for="muncipalityWizerdFormEmail" class="form-label">Email:<span
+                            class="text-danger"> *</span></label>
                         <input type="email" class="form-control" id="muncipalityWizerdFormEmail"
                           name="muncipalityWizerdFormEmail" placeholder="john@example.com" aria-label="john@example.com"
                           required>
@@ -468,7 +469,8 @@
 
                       <!-- Form -->
                       <div class="col-12 col-md-6 ps-4">
-                        <label for="muncipalityWizerdFormPhone" class="form-label">Phone:</label>
+                        <label for="muncipalityWizerdFormPhone" class="form-label">Phone:<span
+                            class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="muncipalityWizerdFormPhone"
                           name="muncipalityWizerdFormPhone" placeholder="+1 (123) 456 0000"
                           aria-label="+1 (123) 456 0000" required>
@@ -511,7 +513,7 @@
                       <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormKeyPrioritiesUpTo3">Key Priorities for
                           the Next
-                          12-24 Months:</label>
+                          12-24 Months:<span class="text-danger"> *</span></label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -532,7 +534,7 @@
                       <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormDepartmentsUnderMunicipality">Departments
                           Under
-                          Municipality (check all that apply):</label>
+                          Municipality (check all that apply):<span class="text-danger"> *</span></label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -565,7 +567,7 @@
                       <!-- start size -->
                       <div class="col-12 col-md-6 pe-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormTotalEmployees">Approx. total
-                          employees:</label>
+                          employees:<span class="text-danger"> *</span></label>
                         <!-- Select -->
                         <input type="text" class="form-control" id="muncipalityWizerdFormTotalEmployees"
                           name="muncipalityWizerdFormTotalEmployees" placeholder="Enter approx. total employees"
@@ -577,7 +579,7 @@
                       <!-- start size -->
                       <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormNumberOfITEmployees">Approx. number of IT
-                          employees:</label>
+                          employees:<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="muncipalityWizerdFormNumberOfITEmployees"
                           name="muncipalityWizerdFormNumberOfITEmployees"
                           placeholder="Enter approx. number of IT employees" maxlength="25"
@@ -591,7 +593,7 @@
 
 
                     <div class="mb-4">
-                      <label class="form-label">Do you use outsourced IT/cyber vendors?</label>
+                      <label class="form-label">Do you use outsourced IT/cyber vendors?<span class="text-danger"> *</span></label>
 
                       <div class="d-flex">
 
@@ -663,7 +665,7 @@
                       <!-- start size -->
                       <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormCloudApplication">Cloud Applications in
-                          Use:</label>
+                          Use:<span class="text-danger"> *</span></label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -682,7 +684,7 @@
                       <!-- start size -->
                       <div class="col-12 col-md-6 ps-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormCloudWorkloads">Cloud
-                          Workloads:</label>
+                          Workloads:<span class="text-danger"> *</span></label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -741,7 +743,7 @@
                       <!-- start size -->
                       <div class="col-12 col-md-6 ps-4" id="">
                         <label class=" form-label" for="muncipalityWizerdFormCompliancesInUse">Compliances in
-                          use:</label>
+                          use:<span class="text-danger"> *</span></label>
                         <!-- Select -->
                         <div class="tom-select-custom" style="cursor: pointer;">
                           <select class="form-select" autocomplete="off" data-hs-tom-select-options='{
@@ -778,7 +780,7 @@
                       <!-- start size -->
                       <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormEndUserDevices">End-user devices (desktops,
-                          laptops, tablets):</label>
+                          laptops, tablets):<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="muncipalityWizerdFormEndUserDevices"
                           name="muncipalityWizerdFormEndUserDevices"
                           placeholder="Enter end-user devices (desktops, laptops, tablets)" maxlength="25"
@@ -790,7 +792,7 @@
                       <!-- start size -->
                       <div class="mb-4 col-12 col-md-6 ps-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormServers">Servers (on-premises or
-                          virtual):</label>
+                          virtual):<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="muncipalityWizerdFormServers"
                           name="muncipalityWizerdFormServers" placeholder="Enter servers" maxlength="25" aria-label="Enter servers (on-premises or
                           virtual)" required>
@@ -808,7 +810,7 @@
                     <!-- start size -->
                     <div class="col-12 col-md-6" id="populationSizeDiv">
                       <label class=" form-label" for="muncipalityWizerdFormSpecializedDevices">Specialized devices
-                        (IoT, cameras, dispatch systems):</label>
+                        (IoT, cameras, dispatch systems):<span class="text-danger"> *</span></label>
                       <input type="text" class="form-control" id="muncipalityWizerdFormSpecializedDevices"
                         name="muncipalityWizerdFormSpecializedDevices" placeholder="Enter specialized devices"
                         maxlength="25" aria-label="Enter specialized devices" required>
@@ -832,7 +834,7 @@
                       <!-- start size -->
                       <div class="mb-4 col-12 col-md-6 pe-4" id="populationSizeDiv">
                         <label class=" form-label" for="muncipalityWizerdFormNumberOfConnectedSites">Approx. number
-                          of connected sites (City Hall, stations, libraries, etc.):</label>
+                          of connected sites (City Hall, stations, libraries, etc.):<span class="text-danger"> *</span></label>
                         <input type="text" class="form-control" id="muncipalityWizerdFormNumberOfConnectedSites"
                           name="muncipalityWizerdFormNumberOfConnectedSites"
                           placeholder="Enter approx. number of connected sites" maxlength="25"
@@ -843,7 +845,7 @@
 
 
                       <div class="col-12 col-md-6 ps-4">
-                        <label class="form-label">Do you have backup internet/redundancy?</label>
+                        <label class="form-label">Do you have backup internet/redundancy?<span class="text-danger"> *</span></label>
 
                         <div class="d-flex">
 
@@ -1038,11 +1040,11 @@
                         <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
                         </ul>"></i>
                     <!-- passowerd eye -->
-                    <a id="changePassTarget"
+                    <!-- <a id="changePassTarget"
                       class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
                       href="javascript:;">
                       <i id="changePassIcon" class="bi-eye"></i>
-                    </a>
+                    </a> -->
                     <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                       name="signupUserPassword" id="signupUserPassword" placeholder="Enter a strong password"
                       aria-label="Password *" required minlength="8" maxlength="50" data-hs-toggle-password-options='{
@@ -1061,11 +1063,11 @@
                       title="
                     <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
                     <!-- passowerd eye -->
-                    <a id="changeRepeatPassTarget"
+                    <!-- <a id="changeRepeatPassTarget"
                       class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
                       href="javascript:;">
                       <i id="changeRepeatPassIcon" class="bi-eye"></i>
-                    </a>
+                    </a> -->
                     <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                       name="signupUserRepeatPassword" id="signupUserRepeatPassword" placeholder="Confirm password"
                       aria-label="Confirm Password " maxlength="50" required data-hs-toggle-password-options='{
@@ -1099,13 +1101,13 @@
 
                   <button type="button" class="btn btn-ghost-secondary mb-4 mb-sm-0 me-2"
                     data-hs-step-form-prev-options='{
-                      "targetSelector": "#municipalityWizerdFormOrganizationSnapshot"
+                      "targetSelector": "#municipalityWizerdTechnologyEnvironment"
                     }'>
                     <i class="bi-chevron-left small"></i> Previous step
                   </button>
                   <!-- Footer -->
                   <div class="d-sm-flex align-items-center justify-content-end">
-                    <button type="button" class="btn btn-outline-white me-2" id="closeWizerd" data-dismiss="modal"
+                    <button type="button" class="btn btn-outline-secondary me-2" id="closeWizerd" data-dismiss="modal"
                       aria-label="Close">Cancel</button>
 
                     <div class="d-flex justify-content-end ">

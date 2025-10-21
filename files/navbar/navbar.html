@@ -36,7 +36,7 @@
     <div class="collapse navbar-collapse" id="navbarContainerNavDropdown">
 
       <!-- Left group: slightly right -->
-      <ul class="navbar-nav mx-auto" style="margin-left: 60px;"> <!-- adjust px as needed -->
+      <ul class="navbar-nav ms-auto" style="margin-left: 60px;"> <!-- adjust px as needed -->
         <li class="nav-item nav-item-to-show-after-login">
           <a class="nav-link" href="/municipality-details.html">
             <img src="/files/images/navbar-icon/Discovery.svg" width="30" height="30" alt="Discovery Icon"
@@ -92,22 +92,23 @@
       </ul>
 
        <!-- Right group: always at end -->
-      <ul class="navbar-nav ms-auto float-end">
-        <li class="nav-item nav-item-to-show-before-login">
-          <a class="nav-link" href="/signin.html">
-            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Sign In Icon"
-              style="margin-right: 10px;"> Sign In
-          </a>
-        </li>
+      <!-- <ul class="navbar-nav ms-auto float-end">
+        
         <li class="nav-item nav-item-to-show-after-login d-none">
           <a class="nav-link d-none" href="/signin.html">
             <img src="/files/images/sidebar-icon/Logout.svg" width="30" height="30" alt="Logout Icon"
               style="margin-right: 10px;"> Logout
           </a>
         </li>
-      </ul>
+      </ul> -->
 
         <ul class="navbar-nav ms-auto p-0 d-none d-md-block">
+        <li class="nav-item nav-item-to-show-before-login" style="margin-right: 0px !important;">
+          <a class="nav-link" href="/signin.html">
+            <img src="/files/images/navbar-icon/Account.svg" width="30" height="30" alt="Sign In Icon"
+              style="margin-right: 10px;"> Sign In
+          </a>
+        </li>
         <!-- Desktop View (Avatar + Dropdown) -->
         <li class="nav-item nav-item-to-show-after-login mt-1 pt-1">
           <div class="avatar avatar-soft-primary avatar-circle border border-primary" id="navSubmenuPagesAccountDropdown"

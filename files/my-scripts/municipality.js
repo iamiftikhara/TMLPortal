@@ -152,13 +152,13 @@ $(document).ready(function () {
       municipalityWizerdFormContactFirstName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
-        minlength: 3,
+        minlength: 1,
         onlyDigitsNotAllowed: true,
       },
       municipalityWizerdFormContactLastName: {
         atLeastOneCharacter: true,
         SomeSpecialCharactersAllowed: true,
-        minlength: 3,
+        minlength: 1,
         onlyDigitsNotAllowed: true,
       },
       muncipalityWizerdFormEmail: {
