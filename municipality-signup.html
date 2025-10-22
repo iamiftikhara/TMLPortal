@@ -1040,11 +1040,11 @@
                         <li>Passwords must contain: 1 lowercase and 1 uppercase character,  1 digit, 1 special character.</li>
                         </ul>"></i>
                     <!-- passowerd eye -->
-                    <!-- <a id="changePassTarget"
+                    <a id="changePassTarget"
                       class="input-group-text password-eye border-0 position-absolute end-50 me-3 bg-transparent mt-1"
                       href="javascript:;">
                       <i id="changePassIcon" class="bi-eye"></i>
-                    </a> -->
+                    </a>
                     <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                       name="signupUserPassword" id="signupUserPassword" placeholder="Enter a strong password"
                       aria-label="Password *" required minlength="8" maxlength="50" data-hs-toggle-password-options='{
@@ -1063,11 +1063,11 @@
                       title="
                     <p class='pt-2'><b>Ensure that these requirements are met:</b></p><ul><li>Enter the same password to confirm.</li></ul>"></i>
                     <!-- passowerd eye -->
-                    <!-- <a id="changeRepeatPassTarget"
+                    <a id="changeRepeatPassTarget"
                       class="input-group-text password-eye border-0 position-absolute end-0 me-3 bg-transparent mt-1"
                       href="javascript:;">
                       <i id="changeRepeatPassIcon" class="bi-eye"></i>
-                    </a> -->
+                    </a>
                     <input type="password" class="js-toggle-password form-control form-control-lg  ps-1"
                       name="signupUserRepeatPassword" id="signupUserRepeatPassword" placeholder="Confirm password"
                       aria-label="Confirm Password " maxlength="50" required data-hs-toggle-password-options='{
@@ -1198,20 +1198,14 @@
   <script src="/files/my-scripts/municipality.js"></script>
   <script src="/files/my-scripts/signup_municipality_wizard.js"></script>
 
-
-
   <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
 
   <script>
-      (function () {
-        window.onload = function () {
-          localStorage.clear()
-          // INITIALIZATION OF TOGGLE PASSWORD
-          // =======================================================
-          new HSTogglePassword('.js-toggle-password');
-        }
-      })()
+    document.addEventListener("DOMContentLoaded", function () {
+      new HSTogglePassword('.js-toggle-password');
+    });
   </script>
+
 
   <!-- script -->
   <script>
